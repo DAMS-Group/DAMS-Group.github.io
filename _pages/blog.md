@@ -1,9 +1,9 @@
 ---
 layout: default
+title: 教材
 permalink: /blog/
-title: blog
 nav: true
-nav_order: 1
+nav_order: 2
 pagination:
   enabled: true
   collection: posts
@@ -14,20 +14,66 @@ pagination:
   trail:
     before: 1 # The number of links before the current page
     after: 3 # The number of links after the current page
+
+# 书本照片
+about_profile:
+  align: right
+  image: 5402751.png
+  image_circular: false # crops the image to make it circular
+
+book_desc: |
+  <div class="book-description">
+    <p>这是一本全面介绍Linux系统虚拟化技术的专业教材，内容涵盖：</p>
+    <ul>
+      <li>虚拟化的理论基础</li>
+      <li>核心技术（如KVM）</li>
+      <li>实际应用案例</li>
+      <li>安全性管理措施</li>
+    </ul>
+    <p>书中结合丰富的实例和实践指南，帮助读者理解如何高效地部署和管理虚拟化环境，并在多用户、多实例等复杂场景下保障系统的安全性和稳定性。</p>
+    <p>无论是技术人员、学生还是对信息安全感兴趣的读者，这本书都能提供实用的理论知识和技术指导。</p>
+    <p class="book-link"><a href="https://gitee.com/silver-zhou/virtualization_book" target="_blank">查看实验信息 →</a></p>
+  </div>
 ---
 
 <div class="post">
+  <!-- <div class="header-bar"> -->
+  <header class="post-header">
+    <h1 class="post-title">{{ site.blog_name }}</h1>
+  </header>
+  <!-- </div> -->
 
-{% assign blog_name_size = site.blog_name | size %}
-{% assign blog_description_size = site.blog_description | size %}
+<div class="clearfix">
+</div>
 
-{% if blog_name_size > 0 or blog_description_size > 0 %}
+<br>
 
-  <div class="header-bar">
-    <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
+<div class="book_profile_box">
+
+{% if page.about_profile %}
+  <div class="about_profile float-{% if page.about_profile.align == 'left' %}left{% else %}right{% endif %}">
+    {% if page.about_profile.image %}
+      {% assign profile_image_path = page.about_profile.image | prepend: 'assets/img/' %}
+      {% if page.about_profile.image_circular %}
+        {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
+      {% else %}
+        {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
+      {% endif %}
+      {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
+  30vw, 95vw"{% endcapture %}
+      {%
+        include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.about_profile.image cache_bust=true
+      %}
+    {% endif %}
+    {% if page.about_profile.more_info %}
+      <div class="more-info">{{ page.about_profile.more_info }}</div>
+    {% endif %}
   </div>
-  {% endif %}
+{% endif %}
+
+<div class="clearfix">{{ page.book_desc }}</div>
+
+</div>
 
 {% if site.display_tags and site.display_tags.size > 0 or site.display_categories and site.display_categories.size > 0 %}
 
@@ -85,7 +131,7 @@ pagination:
 
                     <p class="post-meta">
                       {{ read_time }} min read &nbsp; &middot; &nbsp;
-                      <a href="{{ year | prepend: '/blog/' | relative_url }}">
+                      <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
                         <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
                     </p>
                   </div>
@@ -148,13 +194,13 @@ pagination:
         {% endif %}
       </p>
       <p class="post-tags">
-        <a href="{{ year | prepend: '/blog/' | relative_url }}">
+        <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
           <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
 
           {% if tags != "" %}
           &nbsp; &middot; &nbsp;
             {% for tag in post.tags %}
-            <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">
+            <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
               <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
               {% unless forloop.last %}
                 &nbsp;
@@ -165,7 +211,7 @@ pagination:
           {% if categories != "" %}
           &nbsp; &middot; &nbsp;
             {% for category in post.categories %}
-            <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">
+            <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
               <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a>
               {% unless forloop.last %}
                 &nbsp;

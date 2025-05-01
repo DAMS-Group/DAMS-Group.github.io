@@ -1,9 +1,24 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
+"NDSS":
+  url: https://www.ndss-symposium.org/
   color: "#00369f"
 
-"PhysRev":
-  url: https://journals.aps.org/
+"ACSAC":
+  url: https://www.acsac.org/
 
-"Vision":
-  color: "#009f36"
+"SoCC":
+  url: https://www.ieee-socc.org/
+
+"Computers & Security":
+  url: https://www.sciencedirect.com/journal/computers-and-security
+
+"DSN":
+  url: https://dblp.org/db/conf/dsn/index.html
+
+"IPDPS":
+  url: https://www.ipdps.org/
+
+"ECAI":
+  url: https://dblp.org/db/conf/ecai/index.html
+
+"RAID":
+  url: https://dblp.org/db/conf/raid/index.html

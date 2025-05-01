@@ -7,11 +7,7 @@ FROM ruby:slim
 # ARG USERID=901
 # ARG USERNAME=jekyll
 
-ENV DEBIAN_FRONTEND noninteractive
-
-LABEL authors="Amir Pourmand,George Araújo" \
-      description="Docker image for al-folio academic template" \
-      maintainer="Amir Pourmand"
+ENV DEBIAN_FRONTEND=noninteractive
 
 # uncomment these if you are having this issue with the build:
 # /usr/local/bundle/gems/jekyll-4.3.4/lib/jekyll/site.rb:509:in `initialize': Permission denied @ rb_sysopen - /srv/jekyll/.jekyll-cache/.gitignore (Errno::EACCES)
@@ -21,7 +17,7 @@ LABEL authors="Amir Pourmand,George Araújo" \
 
 # install system dependencies
 RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y --fix-missing --no-install-recommends \
         build-essential \
         curl \
         git \
@@ -30,6 +26,7 @@ RUN apt-get update -y && \
         locales \
         nodejs \
         procps \
+        vim \
         python3-pip \
         zlib1g-dev && \
     pip --no-cache-dir install --upgrade --break-system-packages nbconvert
@@ -73,4 +70,4 @@ COPY bin/entry_point.sh /tmp/entry_point.sh
 # set the ownership of the jekyll site directory to the non-root user
 # USER $USERNAME
 
-CMD ["/tmp/entry_point.sh"]
+CMD ["/bin/bash", "/tmp/entry_point.sh"]

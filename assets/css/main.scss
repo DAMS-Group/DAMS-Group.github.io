@@ -6,13 +6,14 @@
 // Dimensions
 $max-content-width: {{ site.max_width }};
 
+@use 'sass:string';
+
 @import
   "variables",
   "themes",
   "layout",
   "base",
   "distill",
-  "cv",
   "tabs",
   "typograms",
   "font-awesome/fontawesome",
