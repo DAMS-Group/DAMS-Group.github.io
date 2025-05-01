@@ -7,123 +7,123 @@ ninja.data = [{
     title: "首页",
     section: "Navigation",
     handler: () => {
-      window.location.href = "/book/";
+      window.location.href = "/";
     },
   },{id: "nav-新闻",
           title: "新闻",
           description: "实验室新闻。",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/book/news/";
+            window.location.href = "/news/";
           },
         },{id: "nav-教材",
           title: "教材",
           description: "",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/book/blog/";
+            window.location.href = "/blog/";
           },
         },{id: "nav-论文",
           title: "论文",
           description: "实验室相关论文工作。",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/book/publications/";
+            window.location.href = "/publications/";
           },
         },{id: "nav-项目",
           title: "项目",
           description: "论文实现的相关项目。",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/book/projects/";
+            window.location.href = "/projects/";
           },
         },{id: "nav-成员",
           title: "成员",
           description: "实验室成员。",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/book/people/";
+            window.location.href = "/people/";
           },
         },{id: "news-ai技术在医疗领域的应用与未来展望",
           title: 'AI技术在医疗领域的应用与未来展望',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/book/news/announcement_1/";
+              window.location.href = "/news/announcement_1/";
             },},{id: "news-量子计算-推动全球科技变革的新力量",
           title: '量子计算：推动全球科技变革的新力量',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/book/news/announcement_2/";
+              window.location.href = "/news/announcement_2/";
             },},{id: "news-计算机科学在气候变化研究中的创新应用",
           title: '计算机科学在气候变化研究中的创新应用',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/book/news/announcement_3/";
+              window.location.href = "/news/announcement_3/";
             },},{id: "profiles-cwz",
           title: 'Cwz',
           description: "",
           section: "Profiles",handler: () => {
-              window.location.href = "/book/profiles/cwz/";
+              window.location.href = "/profiles/cwz/";
             },},{id: "profiles-jn",
           title: 'Jn',
           description: "",
           section: "Profiles",handler: () => {
-              window.location.href = "/book/profiles/jn/";
+              window.location.href = "/profiles/jn/";
             },},{id: "profiles-qff",
           title: 'Qff',
           description: "",
           section: "Profiles",handler: () => {
-              window.location.href = "/book/profiles/qff/";
+              window.location.href = "/profiles/qff/";
             },},{id: "profiles-syn",
           title: 'Syn',
           description: "",
           section: "Profiles",handler: () => {
-              window.location.href = "/book/profiles/syn/";
+              window.location.href = "/profiles/syn/";
             },},{id: "profiles-xsw",
           title: 'Xsw',
           description: "",
           section: "Profiles",handler: () => {
-              window.location.href = "/book/profiles/xsw/";
+              window.location.href = "/profiles/xsw/";
             },},{id: "profiles-zqh",
           title: 'Zqh',
           description: "",
           section: "Profiles",handler: () => {
-              window.location.href = "/book/profiles/zqh/";
+              window.location.href = "/profiles/zqh/";
             },},{id: "projects-conmonitor",
           title: 'ConMonitor',
           description: "Lightweight Container Protection with Virtualization and VM Functions",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/conmonitor-lightweight-container-protection-with-virtualization-and-vm-functions/";
+              window.location.href = "/projects/conmonitor-lightweight-container-protection-with-virtualization-and-vm-functions/";
             },},{id: "projects-cubevisor",
           title: 'CubeVisor',
           description: "A Multi-realm Architecture Design for Running VM with ARM CCA",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/cubevisor-a-multi-realm-architecture-design-for-running-vm-with-arm-cca/";
+              window.location.href = "/projects/cubevisor-a-multi-realm-architecture-design-for-running-vm-with-arm-cca/";
             },},{id: "projects-hclave",
           title: 'HClave',
           description: "An isolated execution environment design for hypervisor runtime security",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/hclave-an-isolated-execution-environment-design-for-hypervisor-runtime-security/";
+              window.location.href = "/projects/hclave-an-isolated-execution-environment-design-for-hypervisor-runtime-security/";
             },},{id: "projects-log2policy",
           title: 'Log2Policy',
           description: "An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/log2policy-an-approach-to-generate-fine-grained-access-control-rules-for-microservices-from-scratch/";
+              window.location.href = "/projects/log2policy-an-approach-to-generate-fine-grained-access-control-rules-for-microservices-from-scratch/";
             },},{id: "projects-rcontainer",
           title: 'RContainer',
           description: "A Secure Container Architecture through Extending ARM CCA Hardware Primitives",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/rcontainer-a-secure-container-architecutre-through-extending-arm-cca-hardware-primitives/";
+              window.location.href = "/projects/rcontainer-a-secure-container-architecutre-through-extending-arm-cca-hardware-primitives/";
             },},{id: "projects-secfortress",
           title: 'SecFortress',
           description: "Securing Hypervisor using Cross-layer Isolation",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/secfortress-securing-hypervisor-using-cross-layer-isolation/";
+              window.location.href = "/projects/secfortress-securing-hypervisor-using-cross-layer-isolation/";
             },},{id: "projects-sedspec",
           title: 'SEDSpec',
           description: "Securing Emulated Devices by Enforcing Execution Specification",
           section: "Projects",handler: () => {
-              window.location.href = "/book/projects/sedspec-securing-emulated-devices-by-enforcing-execution-specification/";
+              window.location.href = "/projects/sedspec-securing-emulated-devices-by-enforcing-execution-specification/";
             },},{
         id: 'social-email',
         title: 'email',

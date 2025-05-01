@@ -1,1 +1,1 @@
-User-agent: * Disallow: Sitemap: https://book.github.io/book/sitemap.xml
+User-agent: * Disallow: Sitemap: https://dams.net.cn/sitemap.xml
