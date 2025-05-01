@@ -58,12 +58,12 @@ ninja.data = [{
           title: '2023年团建',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/team-building/";
+              window.location.href = "/news/2023-team-building/";
             },},{id: "news-2024年团建",
           title: '2024年团建',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/team-building/";
+              window.location.href = "/news/2024-team-building/";
             },},{id: "profiles-cwz",
           title: 'Cwz',
           description: "",
