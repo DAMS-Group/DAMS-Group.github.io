@@ -44,21 +44,26 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/people/";
           },
-        },{id: "news-ai技术在医疗领域的应用与未来展望",
-          title: 'AI技术在医疗领域的应用与未来展望',
+        },{id: "news-2021年教师节",
+          title: '2021年教师节',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/announcement_1/";
-            },},{id: "news-量子计算-推动全球科技变革的新力量",
-          title: '量子计算：推动全球科技变革的新力量',
+              window.location.href = "/news/2021-teachers-day/";
+            },},{id: "news-2022年教师节",
+          title: '2022年教师节',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-计算机科学在气候变化研究中的创新应用",
-          title: '计算机科学在气候变化研究中的创新应用',
+              window.location.href = "/news/2022-teachers-day/";
+            },},{id: "news-2023年团建",
+          title: '2023年团建',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/announcement_3/";
+              window.location.href = "/news/team-building/";
+            },},{id: "news-2024年团建",
+          title: '2024年团建',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/team-building/";
             },},{id: "profiles-cwz",
           title: 'Cwz',
           description: "",
