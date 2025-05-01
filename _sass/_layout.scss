@@ -33,123 +33,6 @@ body.sticky-bottom-footer {
   padding: 2rem 1rem;
 }
 
-.post {
-  .post-header {
-    text-align: center;
-    margin-bottom: 3rem;
-
-    .post-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--global-theme-color);
-    }
-  }
-
-  .lab_image {
-    margin-bottom: 3rem;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-  }
-
-  .about_row {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin: 1rem 0 2rem;
-
-    >div {
-      flex: 1;
-      min-width: 0;
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: var(--global-theme-color);
-      border-bottom: 2px solid var(--global-theme-color);
-      padding-bottom: 0.5rem;
-      text-align: center;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: var(--global-hover-color);
-      }
-    }
-  }
-
-  .social {
-    text-align: center;
-
-    .contact-icons {
-      font-size: 4rem;
-
-      a {
-        img {
-          width: 3.2rem;
-          height: 3.2rem;
-          margin-bottom: 1rem;
-        }
-
-        svg {
-          width: 3.5rem;
-          height: 4rem;
-          margin-bottom: 0.5rem;
-
-          image {
-            width: 3.5rem;
-            height: 3.5rem;
-          }
-        }
-
-        i::before {
-          color: var(--global-text-color);
-          transition-property: all 0.2s ease-in-out;
-        }
-
-        &:hover {
-          text-decoration: none;
-
-          i::before {
-            color: var(--global-theme-color);
-          }
-        }
-      }
-    }
-
-    .contact-note {
-      font-size: 1.1rem;
-      color: var(--global-text-color);
-    }
-  }
-}
-
-// Profile
-.profile {
-  img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-}
-
-.about_profile {
-  img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-}
-
 /******************************************************************************
  * News
  ******************************************************************************/
@@ -204,6 +87,123 @@ body.sticky-bottom-footer {
         &:hover {
           color: var(--global-hover-color);
         }
+      }
+    }
+  }
+}
+
+.news-container {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.news-sidebar {
+  flex: 0 0 200px;
+  padding: 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  height: fit-content;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+
+  h3 {
+    margin-bottom: 1.2rem;
+    color: #2c3e50;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    padding: 0.5rem 0;
+    z-index: 1;
+  }
+}
+
+.news-timeline {
+  padding-right: 0.5rem;
+}
+
+.timeline-item {
+  margin-bottom: 0.8rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid #3498db;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateX(5px);
+    border-left-color: #2980b9;
+  }
+
+  .timeline-date {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    margin-top: 0.2rem;
+    transition: color 0.2s;
+    font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      color: #3498db;
+    }
+  }
+}
+
+.news-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-card {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+
+  .news-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .news-content {
+    color: #444;
+    line-height: 1.6;
+
+    .read-more {
+      color: #3498db;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 0.5rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #2980b9;
+        transform: translateX(5px);
       }
     }
   }
