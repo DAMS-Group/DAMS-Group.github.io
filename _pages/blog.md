@@ -18,7 +18,7 @@ pagination:
 # 书本照片
 about_profile:
   align: right
-  image: 5402751.png
+  image: book.png
   image_circular: false # crops the image to make it circular
 
 book_desc: |
