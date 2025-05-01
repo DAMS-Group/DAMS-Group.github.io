@@ -5,8 +5,7 @@
 title: DAMS # the website title (if blank, full name will be used instead)
 name: 分布式与移动系统安全实验室
 contact_note: 地址：上地街道树村路19号，海淀区，北京，中国
-footer_text: 网页底部的说明
-keywords: virtualization
+footer_text: All rights reserved
 lang: cn # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 

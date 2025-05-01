@@ -23,15 +23,6 @@ about_profile:
 
 book_desc: |
   <div class="book-description">
-    <p>这是一本全面介绍Linux系统虚拟化技术的专业教材，内容涵盖：</p>
-    <ul>
-      <li>虚拟化的理论基础</li>
-      <li>核心技术（如KVM）</li>
-      <li>实际应用案例</li>
-      <li>安全性管理措施</li>
-    </ul>
-    <p>书中结合丰富的实例和实践指南，帮助读者理解如何高效地部署和管理虚拟化环境，并在多用户、多实例等复杂场景下保障系统的安全性和稳定性。</p>
-    <p>无论是技术人员、学生还是对信息安全感兴趣的读者，这本书都能提供实用的理论知识和技术指导。</p>
     <p class="book-link"><a href="https://gitee.com/silver-zhou/virtualization_book" target="_blank">查看实验信息 →</a></p>
   </div>
 ---
