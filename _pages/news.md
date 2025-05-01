@@ -9,8 +9,8 @@ nav_order: 1
 
 <div class="news-container" style="display: flex; gap: 2rem; margin: 0 auto; max-width: 1200px;">
   <!-- 左侧导航栏 -->
-  <div class="news-sidebar" style="flex: 0 0 200px; background: #f8f9fa; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 2rem; align-self: flex-start; height: fit-content; max-height: calc(100vh - 4rem); overflow-y: auto;">
-    <h3 style="margin-bottom: 1.2rem; color: #2c3e50; font-weight: 600; position: sticky; top: 0; background: #f8f9fa; padding: 0.5rem 0; z-index: 1;">导航栏</h3>
+  <div class="news-sidebar" style="flex: 0 0 200px; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 2rem; align-self: flex-start; height: fit-content; max-height: calc(100vh - 4rem); overflow-y: auto;">
+    <h3 style="margin-bottom: 1.2rem; color: #2c3e50; font-weight: 600; position: sticky; top: 0; padding: 0.5rem 0; z-index: 1;">导航栏</h3>
     <div class="news-timeline" style="padding-right: 0.5rem;">
       {% if site.news != blank %}
         {% assign news = site.news | reverse %}
@@ -29,7 +29,7 @@ nav_order: 1
     {% if site.news != blank %}
       {% assign news = site.news | reverse %}
       {% for item in news %}
-        <div id="news-{{ forloop.index }}" class="news-card" style="background: white; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s;">
+        <div id="news-{{ forloop.index }}" class="news-card" style="padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s;">
           <div class="news-date" style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">{{ item.date | date: '%Y-%m-%d' }}</div>
           <h4 style="color: #2c3e50; margin-bottom: 1rem; font-weight: 600;">
             {% if item.inline %}

@@ -89,14 +89,41 @@ body.sticky-bottom-footer {
 
   .social {
     text-align: center;
-    padding: 2rem 0;
-    // background: var(--global-code-bg-color);
-    background: white;
-    border-radius: 12px;
-    margin-top: 2rem;
 
     .contact-icons {
-      margin-bottom: 1rem;
+      font-size: 4rem;
+
+      a {
+        img {
+          width: 3.2rem;
+          height: 3.2rem;
+          margin-bottom: 1rem;
+        }
+
+        svg {
+          width: 3.5rem;
+          height: 4rem;
+          margin-bottom: 0.5rem;
+
+          image {
+            width: 3.5rem;
+            height: 3.5rem;
+          }
+        }
+
+        i::before {
+          color: var(--global-text-color);
+          transition-property: all 0.2s ease-in-out;
+        }
+
+        &:hover {
+          text-decoration: none;
+
+          i::before {
+            color: var(--global-theme-color);
+          }
+        }
+      }
     }
 
     .contact-note {
