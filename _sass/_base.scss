@@ -301,14 +301,6 @@ ul.task-list input[type="checkbox"] {
 
 // About Profile
 
-.lab_image {
-  width: 80%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .book_profile_box {
   width: 80%;
   padding-right: 15px;
@@ -1537,7 +1529,7 @@ ninja-keys::part(ninja-input-wrapper) {
 
 .hero-section {
   position: relative;
-  height: 50vh;
+  height: 70vh;
   min-height: 300px;
   margin-bottom: 1.5rem;
   overflow: hidden;
@@ -1561,7 +1553,7 @@ ninja-keys::part(ninja-input-wrapper) {
 
 .hero-content {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
