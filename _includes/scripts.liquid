@@ -260,9 +260,6 @@
       crossorigin="anonymous"
     ></script>
   {% endif %}
-  {% if page.images.photoswipe %}
-    <script defer src="{{ '/assets/js/photoswipe-setup.js' | relative_url | bust_file_cache }}" type="module"></script>
-  {% endif %}
   {% if page.images.slider %}
     <script
       defer
