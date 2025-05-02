@@ -6,4 +6,4 @@ inline: false
 related_posts: false
 ---
 
-{% include figure.liquid loading="eager" path="assets/img/news/2022-teachers-day.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/news/2022-teachers-day.jpg" title="2022年教师节" class="img-fluid rounded z-depth-1" width="70%" zoomable=true %}

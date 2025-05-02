@@ -6,6 +6,6 @@ inline: false
 related_posts: false
 ---
 
-{% include figure.liquid loading="eager" path="assets/img/news/2023-team-building-1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/news/2023-team-building-1.jpg" title="2023年团建-聚餐" class="img-fluid rounded z-depth-1" width="70%" zoomable=true %}
 
-{% include figure.liquid loading="eager" path="assets/img/news/2023-team-building-2.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/news/2023-team-building-2.jpg" title="2023年团建-桌游" class="img-fluid rounded z-depth-1" width="70%" zoomable=true %}
