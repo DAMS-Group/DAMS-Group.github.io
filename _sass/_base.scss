@@ -561,47 +561,28 @@ ul.task-list input[type="checkbox"] {
 
 // Social (bottom)
 
+/* 社交媒体区域 */
 .social {
   text-align: center;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+  min-width: 300px;
+  
   .contact-icons {
-    font-size: 4rem;
-
-    a {
-      img {
-        width: 3.2rem;
-        height: 3.2rem;
-        margin-bottom: 1rem;
-      }
-
-      svg {
-        width: 3.5rem;
-        height: 4rem;
-        margin-bottom: 0.5rem;
-
-        image {
-          width: 3.5rem;
-          height: 3.5rem;
-        }
-      }
-
-      i::before {
-        color: var(--global-text-color);
-        transition-property: all 0.2s ease-in-out;
-      }
-
-      &:hover {
-        text-decoration: none;
-
-        i::before {
-          color: var(--global-theme-color);
-        }
-      }
-    }
+    font-size: 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
-
+  
   .contact-note {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    color: var(--global-text-color);
+    max-width: 80%;
   }
 }
 
@@ -1399,8 +1380,9 @@ ninja-keys::part(ninja-input-wrapper) {
   .about_row {
     display: flex;
     justify-content: space-between;
-    gap: 1.5rem;
-    margin: 1rem 0 1rem;
+    gap: 1rem; /* 减小间距 */
+    margin: 0.5rem 0 0.5rem; /* 减小上下边距 */
+    align-items: baseline;
 
     >div {
       flex: 1;
@@ -1409,10 +1391,10 @@ ninja-keys::part(ninja-input-wrapper) {
 
     h2 {
       font-size: 1.8rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem; /* 减小标题下方边距 */
       color: var(--global-theme-color);
       border-bottom: 2px solid var(--global-theme-color);
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.3rem; /* 减小标题下方内边距 */
       text-align: center;
       transition: color 0.3s ease;
 
@@ -1494,13 +1476,6 @@ ninja-keys::part(ninja-input-wrapper) {
   justify-content: center;
 }
 
-.about_row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  align-content: flex-start;
-}
-
 .profile-hover-effect {
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1578,24 +1553,24 @@ ninja-keys::part(ninja-input-wrapper) {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-// 网站访问统计样式
+/* 网站访问统计样式 */
 .site-statistics {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
-  width: 100%;
+  width: 45%;
+  min-width: 300px;
   
   .busuanzi-statistics {
-    color: rgb(255, 255, 255);
-    margin-bottom: 15px;
+    color: var(--global-text-color);
+    margin-top: 15px;
     font-size: 16px;
     text-align: center;
   }
   
   .clustermaps-statistics {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     height: 250px;
     width: 250px;
     display: flex;
@@ -1622,4 +1597,34 @@ ninja-keys::part(ninja-input-wrapper) {
   color: #0a99ac;
   font-size: 20px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 统计和社交信息容器 */
+.stats-social-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 3rem auto;
+  width: 100%;
+  max-width: 1200px;
+  gap: 3rem;
+  padding: 1.5rem;
+  background-color: var(--global-bg-color);
+  border-radius: 10px;
+  margin-top: var(--spacing-sm); /* 使用预定义的间距变量 */
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+  .stats-social-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .site-statistics, .social {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
 }

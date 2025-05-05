@@ -216,44 +216,44 @@ body.sticky-bottom-footer {
 .selected_paper {
   width: 100%;
   max-width: 1200px;
-  margin: 3rem auto;
+  margin: 1.5rem auto; /* 从3rem减小到1.5rem */
   padding: 0 20px;
 
   .paper-entry {
     background-color: var(--global-bg-color);
-    border-radius: 16px;
+    border-radius: 12px; /* 从16px减小到12px */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    padding: 2rem;
-    margin-bottom: 2rem;
+    padding: 1.2rem; /* 从2rem减小到1.2rem */
+    margin-bottom: 1.2rem; /* 从2rem减小到1.2rem */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px);
+      transform: translateY(-3px); /* 从-4px减小到-3px */
     }
   }
 
   h1 {
     color: var(--global-theme-color);
-    font-size: 2rem;
+    font-size: 1.8rem; /* 从2rem减小到1.8rem */
     text-align: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: 0.6em; /* 从1em减小到0.6em */
+    margin-bottom: 0.6em; /* 从1em减小到0.6em */
   }
 
   h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem; /* 从1rem减小到0.7rem */
 
     span {
-      font-size: 1.5rem;
+      font-size: 1.3rem; /* 从1.5rem减小到1.3rem */
     }
   }
 
   h2.bibliography {
     color: var(--global-divider-color);
     border-top: 1px solid var(--global-divider-color);
-    padding-top: 1rem;
-    margin-top: 2rem;
+    padding-top: 0.7rem; /* 从1rem减小到0.7rem */
+    margin-top: 1.5rem; /* 从2rem减小到1.5rem */
     text-align: right;
   }
 
@@ -263,12 +263,12 @@ body.sticky-bottom-footer {
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem;
+      margin-bottom: 0.7rem; /* 从1rem减小到0.7rem */
 
       .preview {}
 
       .title {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* 从1.2rem减小到1.1rem */
         font-weight: 600;
         color: var(--global-theme-color);
         text-decoration: none;
