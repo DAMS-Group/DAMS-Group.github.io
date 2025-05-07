@@ -44,17 +44,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/people/";
           },
-        },{id: "news-2021年教师节",
-          title: '2021年教师节',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/2021-teachers-day/";
-            },},{id: "news-2022年教师节",
-          title: '2022年教师节',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/2022-teachers-day/";
-            },},{id: "news-2023年团建",
+        },{id: "news-2023年团建",
           title: '2023年团建',
           description: "",
           section: "News",handler: () => {
