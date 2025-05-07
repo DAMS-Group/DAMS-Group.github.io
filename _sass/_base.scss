@@ -364,11 +364,11 @@ ul.task-list input[type="checkbox"] {
 }
 
 .about_profile {
-  width: 100%;
+  width: 90%;
 
   .more-info {
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     font-family: monospace;
 
     p {
@@ -379,11 +379,11 @@ ul.task-list input[type="checkbox"] {
 }
 
 .about_profile.float-right {
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 .about_profile.float-left {
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 @media (min-width: 576px) {
@@ -1314,6 +1314,22 @@ ninja-keys::part(ninja-input-wrapper) {
   background: var(--global-bg-color);
 }
 
+.bibsearch-form-input {
+  color: var(--global-newsletter-text-color);
+  background: var(--global-newsletter-bg-color);
+  border: 1px solid var(--global-newsletter-text-color);
+  outline: none;
+  margin: 0px 10px 0px 0px;
+  width: 100%;
+  max-width: 350px;
+  min-width: 100px;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-left: 13%;
+}
+
 // popover is used for annotation in bib.liquid
 .popover {
   background-color: var(--global-bg-color);
@@ -1520,7 +1536,7 @@ ninja-keys::part(ninja-input-wrapper) {
 
 .hero-section {
   position: relative;
-  height: 70vh;
+  height: 50vh;
   min-height: 300px;
   margin-bottom: 1.5rem;
   overflow: hidden;
@@ -1544,12 +1560,12 @@ ninja-keys::part(ninja-input-wrapper) {
 
 .hero-content {
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-  color: white;
+  color: var(--global-theme-color);
   width: 80%;
   max-width: 800px;
 }
@@ -1613,4 +1629,108 @@ ninja-keys::part(ninja-input-wrapper) {
   color: #0a99ac;
   font-size: 20px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 书籍描述样式 */
+.book-description {
+  padding: 1rem;
+  background-color: var(--global-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-description:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-info {
+  flex: 0 0 65%;
+  order: 1;
+}
+
+.book-image {
+  flex: 0 0 30%;
+  order: 2;
+  text-align: center;
+}
+
+.book-image figure {
+  margin: 0;
+}
+
+.system-info,
+.usage-info {
+  margin-bottom: 1.2rem;
+}
+
+.info-title {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.3rem;
+  display: inline-block;
+}
+
+.info-list {
+  list-style: none;
+  padding-left: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.info-list li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.info-list li:before {
+  content: "•";
+  color: #3498db;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #34495e;
+}
+
+.book-link {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.book-link a {
+  display: inline-block;
+  color: #3498db;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.book-link a:hover {
+  color: #2980b9;
+  transform: translateX(5px);
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+  .book-description {
+    flex-direction: column-reverse;
+  }
+
+  .book-info,
+  .book-image {
+    flex: 0 0 100%;
+    margin-bottom: 1.5rem;
+  }
 }

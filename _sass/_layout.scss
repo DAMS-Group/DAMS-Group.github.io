@@ -2,12 +2,14 @@
  * Content
  ******************************************************************************/
 
+/* 注意：基本的body样式在_base.scss中已定义，这里只添加特定于布局的样式 */
 body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
   line-height: 1.6;
 
+  /* 添加滚动边距以确保标题在固定导航栏下方正确显示 */
   h1,
   h2,
   h3,
@@ -37,7 +39,9 @@ body.sticky-bottom-footer {
  * News
  ******************************************************************************/
 
+/* 新闻部分的特定布局样式 */
 .news {
+  /* 表格响应式容器样式 */
   .table-responsive {
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
@@ -49,6 +53,7 @@ body.sticky-bottom-footer {
     }
   }
 
+  /* 新闻表格样式 */
   table {
     margin-bottom: 0;
 
@@ -92,6 +97,7 @@ body.sticky-bottom-footer {
   }
 }
 
+/* 新闻容器 - 用于创建新闻页面的弹性布局 */
 .news-container {
   display: flex;
   gap: 2rem;
@@ -99,6 +105,7 @@ body.sticky-bottom-footer {
   max-width: 1200px;
 }
 
+/* 新闻侧边栏 - 包含时间线和分类 */
 .news-sidebar {
   flex: 0 0 200px;
   padding: 1.2rem;
@@ -122,10 +129,12 @@ body.sticky-bottom-footer {
   }
 }
 
+/* 新闻时间线 - 侧边栏中的时间线组件 */
 .news-timeline {
   padding-right: 0.5rem;
 }
 
+/* 时间线项目 - 单个新闻时间线条目 */
 .timeline-item {
   margin-bottom: 0.8rem;
   padding-left: 0.8rem;
@@ -161,11 +170,13 @@ body.sticky-bottom-footer {
   }
 }
 
+/* 新闻内容区域 - 主要内容区 */
 .news-content {
   flex: 1;
   min-width: 0;
 }
 
+/* 新闻卡片 - 单个新闻项目的卡片样式 */
 .news-card {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -213,47 +224,50 @@ body.sticky-bottom-footer {
  * Publications
  ******************************************************************************/
 
+/* 注意：主要的publications样式已移至_base.scss文件中的.publications类 */
+
+/* 这个类是特定于选定论文的样式，与_base.scss中的.publications不同 */
 .selected_paper {
   width: 100%;
   max-width: 1200px;
-  margin: 1.5rem auto; /* 从3rem减小到1.5rem */
+  margin: 1.5rem auto;
   padding: 0 20px;
 
   .paper-entry {
     background-color: var(--global-bg-color);
-    border-radius: 12px; /* 从16px减小到12px */
+    border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    padding: 1.2rem; /* 从2rem减小到1.2rem */
-    margin-bottom: 1.2rem; /* 从2rem减小到1.2rem */
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-      transform: translateY(-3px); /* 从-4px减小到-3px */
+      transform: translateY(-3px);
     }
   }
 
   h1 {
     color: var(--global-theme-color);
-    font-size: 1.8rem; /* 从2rem减小到1.8rem */
+    font-size: 1.8rem;
     text-align: center;
-    margin-top: 0.6em; /* 从1em减小到0.6em */
-    margin-bottom: 0.6em; /* 从1em减小到0.6em */
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
   }
 
   h2 {
-    margin-bottom: 0.7rem; /* 从1rem减小到0.7rem */
+    margin-bottom: 0.7rem;
 
     span {
-      font-size: 1.3rem; /* 从1.5rem减小到1.3rem */
+      font-size: 1.3rem;
     }
   }
 
   h2.bibliography {
     color: var(--global-divider-color);
     border-top: 1px solid var(--global-divider-color);
-    padding-top: 0.7rem; /* 从1rem减小到0.7rem */
-    margin-top: 1.5rem; /* 从2rem减小到1.5rem */
+    padding-top: 0.7rem;
+    margin-top: 1.5rem;
     text-align: right;
   }
 
@@ -263,12 +277,12 @@ body.sticky-bottom-footer {
     margin-top: 0;
 
     li {
-      margin-bottom: 0.7rem; /* 从1rem减小到0.7rem */
+      margin-bottom: 0.7rem;
 
       .preview {}
 
       .title {
-        font-size: 1.1rem; /* 从1.2rem减小到1.1rem */
+        font-size: 1.1rem;
         font-weight: 600;
         color: var(--global-theme-color);
         text-decoration: none;
