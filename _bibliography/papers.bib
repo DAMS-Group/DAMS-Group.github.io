@@ -101,3 +101,42 @@
   preview={secfortress-architecture.png},
   type={inproceedings},
 }
+
+@article{jianwei2020seef-aldr,
+  bibtex_show={true},
+  title={SEEF-ALDR: A Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation},
+  author={Tai, Jianwei and Jia, Xiaoqi and Huang, Qingjia and Zhang, Weijuan and Du, Haichao and Zhang, Shengzhi},
+  abstract={Speaker verification, as a biometric authentication mechanism, has been widely used due to the pervasiveness of voice control on smart devices. However, the task of “in-the-wild” speaker verification is still challenging, considering the speech samples may contain lots of identity-unrelated information, e.g., background noise, reverberation, emotion, etc. Previous works focus on optimizing the model to improve verification accuracy, without taking into account the elimination of the impact from the identity-unrelated information. To solve the above problem, we propose SEEF-ALDR, a novel Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation, to reinforce the performance of existing models on speaker verification. The key idea is to retrieve as much speaker identity information as possible from the original speech, thus minimizing the impact of identity-unrelated information on the speaker verification task by using adversarial learning. Experimental results demonstrate that the proposed framework can significantly improve the performance of speaker verification by 20.3\% and 23.8\% on average over 13 tested baselines on dataset Voxceleb1 and 8 tested baselines on dataset Voxceleb2 respectively, without adjusting the structure or hyper-parameters of them. Furthermore, the ablation study was conducted to evaluate the contribution of each module in SEEF-ALDR. Finally, porting an existing model into the proposed framework is straightforward and cost-efficient, with very little effort from the model owners due to the modular design of the framework.},
+  year={2020},
+  note={Proceedings of the 36th Annual Computer Security Applications Conference},
+  doi={10.1145/3427228.3427274},
+  html={https://dl.acm.org/doi/10.1145/3427228.3427274},
+  slide={https://www.acsac.org/2020/files/web/7b-4_seef-aldr-a_speaker_embedding_enhancement_framework_via_adversarial_learning_based_disentangled_representation.pdf},
+  preview={seef-aldr-architecture.png},
+  type={inproceedings},
+}
+
+@article{jianwei2020et-gan,
+  bibtex_show={true},
+  title={ET-GAN: Cross-Language Emotion Transfer Based on Cycle-Consistent Generative Adversarial Networks},
+  author={Jia, Xiaoqi and Tai, Jianwei and Hang, Zhou and Li, Yakai and Zhang, Weijuan and Du, Haichao and Huang, Qingjia},
+  abstract={Despite the remarkable progress made in synthesizing emotional speech from text, it is still challenging to provide emotion information to existing speech segments. Previous methods mainly rely on parallel data, and few works have studied the generalization ability for one model to transfer emotion information across different languages. To cope with such problems, we propose an emotion transfer system named ET-GAN, for learning language-independent emotion transfer from one emotion to another without parallel training samples. Based on cycle-consistent generative adversarial network, our method ensures the transfer of only emotion information across speeches with simple loss designs. Besides, we introduce an approach for migrating emotion information across different languages by using transfer learning. The experiment results show that our method can efficiently generate high-quality emotional speech for any given emotion category, without aligned speech pairs.},
+  year={2020},
+  note={The 24th European Conference on Artificial Intelligence (ECAI 2020)},
+  pdf={https://ecai2020.eu/papers/239_paper.pdf},
+  preview={et-gan-architecture.png},
+  type={inproceedings},
+}
+
+@article{yun2020enclavepdp,
+  bibtex_show={true},
+  title={EnclavePDP: A General Framework to Verify Data Integrity in Cloud Using Intel SGX},
+  author={He, Yun and Xu, Yihua and Jia, Xiaoqi and Zhang, Shengzhi and Liu, Peng and Chang, Shuai},
+  abstract={As the cloud storage service becomes pervasive, verifying the integrity of their outsourced data on cloud remotely turns out to be challenging for users. Existing Provable Data Possession (PDP) schemes mostly resort to a Third Party Auditor (TPA) to verify the integrity on behalf of users, thus reducing their communication and computation burden. However, such schemes demand fully trusted TPA, that is, placing TPA in the Trusted Computing Base (TCB), which is not always a reasonable assumption. In this paper, we propose EnclavePDP, a secure and general data integrity verification framework that relies on Intel SGX to establish the TCB for PDP schemes, thus eliminating the TPA from the TCB. EnclavePDP supports both new and existing PDP schemes by integrating core functionalities of cryptography libraries into Intel SGX. We choose 10 existing representative PDP schemes, and port them into EnclavePDP with reasonable effort. By deploying EnclavePDP in a real-world cloud storage platform and running the 10 PDP schemes respectively, we demonstrate that EnclavePDP can eliminate the dependence on TPA and introduce reasonable performance overhead.},
+  year={2020},
+  note={The 23rd International Symposium on Research in Attacks, Intrusions and Defenses (RAID 2020)},
+  html={https://www.usenix.org/conference/raid2020/presentation/he},
+  pdf={https://www.usenix.org/system/files/raid20-he.pdf},
+  preview={enclavepdp-architecture.png},
+  type={inproceedings},
+}

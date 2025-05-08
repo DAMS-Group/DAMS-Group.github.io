@@ -4,16 +4,11 @@
       {% if project.img %}
         <div class="square-img-container">
           {%
-            include figure.liquid
-            loading="eager"
-            path=project.img
-            sizes="250px"
-            alt="project thumbnail"
-            class="card-img-top square-img"
+            include figure.liquid loading="eager" path=project.img sizes="250px" alt="project thumbnail" class="card-img-top square-img"
           %}
         </div>
       {% endif %}
-      <div class="card-body p-3 text-center">
+      <div class="card-body">
         <h2 class="card-title fs-5 mb-1">{{ project.title }}</h2>
         <p class="card-text small">{{ project.description }}</p>
       </div>

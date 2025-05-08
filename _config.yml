@@ -4,6 +4,7 @@
 
 title: DAMS # the website title (if blank, full name will be used instead)
 name: 分布式与移动系统安全实验室
+whole_name: Distributed and Mobile System Security Lab
 contact_note: 地址：上地街道树村路19号，海淀区，北京，中国 <br>
   Email：contact@dams.net.cn
 footer_text: All rights reserved
@@ -212,7 +213,7 @@ jekyll-archives:
     category: "/blog/category/:name/"
 
 display_tags: ["QEMU", "KVM"] # these tags will be displayed on the front page of your blog
-display_categories: ["教材实验"] # these categories will be displayed on the front page of your blog
+display_categories: ["配套实验"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
