@@ -9,14 +9,7 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-新闻",
-          title: "新闻",
-          description: "实验室新闻。",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/news/";
-          },
-        },{id: "nav-教材",
+  },{id: "nav-教材",
           title: "教材",
           description: "",
           section: "Navigation",
@@ -43,6 +36,13 @@ ninja.data = [{
           section: "Navigation",
           handler: () => {
             window.location.href = "/people/";
+          },
+        },{id: "nav-新闻",
+          title: "新闻",
+          description: "实验室新闻。",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/news/";
           },
         },{id: "news-2023年团建",
           title: '2023年团建',
@@ -120,13 +120,6 @@ ninja.data = [{
           section: "Projects",handler: () => {
               window.location.href = "/projects/sedspec-securing-emulated-devices-by-enforcing-execution-specification/";
             },},{
-        id: 'social-email',
-        title: 'email',
-        section: 'Socials',
-        handler: () => {
-          window.open("mailto:%63%6F%6E%74%61%63%74@%64%61%6D%73.%6E%65%74.%63%6E", "_blank");
-        },
-      },{
         id: 'social-github',
         title: 'GitHub',
         section: 'Socials',
