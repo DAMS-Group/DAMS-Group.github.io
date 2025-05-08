@@ -547,18 +547,24 @@ ul.task-list input[type="checkbox"] {
   flex-direction: column;
   align-items: center;
   min-width: 300px;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
 
   .contact-icons {
-    font-size: 3.5rem;
+    font-size: 2.2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.3rem;
+    margin-bottom: 0.3rem;
+    
+    .social-icon {
+      font-size: 0.6em; /* 使图标变小，相对于父元素的字体大小 */
+    }
   }
 
   .contact-note {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--global-text-color);
     max-width: 80%;
   }
@@ -1417,22 +1423,23 @@ ninja-keys::part(ninja-input-wrapper) {
 
   .social {
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
 
     .contact-icons {
-      font-size: 4rem;
+      font-size: 3rem;
 
       a {
         img {
-          width: 3.2rem;
-          height: 3.2rem;
-          margin-bottom: 1rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          margin-bottom: 0.5rem;
         }
 
         svg {
-          width: 3.5rem;
-          height: 4rem;
-          margin-bottom: 0.5rem;
+          width: 2.8rem;
+          height: 3rem;
+          margin-bottom: 0.3rem;
 
           image {
             width: 3.5rem;
@@ -1676,11 +1683,6 @@ ninja-keys::part(ninja-input-wrapper) {
   font-weight: bold;
   position: absolute;
   left: 0;
-}
-
-.info-label {
-  font-weight: 600;
-  color: #34495e;
 }
 
 .book-link {

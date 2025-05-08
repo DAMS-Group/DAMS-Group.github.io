@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 教材
-permalink: /blog/
+permalink: /book/
 nav: true
 nav_order: 2
 pagination:
@@ -25,7 +25,7 @@ about_profile:
 <div class="post">
   <!-- <div class="header-bar"> -->
   <header class="post-header">
-    <h1 class="post-title">{{ site.blog_name }}</h1>
+    <h1 class="post-title">{{ site.book_name }}</h1>
   </header>
   <!-- </div> -->
 
@@ -41,18 +41,15 @@ about_profile:
   <div class="book-description">
     <div class="book-info">
       <div class="system-info">
-        <h3 class="info-title">系统版本</h3>
+        <h3 class="info-title">内容简介</h3>
         <ul class="info-list">
-          <li><span class="info-label">宿主机：</span>Linux（KVM）5.15</li>
-          <li><span class="info-label">虚拟机：</span>Linux 4.14</li>
-          <li><span class="info-label">QEMU：</span>qemu 4.0.0</li>
+          <li>XXX</li>
         </ul>
       </div>
       <div class="usage-info">
-        <h3 class="info-title">使用说明</h3>
+        <h3 class="info-title">作者信息</h3>
         <ul class="info-list">
-          <li>可直接替换本地系统的目标文件</li>
-          <li>可参考源码自行实现和编译</li>
+          <li>YYY</li>
         </ul>
       </div>
       <p class="book-link"><a href="https://gitee.com/silver-zhou/virtualization_book" target="_blank">查看实验信息 →</a></p>
@@ -82,7 +79,7 @@ about_profile:
     <ul class="p-0 m-0">
       {% for tag in site.display_tags %}
         <li>
-          <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
+          <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ tag | slugify | prepend: '/book/tag/' | relative_url }}">{{ tag }}</a>
         </li>
         {% unless forloop.last %}
           <p>&bull;</p>
@@ -93,7 +90,7 @@ about_profile:
       {% endif %}
       {% for category in site.display_categories %}
         <li>
-          <i class="fa-solid fa-tag fa-sm"></i> <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>
+          <i class="fa-solid fa-tag fa-sm"></i> <a href="{{ category | slugify | prepend: '/book/category/' | relative_url }}">{{ category }}</a>
         </li>
         {% unless forloop.last %}
           <p>&bull;</p>
@@ -129,7 +126,7 @@ about_profile:
                   {% assign year = post.date | date: "%Y" %}
                   <p class="post-meta">
                     {{ read_time }} min read &nbsp; &middot; &nbsp;
-                    <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
+                    <a href="{{ year | prepend: '/book/' | prepend: site.baseurl}}">
                       <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
                     </a>
                   </p>
@@ -187,13 +184,13 @@ about_profile:
               {% endif %}
             </p>
             <p class="post-tags">
-              <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
+              <a href="{{ year | prepend: '/book/' | prepend: site.baseurl}}">
                 <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
               </a>
               {% if tags != "" %}
                 &nbsp; &middot; &nbsp;
                   {% for tag in post.tags %}
-                    <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
+                    <a href="{{ tag | slugify | prepend: '/book/tag/' | prepend: site.baseurl}}">
                       <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}
                     </a>
                     {% unless forloop.last %}
@@ -204,7 +201,7 @@ about_profile:
               {% if categories != "" %}
                 &nbsp; &middot; &nbsp;
                   {% for category in post.categories %}
-                    <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
+                    <a href="{{ category | slugify | prepend: '/book/category/' | prepend: site.baseurl}}">
                       <i class="fa-solid fa-tag fa-sm"></i> {{ category }}
                     </a>
                     {% unless forloop.last %}
