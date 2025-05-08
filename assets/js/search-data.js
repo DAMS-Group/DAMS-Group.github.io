@@ -14,7 +14,7 @@ ninja.data = [{
           description: "",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/blog/";
+            window.location.href = "/book/";
           },
         },{id: "nav-论文",
           title: "论文",
@@ -35,7 +35,7 @@ ninja.data = [{
           description: "实验室成员。",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/people/";
+            window.location.href = "/members/";
           },
         },{id: "nav-新闻",
           title: "新闻",
