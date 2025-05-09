@@ -104,7 +104,7 @@ collections:
   projects:
     output: true
     permalink: /:collection/:title/
-  profiles:
+  members:
     output: true
     permalink: /:collection/:title/
 

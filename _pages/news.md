@@ -11,25 +11,69 @@ nav_order: 10
   <!-- 左侧导航栏 -->
   <div class="news-sidebar">
     <h3>导航栏</h3>
-    <div class="news-timeline">
-      {% if site.news != blank %}
-        {% assign news = site.news | reverse %}
-        {% for item in news %}
-          <div class="timeline-item">
-            <div class="timeline-date">{{ item.date | date: '%Y-%m-%d' }}</div>
-            <a href="#news-{{ forloop.index }}">{{ item.title }}</a>
-          </div>
-        {% endfor %}
-      {% endif %}
+    
+    <!-- 分类导航 -->
+    <div class="category-nav">
+      <ul class="category-list">
+        <li><a href="#" class="category-link active" data-category="学术报告">学术报告</a></li>
+        <li><a href="#" class="category-link" data-category="团建活动">团建活动</a></li>
+      </ul>
+    </div>
+    
+    <!-- 分类内容区 -->
+    <div class="category-content">
+
+      
+      <!-- 学术报告分类内容 -->
+      <div class="category-section" id="category-学术报告">
+        <h4>学术报告</h4>
+        <div class="news-list">
+          {% if site.news != blank %}
+            {% assign news = site.news | reverse %}
+            {% for item in news %}
+              {% if item.category == "学术报告" %}
+                <div class="news-item">
+                  <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
+                  <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <p>暂无新闻...</p>
+          {% endif %}
+        </div>
+      </div>
+      
+      <!-- 团建活动分类内容 -->
+      <div class="category-section" id="category-团建活动">
+        <h4>团建活动</h4>
+        <div class="news-list">
+          {% if site.news != blank %}
+            {% assign news = site.news | reverse %}
+            {% for item in news %}
+              {% if item.category == "团建活动" %}
+                <div class="news-item">
+                  <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
+                  <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <p>暂无新闻...</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 右侧内容区 -->
+  <!-- 右侧详细内容区 -->
   <div class="news-content">
     {% if site.news != blank %}
       {% assign news = site.news | reverse %}
+      {% assign has_news = false %}
       {% for item in news %}
-        <div id="news-{{ forloop.index }}" class="news-card">
+        {% assign category = item.category | default: "其他" %}
+        <div id="news-{{ forloop.index }}" class="news-card" data-category="{{ category }}">
           <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
           <h4>
             {% if item.inline %}
@@ -48,9 +92,97 @@ nav_order: 10
             {% endif %}
           </div>
         </div>
+        {% if category == "学术报告" or category == "团建活动" %}
+          {% assign has_news = true %}
+        {% endif %}
       {% endfor %}
+      {% if has_news == false %}
+        <p class="no-news-message">暂无新闻...</p>
+      {% endif %}
     {% else %}
       <p>暂无新闻...</p>
     {% endif %}
   </div>
 </div>
+
+<!-- JavaScript代码 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取所有分类链接和分类内容区
+    const categoryLinks = document.querySelectorAll('.category-link');
+    const categorySections = document.querySelectorAll('.category-section');
+    const newsCards = document.querySelectorAll('.news-card');
+    
+    // 初始化 - 显示学术报告分类
+    document.getElementById('category-学术报告').classList.add('active');
+    let hasInitialNews = false;
+    newsCards.forEach(card => {
+      if (card.getAttribute('data-category') === '学术报告') {
+        card.style.display = 'block';
+        hasInitialNews = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    // 检查初始分类是否有新闻
+    const noNewsMessage = document.querySelector('.no-news-message');
+    if (noNewsMessage) {
+      noNewsMessage.style.display = hasInitialNews ? 'none' : 'block';
+    }
+
+    // 为分类链接添加点击事件
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 移除所有链接的active类
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        
+        // 为当前点击的链接添加active类
+        this.classList.add('active');
+
+        // 获取选中的分类
+        const selectedCategory = this.getAttribute('data-category');
+        
+        // 隐藏所有分类内容区
+        categorySections.forEach(section => {
+          section.classList.remove('active');
+        });
+        
+        // 显示选中的分类内容区
+        document.getElementById('category-' + selectedCategory).classList.add('active');
+
+        // 筛选新闻卡片
+        let hasNews = false;
+        newsCards.forEach(card => {
+          if (card.getAttribute('data-category') === selectedCategory) {
+            card.style.display = 'block';
+            hasNews = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // 检查是否有该分类的新闻
+        const noNewsMessage = document.querySelector('.no-news-message');
+        if (noNewsMessage) {
+          noNewsMessage.style.display = hasNews ? 'none' : 'block';
+        }
+      });
+    });
+    
+    // 为新闻链接添加点击事件，点击时滚动到对应的新闻卡片
+    const newsLinks = document.querySelectorAll('.news-link');
+    newsLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>
