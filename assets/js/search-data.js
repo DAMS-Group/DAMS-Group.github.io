@@ -49,6 +49,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/caowenzhuo/";
+            },},{id: "members-chenjiayun",
+          title: 'Chenjiayun',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/chenjiayun/";
             },},{id: "members-qianfeifan",
           title: 'Qianfeifan',
           description: "",
@@ -69,6 +74,16 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiaxiaoqi/";
+            },},{id: "members-lvzhiqiang",
+          title: 'Lvzhiqiang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/lvzhiqiang/";
+            },},{id: "members-songzhenyu",
+          title: 'Songzhenyu',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/songzhenyu/";
             },},{id: "members-xushaowen",
           title: 'Xushaowen',
           description: "",
