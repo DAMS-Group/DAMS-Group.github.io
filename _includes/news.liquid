@@ -1,33 +1,196 @@
-<div class="news" style="width: 30%">
-  {% if site.news != blank %}
-    {% assign news_size = site.news | size %}
-    <div
-      class="table-responsive"
-      {% if include.limit and site.announcements.scrollable and news_size > 3 %}
-      style="max-height: 60vw"
-      {% endif %}>
-      <table class="table table-sm table-borderless">
-        {% assign news = site.news | reverse %}
-        {% if include.limit and site.announcements.limit %}
-          {% assign news_limit = site.announcements.limit %}
-        {% else %}
-          {% assign news_limit = news_size %}
-        {% endif %}
-        {% for item in news limit: news_limit %}
-          <tr>
-            <th scope="row" style="width: 30%; white-space: nowrap;">{{ item.date | date: '%b %d, %Y' }}</th>
-            <td style="max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-              {% if item.inline %}
-                {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
-              {% else %}
-                <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
-      </table>
+<div class="news-container">
+  <!-- 左侧导航栏 -->
+  <div class="news-sidebar">
+    <h3>导航栏</h3>
+
+    <!-- 分类导航 -->
+    <div class="category-nav">
+      <ul class="category-list">
+        <li class="category-section" id="category-学术报告">
+          <a
+            href="#"
+            class="category-link active"
+            data-category="学术报告">学术报告</a>
+          <div class="news-list">
+            {% if site.news != blank %}
+              {% assign news = site.news | reverse %}
+              {% for item in news %}
+                {% if item.category == "学术报告" %}
+                  <div class="news-item">
+                    <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
+                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <p>暂无新闻...</p>
+            {% endif %}
+          </div>
+        </li>
+        <li class="category-section" id="category-团建活动">
+          <a
+            href="#"
+            class="category-link"
+            data-category="团建活动">团建活动</a>
+          <div class="news-list">
+            {% if site.news != blank %}
+              {% assign news = site.news | reverse %}
+              {% for item in news %}
+                {% if item.category == "团建活动" %}
+                  <div class="news-item">
+                    <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
+                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <p>暂无新闻...</p>
+            {% endif %}
+          </div>
+        </li>
+      </ul>
     </div>
-  {% else %}
-    <p>No news so far...</p>
-  {% endif %}
+  </div>
+
+  <!-- 右侧详细内容区 -->
+  <div class="news-content">
+    {% if site.news != blank %}
+      {% assign news = site.news | reverse %}
+      {% assign has_news = false %}
+      {% for item in news %}
+        {% assign category = item.category | default: "其他" %}
+        <div
+          id="news-{{ forloop.index }}"
+          class="news-card"
+          data-category="{{ category }}">
+          <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
+          <h4>
+            {% if item.inline %}
+              {{ item.title }}
+            {% else %}
+              <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endif %}
+          </h4>
+          <div class="news-content">
+            {% if item.inline %}
+              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+            {% else %}
+              {% assign first_paragraph = item.content | split: '</p>' | first | remove: '<p>' %}
+              {{ first_paragraph }}
+              <a href="{{ item.url | relative_url }}" class="read-more">阅读更多</a>
+            {% endif %}
+          </div>
+        </div>
+        {% if category == "学术报告" or category == "团建活动" %}
+          {% assign has_news = true %}
+        {% endif %}
+      {% endfor %}
+      {% if has_news == false %}
+        <p class="no-news-message">暂无新闻...</p>
+      {% endif %}
+    {% else %}
+      <p>暂无新闻...</p>
+    {% endif %}
+  </div>
 </div>
+
+<!-- JavaScript代码 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取所有分类链接和分类内容区
+    const categoryLinks = document.querySelectorAll('.category-link');
+    const categorySections = document.querySelectorAll('.category-section');
+    const newsCards = document.querySelectorAll('.news-card');
+
+    // 初始化 - 显示学术报告分类
+    document.getElementById('category-学术报告').classList.add('active');
+    let hasInitialNews = false;
+    newsCards.forEach(card => {
+      if (card.getAttribute('data-category') === '学术报告') {
+        card.style.display = 'block';
+        hasInitialNews = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // 初始化 - 隐藏非活动分类的news-list
+    categorySections.forEach(section => {
+      if (!section.classList.contains('active')) {
+        const newsList = section.querySelector('.news-list');
+        if (newsList) {
+          newsList.style.display = 'none';
+        }
+      }
+    });
+
+    // 检查初始分类是否有新闻
+    const noNewsMessage = document.querySelector('.no-news-message');
+    if (noNewsMessage) {
+      noNewsMessage.style.display = hasInitialNews ? 'none' : 'block';
+    }
+
+    // 为分类链接添加点击事件
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 移除所有链接的active类
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        
+        // 为当前点击的链接添加active类
+        this.classList.add('active');
+
+        // 获取选中的分类
+        const selectedCategory = this.getAttribute('data-category');
+        
+        // 处理分类内容区的显示/隐藏
+        categorySections.forEach(section => {
+          section.classList.remove('active');
+          const newsList = section.querySelector('.news-list');
+          if (newsList) {
+            newsList.style.display = 'none';
+          }
+        });
+        
+        // 显示选中的分类内容区
+        const selectedSection = document.getElementById('category-' + selectedCategory);
+        selectedSection.classList.add('active');
+        const selectedNewsList = selectedSection.querySelector('.news-list');
+        if (selectedNewsList) {
+          selectedNewsList.style.display = 'block';
+        }
+
+        // 筛选新闻卡片
+        let hasNews = false;
+        newsCards.forEach(card => {
+          if (card.getAttribute('data-category') === selectedCategory) {
+            card.style.display = 'block';
+            hasNews = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // 检查是否有该分类的新闻
+        const noNewsMessage = document.querySelector('.no-news-message');
+        if (noNewsMessage) {
+          noNewsMessage.style.display = hasNews ? 'none' : 'block';
+        }
+      });
+    });
+
+    // 为新闻链接添加点击事件，点击时滚动到对应的新闻卡片
+    const newsLinks = document.querySelectorAll('.news-link');
+    newsLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>

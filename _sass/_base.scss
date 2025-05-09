@@ -1787,28 +1787,6 @@ ninja-keys::part(ninja-input-wrapper) {
   color: white;
 }
 
-/* 分类内容区 */
-.category-content {
-  padding-right: 0.5rem;
-}
-
-/* 分类区块 */
-.category-section {
-  display: none;
-  margin-bottom: 1.5rem;
-}
-
-.category-section.active {
-  display: block;
-}
-
-.category-section h4 {
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
-  color: var(--global-theme-color);
-}
-
 /* 新闻列表 */
 .news-list {
   margin-left: 0.5rem;
@@ -1816,6 +1794,7 @@ ninja-keys::part(ninja-input-wrapper) {
 
 /* 新闻项目 */
 .news-item {
+  margin-top: 1rem;
   margin-bottom: 0.8rem;
   padding-left: 0.8rem;
   border-left: 2px solid #eee;

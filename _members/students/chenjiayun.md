@@ -1,6 +1,6 @@
 ---
-category: teachers
-order: 5
+category: students
+order: 102
 image: octocat/red-polo.png
 more_info: |
   名字<br>
