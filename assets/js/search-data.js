@@ -54,36 +54,6 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/2024-team-building/";
-            },},{id: "profiles-cwz",
-          title: 'Cwz',
-          description: "",
-          section: "Profiles",handler: () => {
-              window.location.href = "/profiles/cwz/";
-            },},{id: "profiles-jn",
-          title: 'Jn',
-          description: "",
-          section: "Profiles",handler: () => {
-              window.location.href = "/profiles/jn/";
-            },},{id: "profiles-qff",
-          title: 'Qff',
-          description: "",
-          section: "Profiles",handler: () => {
-              window.location.href = "/profiles/qff/";
-            },},{id: "profiles-syn",
-          title: 'Syn',
-          description: "",
-          section: "Profiles",handler: () => {
-              window.location.href = "/profiles/syn/";
-            },},{id: "profiles-xsw",
-          title: 'Xsw',
-          description: "",
-          section: "Profiles",handler: () => {
-              window.location.href = "/profiles/xsw/";
-            },},{id: "profiles-zqh",
-          title: 'Zqh',
-          description: "",
-          section: "Profiles",handler: () => {
-              window.location.href = "/profiles/zqh/";
             },},{id: "projects-conmonitor",
           title: 'ConMonitor',
           description: "Lightweight Container Protection with Virtualization and VM Functions",
