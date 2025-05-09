@@ -3,9 +3,11 @@ layout: page
 ---
 <div class="post">
   <article>
-    {% assign members = site.members | sort: 'order' %}
-    {% if members.size > 0 %}
-      {% for member in members %}
+    <!-- Teachers Section -->
+    <h2>Teachers</h2>
+    {% assign teachers = site.members | where: "category", "teachers" | sort: 'order' %}
+    {% if teachers.size > 0 %}
+      {% for member in teachers %}
         <hr>
         {% assign loopindex = forloop.index0 | modulo: 5 %}
         {% if loopindex == 0 %}
@@ -27,7 +29,36 @@ layout: page
         {% endif %}
       {% endfor %}
     {% else %}
-      <p>暂无成员信息。请在 _members 目录下添加成员信息文件。</p>
+      <p>暂无教师信息。</p>
+    {% endif %}
+
+    <!-- Students Section -->
+    <h2>Students</h2>
+    {% assign students = site.members | where: "category", "students" | sort: 'order' %}
+    {% if students.size > 0 %}
+      {% for member in students %}
+        <hr>
+        {% assign loopindex = forloop.index0 | modulo: 5 %}
+        {% if loopindex == 0 %}
+          <div class="members_row">
+        {% endif %}
+        <div class="member">
+          {% if member.image %}
+            {% assign member_image_path = member.image | prepend: 'assets/img/' %}
+            {% assign member_image_class = 'img-fluid z-depth-1 rounded member-hover-effect' %}
+            {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.25}}px, (min-width: 576px) 25vw, 80vw"{% endcapture %}
+            {% include figure.liquid loading="eager" path=member_image_path class=member_image_class sizes=sizes alt=member.image %}
+          {% endif %}
+          {% if member.more_info %}
+            <div class="more-info">{{ member.more_info }}</div>
+          {% endif %}
+        </div>
+        {% if loopindex == 4 or forloop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p>暂无学生信息。</p>
     {% endif %}
   </article>
 </div>

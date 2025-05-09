@@ -240,9 +240,9 @@ ul.task-list input[type="checkbox"] {
   color: var(--global-theme-color);
 }
 
-// Profile
+// Member
 
-.profile {
+.member {
   width: 100%;
   text-align: center;
 
@@ -258,16 +258,16 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-.profile.float-right {
+.member.float-right {
   margin-left: 1rem;
 }
 
-.profile.float-left {
+.member.float-left {
   margin-right: 1rem;
 }
 
 @media (min-width: 576px) {
-  .profile {
+  .member {
     width: 15%;
 
     .address {
@@ -1470,8 +1470,8 @@ ninja-keys::part(ninja-input-wrapper) {
   }
 }
 
-// Profile
-.profile {
+// Member
+.member {
   img {
     width: 100%;
     border-radius: 12px;
@@ -1489,18 +1489,18 @@ ninja-keys::part(ninja-input-wrapper) {
 
 // Additional styles
 
-.profiles_row {
+.members_row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
-.profile-hover-effect {
+.member-hover-effect {
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.profile-hover-effect:hover {
+.member-hover-effect:hover {
   transform: translateY(-10px) scale(1.05);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
