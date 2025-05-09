@@ -44,7 +44,42 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/news/";
           },
-        },{id: "news-2023年团建",
+        },{id: "members-caowenzhuo",
+          title: 'Caowenzhuo',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/caowenzhuo/";
+            },},{id: "members-qianfeifan",
+          title: 'Qianfeifan',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/qianfeifan/";
+            },},{id: "members-songyanni",
+          title: 'Songyanni',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/songyanni/";
+            },},{id: "members-jiangnan",
+          title: 'Jiangnan',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/jiangnan/";
+            },},{id: "members-jiaxiaoqi",
+          title: 'Jiaxiaoqi',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/jiaxiaoqi/";
+            },},{id: "members-xushaowen",
+          title: 'Xushaowen',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/xushaowen/";
+            },},{id: "members-zhouqihang",
+          title: 'Zhouqihang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhouqihang/";
+            },},{id: "news-2023年团建",
           title: '2023年团建',
           description: "",
           section: "News",handler: () => {
