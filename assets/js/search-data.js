@@ -44,7 +44,12 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/news/";
           },
-        },{id: "members-caowenzhuo",
+        },{id: "members-baiyirui",
+          title: 'Baiyirui',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/baiyirui/";
+            },},{id: "members-caowenzhuo",
           title: 'Caowenzhuo',
           description: "",
           section: "Members",handler: () => {
@@ -54,56 +59,186 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/chenjiayun/";
+            },},{id: "members-guojiaming",
+          title: 'Guojiaming',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/guojiaming/";
+            },},{id: "members-hezhiyu",
+          title: 'Hezhiyu',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/hezhiyu/";
+            },},{id: "members-huangsicong",
+          title: 'Huangsicong',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/huangsicong/";
+            },},{id: "members-hujunjie",
+          title: 'Hujunjie',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/hujunjie/";
+            },},{id: "members-liupuchun",
+          title: 'Liupuchun',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/liupuchun/";
+            },},{id: "members-liuxin",
+          title: 'Liuxin',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/liuxin/";
+            },},{id: "members-liyan",
+          title: 'Liyan',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/liyan/";
+            },},{id: "members-luyifan",
+          title: 'Luyifan',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/luyifan/";
             },},{id: "members-qianfeifan",
           title: 'Qianfeifan',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/qianfeifan/";
+            },},{id: "members-songqiyang",
+          title: 'Songqiyang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/songqiyang/";
             },},{id: "members-songyanni",
           title: 'Songyanni',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songyanni/";
-            },},{id: "members-jiangnan",
-          title: 'Jiangnan',
+            },},{id: "members-wanyisen",
+          title: 'Wanyisen',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/wanyisen/";
+            },},{id: "members-xieqiang",
+          title: 'Xieqiang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/xieqiang/";
+            },},{id: "members-yanghaoran",
+          title: 'Yanghaoran',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/yanghaoran/";
+            },},{id: "members-yangxiangcong",
+          title: 'Yangxiangcong',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/yangxiangcong/";
+            },},{id: "members-yanxiaolong",
+          title: 'Yanxiaolong',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/yanxiaolong/";
+            },},{id: "members-yaowentao",
+          title: 'Yaowentao',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/yaowentao/";
+            },},{id: "members-zhangyixin",
+          title: 'Zhangyixin',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhangyixin/";
+            },},{id: "members-zhangzhicong",
+          title: 'Zhangzhicong',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhangzhicong/";
+            },},{id: "members-zhaoyuanbo",
+          title: 'Zhaoyuanbo',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhaoyuanbo/";
+            },},{id: "members-助理研究员",
+          title: '助理研究员',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiangnan/";
-            },},{id: "members-jiaxiaoqi",
-          title: 'Jiaxiaoqi',
+            },},{id: "members-博导",
+          title: '博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiaxiaoqi/";
-            },},{id: "members-lvzhiqiang",
-          title: 'Lvzhiqiang',
+            },},{id: "members-博导",
+          title: '博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/lvzhiqiang/";
-            },},{id: "members-songzhenyu",
-          title: 'Songzhenyu',
+            },},{id: "members-博导",
+          title: '博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songzhenyu/";
-            },},{id: "members-xushaowen",
-          title: 'Xushaowen',
+            },},{id: "members-助理研究员",
+          title: '助理研究员',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/xushaowen/";
-            },},{id: "members-zhouqihang",
-          title: 'Zhouqihang',
+            },},{id: "members-xxx",
+          title: 'xxx',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhouqihang/";
-            },},{id: "news-2023年团建",
-          title: '2023年团建',
+            },},{id: "news-2023年10月15日聚点串吧团建",
+          title: '2023年10月15日聚点串吧团建',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/2023-team-building/";
-            },},{id: "news-2024年团建",
-          title: '2024年团建',
+              window.location.href = "/news/team-building@judianchuanba/";
+            },},{id: "news-陈家赟的报告-ccgrid-2024",
+          title: '陈家赟的报告 @ CCGRID 2024',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/2024-team-building/";
+              window.location.href = "/news/chenjiayun@ccgrid/";
+            },},{id: "news-姜楠的报告-ccgrid-2024",
+          title: '姜楠的报告 @ CCGRID 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/jiangnan@sec2024/";
+            },},{id: "news-张艺馨的报告-iscc-2024",
+          title: '张艺馨的报告 @ ISCC 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/zhangyixin@iscc2024/";
+            },},{id: "news-张志聪的报告-icpads-2024",
+          title: '张志聪的报告 @ ICPADS 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/zhangzhicong@icpads2024/";
+            },},{id: "news-2024年10月25日第六季团建",
+          title: '2024年10月25日第六季团建',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/team-building@diliuji/";
+            },},{id: "news-徐少文的报告-socc-2024",
+          title: '徐少文的报告 @ SoCC 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/xushaowen@socc2024/";
+            },},{id: "news-陈家赟的报告-acsac-2024",
+          title: '陈家赟的报告 @ ACSAC 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/chenjiayun@acsac2024/";
+            },},{id: "news-trustcom-2024",
+          title: 'TrustCom 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/dams@trustcom2024/";
+            },},{id: "news-ndss-2025",
+          title: 'NDSS 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/dams@ndss2025/";
             },},{id: "projects-conmonitor",
           title: 'ConMonitor',
           description: "Lightweight Container Protection with Virtualization and VM Functions",
