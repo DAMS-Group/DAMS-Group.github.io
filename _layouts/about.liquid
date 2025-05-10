@@ -7,9 +7,7 @@ layout: default
       <div class="lab_image background-image">
         {% assign lab_image_path = page.lab_image | prepend: 'assets/img/' %}
         {% assign lab_image_class = 'img-fluid' %}
-        {%
-          include figure.liquid loading="eager" path=lab_image_path class=lab_image_class alt=page.lab_image cache_bust=true
-        %}
+        {% include figure.liquid loading="eager" path=lab_image_path class=lab_image_class alt=page.lab_image cache_bust=true %}
       </div>
     {% endif %}
 
@@ -18,7 +16,8 @@ layout: default
         {{ site.title }}
       </h1>
       <p class="desc">
-        {{ site.name }} <br>
+        {{ site.name }}
+        <br>
         {{ site.whole_name }}
       </p>
     </div>
@@ -61,7 +60,8 @@ layout: default
         <script
           type="text/javascript"
           id="clstr_globe"
-          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"></script>
+          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"
+        ></script>
       </div>
       <script type="text/javascript" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       <div class="busuanzi-statistics">
@@ -73,5 +73,4 @@ layout: default
       </div>
     </div>
   {% endif %}
-
 </div>

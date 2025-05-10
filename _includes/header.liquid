@@ -3,11 +3,10 @@
   <nav
     id="navbar"
     class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}"
-    role="navigation">
+    role="navigation"
+  >
     <div class="container">
-      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
-        {{ site.title }} | {{ site.name }}
-      </a>
+      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/"> {{ site.title }} | {{ site.name }} </a>
       <!-- Navbar Toggle -->
       <button
         class="navbar-toggler collapsed ml-auto"
@@ -16,7 +15,8 @@
         data-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
-        aria-label="Toggle navigation">
+        aria-label="Toggle navigation"
+      >
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar top-bar"></span>
         <span class="icon-bar middle-bar"></span>
@@ -39,7 +39,7 @@
                 <span class="sr-only">(current)</span>
               {% endif %}
             </a>
-        </li>
+          </li>
 
           <!-- Other pages -->
           {% assign sorted_pages = site.pages | sort: 'nav_order' %}
@@ -60,7 +60,8 @@
                     role="button"
                     data-toggle="dropdown"
                     aria-haspopup="true"
-                    aria-expanded="false">
+                    aria-expanded="false"
+                  >
                     {{- p.title }}
                     {% if page.title == p.title or has_active_child %}
                       <span class="sr-only">(current)</span>
@@ -71,7 +72,10 @@
                       {% if child.title == 'divider' %}
                         <div class="dropdown-divider"></div>
                       {% else %}
-                        <a class="dropdown-item {% if page.title == child.title %}active{% endif %}" href="{% if child.permalink contains '://' %}{{ child.permalink }}{% else %}{{ child.permalink | relative_url }}{% endif %}">
+                        <a
+                          class="dropdown-item {% if page.title == child.title %}active{% endif %}"
+                          href="{% if child.permalink contains '://' %}{{ child.permalink }}{% else %}{{ child.permalink | relative_url }}{% endif %}"
+                        >
                           {{- child.title -}}
                         </a>
                       {% endif %}
@@ -104,7 +108,8 @@
               <button
                 id="search-toggle"
                 title="Search"
-                onclick="openSearchModal()">
+                onclick="openSearchModal()"
+              >
                 <span class="nav-link">
                   <i class="ti ti-search"></i>
                 </span>
