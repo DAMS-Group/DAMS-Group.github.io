@@ -18,8 +18,8 @@ layout: page
           <div class="member">
             {% if member.image %}
               {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect square-img' %}
-              <div class="square-img-container">
+              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
+              <div class="avatar-img-container">
                 {%
                   include figure.liquid
                   loading="eager"
@@ -71,8 +71,8 @@ layout: page
           <div class="member">
             {% if member.image %}
               {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect square-img' %}
-              <div class="square-img-container">
+              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
+              <div class="avatar-img-container">
                 {%
                   include figure.liquid
                   loading="eager"

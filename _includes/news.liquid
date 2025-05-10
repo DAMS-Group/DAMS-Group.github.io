@@ -39,7 +39,7 @@
               {% assign news = site.news | reverse %}
               {% for item in news %}
                 {% if item.category == '学术报告' %}
-                  <div class="news-item" style="display:none;">
+                  <div class="news-item">
                     <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
                     <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
                   </div>
@@ -62,7 +62,7 @@
               {% assign news = site.news | reverse %}
               {% for item in news %}
                 {% if item.category == '团建活动' %}
-                  <div class="news-item" style="display:none;">
+                  <div class="news-item">
                     <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
                     <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
                   </div>
@@ -136,6 +136,12 @@
       card.style.display = 'block';
       hasInitialNews = true;
     });
+    
+    // 添加导航栏动画激活
+    const categoryNav = document.querySelector('.category-nav');
+    if (categoryNav) {
+      categoryNav.classList.add('active');
+    }
 
     // 初始化 - 隐藏非活动分类的news-list
     categorySections.forEach((section) => {
