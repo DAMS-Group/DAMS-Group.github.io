@@ -1,9 +1,8 @@
 ---
 category: teachers
 order: 1
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/teachers/jiaxiaoqi.jpg
+name: 贾晓启
+title: 博导
+research: xxx
 ---

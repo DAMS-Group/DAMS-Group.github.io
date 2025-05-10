@@ -1,9 +1,8 @@
 ---
 category: teachers
 order: 6
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/teachers/jiangnan.jpg
+name: 姜楠
+title: 助理研究员
+research: 移动系统安全、可信执行环境
 ---

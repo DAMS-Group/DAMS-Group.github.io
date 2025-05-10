@@ -240,6 +240,28 @@ ul.task-list input[type="checkbox"] {
   color: var(--global-theme-color);
 }
 
+// Member Type
+
+.member_type {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--global-card-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  
+  h2 {
+    color: var(--global-theme-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  hr {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
 // Member
 
 .member {
@@ -247,13 +269,37 @@ ul.task-list input[type="checkbox"] {
   text-align: center;
 
   .more-info {
-    margin-bottom: 5px;
-    margin-top: 5px;
-    font-family: monospace;
-
+    margin-bottom: 8px;
+    margin-top: 8px;
+    font-family: var(--global-font-family);
+    line-height: 1.5;
+    
     p {
       display: inline-block;
       margin: 0;
+    }
+    
+    /* 姓名样式 */
+    :first-child {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--global-theme-color);
+      margin-bottom: 3px;
+    }
+    
+    /* 职位/年级样式 */
+    :nth-child(3) {
+      font-size: 0.9rem;
+      color: var(--global-text-color);
+      font-style: italic;
+      opacity: 0.9;
+    }
+    
+    /* 研究方向样式 */
+    :nth-child(5) {
+      font-size: 0.85rem;
+      color: var(--global-text-color-light);
+      margin-top: 2px;
     }
   }
 }
@@ -339,10 +385,11 @@ ul.task-list input[type="checkbox"] {
   width: 90%;
 
   .more-info {
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-family: monospace;
-
+    margin-bottom: 12px;
+    margin-top: 12px;
+    font-family: var(--global-font-family);
+    line-height: 1.5;
+    
     p {
       display: inline-block;
       margin: 0;
@@ -1392,7 +1439,7 @@ ninja-keys::part(ninja-input-wrapper) {
 
   .about_row {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 1rem;
     /* 减小间距 */
     margin: 0.5rem 0 0.5rem;
@@ -1492,7 +1539,7 @@ ninja-keys::part(ninja-input-wrapper) {
 .members_row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
 }
 
 .member-hover-effect {
@@ -1627,7 +1674,7 @@ ninja-keys::part(ninja-input-wrapper) {
   margin-bottom: 1.5rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1801,6 +1848,12 @@ ninja-keys::part(ninja-input-wrapper) {
   transition: all 0.3s ease;
 }
 
+.news-item.active {
+  border-left-color: var(--global-theme-color);
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.25rem;
+}
+
 .news-item:hover {
   border-left-color: var(--global-theme-color);
 }
@@ -1870,4 +1923,38 @@ ninja-keys::part(ninja-input-wrapper) {
     top: 0;
     margin-bottom: 1.5rem;
   }
+}
+
+.news-link {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 新闻列表滚动样式 */
+.news-list {
+  max-height: 300px; /* 设置最大高度，超过时显示滚动条 */
+  overflow-y: auto; /* 垂直方向自动显示滚动条 */
+  padding-right: 5px; /* 右侧添加内边距，避免滚动条遮挡内容 */
+}
+
+/* 美化滚动条样式 */
+.news-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.news-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.news-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

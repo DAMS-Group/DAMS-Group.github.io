@@ -1,9 +1,7 @@
 ---
 category: students
-order: 101
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/students/qianfeifan.jpg
+name: 钱非凡
+grade: 2021
+research: 可信执行环境、端侧GPU保护
 ---

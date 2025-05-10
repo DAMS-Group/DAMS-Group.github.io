@@ -1,9 +1,8 @@
 ---
 category: teachers
 order: 5
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/teachers/xushaowen.jpg
+name: 徐少文
+title: 助理研究员
+research: 云计算安全、虚拟化安全
 ---

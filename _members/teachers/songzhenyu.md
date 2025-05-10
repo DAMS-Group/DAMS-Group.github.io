@@ -1,9 +1,8 @@
 ---
 category: teachers
-order: 2
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+order: 3
+image: members/teachers/songzhenyu.jpg
+name: 宋振宇
+title: 博导
+research: xxx
 ---

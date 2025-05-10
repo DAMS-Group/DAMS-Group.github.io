@@ -1,9 +1,7 @@
 ---
 category: students
-order: 102
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/students/songyanni.jpg
+name: 宋燕妮
+grade: 2023
+research: 系统虚拟化安全
 ---

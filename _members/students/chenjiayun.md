@@ -1,9 +1,8 @@
 ---
 category: students
 order: 102
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/students/chenjiayun.png
+name: 陈家赟
+grade: 2018
+research: 虚拟化安全、可信计算、虚拟机隔离
 ---

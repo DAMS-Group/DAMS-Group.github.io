@@ -1,9 +1,7 @@
 ---
 category: students
-order: 100
-image: octocat/red-polo.png
-more_info: |
-  名字<br>
-  研究方向<br>
-  年级/毕业去向
+image: members/students/caowenzhuo.jpg
+name: 曹文卓
+grade: 2022
+research: I/O场景融合下的云上机密计算框架研究、基于Linux内核的容器与虚拟化逃逸
 ---
