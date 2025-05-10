@@ -88,7 +88,7 @@ giscus:
   input_position: top # whether to display input form below (bottom) or above (top) the comments
   theme: preferred_color_scheme # name of the color scheme (preferred works well with al-folio light/dark mode)
   emit_metadata: 0
-  loading: lazy # loading strategy for the giscus comments iframe (lazy or eager) 
+  loading: lazy # loading strategy for the giscus comments iframe (lazy or eager)
   lang: zh-CN
 
 # -----------------------------------------------------------------------------

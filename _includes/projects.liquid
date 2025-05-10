@@ -3,9 +3,7 @@
     <div class="card h-100 hoverable">
       {% if project.img %}
         <div class="square-img-container">
-          {%
-            include figure.liquid loading="eager" path=project.img sizes="250px" alt="project thumbnail" class="card-img-top square-img"
-          %}
+          {% include figure.liquid loading="eager" path=project.img sizes="250px" alt="project thumbnail" class="card-img-top square-img" %}
         </div>
       {% endif %}
       <div class="card-body">

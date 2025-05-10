@@ -7,100 +7,105 @@ layout: page
     <div class="member_type">
       <h2>Teachers</h2>
       <hr>
-      {% assign teachers = site.members | where: "category", "teachers" | sort: 'order' %}
-    {% if teachers.size > 0 %}
-      {% for member in teachers %}
-        <br>
-        {% assign loopindex = forloop.index0 | modulo: 5 %}
-        {% if loopindex == 0 %}
-          <div class="members_row">
-        {% endif %}
-        <div class="member">
-          {% if member.image %}
-            {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-            {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect square-img' %}
-            <div class="square-img-container">
-              {%
-                include figure.liquid
-                loading="eager"
-                path=member_image_path
-                width="100%"
-                height="auto"
-                sizes="1500px"
-                class=member_image_class
-                alt=member.image
-              %}
+      {% assign teachers = site.members | where: 'category', 'teachers' | sort: 'order' %}
+      {% if teachers.size > 0 %}
+        {% for member in teachers %}
+          <br>
+          {% assign loopindex = forloop.index0 | modulo: 5 %}
+          {% if loopindex == 0 %}
+            <div class="members_row">
+          {% endif %}
+          <div class="member">
+            {% if member.image %}
+              {% assign member_image_path = member.image | prepend: 'assets/img/' %}
+              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect square-img' %}
+              <div class="square-img-container">
+                {%
+                  include figure.liquid
+                  loading="eager"
+                  path=member_image_path
+                  width="100%"
+                  height="auto"
+                  sizes="1500px"
+                  class=member_image_class
+                  alt=member.image
+                %}
+              </div>
+            {% endif %}
+            <div class="more-info">
+              {% if member.name %}
+                {{ member.name -}}
+                <br>
+              {% endif %}
+              {% if member.title %}
+                {{ member.title -}}
+                <br>
+              {% endif %}
+              {% if member.research %}
+                {{ member.research -}}
+                <br>
+              {% endif %}
+            </div>
+          </div>
+          {% if loopindex == 4 or forloop.last %}
             </div>
           {% endif %}
-          <div class="more-info">
-            {% if member.name %}
-              {{ member.name }}<br>
-            {% endif %}
-            {% if member.title %}
-              {{ member.title }}<br>
-            {% endif %}
-            {% if member.research %}
-              {{ member.research }}<br>
-            {% endif %}
-          </div>
-        </div>
-        {% if loopindex == 4 or forloop.last %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    {% else %}
-      <p>暂无教师信息。</p>
-    {% endif %}
+        {% endfor %}
+      {% else %}
+        <p>暂无教师信息。</p>
+      {% endif %}
     </div>
 
     <!-- Students Section -->
     <div class="member_type">
       <h2>Students</h2>
       <hr>
-      {% assign students = site.members | where: "category", "students" | sort: 'grade' | reversed %}
-    {% if students.size > 0 %}
-      {% for member in students %}
-        <br>
-        {% assign loopindex = forloop.index0 | modulo: 5 %}
-        {% if loopindex == 0 %}
-          <div class="members_row">
-        {% endif %}
-        <div class="member">
-          {% if member.image %}
-            {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-            {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect square-img' %}
-            <div class="square-img-container">
-              {%
-                include figure.liquid
-                loading="eager"
-                path=member_image_path
-                width="100%"
-                height="auto"
-                sizes="1500px"
-                class=member_image_class
-                alt=member.image
-              %}
+      {% assign students = site.members | where: 'category', 'students' | sort: 'grade' | reversed %}
+      {% if students.size > 0 %}
+        {% for member in students %}
+          <br>
+          {% assign loopindex = forloop.index0 | modulo: 5 %}
+          {% if loopindex == 0 %}
+            <div class="members_row">
+          {% endif %}
+          <div class="member">
+            {% if member.image %}
+              {% assign member_image_path = member.image | prepend: 'assets/img/' %}
+              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect square-img' %}
+              <div class="square-img-container">
+                {%
+                  include figure.liquid
+                  loading="eager"
+                  path=member_image_path
+                  width="100%"
+                  height="auto"
+                  sizes="1500px"
+                  class=member_image_class
+                  alt=member.image
+                %}
+              </div>
+            {% endif %}
+            <div class="more-info">
+              {% if member.name %}
+                {{ member.name -}}
+                <br>
+              {% endif %}
+              {% if member.grade %}
+                {{ member.grade }} 级博士生<br>
+              {% endif %}
+              {% if member.research %}
+                {{ member.research -}}
+                <br>
+              {% endif %}
+            </div>
+          </div>
+          {% if loopindex == 4 or forloop.last %}
             </div>
           {% endif %}
-          <div class="more-info">
-            {% if member.name %}
-              {{ member.name }}<br>
-            {% endif %}
-            {% if member.grade %}
-              {{ member.grade }} 级博士生<br>
-            {% endif %}
-            {% if member.research %}
-              {{ member.research }}<br>
-            {% endif %}
-          </div>
-        </div>
-        {% if loopindex == 4 or forloop.last %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    {% else %}
-      <p>暂无学生信息。</p>
-    {% endif %}
+        {% endfor %}
+      {% else %}
+        <p>暂无学生信息。</p>
+      {% endif %}
     </div>
   </article>
 </div>
