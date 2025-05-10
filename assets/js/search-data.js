@@ -164,8 +164,8 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiangnan/";
-            },},{id: "members-博导",
-          title: '博导',
+            },},{id: "members-研究员-博导",
+          title: '研究员 博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiaxiaoqi/";
@@ -185,7 +185,7 @@ ninja.data = [{
           section: "Members",handler: () => {
               window.location.href = "/members/xushaowen/";
             },},{id: "members-xxx",
-          title: 'xxx',
+          title: 'XXX',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhouqihang/";
