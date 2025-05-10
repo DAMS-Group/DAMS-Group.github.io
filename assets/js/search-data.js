@@ -199,8 +199,8 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/chenjiayun@ccgrid/";
-            },},{id: "news-姜楠的报告-ccgrid-2024",
-          title: '姜楠的报告 @ CCGRID 2024',
+            },},{id: "news-姜楠的报告-ifipsec-2024",
+          title: '姜楠的报告 @ IFIPSEC 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/jiangnan@sec2024/";

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="cn"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://dams.net.cn/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dams.net.cn/" rel="alternate" type="text/html" hreflang="cn"/><updated>2025-05-10T06:45:54+00:00</updated><id>https://dams.net.cn/feed.xml</id><title type="html">DAMS</title><entry><title type="html">第一章实验</title><link href="https://dams.net.cn/book/2025/lab1/" rel="alternate" type="text/html" title="第一章实验"/><published>2025-04-01T08:00:00+00:00</published><updated>2025-04-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab1</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab1/"><![CDATA[<h1 id="实验一搭建-kvm-虚拟化平台">实验一：搭建 KVM 虚拟化平台</h1> <h2 id="安装-host-系统">安装 Host 系统</h2> <blockquote> <p>本小节为物理机安装 ubuntu 双系统说明，如采用 VMWare 等虚拟工作站方式作为运行环境可直接跳转下一小节。</p> </blockquote> <ul> <li>Ubuntu 20.04 LTS 镜像 <ul> <li>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04/">清华源下载ubuntu-20.04.5-desktop-amd64.iso</a></li> <li>20.04自带内核版本为 Linux5.15，与本书研究对象一致。</li> </ul> </li> <li> <p>制作U盘启动盘</p> <p>MacOS 系统可采用 <code class="language-plaintext highlighter-rouge">dd</code> 命令将U盘制作成 ubuntu 系统启动盘（windows 系统可采用 Rufus 工具）。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diskutil list
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="cn"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://dams.net.cn/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dams.net.cn/" rel="alternate" type="text/html" hreflang="cn"/><updated>2025-05-10T11:47:24+00:00</updated><id>https://dams.net.cn/feed.xml</id><title type="html">DAMS</title><entry><title type="html">第一章实验</title><link href="https://dams.net.cn/book/2025/lab1/" rel="alternate" type="text/html" title="第一章实验"/><published>2025-04-01T08:00:00+00:00</published><updated>2025-04-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab1</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab1/"><![CDATA[<h1 id="实验一搭建-kvm-虚拟化平台">实验一：搭建 KVM 虚拟化平台</h1> <h2 id="安装-host-系统">安装 Host 系统</h2> <blockquote> <p>本小节为物理机安装 ubuntu 双系统说明，如采用 VMWare 等虚拟工作站方式作为运行环境可直接跳转下一小节。</p> </blockquote> <ul> <li> <p>Ubuntu 20.04 LTS 镜像</p> <ul> <li>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04/">清华源下载ubuntu-20.04.5-desktop-amd64.iso</a></li> <li>20.04自带内核版本为 Linux5.15，与本书研究对象一致。</li> </ul> </li> <li> <p>制作U盘启动盘</p> <p>MacOS 系统可采用 <code class="language-plaintext highlighter-rouge">dd</code> 命令将U盘制作成 ubuntu 系统启动盘（windows 系统可采用 Rufus 工具）。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diskutil list
 /dev/disk0 <span class="o">(</span>internal, physical<span class="o">)</span>:
    <span class="c">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      GUID_partition_scheme                        <span class="k">*</span>251.0 GB   disk0
    1:                        EFI EFI                     314.6 MB   disk0s1
    2:                 Apple_APFS Container disk1         250.7 GB   disk0s2
-  
+
 /dev/disk1 <span class="o">(</span>synthesized<span class="o">)</span>:
    <span class="c">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      APFS Container Scheme -                      +250.7 GB   disk1
@@ -15,33 +15,33 @@
    4:                APFS Volume VM                      8.6 GB     disk1s4
    5:                APFS Volume Macintosh HD            21.5 GB    disk1s5
    6:              APFS Snapshot com.apple.os.update-... 21.5 GB    disk1s5s1
-  
+
 /dev/disk2 <span class="o">(</span>external, physical<span class="o">)</span>:
    <span class="c">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:     FDisk_partition_scheme                        <span class="k">*</span>7.8 GB     disk2
    1:             Windows_FAT_32 TESTONLY                7.8 GB     disk2s4
-  
+
 <span class="nv">$ </span>diskutil unmountDisk /dev/disk2
 Unmount of all volumes on disk2 was successful
 <span class="nv">$ </span><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>/Users/challenge/Downloads/ubuntu-20.04.5-desktop-amd64.iso <span class="nv">of</span><span class="o">=</span>/dev/rdisk2 <span class="nv">bs</span><span class="o">=</span>1m
 Password:
-  
+
 3685+1 records <span class="k">in
 </span>3685+1 records out
 3864182784 bytes transferred <span class="k">in </span>625.176597 secs <span class="o">(</span>6180946 bytes/sec<span class="o">)</span>
-</code></pre></div> </div> </li> <li>安装双系统 <ul> <li>修改bios启动顺序 U盘优先（华硕主板开机界面按 F2 进入）</li> <li>进入ubuntu安装，选择新的硬盘即可</li> <li>重启拔掉U盘</li> </ul> </li> <li> <p>重启后可能会遇到死机进入grub命令界面</p> <ul> <li> <p>首先通过ls命令显示出硬盘分区信息，目的是找到boot/grub所在位置</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grub&gt; <span class="nb">ls</span> <span class="o">(</span>h
+</code></pre></div> </div> </li> <li> <p>安装双系统</p> <ul> <li>修改bios启动顺序 U盘优先（华硕主板开机界面按 F2 进入）</li> <li>进入ubuntu安装，选择新的硬盘即可</li> <li>重启拔掉U盘</li> </ul> </li> <li> <p>重启后可能会遇到死机进入grub命令界面</p> <ul> <li> <p>首先通过ls命令显示出硬盘分区信息，目的是找到boot/grub所在位置</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grub&gt; <span class="nb">ls</span> <span class="o">(</span>h
 Possible devices are:
 hd0 hd1
-    
+
 grub› <span class="nb">ls</span> <span class="o">(</span>hd0,gpt
 Possible partitions are:
 	Partition hd0,gpt1: Filesystem <span class="nb">type </span>fat, UUID 890D-5C71 - Partition start at 1024K1B - Total size 524288KiB
 	Partition hd0,gpt2: Filesystem <span class="nb">type </span>ext<span class="k">*</span> - Last modification <span class="nb">time </span>2023-03-23 09:33:27 Thursday, UUID 161f2ec0-a71c-4917-8abb-e4c558884663 - Partition start at 525312K1B - Total size 976236544KiB
-    
+
 grub&gt; <span class="nb">ls</span> <span class="o">(</span>hd0, gpt2<span class="o">)</span> /
 Possible files are:
 	lost+found/ boot/ swapfile etc/ media/ var/ bin/ dev/ home/ lib/ 11664/ mnt/ opt/ proc/ root/ run/ sbin/ snap/ srv/ sys/ tmp/ usr/ initrd.img initrd.img.old vmlinuz vmlinuz.old cdrom/ .cache/ lib32/ libx32/
-    	
+
 grub&gt; <span class="nb">ls</span> <span class="o">(</span>hd0,gpt2<span class="o">)</span>/boot/grub/
 Possible files are:
 	gfxblacklist.txt unicode.pf2 x86_64-efi/ locale/ fonts/ grubenv grub.cfg
@@ -49,7 +49,33 @@ Possible files are:
 grub&gt; <span class="nb">set </span><span class="nv">prefix</span><span class="o">=(</span>hd0,gpt2<span class="o">)</span>/boot/grub
 grub&gt; insmod normal
 grub&gt; normal
-</code></pre></div> </div> </li> <li> <p>然后便进入了系统选择页面，选择进入ubuntu20.04，再在终端命令行运行以下命令修复grub</p> <p>```bash $ sudo update-grub [sudo] password for chalnan: Sourcing file ‘/etc/default/grub’ Sourcing file ‘etc/default/grub.d/init-select.cfg’ Generating grub configuration file … Found linux image: /boot/vmlinuz-5.15.0-67-generic Found initrd image: /boot/initrd.img-5.15.0-67-generic Found linux image: /boot/vmlinuz-5.15.0-60-generic Found initrd image: /boot/initrd.img-5.15.0-60-generic Found linux image: /boot/vmlinuz-5.15.0 Found initrd image: /boot/initrd.img-5.15.0 Found Ubuntu 18.04.5 LTS (18.04) on /dev/sda2 Adding boot menu entry for UEFI Firmware Settings done $ lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sda 8:0 0 931.5G 0 disk ├─sda1 8:1 0 512M 0 part /boot/efi └─sda2 8:2 0 931G 0 part sr0 11:0 1 1024M 0 rom<br/> nvme0n1 259:0 0 931.5G 0 disk └─nvme0n1p1 259:1 0 931.5G 0 part / $ sudo grub-install /dev/nvme0n1 Installing for x86_64-efi platform. Installation finished. No error reported.</p> </li> <li> <p>重启后，可以正常引导启动进入ubuntu的图形界面系统。</p> </li> </ul> </li> </ul> <h2 id="源码编译安装-linux-内核">源码编译安装 Linux 内核</h2> <ul> <li><a href="https://mirrors.tuna.tsinghua.edu.cn/kernel/v5.x/linux-5.15.tar.gz">清华源下载linux-5.15.tar.gz</a></li> </ul> <h3 id="检查硬件系统支持">检查硬件系统支持</h3> <p>检查 CPU 是否支持 KVM 虚拟化。在 x86 和 x86-64 中，Intel 系列 CPU 支持虚拟化的标志为 vmx，AMD 系列 CPU 的标志为 svm ，如下命令行如有输出则表示 CPU 支持硬件虚拟化。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'(vmx|svm)'</span> /proc/cpuinfo
+</code></pre></div> </div> </li> <li> <p>然后便进入了系统选择页面，选择进入ubuntu20.04，再在终端命令行运行以下命令修复grub</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">sudo </span>update-grub
+  <span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> password <span class="k">for </span>chalnan:
+  Sourcing file <span class="s1">'/etc/default/grub'</span>
+  Sourcing file <span class="s1">'etc/default/grub.d/init-select.cfg'</span>
+  Generating grub configuration file ...
+  Found linux image: /boot/vmlinuz-5.15.0-67-generic
+  Found initrd image: /boot/initrd.img-5.15.0-67-generic
+  Found linux image: /boot/vmlinuz-5.15.0-60-generic
+  Found initrd image: /boot/initrd.img-5.15.0-60-generic
+  Found linux image: /boot/vmlinuz-5.15.0
+  Found initrd image: /boot/initrd.img-5.15.0
+  Found Ubuntu 18.04.5 LTS <span class="o">(</span>18.04<span class="o">)</span> on /dev/sda2
+  Adding boot menu entry <span class="k">for </span>UEFI Firmware Settings
+  <span class="k">done</span>
+  <span class="nv">$ </span>lsblk
+  NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+  sda           8:0    0 931.5G  0 disk
+  ├─sda1        8:1    0   512M  0 part /boot/efi
+  └─sda2        8:2    0   931G  0 part
+  sr0          11:0    1  1024M  0 rom
+  nvme0n1     259:0    0 931.5G  0 disk
+  └─nvme0n1p1 259:1    0 931.5G  0 part /
+  <span class="nv">$ </span><span class="nb">sudo </span>grub-install /dev/nvme0n1
+  Installing <span class="k">for </span>x86_64-efi platform.
+  Installation finished. No error reported.
+
+</code></pre></div> </div> </li> <li> <p>重启后，可以正常引导启动进入ubuntu的图形界面系统。</p> </li> </ul> </li> </ul> <h2 id="源码编译安装-linux-内核">源码编译安装 Linux 内核</h2> <ul> <li><a href="https://mirrors.tuna.tsinghua.edu.cn/kernel/v5.x/linux-5.15.tar.gz">清华源下载linux-5.15.tar.gz</a></li> </ul> <h3 id="检查硬件系统支持">检查硬件系统支持</h3> <p>检查 CPU 是否支持 KVM 虚拟化。在 x86 和 x86-64 中，Intel 系列 CPU 支持虚拟化的标志为 vmx，AMD 系列 CPU 的标志为 svm ，如下命令行如有输出则表示 CPU 支持硬件虚拟化。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'(vmx|svm)'</span> /proc/cpuinfo
 </code></pre></div></div> <h3 id="配置内核">配置内核</h3> <p>安装基础开发工具软件包，该命令会安装一系列软件包，包括 <code class="language-plaintext highlighter-rouge">gcc</code>, <code class="language-plaintext highlighter-rouge">make</code>。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
 <span class="nb">sudo </span>apt <span class="nb">install </span>build-essential
 </code></pre></div></div> <p>安装 ncurses libraries、flex bison 依赖库</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>ncurses-dev flex bison
@@ -70,7 +96,7 @@ make mrproper
 </code></pre></div></div> <p>编译</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nt">-j8</span>
 </code></pre></div></div> <h3 id="安装内核">安装内核</h3> <p>安装 module</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make modules_install
 </code></pre></div></div> <p>以上命令将 module 安装到相应的目录中，默认情况下被安装到 <code class="language-plaintext highlighter-rouge">/lib/modules/$kernel_version/kernel</code> 目录之中，安装完之后可以查看 KVM 模块：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span> /lib/modules/5.15.0/kernel/arch/x86/kvm/
-</code></pre></div></div> <p>安装 kernel 和 initramfs</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nb">install</span> 
+</code></pre></div></div> <p>安装 kernel 和 initramfs</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nb">install</span>
 </code></pre></div></div> <p>此时可见 <code class="language-plaintext highlighter-rouge">/boot</code> 目录下生成了内核（vmlinuz）和 initramfs 等内核启动所需的文件， grub 配置文件中自动添加了一个 grub 选项</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span> /boot/
 <span class="nb">cat</span> /boot/grub/grub.cfg |grep menuentry
 </code></pre></div></div> <p>更改 grub 配置文件</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /etc/default/grub
@@ -100,22 +126,22 @@ make <span class="nb">install</span>
 </code></pre></div></div> <p>检查安装之后的系统状态</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which qemu-system-x86_64
 which qemu-img
 </code></pre></div></div> <p>QEMU 是用户态的程序，不需要重启系统，直接用 <code class="language-plaintext highlighter-rouge">qemu-systemx86_64</code> 命令行工具即可启动虚拟机。</p> <h1 id="实验二创建并启动虚拟机">实验二：创建并启动虚拟机</h1> <h2 id="下载镜像">下载镜像</h2> <ul> <li>首先下载一个供虚拟机运行的镜像（本实例为 ubuntu.iso，读者可自行选择其他iso），并切换到存放镜像的路径下</li> </ul> <h2 id="创建磁盘文件">创建磁盘文件</h2> <ul> <li> <p>创建一个空的镜像文件来存储虚拟机的系统和文件（也可采用 <code class="language-plaintext highlighter-rouge">qemu-img</code> 命令）</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>guest.img <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>40960
-</code></pre></div> </div> <p><code class="language-plaintext highlighter-rouge">dd</code> 命令用于生成虚拟块设备文件。<code class="language-plaintext highlighter-rouge">if</code> 参数告诉 <code class="language-plaintext highlighter-rouge">dd</code> 从哪个文件读取数据， <code class="language-plaintext highlighter-rouge">of</code> 参数表示读出的数据写入哪个文件中。 <code class="language-plaintext highlighter-rouge">/dev/zero</code> 是 Linux 提供的一个特殊的字符设备，其每次读取的结果都是二进制0，可用于生成空镜像文件。<code class="language-plaintext highlighter-rouge">bs=1M</code> 表示每一次读写1M数据，<code class="language-plaintext highlighter-rouge">count=40960</code>表示读写 40960 次，这样就指定了生成文件的大小为40G。</p> </li> </ul> <h2 id="启动虚拟机">启动虚拟机</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  qemu-system-x86_64 <span class="nt">-cpu</span> host <span class="nt">-smp</span> 1 <span class="nt">-m</span> 2048 <span class="nt">--enable-kvm</span> guest.img <span class="nt">-cdrom</span> ubuntu.iso
-</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">-cpu</code> 参数用于指定cpu类型和型号， <code class="language-plaintext highlighter-rouge">-smp</code> 参数用于cpu核数， <code class="language-plaintext highlighter-rouge">-m</code> 参数用于指定内存大小，<code class="language-plaintext highlighter-rouge">-cdrom</code> 参数用于指定要载入的镜像。</p> <h2 id="安装-gvncviewer-并连接虚拟机">安装 gvncviewer 并连接虚拟机</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>apt <span class="nb">install </span>gvncviewer
-  gvncviewer 127.0.0.1::5900 <span class="c"># 默认情况 QEMU 开启5900端口</span>
+</code></pre></div> </div> <p><code class="language-plaintext highlighter-rouge">dd</code> 命令用于生成虚拟块设备文件。<code class="language-plaintext highlighter-rouge">if</code> 参数告诉 <code class="language-plaintext highlighter-rouge">dd</code> 从哪个文件读取数据， <code class="language-plaintext highlighter-rouge">of</code> 参数表示读出的数据写入哪个文件中。 <code class="language-plaintext highlighter-rouge">/dev/zero</code> 是 Linux 提供的一个特殊的字符设备，其每次读取的结果都是二进制0，可用于生成空镜像文件。<code class="language-plaintext highlighter-rouge">bs=1M</code> 表示每一次读写1M数据，<code class="language-plaintext highlighter-rouge">count=40960</code>表示读写 40960 次，这样就指定了生成文件的大小为40G。</p> </li> </ul> <h2 id="启动虚拟机">启动虚拟机</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-x86_64 <span class="nt">-cpu</span> host <span class="nt">-smp</span> 1 <span class="nt">-m</span> 2048 <span class="nt">--enable-kvm</span> guest.img <span class="nt">-cdrom</span> ubuntu.iso
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">-cpu</code> 参数用于指定cpu类型和型号， <code class="language-plaintext highlighter-rouge">-smp</code> 参数用于cpu核数， <code class="language-plaintext highlighter-rouge">-m</code> 参数用于指定内存大小，<code class="language-plaintext highlighter-rouge">-cdrom</code> 参数用于指定要载入的镜像。</p> <h2 id="安装-gvncviewer-并连接虚拟机">安装 gvncviewer 并连接虚拟机</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>gvncviewer
+gvncviewer 127.0.0.1::5900 <span class="c"># 默认情况 QEMU 开启5900端口</span>
 </code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">Ctrl+Alt+2</code> 切换到 QEMU 监视器窗口，可以执行 <code class="language-plaintext highlighter-rouge">info kvm</code> 命令来查看当前 QEMU 是否使用 KVM。<code class="language-plaintext highlighter-rouge">Ctrl+Alt+1</code> 切换回原窗口。</p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这篇文章主要介绍了如何搭建KVM虚拟化平台，包括安装Ubuntu Host系统、编译安装Linux内核、配置KVM支持、编译安装QEMU，以及如何创建和启动虚拟机。]]></summary></entry><entry><title type="html">第二章实验</title><link href="https://dams.net.cn/book/2025/lab2/" rel="alternate" type="text/html" title="第二章实验"/><published>2025-04-01T08:00:00+00:00</published><updated>2025-04-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab2</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab2/"><![CDATA[<h1 id="实验一简易kvm虚拟机实例">实验一：简易KVM虚拟机实例</h1> <h2 id="背景知识">背景知识</h2> <p><strong><code class="language-plaintext highlighter-rouge">/dev/kvm</code> 设备</strong></p> <p><code class="language-plaintext highlighter-rouge">/dev/kvm</code> 是一个字符设备，KVM 通过该设备导出了一系列 ioctl 系统调用接口，QEMU 等用户层程序通过这些接口来控制虚拟机。KVM 的 ioctl 接口可以分为三类：</p> <ol> <li>系统全局的 ioctl，这类 ioctl 的作用对象是 KVM 模块，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_dev_ioctl</code>，功能包括获取 KVM 版本，创建 VM 等。</li> <li>虚拟机相关的 ioctl，这类 ioctl 的作用对象是 VM，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_vm_ioctl</code> ，功能包括设置 VM 内存，创建 VCPU 等。</li> <li>虚拟机 VCPU 相关的 ioctl，这类 ioctl 的作用对象是 VCPU，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_vcpu_ioctl</code> ，功能包括设置寄存器，VCPU运行等。</li> </ol> <h2 id="解决思路">解决思路</h2> <p>创建一个简易 KVM 虚拟机实例分为两大部分：</p> <ol> <li>实现一个简易的用户层 QEMU。</li> <li>实现一个简易的 guest 内核。</li> </ol> <h3 id="实现简易的用户层-qemu">实现简易的用户层 QEMU</h3> <p>本书的1.4.1章节中介绍了 KVM 虚拟机与 QEMU 的关系： KVM 的生命周期由 QEMU 管理和维护，一个 KVM 虚拟机可以理解为一个 QEMU 进程，虚拟机的一个 VCPU 对应 QEMU 进程中的一个线程。</p> <p>KVM 导出了一系列 IOCTL 接口供用户层创建、配置、启动虚拟机，典型的用户层软件是 QEMU ，但是从本质上来说，QEMU 和 KVM 可以不必相互依赖，本实验展示简易的用户层程序（后称为简易 QEMU）。</p> <p>该简易 QEMU 主要实现如下几个功能：</p> <ul> <li>创建虚拟机对象</li> <li>为虚拟机分配物理内存、加载 guest 二进制</li> <li>创建虚拟机 VCPU 对象</li> <li>设置 VCPU 的相关寄存器、将 VCPU 调度到物理 CPU 上运行</li> <li>处理 VM Exit 事件</li> </ul> <p><strong>创建虚拟机对象</strong></p> <p>首先打开 <code class="language-plaintext highlighter-rouge">/dev/kvm</code> 设备获取 KVM 模块的文件描述符 <code class="language-plaintext highlighter-rouge">dev_fd</code> ，通过 ioctl(KVM_GET_API_VERSION) 获取 KVM 的版本号，从而使用户层知道相关接口在内核是否有支持。</p> <p>再通过 ioctl(KVM_CREATE_VM) 创建一个虚拟机对象，该 ioctl 返回一个代表虚拟机的文件描述符 <code class="language-plaintext highlighter-rouge">vm_fd</code> ，之后可以通过 <code class="language-plaintext highlighter-rouge">vm_fd</code> 控制虚拟机的内存、VCPU 等。</p> <p><strong>为虚拟机分配物理内存、加载 guest 二进制</strong></p> <p>虚拟机的物理内存对应 QEMU 的进程地址空间，使用 <code class="language-plaintext highlighter-rouge">mmap</code> 分配一定大小的内存作为虚拟机物理内存，然后调用 ioctl(KVM_SET_USER_MEMORY_REGION) 为虚拟机指定一个内存条。接着将简易的 guest 二进制加载到该内存区域。</p> <p><strong>创建虚拟机 VCPU 对象</strong></p> <p>调用 ioctl(KVM_CREATE_VCPU) 创建虚拟机 VCPU 对象，该 ioctl 返回一个代表 VCPU 的文件描述符 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> ，之后通过 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> 控制虚拟机的运行等。</p> <p>虚拟机运行过程中用户层（简易QEMU）和内核层（KVM模块）之间的数据共享是通过 VCPU 维护的 <code class="language-plaintext highlighter-rouge">kvm_run</code> 数据结构来实现的。首先通过调用 ioctl(KVM_GET_VCPU_MMAP_SIZE) 得到该结构的大小，接着调用 <code class="language-plaintext highlighter-rouge">mmap</code> 为 <code class="language-plaintext highlighter-rouge">kvm_run</code> 分配空间。</p> <p><strong>设置 VCPU 的相关寄存器、将 VCPU 调度到物理 CPU 上运行</strong></p> <p>为了让虚拟机 VCPU 运行起来，需要设置 VCPU 的相关寄存器，其中段寄存器和控制寄存器等特殊寄存器存放在 <code class="language-plaintext highlighter-rouge">kvm_sregs</code> 中，通过 ioctl(KVM_GET_SREGS)、ioctl(KVM_SET_SREGS) 读取和修改，通用寄存器存放在 <code class="language-plaintext highlighter-rouge">kvm_regs</code> 中，通过 ioctl(KVM_SET_REGS) 修改。</p> <p>准备工作完毕，可以让虚拟机运行起来了，通常在一个死循环中对 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> 调用 ioctl(KVM_RUN)。KVM 内核模块在处理这个 ioctl 时会把 VCPU 调度到物理 CPU 上运行，遇到 KVM 无法处理的退出事件则会返回到此处，处理完之后再次进入循环调用 ioctl(KVM_RUN) 进入虚拟机。</p> <p><strong>处理 VM Exit 事件</strong></p> <p>内核 KVM 无法处理时，会将信息保存到 <code class="language-plaintext highlighter-rouge">kvm_run</code> 并 return 0，用户层则可以通过读取该共享内存得知虚拟机退出原因，进行相应的处理。本例包括 guest 向 I/O 端口写数据产生的 <code class="language-plaintext highlighter-rouge">KVM_EXIT_IO</code> 退出的处理、执行 HALT 指令等。</p> <h3 id="实现简易的-guest-内核">实现简易的 guest 内核</h3> <p>简易内核主要实现一些能触发 VM Exit 的操作，包括向 I/O 端口写数据、执行 HALT 指令。汇编文件如下</p> <pre><code class="language-assembly">// guest_test.S
 
 .globl _start
     .code16
 _start:
     xorw %ax, %ax
-    
+
     out %ax, $0x10
     inc %ax
     out %ax, $0x10
     inc %ax
     out %ax, $0x10
-    
+
     hlt
 </code></pre> <p>编译</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>as <span class="nt">-32</span> guest_test.S <span class="nt">-o</span> guest_test.o
 <span class="nv">$ </span>ld <span class="nt">-m</span> elf_i386 <span class="nt">--oformat</span> binary <span class="nt">-e</span> _start <span class="nt">-Ttext</span> 0x0 <span class="nt">-o</span> guest_test.bin guest_test.o
@@ -132,7 +158,7 @@ ld <span class="nt">-m</span> elf_i386 <span class="nt">--oformat</span> binary 
 </span>guest_test.bin  guest_test.S  qemu_sample    qemu_sample.o
 guest_test.o    Makefile      qemu_sample.c
 
-<span class="nv">$ </span>./qemu_sample 
+<span class="nv">$ </span>./qemu_sample
 open /dev/kvm...
 get vm fd...
 load guest_test.bin...
@@ -207,7 +233,7 @@ KVM_EXIT_HLT
 <span class="k">static</span> <span class="kt">int</span> <span class="nf">vmx_handle_exit</span><span class="p">(</span><span class="k">struct</span> <span class="n">kvm_vcpu</span> <span class="o">*</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">fastpath_t</span> <span class="n">exit_fastpath</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">__vmx_handle_exit</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">exit_fastpath</span><span class="p">);</span>
-	
+
     <span class="c1">// 获取当前VMCS的guest_rip和guest_cs字段</span>
 	<span class="n">printk</span><span class="p">(</span><span class="n">KERN_NOTICE</span> <span class="s">"GUEST CS:RIP=%04x:0x%016lx</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
 	       <span class="n">vmcs_read16</span><span class="p">(</span><span class="n">GUEST_CS_SELECTOR</span><span class="p">),</span> <span class="n">vmcs_readl</span><span class="p">(</span><span class="n">GUEST_RIP</span><span class="p">));</span>
@@ -239,7 +265,7 @@ KVM_EXIT_HLT
 	<span class="n">u32</span> <span class="n">orig_function</span> <span class="o">=</span> <span class="o">*</span><span class="n">eax</span><span class="p">,</span> <span class="n">function</span> <span class="o">=</span> <span class="o">*</span><span class="n">eax</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="o">*</span><span class="n">ecx</span><span class="p">;</span>
 	<span class="k">struct</span> <span class="n">kvm_cpuid_entry2</span> <span class="o">*</span><span class="n">entry</span><span class="p">;</span>
 	<span class="n">bool</span> <span class="n">exact</span><span class="p">,</span> <span class="n">used_max_basic</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    
+
 	<span class="n">entry</span> <span class="o">=</span> <span class="n">kvm_find_cpuid_entry</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
 	<span class="n">exact</span> <span class="o">=</span> <span class="o">!!</span><span class="n">entry</span><span class="p">;</span>
 
@@ -335,7 +361,7 @@ KVM_EXIT_HLT
 		<span class="o">*</span><span class="n">ecx</span> <span class="o">=</span> <span class="n">entry</span><span class="o">-&gt;</span><span class="n">ecx</span><span class="p">;</span>
 		<span class="o">*</span><span class="n">edx</span> <span class="o">=</span> <span class="n">entry</span><span class="o">-&gt;</span><span class="n">edx</span><span class="p">;</span>
 
-		<span class="cm">/*****case model-id modify test*/</span> 
+		<span class="cm">/*****case model-id modify test*/</span>
 		<span class="k">if</span><span class="p">(</span><span class="n">function</span> <span class="o">==</span> <span class="mh">0x80000002</span> <span class="o">||</span> <span class="n">function</span> <span class="o">==</span> <span class="mh">0x80000003</span> <span class="o">||</span> <span class="n">function</span> <span class="o">==</span> <span class="mh">0x80000004</span><span class="p">){</span>
 			<span class="n">printk</span><span class="p">(</span><span class="s">"index:0x%x, cpuid_model=0x%x"</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]);</span>
 			<span class="o">*</span><span class="n">eax</span> <span class="o">=</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">0</span><span class="p">];</span>
@@ -343,7 +369,7 @@ KVM_EXIT_HLT
 			<span class="o">*</span><span class="n">ecx</span> <span class="o">=</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">2</span><span class="p">];</span>
 			<span class="o">*</span><span class="n">edx</span> <span class="o">=</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span><span class="p">];</span>
 		<span class="p">}</span>
-		<span class="cm">/*****case model-id modify test*/</span> 
+		<span class="cm">/*****case model-id modify test*/</span>
 		<span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div></div> <p>编译运行结果如下:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter2/exp3/modify-cpuid-model-test-480.webp 480w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-800.webp 800w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/book/chapter2/exp3/modify-cpuid-model-test.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="modify-cpuid-model-test" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这篇文章主要介绍了三个KVM虚拟化实验：实现一个简易的KVM虚拟机实例、捕获虚拟机下一条指令地址信息、伪造虚拟机CPUID信息。]]></summary></entry><entry><title type="html">第三章实验</title><link href="https://dams.net.cn/book/2025/lab3/" rel="alternate" type="text/html" title="第三章实验"/><published>2025-04-01T08:00:00+00:00</published><updated>2025-04-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab3</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab3/"><![CDATA[<h1 id="实验一ept页表副本的创建与替换">实验一：EPT页表副本的创建与替换</h1> <p><strong>创建EPT页表副本，在虚拟机从实模式跳转到保护模式时替换原有的EPT页表</strong></p> <h2 id="解决思路">解决思路</h2> <p>如3.3.3中提到的，<code class="language-plaintext highlighter-rouge">vmx_load_mmu_pgd</code>函数中完成了EPT页表的加载：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">enable_ept</span><span class="p">){</span>
@@ -363,7 +389,7 @@ KVM_EXIT_HLT
     <span class="p">...</span>
     <span class="k">if</span><span class="p">(</span><span class="n">vcpu</span><span class="o">-&gt;</span><span class="n">arch</span><span class="p">.</span><span class="n">mmu</span><span class="o">-&gt;</span><span class="n">direct_map</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">mmu_alloc_direct_roots</span><span class="p">(</span><span class="n">vcpu</span><span class="p">);</span>
-    
+
     <span class="p">...</span>
     <span class="n">kvm_mmu_load_pgd</span><span class="p">(</span><span class="n">vcpu</span><span class="p">);</span>
 <span class="p">}</span>
@@ -421,7 +447,7 @@ KVM_EXIT_HLT
 	<span class="n">vmx</span><span class="o">-&gt;</span><span class="n">eptp_list_pg</span> <span class="o">=</span> <span class="n">eptp_list_pg</span><span class="p">;</span>
 
 	<span class="n">vmcs_write64</span><span class="p">(</span><span class="n">EPTP_LIST_ADDRESS</span><span class="p">,</span> <span class="n">page_to_phys</span><span class="p">(</span><span class="n">vmx</span><span class="o">-&gt;</span><span class="n">eptp_list_pg</span><span class="p">));</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div> <h3 id="在eptp-list中写入地址">在EPTP List中写入地址</h3> <p>在<code class="language-plaintext highlighter-rouge">vmx_load_mmu_pgd</code>中：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">if</span> <span class="p">(</span><span class="n">enable_ept</span><span class="p">)</span> <span class="p">{</span>
 		<span class="n">eptp</span> <span class="o">=</span> <span class="n">construct_eptp</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">root_hpa</span><span class="p">,</span> <span class="n">root_level</span><span class="p">);</span>
@@ -451,24 +477,24 @@ KVM_EXIT_HLT
     <span class="k">union</span> <span class="n">kvm_mmu_page_role</span> <span class="n">role</span><span class="p">;</span>
     <span class="k">struct</span> <span class="n">kvm</span> <span class="o">*</span><span class="n">kvm</span> <span class="o">=</span> <span class="n">vcpu</span><span class="o">-&gt;</span><span class="n">kvm</span><span class="p">;</span>
     <span class="k">struct</span> <span class="n">kvm_mmu_page</span> <span class="o">*</span><span class="n">root</span><span class="p">;</span>
-    
+
     <span class="n">lockdep_assert_held_write</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kvm</span><span class="o">-&gt;</span><span class="n">mmu_lock</span><span class="p">);</span>
-    
+
     <span class="n">role</span> <span class="o">=</span> <span class="n">alloc_tdp_mmu_kpage</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vcpu</span><span class="o">-&gt;</span><span class="n">arch</span><span class="p">.</span><span class="n">mmu</span><span class="o">-&gt;</span><span class="n">shadow_root_level</span><span class="p">);</span>
     <span class="n">refcount_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">tdp_mmu_root_count</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-    
+
     <span class="n">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kvm</span><span class="o">-&gt;</span><span class="n">arch</span><span class="p">.</span><span class="n">tdp_mmu_pages_lock</span><span class="p">);</span>
     <span class="n">list_add_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">link</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">kvm</span><span class="o">-&gt;</span><span class="n">arch</span><span class="p">.</span><span class="n">tdp_mmu_roots</span><span class="p">);</span>
     <span class="n">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kvm</span><span class="o">-&gt;</span><span class="n">arch</span><span class="p">.</span><span class="n">tdp_mmu_pages_lock</span><span class="p">);</span>
-    
+
     <span class="k">return</span> <span class="n">__pa</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">spt</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div> <p>相比<code class="language-plaintext highlighter-rouge">kvm_tdp_mmu_get_vcpu_root_hpa</code>，<code class="language-plaintext highlighter-rouge">new_kvm_tdp_mmu_get_vcpu_root_hpa</code>删除了从备用链表中取出页表的链表，强制KVM分配新的物理页。</p> <p>在<code class="language-plaintext highlighter-rouge">vmx_load_mmu_pgd</code>中添加一个<strong>参数</strong>：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">vmx_load_mmu_pgd</span><span class="p">(</span><span class="k">struct</span> <span class="n">kvm_vcpu</span> <span class="o">*</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">hpa_t</span> <span class="n">root_hpa</span><span class="p">,</span> <span class="n">hpa_t</span> <span class="o">*</span><span class="n">new_root_hpa</span><span class="p">,</span> <span class="kt">int</span> <span class="n">root_level</span><span class="p">){</span>
-<span class="p">...</span>    
+<span class="p">...</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">enable_ept</span><span class="p">){</span>
         <span class="n">eptp</span> <span class="o">=</span> <span class="n">construct_eptp</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">root_hpa</span><span class="p">,</span> <span class="n">root_level</span><span class="p">);</span>
         <span class="n">vmcs_write64</span><span class="p">(</span><span class="n">EPT_POINTER</span><span class="p">,</span> <span class="n">eptp</span><span class="p">);</span>
-        
+
         <span class="k">if</span> <span class="p">(</span><span class="n">to_vmx</span><span class="p">(</span><span class="n">vcpu</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">eptp_list_pg</span><span class="p">){</span>
 			<span class="n">eptp_list</span> <span class="o">=</span> <span class="p">(</span><span class="n">u64</span> <span class="o">*</span><span class="p">)</span><span class="n">phys_to_virt</span><span class="p">(</span><span class="n">page_to_phys</span><span class="p">(</span><span class="n">to_vmx</span><span class="p">(</span><span class="n">vcpu</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">eptp_list_pg</span><span class="p">));</span>
 			<span class="n">eptp_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">eptp</span><span class="p">;</span>
@@ -490,7 +516,7 @@ KVM_EXIT_HLT
 		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">VALID_PAGE</span><span class="p">(</span><span class="n">new_root_hpa</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 			<span class="k">return</span><span class="p">;</span>
 	<span class="p">}</span>
-	
+
 	<span class="n">static_call</span><span class="p">(</span><span class="n">kvm_x86_load_mmu_pgd</span><span class="p">)(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">root_hpa</span><span class="p">,</span> <span class="n">new_root_hpa</span><span class="p">,</span>
  					  <span class="n">vcpu</span><span class="o">-&gt;</span><span class="n">arch</span><span class="p">.</span><span class="n">mmu</span><span class="o">-&gt;</span><span class="n">shadow_root_level</span><span class="p">);</span>
 <span class="p">}</span>
@@ -525,7 +551,7 @@ KVM_EXIT_HLT
 			<span class="n">mmu</span><span class="o">-&gt;</span><span class="n">new_root_hpa</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
 			<span class="k">break</span><span class="p">;</span>
 		<span class="p">}</span>
-	<span class="p">}</span>	
+	<span class="p">}</span>
 </code></pre></div></div> <h3 id="结果">结果</h3> <p>能够成功输出：<code class="language-plaintext highlighter-rouge">i = 1</code></p> <p>查看内核debug信息：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dmesg
 </code></pre></div></div> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter3/exp2/vmfunc_thread-480.webp 480w,/assets/img/book/chapter3/exp2/vmfunc_thread-800.webp 800w,/assets/img/book/chapter3/exp2/vmfunc_thread-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/book/chapter3/exp2/vmfunc_thread.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="vmfunc_thread" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>此时ept_violation处理函数中输出此时的eptp指针为0x1c0f8c05e，正是新创建的eptp。</p> <h1 id="实验三气球模型的充气与放气实现">实验三：气球模型的充气与放气实现</h1> <p><strong>QEMU中增加捕获和修改气球模型的映射页面的功能，并在“放气”时将这些页面重新映射到虚拟机操作系统内核中。</strong></p> <h2 id="背景知识-1">背景知识</h2> <h3 id="使用qemu的balloon功能"><strong>使用QEMU的balloon功能</strong></h3> <ol> <li>正常通过KVM/QEMU启动虚拟机，可以参考实验一<a href="https://gitee.com/silver-zhou/virtualization_book/tree/v-1.0/第一章实验#创建并启动虚拟机">第一章实验</a></li> <li>通过VNC连接到QEMU</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gvncviewer 127.0.0.1::5900
 </code></pre></div></div> <ol> <li>通过快捷键<code class="language-plaintext highlighter-rouge">Ctrl+Alt+2</code>切换到QEMU Monitor</li> <li>查看balloon设备信息</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>qemu<span class="o">)</span> info balloon
@@ -571,7 +597,7 @@ KVM_EXIT_HLT
 
 <span class="n">list_for_each_entry_safe</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">next</span><span class="p">,</span> <span class="n">pages</span><span class="p">,</span> <span class="n">lru</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">page_addr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">page_address</span><span class="p">(</span><span class="n">page</span><span class="p">);</span> <span class="c1">//通过内核函数page_address将page指针转换为虚拟地址</span>
-    
+
     <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4096</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_addr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
         <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">printk</span><span class="p">(</span><span class="s">"data = %c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>

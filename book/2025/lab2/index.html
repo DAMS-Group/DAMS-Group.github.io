@@ -6,13 +6,13 @@
     .code16
 _start:
     xorw %ax, %ax
-    
+
     out %ax, $0x10
     inc %ax
     out %ax, $0x10
     inc %ax
     out %ax, $0x10
-    
+
     hlt
 </code></pre> <p>编译</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>as <span class="nt">-32</span> guest_test.S <span class="nt">-o</span> guest_test.o
 <span class="nv">$ </span>ld <span class="nt">-m</span> elf_i386 <span class="nt">--oformat</span> binary <span class="nt">-e</span> _start <span class="nt">-Ttext</span> 0x0 <span class="nt">-o</span> guest_test.bin guest_test.o
@@ -29,7 +29,7 @@ ld <span class="nt">-m</span> elf_i386 <span class="nt">--oformat</span> binary 
 </span>guest_test.bin  guest_test.S  qemu_sample    qemu_sample.o
 guest_test.o    Makefile      qemu_sample.c
 
-<span class="nv">$ </span>./qemu_sample 
+<span class="nv">$ </span>./qemu_sample
 open /dev/kvm...
 get vm fd...
 load guest_test.bin...
@@ -104,7 +104,7 @@ KVM_EXIT_HLT
 <span class="k">static</span> <span class="kt">int</span> <span class="nf">vmx_handle_exit</span><span class="p">(</span><span class="k">struct</span> <span class="n">kvm_vcpu</span> <span class="o">*</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">fastpath_t</span> <span class="n">exit_fastpath</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">__vmx_handle_exit</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">exit_fastpath</span><span class="p">);</span>
-	
+
     <span class="c1">// 获取当前VMCS的guest_rip和guest_cs字段</span>
 	<span class="n">printk</span><span class="p">(</span><span class="n">KERN_NOTICE</span> <span class="s">"GUEST CS:RIP=%04x:0x%016lx</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
 	       <span class="n">vmcs_read16</span><span class="p">(</span><span class="n">GUEST_CS_SELECTOR</span><span class="p">),</span> <span class="n">vmcs_readl</span><span class="p">(</span><span class="n">GUEST_RIP</span><span class="p">));</span>
@@ -136,7 +136,7 @@ KVM_EXIT_HLT
 	<span class="n">u32</span> <span class="n">orig_function</span> <span class="o">=</span> <span class="o">*</span><span class="n">eax</span><span class="p">,</span> <span class="n">function</span> <span class="o">=</span> <span class="o">*</span><span class="n">eax</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="o">*</span><span class="n">ecx</span><span class="p">;</span>
 	<span class="k">struct</span> <span class="n">kvm_cpuid_entry2</span> <span class="o">*</span><span class="n">entry</span><span class="p">;</span>
 	<span class="n">bool</span> <span class="n">exact</span><span class="p">,</span> <span class="n">used_max_basic</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    
+
 	<span class="n">entry</span> <span class="o">=</span> <span class="n">kvm_find_cpuid_entry</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
 	<span class="n">exact</span> <span class="o">=</span> <span class="o">!!</span><span class="n">entry</span><span class="p">;</span>
 
@@ -232,7 +232,7 @@ KVM_EXIT_HLT
 		<span class="o">*</span><span class="n">ecx</span> <span class="o">=</span> <span class="n">entry</span><span class="o">-&gt;</span><span class="n">ecx</span><span class="p">;</span>
 		<span class="o">*</span><span class="n">edx</span> <span class="o">=</span> <span class="n">entry</span><span class="o">-&gt;</span><span class="n">edx</span><span class="p">;</span>
 
-		<span class="cm">/*****case model-id modify test*/</span> 
+		<span class="cm">/*****case model-id modify test*/</span>
 		<span class="k">if</span><span class="p">(</span><span class="n">function</span> <span class="o">==</span> <span class="mh">0x80000002</span> <span class="o">||</span> <span class="n">function</span> <span class="o">==</span> <span class="mh">0x80000003</span> <span class="o">||</span> <span class="n">function</span> <span class="o">==</span> <span class="mh">0x80000004</span><span class="p">){</span>
 			<span class="n">printk</span><span class="p">(</span><span class="s">"index:0x%x, cpuid_model=0x%x"</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]);</span>
 			<span class="o">*</span><span class="n">eax</span> <span class="o">=</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">0</span><span class="p">];</span>
@@ -240,7 +240,7 @@ KVM_EXIT_HLT
 			<span class="o">*</span><span class="n">ecx</span> <span class="o">=</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">2</span><span class="p">];</span>
 			<span class="o">*</span><span class="n">edx</span> <span class="o">=</span> <span class="n">cpuid_model</span><span class="p">[(</span><span class="n">function</span> <span class="o">-</span> <span class="mh">0x80000002</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span><span class="p">];</span>
 		<span class="p">}</span>
-		<span class="cm">/*****case model-id modify test*/</span> 
+		<span class="cm">/*****case model-id modify test*/</span>
 		<span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div></div> <p>编译运行结果如下:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter2/exp3/modify-cpuid-model-test-480.webp 480w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-800.webp 800w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/book/chapter2/exp3/modify-cpuid-model-test.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="modify-cpuid-model-test" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/book/2025/lab3/">第三章实验</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/book/2025/lab1/">第一章实验</a> </li> <div id="giscus_thread" style="max-width: 1600px; margin: 0 auto;"> <script>
