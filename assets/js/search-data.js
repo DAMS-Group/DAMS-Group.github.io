@@ -9,8 +9,8 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-教材",
-          title: "教材",
+  },{id: "nav-著作",
+          title: "著作",
           description: "",
           section: "Navigation",
           handler: () => {
@@ -30,8 +30,8 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/projects/";
           },
-        },{id: "nav-成员",
-          title: "成员",
+        },{id: "nav-团队",
+          title: "团队",
           description: "实验室成员。",
           section: "Navigation",
           handler: () => {
@@ -79,6 +79,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/hujunjie/";
+            },},{id: "members-jiangnan",
+          title: 'Jiangnan',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/jiangnan/";
             },},{id: "members-liupuchun",
           title: 'Liupuchun',
           description: "",
@@ -124,6 +129,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/xieqiang/";
+            },},{id: "members-xushaowen",
+          title: 'Xushaowen',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/xushaowen/";
             },},{id: "members-yanghaoran",
           title: 'Yanghaoran',
           description: "",
@@ -159,38 +169,28 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhaoyuanbo/";
-            },},{id: "members-助理研究员",
-          title: '助理研究员',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/jiangnan/";
             },},{id: "members-研究员-博导",
           title: '研究员 博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiaxiaoqi/";
-            },},{id: "members-博导",
-          title: '博导',
+            },},{id: "members-正高级工程师-博导",
+          title: '正高级工程师 博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/lvzhiqiang/";
-            },},{id: "members-博导",
-          title: '博导',
+            },},{id: "members-正高级工程师-硕导",
+          title: '正高级工程师 硕导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songzhenyu/";
-            },},{id: "members-助理研究员",
-          title: '助理研究员',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/xushaowen/";
-            },},{id: "members-xxx",
-          title: 'XXX',
+            },},{id: "members-副研究员",
+          title: '副研究员',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhouqihang/";
-            },},{id: "news-2023年10月15日聚点串吧团建",
-          title: '2023年10月15日聚点串吧团建',
+            },},{id: "news-2023年10月15日秋日团建",
+          title: '2023年10月15日秋日团建',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/team-building@judianchuanba/";
@@ -214,8 +214,8 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/zhangzhicong@icpads2024/";
-            },},{id: "news-2024年10月25日第六季团建",
-          title: '2024年10月25日第六季团建',
+            },},{id: "news-2024年10月25日年度团建",
+          title: '2024年10月25日年度团建',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/team-building@diliuji/";
