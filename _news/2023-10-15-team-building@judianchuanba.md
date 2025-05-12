@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2023年10月15日聚点串吧团建
+title: 2023年10月15日秋日团建
 date: 2023-10-15 10:00:00+0800
 inline: false
 related_posts: false

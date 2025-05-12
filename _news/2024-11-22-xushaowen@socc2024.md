@@ -5,7 +5,7 @@ date: 2024-11-22 14:00:00+0800
 inline: false
 related_posts: false
 giscus_comments: true
-category: 学术报告
+category: 学术活动
 ---
 
 徐少文于2024年11月22日在美国华盛顿。

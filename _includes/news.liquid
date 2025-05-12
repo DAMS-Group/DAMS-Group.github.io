@@ -10,9 +10,7 @@
           <a
             href="#"
             class="category-link active"
-            data-category="全部"
-            >全部</a
-          >
+            data-category="全部">全部</a>
           <div class="news-list">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
@@ -27,18 +25,16 @@
             {% endif %}
           </div>
         </li>
-        <li class="category-section" id="category-学术报告">
+        <li class="category-section" id="category-学术活动">
           <a
             href="#"
             class="category-link"
-            data-category="学术报告"
-            >学术报告</a
-          >
+            data-category="学术活动">学术活动</a>
           <div class="news-list">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
               {% for item in news %}
-                {% if item.category == '学术报告' %}
+                {% if item.category == '学术活动' %}
                   <div class="news-item">
                     <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
                     <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
@@ -54,9 +50,7 @@
           <a
             href="#"
             class="category-link"
-            data-category="团建活动"
-            >团建活动</a
-          >
+            data-category="团建活动">团建活动</a>
           <div class="news-list">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
@@ -87,8 +81,7 @@
         <div
           id="news-{{ forloop.index }}"
           class="news-card"
-          data-category="{{ category }}"
-        >
+          data-category="{{ category }}">
           <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
           <h4>
             {% if item.inline %}
@@ -107,7 +100,7 @@
             {% endif %}
           </div>
         </div>
-        {% if category == '学术报告' or category == '团建活动' or category == '其他' %}
+        {% if category == '学术活动' or category == '团建活动' or category == '其他' %}
           {% assign has_news = true %}
         {% endif %}
       {% endfor %}

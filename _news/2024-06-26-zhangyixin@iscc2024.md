@@ -5,7 +5,7 @@ date: 2024-06-26 14:00:00+0800
 inline: false
 related_posts: false
 giscus_comments: true
-category: 学术报告
+category: 学术活动
 ---
 
 张艺馨于2024年6月26日在法国巴黎。

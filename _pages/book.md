@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 教材
+title: 著作
 permalink: /book/
 nav: true
 nav_order: 2

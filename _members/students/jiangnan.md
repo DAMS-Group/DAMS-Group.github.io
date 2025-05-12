@@ -1,8 +1,9 @@
 ---
-category: teachers
+category: students
 order: 6
 image: members/teachers/jiangnan.jpg
 name: 姜楠
-title: 助理研究员
+grade: 2018
 research: 移动系统安全、可信执行环境
+job: 中国科学院信息工程研究所
 ---

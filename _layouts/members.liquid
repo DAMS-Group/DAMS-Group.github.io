@@ -21,14 +21,7 @@ layout: page
               {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
               <div class="avatar-img-container">
                 {%
-                  include figure.liquid
-                  loading="eager"
-                  path=member_image_path
-                  width="100%"
-                  height="auto"
-                  sizes="1500px"
-                  class=member_image_class
-                  alt=member.image
+                  include figure.liquid loading="eager" path=member_image_path width="100%" height="auto" sizes="1500px" class=member_image_class alt=member.image
                 %}
               </div>
             {% endif %}
@@ -42,7 +35,11 @@ layout: page
                 <br>
               {% endif %}
               {% if member.research %}
-                {{ member.research -}}
+                研究方向：{{ member.research -}}
+                <br>
+              {% endif %}
+              {% if member.email %}
+                {{ member.email }}
                 <br>
               {% endif %}
             </div>
@@ -74,14 +71,7 @@ layout: page
               {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
               <div class="avatar-img-container">
                 {%
-                  include figure.liquid
-                  loading="eager"
-                  path=member_image_path
-                  width="100%"
-                  height="auto"
-                  sizes="1500px"
-                  class=member_image_class
-                  alt=member.image
+                  include figure.liquid loading="eager" path=member_image_path width="100%" height="auto" sizes="1500px" class=member_image_class alt=member.image
                 %}
               </div>
             {% endif %}
@@ -93,8 +83,12 @@ layout: page
               {% if member.grade %}
                 {{ member.grade }} 级博士生<br>
               {% endif %}
+              {% if member.job %}
+                毕业去向：{{ member.job -}}
+                <br>
+              {% endif %}
               {% if member.research %}
-                {{ member.research -}}
+                研究方向：{{ member.research -}}
                 <br>
               {% endif %}
             </div>

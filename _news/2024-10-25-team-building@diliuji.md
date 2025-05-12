@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2024年10月25日第六季团建
+title: 2024年10月25日年度团建
 date: 2024-10-25 10:00:00+0800
 inline: false
 related_posts: false

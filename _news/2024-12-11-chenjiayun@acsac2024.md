@@ -5,7 +5,7 @@ date: 2024-12-11 14:00:00+0800
 inline: false
 related_posts: false
 giscus_comments: true
-category: 学术报告
+category: 学术活动
 ---
 
 陈家赟于2024年12月11日在美国夏威夷。
