@@ -6,7 +6,7 @@ title: DAMS # the website title (if blank, full name will be used instead)
 name: 分布式与移动系统安全实验室
 whole_name: Distributed and Mobile System Security Lab
 contact_note: 地址：上地街道树村路19号，海淀区，北京，中国 <br>
-  Email：contact@dams.net.cn
+  Email：zhouqihang@iie.ac.cn
 footer_text: All rights reserved
 lang: cn # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: icon.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)

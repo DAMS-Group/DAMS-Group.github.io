@@ -2,7 +2,7 @@
 layout: page
 title: Log2Policy
 description: An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch
-img: assets/img/octocat/inspectocat.jpg
+img: assets/img/octocat/snowtocat.jpg
 importance: 1
 category: Publications
 related_publications: true

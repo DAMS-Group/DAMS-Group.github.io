@@ -2,7 +2,7 @@
 layout: page
 title: CubeVisor
 description: A Multi-realm Architecture Design for Running VM with ARM CCA
-img: assets/img/octocat/manufacturetocat.png
+img: assets/img/octocat/surftocat.png
 importance: 1
 category: Publications
 related_publications: true

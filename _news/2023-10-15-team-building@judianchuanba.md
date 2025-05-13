@@ -8,10 +8,10 @@ giscus_comments: true
 category: 团建活动
 ---
 
-2023年10月15日，实验室在聚点串吧组织了疫情后的第一次团建聚餐。
+2023年10月15日，实验室的小伙伴们相约聚点串吧，开启了一场别开生面的团建活动！🔥
 
-{% include figure.liquid loading="eager" path="assets/img/news/activities/2023-team-building-1.jpg" title="2023年团建-聚餐" class="img-fluid rounded z-depth-1" %}
+在美食的香气中，大家一边品尝着美味的烤串，一边分享着各自的研究进展和生活趣事。欢声笑语中，不仅增进了团队成员之间的感情，也为繁忙的科研生活增添了一抹温暖的色彩。🍖
 
-聚餐结束后，同学们前往桌游馆游玩。
+{% include figure.liquid loading="eager" path="assets/img/news/activities/2023-team-building.jpg" title="2023年团建" class="img-fluid rounded z-depth-1" width="80%" center="true" %}
 
-{% include figure.liquid loading="eager" path="assets/img/news/activities/2023-team-building-2.jpg" title="2023年团建-桌游" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/news/activities/2023-team-building-2.jpg" title="2023年团建-桌游" class="img-fluid rounded z-depth-1" width="80%" center="true" %}
