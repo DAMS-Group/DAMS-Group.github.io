@@ -27,20 +27,16 @@ layout: page
             {% endif %}
             <div class="more-info">
               {% if member.name %}
-                {{ member.name -}}
-                <br>
+                <li style="list-style-type:none;"> {{ member.name }} </li>
               {% endif %}
               {% if member.title %}
-                {{ member.title -}}
-                <br>
+                <li style="list-style-type:none;"> {{ member.title }} </li>
               {% endif %}
               {% if member.research %}
-                研究方向：{{ member.research -}}
-                <br>
+                <li style="list-style-type:none;"> 研究方向： {{ member.research }} </li>
               {% endif %}
               {% if member.email %}
-                {{ member.email }}
-                <br>
+                <li style="list-style-type:none;"><a href="mailto: {{- member.email -}} "> {{- member.email -}} </a></li>
               {% endif %}
             </div>
           </div>
@@ -77,19 +73,16 @@ layout: page
             {% endif %}
             <div class="more-info">
               {% if member.name %}
-                {{ member.name -}}
-                <br>
+                <li style="list-style-type:none;"> {{ member.name }} </li>
               {% endif %}
               {% if member.grade %}
-                {{ member.grade }} 级博士生<br>
+                <li style="list-style-type:none;"> {{ member.grade }} 级博士生 </li>
               {% endif %}
               {% if member.job %}
-                毕业去向：{{ member.job -}}
-                <br>
+                <li style="list-style-type:none;"> 毕业去向： {{ member.job }} </li>
               {% endif %}
               {% if member.research %}
-                研究方向：{{ member.research -}}
-                <br>
+                <li style="list-style-type:none;"> 研究方向： {{ member.research }} </li>
               {% endif %}
             </div>
           </div>

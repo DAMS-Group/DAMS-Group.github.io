@@ -291,18 +291,25 @@ ul.task-list input[type="checkbox"] {
       transition: color 0.3s ease;
     }
 
-    /* 职称/年级样式（第二行） */
+    /* 年级样式（第二行） */
     :nth-child(2) {
       font: italic 0.95rem/1.4 'Georgia', serif;
       color: var(--global-text-color);
       opacity: 0.85;
     }
 
-    /* 研究方向样式（第三行） */
+    /* 毕业去向/研究方向（第三行） */
     :nth-child(3) {
       font: 0.85rem/1.5 var(--global-font-family);
       color: var(--global-text-color-light);
       margin-top: 2px;
+    }
+
+    /* 第四行 - 重点信息样式 */
+    :nth-child(4) {
+      font: 0.5rem/0.8 var(--global-font-family);
+      color: #dcdcdc;
+      transition: all 0.3s ease;
     }
 
     /* 邮箱样式（带邮件图标） */
