@@ -229,16 +229,41 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/chenjiayun@acsac2024/";
-            },},{id: "news-trustcom-2024",
-          title: 'TrustCom 2024',
+            },},{id: "news-姜楠的学术报告-trustcom-2024",
+          title: '姜楠的学术报告 @ TrustCom 2024',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/dams@trustcom2024/";
-            },},{id: "news-ndss-2025",
-          title: 'NDSS 2025',
+              window.location.href = "/news/jiangnan@trustcom2024/";
+            },},{id: "news-张艺馨的学术报告-trustcom-2024",
+          title: '张艺馨的学术报告 @ TrustCom 2024',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/dams@ndss2025/";
+              window.location.href = "/news/zhangyixin@trustcom2024/";
+            },},{id: "news-陈家赟的学术报告-ndss-2025",
+          title: '陈家赟的学术报告 @ NDSS 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/chenjiayun@ndss2025/";
+            },},{id: "news-宋奇阳的学术报告-ndss-2025",
+          title: '宋奇阳的学术报告 @ NDSS 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/songqiyang@ndss2025/";
+            },},{id: "projects-high-speed-usb-attack",
+          title: 'High-Speed USB Attack',
+          description: "A Conducted Compromising Emanations Method on High-Speed USB Devices via USB Hubs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/a-conducted-compromising-emanations-method-on-high-speed-usb-devices-via-usb-hubs/";
+            },},{id: "projects-chameleon",
+          title: 'Chameleon',
+          description: "Towards Building Least-privileged TEE via Functionality-based Resource Re-grouping",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/chameleon-towards-building-least-privileged-tee-via-functionality-based-resource-re-grouping/";
+            },},{id: "projects-cipo",
+          title: 'CIPO',
+          description: "Efficient, Lightweight and Programmable Packet Scheduling",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cipo-efficient-lightweight-and-programmable-packet-scheduling/";
             },},{id: "projects-conmonitor",
           title: 'ConMonitor',
           description: "Lightweight Container Protection with Virtualization and VM Functions",
@@ -249,11 +274,21 @@ ninja.data = [{
           description: "A Multi-realm Architecture Design for Running VM with ARM CCA",
           section: "Projects",handler: () => {
               window.location.href = "/projects/cubevisor-a-multi-realm-architecture-design-for-running-vm-with-arm-cca/";
+            },},{id: "projects-enclavepdp",
+          title: 'EnclavePDP',
+          description: "A General Framework to Verify Data Integrity in Cloud Using Intel SGX",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/enclavepdp-a-general-framework-to-verify-data-integrity-in-cloud-using-intel-sgx/";
             },},{id: "projects-hclave",
           title: 'HClave',
-          description: "An isolated execution environment design for hypervisor runtime security",
+          description: "An Isolated Execution Environment Design for Hypervisor Runtime Security",
           section: "Projects",handler: () => {
               window.location.href = "/projects/hclave-an-isolated-execution-environment-design-for-hypervisor-runtime-security/";
+            },},{id: "projects-lightarmor",
+          title: 'LightArmor',
+          description: "A Lightweight Trusted Operating System Isolation Approach for Mobile Systems",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/lightarmor-a-lightweight-trusted-operating-system-isolation-approach-for-mobile-systems/";
             },},{id: "projects-log2policy",
           title: 'Log2Policy',
           description: "An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch",
@@ -263,17 +298,47 @@ ninja.data = [{
           title: 'RContainer',
           description: "A Secure Container Architecture through Extending ARM CCA Hardware Primitives",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/rcontainer-a-secure-container-architecutre-through-extending-arm-cca-hardware-primitives/";
+              window.location.href = "/projects/rcontainer-a-secure-container-architecture-through-extending-arm-cca-hardware-primitives/";
             },},{id: "projects-secfortress",
           title: 'SecFortress',
           description: "Securing Hypervisor using Cross-layer Isolation",
           section: "Projects",handler: () => {
               window.location.href = "/projects/secfortress-securing-hypervisor-using-cross-layer-isolation/";
+            },},{id: "projects-sechannel",
+          title: 'SeChannel',
+          description: "A Secure and Lightweight Channel Protection Approach for TEE Systems",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/sechannel-a-secure-and-lightweight-channel-protection-approach-for-tee-systems/";
             },},{id: "projects-sedspec",
           title: 'SEDSpec',
           description: "Securing Emulated Devices by Enforcing Execution Specification",
           section: "Projects",handler: () => {
               window.location.href = "/projects/sedspec-securing-emulated-devices-by-enforcing-execution-specification/";
+            },},{id: "projects-autoar",
+          title: 'AutoAR',
+          description: "Silence False Alarms - Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/silence-false-alarms-identifying-anti-reentrancy-patterns-on-ethereum-to-refine-smart-contract-reentrancy-detection/";
+            },},{id: "projects-summslim",
+          title: 'SummSlim',
+          description: "A Universal and Automated Approach for Debloating Container Images",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/summslim-a-universal-and-automated-approach-for-debloating-container-images/";
+            },},{id: "projects-unicontainer",
+          title: 'Unicontainer',
+          description: "Unlocking the Potential of Unikernel for Secure and Efficient Containerization",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/unicontainer-unlocking-the-potential-of-unikernel-for-secure-and-efficient-containerization/";
+            },},{id: "projects-usb-catcher",
+          title: 'USB Catcher',
+          description: "Detection of Controlled Emissions via Conducted Compromising Emanations",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/usb-catcher-detection-of-controlled-emissions-via-conducted-compromising-emanations/";
+            },},{id: "projects-vasp",
+          title: 'vASP',
+          description: "Full VM Life-cycle Protection Based on Active Security Processor Architecture",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/vasp-full-vm-life-cycle-protection-based-on-active-security-processor-architecture/";
             },},{
         id: 'social-github',
         title: 'GitHub',
