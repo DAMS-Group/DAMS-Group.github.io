@@ -285,40 +285,42 @@ ul.task-list input[type="checkbox"] {
 
   .more-info {
     /* 姓名样式（首行） */
-    :nth-child(1) {
+    .member-name {
       font: 600 1.1rem/1.3 var(--global-font-family);
       color: var(--global-theme-color);
       transition: color 0.3s ease;
     }
 
     /* 年级样式（第二行） */
-    :nth-child(2) {
+    .member-grade {
       font: italic 0.95rem/1.4 'Georgia', serif;
       color: var(--global-text-color);
       opacity: 0.85;
     }
 
-    /* 毕业去向/研究方向（第三行） */
-    :nth-child(3) {
-      font: 0.85rem/1.5 var(--global-font-family);
-      color: var(--global-text-color-light);
+    /* 职称 */
+    .member-title {
+      font: italic 0.95rem/1.4 'Georgia', serif;
+      color: var(--global-text-color);
+      opacity: 0.85;
+    }
+
+    /* 毕业去向 */
+    .member-job {
+      font-size: 0.8rem;
+      color: #0f8ec5;
       margin-top: 2px;
     }
 
-    /* 第四行 - 重点信息样式 */
-    :nth-child(4) {
-      font: 0.4rem/0.8 var(--global-font-family);
-      color: #e0e0e0;
+    .member-research {
+      font-size: 0.8rem;
+      color: var(--global-text-color-light);
       transition: all 0.3s ease;
     }
 
-    /* 邮箱样式（带邮件图标） */
-    [href^="mailto:"] {
+    .member-email {
+      font-size: 0.8rem;
       font-family: 'Courier New', monospace;
-      &::before {
-        content: '✉️ ';
-        margin-right: 0.3em;
-      }
     }
   }
 }
@@ -1442,30 +1444,26 @@ ninja-keys::part(ninja-input-wrapper) {
     display: flex;
     justify-content: space-around;
     gap: 1rem;
-    /* 减小间距 */
     margin: 0.5rem 0 0.5rem;
-    /* 减小上下边距 */
-    align-items: baseline;
+    align-items: flex-start;
 
     > div {
       flex: 1;
       min-width: 0;
+      padding-top: 0.5rem;
     }
 
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
-      /* 减小标题下方边距 */
       color: var(--global-theme-color);
       border-bottom: 2px solid var(--global-theme-color);
       padding-bottom: 0.3rem;
-      /* 减小标题下方内边距 */
       text-align: center;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: var(--global-hover-color);
-      }
+      align-self: center;
+      line-height: 3rem;
+      height: 3rem;
+      margin: 0 0 5.5rem;
     }
   }
 

@@ -19,21 +19,27 @@ layout: page
             {% if member.image %}
               {% assign member_image_path = member.image | prepend: 'assets/img/' %}
               {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
-              <div class="avatar-img-container">
-                {%
-                  include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true"
-                %}
-              </div>
+              {% if member.blog %}
+                <a href="{{ member.blog }}">
+              {% endif %}
+                  <div class="avatar-img-container">
+                    {%
+                      include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true"
+                    %}
+                  </div>
+              {% if member.blog %}
+                </a>
+              {% endif %}
             {% endif %}
             <div class="more-info">
               {% if member.name %}
-                <li style="list-style-type:none;"> {{ member.name }} </li>
+                <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
               {% endif %}
               {% if member.title %}
-                <li style="list-style-type:none;"> {{ member.title }} </li>
+                <li class="member-title" style="list-style-type:none;">{{ member.title }}</li>
               {% endif %}
               {% if member.research %}
-                <li style="list-style-type:none;"> 研究方向： {{ member.research }} </li>
+                <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
               {% endif %}
               {% if member.email %}
                 <li style="list-style-type:none;"><a href="mailto: {{- member.email -}} "> {{- member.email -}} </a></li>
@@ -73,16 +79,16 @@ layout: page
             {% endif %}
             <div class="more-info">
               {% if member.name %}
-                <li style="list-style-type:none;"> {{ member.name }} </li>
+                <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
               {% endif %}
               {% if member.grade %}
-                <li style="list-style-type:none;"> {{ member.grade }} 级博士生 </li>
+                <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级博士生</li>
               {% endif %}
               {% if member.job %}
-                <li style="list-style-type:none;"> 毕业去向： {{ member.job }} </li>
+                <li class="member-job" style="list-style-type:none;">毕业去向：{{ member.job }}</li>
               {% endif %}
               {% if member.research %}
-                <li style="list-style-type:none;"> 研究方向： {{ member.research }} </li>
+                <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
               {% endif %}
             </div>
           </div>
