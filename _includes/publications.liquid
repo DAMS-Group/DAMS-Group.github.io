@@ -4,7 +4,7 @@
   <div class="flex-grow-1" style="min-width: 280px; max-width: calc(100% - 300px)">
     {% include bib_search.liquid %}
   </div>
-  <div class="tag-filter-card flex-grow-1" style="max-width: 100%; min-width: min(100%, 300px)">
+  <div class="tag-filter-card flex-grow-1" style="max-width: 800px; min-width: min(100%, 300px)">
     <div id="tag-cloud"></div>
   </div>
 </div>
@@ -12,3 +12,47 @@
 <div class="publications">
   {% bibliography %}
 </div>
+
+<script>
+  (function () {
+    const tagMap = new Map();
+    document.querySelectorAll('.tag-filter').forEach((el) => {
+      const tag = el.dataset.tag.toLowerCase().trim().replace(/\s+/g, ' ');
+      if (tag && !tagMap.has(tag)) {
+        tagMap.set(tag, document.createElement('span'));
+      }
+    });
+
+    console.log(tagMap);
+
+    const container = document.getElementById('tag-cloud');
+    const selectedTags = new Set();
+
+    tagMap.forEach((_, tag) => {
+      const element = document.createElement('span');
+      element.className = 'tag-toggle tag-decoration';
+      element.textContent = tag;
+      element.onclick = () => {
+        element.classList.toggle('tag-active');
+        element.classList.contains('tag-active') ? selectedTags.add(tag) : selectedTags.delete(tag);
+
+        document.querySelectorAll('li > div > div > div.paper-tags').forEach((paper) => {
+          const paperTags = [...paper.querySelectorAll('.tag-filter')].map((t) => t.dataset.tag.trim());
+          const show = selectedTags.size === 0 || [...selectedTags].every((t) => paperTags.includes(t));
+          paper.parentElement.parentElement.parentElement.style.display = show ? '' : 'none';
+        });
+
+        document.querySelectorAll('h2.bibliography').forEach((pub_year) => {
+          const sibling = pub_year.nextElementSibling;
+          if (sibling) {
+            const paperTags = sibling.querySelectorAll('li');
+            const allHidden = Array.from(paperTags).every(tag => tag.style.display === 'none');
+            pub_year.style.display = allHidden ? 'none' : '';
+          }
+        });
+      };
+      container.appendChild(element);
+      container.appendChild(document.createTextNode(' '));
+    });
+  })();
+</script>
