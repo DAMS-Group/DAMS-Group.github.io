@@ -279,6 +279,11 @@ ninja.data = [{
           description: "A General Framework to Verify Data Integrity in Cloud Using Intel SGX",
           section: "Projects",handler: () => {
               window.location.href = "/projects/enclavepdp-a-general-framework-to-verify-data-integrity-in-cloud-using-intel-sgx/";
+            },},{id: "projects-et-gan",
+          title: 'ET-GAN',
+          description: "Cross-Language Emotion Transfer Based on Cycle-Consistent Generative Adversarial Networks",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/et-gan-cross-language-emotion-transfer-based-on-cycle-consistent-generative-adversarial-networks/";
             },},{id: "projects-hclave",
           title: 'HClave',
           description: "An Isolated Execution Environment Design for Hypervisor Runtime Security",
@@ -314,6 +319,11 @@ ninja.data = [{
           description: "Securing Emulated Devices by Enforcing Execution Specification",
           section: "Projects",handler: () => {
               window.location.href = "/projects/sedspec-securing-emulated-devices-by-enforcing-execution-specification/";
+            },},{id: "projects-seef-aldr",
+          title: 'SEEF-ALDR',
+          description: "A Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/seef-aldr-a-speaker-embedding-enhancement-framework-via-adversarial-learning-based-disentangled-representation/";
             },},{id: "projects-autoar",
           title: 'AutoAR',
           description: "Silence False Alarms - Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection",
