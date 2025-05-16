@@ -10,7 +10,9 @@
           <a
             href="#"
             class="category-link active"
-            data-category="全部">全部</a>
+            data-category="全部"
+            >全部</a
+          >
           <div class="news-list">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
@@ -29,7 +31,9 @@
           <a
             href="#"
             class="category-link"
-            data-category="学术活动">学术活动</a>
+            data-category="学术活动"
+            >学术活动</a
+          >
           <div class="news-list">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
@@ -50,7 +54,9 @@
           <a
             href="#"
             class="category-link"
-            data-category="团建活动">团建活动</a>
+            data-category="团建活动"
+            >团建活动</a
+          >
           <div class="news-list">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
@@ -81,7 +87,8 @@
         <div
           id="news-{{ forloop.index }}"
           class="news-card"
-          data-category="{{ category }}">
+          data-category="{{ category }}"
+        >
           <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
           <h4>
             {% if item.inline %}
@@ -129,7 +136,7 @@
       card.style.display = 'block';
       hasInitialNews = true;
     });
-    
+
     // 添加导航栏动画激活
     const categoryNav = document.querySelector('.category-nav');
     if (categoryNav) {

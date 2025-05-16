@@ -52,7 +52,6 @@
     <div class="title">{{ entry.title }}</div>
     <!-- Author -->
     <div class="author">
-
       <!-- Tags -->
       {% if entry.tags %}
         <div class="paper-tags mt-2">
@@ -330,9 +329,9 @@
 </div>
 
 <script>
-  (function() {
+  (function () {
     const tagMap = new Map();
-    document.querySelectorAll('.tag-filter').forEach(el => {
+    document.querySelectorAll('.tag-filter').forEach((el) => {
       const tag = el.dataset.tag.trim();
       if (tag && !tagMap.has(tag)) {
         tagMap.set(tag, document.createElement('span'));
@@ -348,14 +347,11 @@
       element.textContent = tag;
       element.onclick = () => {
         element.classList.toggle('tag-active');
-        element.classList.contains('tag-active') ? 
-          selectedTags.add(tag) : selectedTags.delete(tag);
+        element.classList.contains('tag-active') ? selectedTags.add(tag) : selectedTags.delete(tag);
 
-        document.querySelectorAll('.publications > div').forEach(paper => {
-          const paperTags = [...paper.querySelectorAll('.tag-filter')]
-            .map(t => t.dataset.tag.trim());
-          const show = selectedTags.size === 0 || 
-            [...selectedTags].every(t => paperTags.includes(t));
+        document.querySelectorAll('.publications > div').forEach((paper) => {
+          const paperTags = [...paper.querySelectorAll('.tag-filter')].map((t) => t.dataset.tag.trim());
+          const show = selectedTags.size === 0 || [...selectedTags].every((t) => paperTags.includes(t));
           paper.style.display = show ? '' : 'none';
         });
       };
