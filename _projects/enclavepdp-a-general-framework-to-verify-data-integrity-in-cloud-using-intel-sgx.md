@@ -3,7 +3,7 @@ layout: page
 title: EnclavePDP
 description: A General Framework to Verify Data Integrity in Cloud Using Intel SGX
 img: assets/img/octocat/inspectocat.jpg
-importance: 1
+pub_year: 2020
 category: Publications
 related_publications: true
 redirect: javascript:void(0)

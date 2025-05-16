@@ -6,10 +6,11 @@
   author={Zhang, Zhicong and Zhou, Qihang and Xu, Shaowen and Jiang, Nan and Zhang, Weijuan and Jia, Xiaoqi},
   abstract={Container technology, characterized by its convenience in deployment and exceptional performance, has emerged as a dominant force in the realm of cloud computing. However, the shared kernel among different containers and the common practice of running multiple applications within a single container pose threats to user data from malicious co-resident containers or other malicious programs within the same container. To address this problem, we introduce a novel container architecture design - UniContainer. UniContainer partitions original containers, allowing each component to run within an independent customized Unikernel, thereby enhancing isolation both between containers and within containers. We implement a prototype of UniContainer based on Unikraft, enabling automated analysis of target container system call logs and configuration of optimal Unikraft images, while preserving the convenience of container technology deployment. Through experimental evaluation, we validate the effectiveness and performance of UniContainer, maximizing the outstanding performance benefits of container technology.},
   year={2025},
-  note={The 23rd ACM International Conference on Mobile Systems, Applications, and Services (MobiSys 2025)},
+  note={ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems (SIGMETRICS 2025)},
   bibtex_show={true},
   preview={unicontainer-architecture.png},
   type={inproceedings},
+  tags={container,security},
 }
 
 @article{nan2025chameleon,
@@ -17,10 +18,11 @@
   author={Jiang, Nan and Zhou, Qihang and Qian, Feifan and Chen, Jiayun and Huang, Heqing and Jia, Xiaoqi and Du, Haichao},
   abstract={TrustZone-assisted Trusted Execution Environment (TEE) has been widely employed in mobile devices to protect sensitive applications. With increased customization demands, Trusted Applications (TAs) have become more flexible and complex, exposing numerous vulnerabilities within the TEE. Furthermore, due to the unrestricted Trusted Operating System (TOS) services provided to TA, an attacker can exploit vulnerabilities to compromise the whole TEE system. In this paper, we propose a novel customized TOS partition approach, called Chameleon, to enhance the security of the TrustZone-assisted TEE system. Inspired by the principle of least privilege and our TEE vulnerability analysis, we first categorize the TOS into TOS service modules and basic kernel modules. Then, we selectively encapsulate these modules into distinct Capsules based on the TA’s functional requirements, providing each TA with a separate execution environment (TA-entity). To enforce access control and confine vulnerable modules within a TA-entity, we introduce T-Visor, which serves as our Trusted Computing Base. Our prototype implementation, built upon Linaro’s OP-TEE, requires only 2.9K Lines of Code (LoC) modifications. Evaluation on a Hikey960 board demonstrates that Chameleon reduces the attack surface of TOS services to 51% and mitigates 122 out of 138 CVEs (88.41%) with negligible performance overhead.},
   year={2025},
-  note={ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems (SIGMETRICS 2025)},
+  note={The 23rd ACM International Conference on Mobile Systems, Applications, and Services (MobiSys 2025)},
   bibtex_show={true},
   preview={chameleon-architecture.png},
   type={inproceedings},
+  tags={tee,mobile,security},
 }
 
 @article{qihang2025rcontainer,

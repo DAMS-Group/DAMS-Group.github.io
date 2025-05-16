@@ -59,7 +59,7 @@ layout: page
     <div class="member_type">
       <h2>Students</h2>
       <hr>
-      {% assign students = site.members | where: 'category', 'students' | sort: 'grade' | reversed %}
+      {% assign students = site.members | where: 'category', 'students' | sort: 'grade' %}
       {% if students.size > 0 %}
         {% for member in students %}
           <br>

@@ -153,7 +153,7 @@ keep_files:
 
 # Plug-ins
 plugins:
-  - jekyll-archives
+  - jekyll-archives-v2
   - jekyll-email-protect
   - jekyll-feed
   - jekyll-get-json
@@ -202,11 +202,11 @@ terser:
 # -----------------------------------------------------------------------------
 
 jekyll-archives:
-  enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
-  permalinks:
-    year: "/blog/:year/"
-    tags: "/blog/:type/:name/"
-    category: "/book/category/:name/"
+  posts:
+    enabled: [tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
+    permalinks:
+      tags: "/book/:type/:name/"
+      categories: "/book/:type/:name/"
 
 display_tags: ["QEMU", "KVM"] # these tags will be displayed on the front page of your blog
 display_categories: ["配套实验"] # these categories will be displayed on the front page of your blog

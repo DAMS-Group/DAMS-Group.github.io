@@ -3,7 +3,7 @@ layout: page
 title: vASP
 description: Full VM Life-cycle Protection Based on Active Security Processor Architecture
 img: assets/img/octocat/catstello.png
-importance: 1
+pub_year: 2024
 category: Publications
 related_publications: true
 redirect: javascript:void(0)

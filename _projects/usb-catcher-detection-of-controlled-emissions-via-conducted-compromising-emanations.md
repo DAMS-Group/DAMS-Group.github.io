@@ -3,7 +3,7 @@ layout: page
 title: USB Catcher
 description: Detection of Controlled Emissions via Conducted Compromising Emanations
 img: assets/img/octocat/dinotocat.png
-importance: 1
+pub_year: 2024
 category: Publications
 related_publications: true
 redirect: javascript:void(0)

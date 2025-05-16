@@ -3,7 +3,7 @@ layout: page
 title: LightArmor
 description: A Lightweight Trusted Operating System Isolation Approach for Mobile Systems
 img: assets/img/octocat/scubatocat.png
-importance: 1
+pub_year: 2024
 category: Publications
 related_publications: true
 redirect: javascript:void(0)

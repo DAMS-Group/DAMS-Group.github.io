@@ -1,0 +1,13 @@
+<div class="col">
+  <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
+    <div class="card hoverable">
+      {% if project.img %}
+        {% include figure.liquid loading="eager" path=project.img max-width="60%" class="card-img" center="true" %}
+      {% endif %}
+      <div class="card-body">
+        <h2 class="card-title fs-5 mb-1">{{ project.title }}</h2>
+        <p class="card-text small">{{ project.description }}</p>
+      </div>
+    </div>
+  </a>
+</div>

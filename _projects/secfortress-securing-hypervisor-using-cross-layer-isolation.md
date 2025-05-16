@@ -3,7 +3,7 @@ layout: page
 title: SecFortress
 description: Securing Hypervisor using Cross-layer Isolation
 img: assets/img/octocat/securitocat.png
-importance: 1
+pub_year: 2022
 category: Publications
 related_publications: true
 redirect: javascript:void(0)

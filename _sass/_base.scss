@@ -24,6 +24,7 @@ hr {
 }
 
 table {
+
   td,
   th {
     font-size: 1rem;
@@ -140,7 +141,7 @@ ul.task-list {
   /* Remove bullets from all levels */
 }
 
-ul.task-list > li ul {
+ul.task-list>li ul {
   /* Nested lists within .task-list */
   padding-inline-start: 1.5rem;
 }
@@ -284,6 +285,7 @@ ul.task-list input[type="checkbox"] {
   text-align: center;
 
   .more-info {
+
     /* 姓名样式（首行） */
     .member-name {
       font: 600 1.1rem/1.3 var(--global-font-family);
@@ -490,7 +492,7 @@ ul.task-list input[type="checkbox"] {
     }
   }
 
-  .navbar-nav .nav-item.active > .nav-link {
+  .navbar-nav .nav-item.active>.nav-link {
     background-color: inherit;
     font-weight: bolder;
     color: var(--global-theme-color);
@@ -611,7 +613,8 @@ ul.task-list input[type="checkbox"] {
     margin-bottom: 0.3rem;
 
     .social-icon {
-      font-size: 0.6em; /* 使图标变小，相对于父元素的字体大小 */
+      font-size: 0.6em;
+      /* 使图标变小，相对于父元素的字体大小 */
     }
   }
 
@@ -636,7 +639,7 @@ ul.task-list input[type="checkbox"] {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.wechat-modal > img {
+.wechat-modal>img {
   display: block;
   position: relative;
   top: 50%;
@@ -647,7 +650,7 @@ ul.task-list input[type="checkbox"] {
 }
 
 @media only screen and (max-width: 400px) {
-  .wechat-modal > img {
+  .wechat-modal>img {
     width: 100%;
   }
 }
@@ -808,6 +811,7 @@ footer.sticky-bottom {
   width: 1200px;
   margin-right: auto;
   margin-left: auto;
+
   a {
     text-decoration: none;
 
@@ -887,8 +891,7 @@ footer.sticky-bottom {
     li {
       margin-bottom: 1rem;
 
-      .preview {
-      }
+      .preview {}
 
       .abbr {
         margin-bottom: 0.5rem;
@@ -927,12 +930,12 @@ footer.sticky-bottom {
           }
         }
 
-        > em {
+        >em {
           border-bottom: 1px solid;
           font-style: normal;
         }
 
-        > span.more-authors {
+        >span.more-authors {
           color: var(--global-text-color-light);
           border-bottom: 1px dashed var(--global-text-color-light);
           cursor: pointer;
@@ -1225,11 +1228,11 @@ progress::-moz-progress-bar {
 nav[data-toggle="toc"] {
   top: 5rem;
 
-  .nav .nav > li > a {
+  .nav .nav>li>a {
     font-size: 0.75rem;
   }
 
-  .nav > li > a {
+  .nav>li>a {
     color: var(--global-text-color);
     font-size: 0.75rem;
 
@@ -1253,6 +1256,7 @@ nav[data-toggle="toc"] {
 
 /* small screens */
 @media (max-width: 576px) {
+
   /* override stickyness so that the navigation does not follow scrolling */
   nav[data-toggle="toc"] {
     visibility: hidden;
@@ -1325,7 +1329,7 @@ swiper-container {
     border-bottom: 2px solid var(--global-text-color);
   }
 
-  .ps-algorithm.with-caption > .ps-line:first-child {
+  .ps-algorithm.with-caption>.ps-line:first-child {
     border-bottom: 2px solid var(--global-text-color);
   }
 }
@@ -1379,6 +1383,7 @@ ninja-keys::part(ninja-input-wrapper) {
 }
 
 .bs-popover-top {
+
   // arrow fill color
   .arrow::after {
     border-top-color: var(--global-bg-color);
@@ -1391,6 +1396,7 @@ ninja-keys::part(ninja-input-wrapper) {
 }
 
 .bs-popover-bottom {
+
   // arrow fill color
   .arrow::after {
     border-bottom-color: var(--global-bg-color);
@@ -1447,7 +1453,7 @@ ninja-keys::part(ninja-input-wrapper) {
     margin: 0.5rem 0 0.5rem;
     align-items: flex-start;
 
-    > div {
+    >div {
       flex: 1;
       min-width: 0;
       padding-top: 0.5rem;
@@ -1928,9 +1934,12 @@ ninja-keys::part(ninja-input-wrapper) {
 
 /* 新闻列表滚动样式 */
 .news-list {
-  max-height: 300px; /* 设置最大高度，超过时显示滚动条 */
-  overflow-y: auto; /* 垂直方向自动显示滚动条 */
-  padding-right: 5px; /* 右侧添加内边距，避免滚动条遮挡内容 */
+  max-height: 300px;
+  /* 设置最大高度，超过时显示滚动条 */
+  overflow-y: auto;
+  /* 垂直方向自动显示滚动条 */
+  padding-right: 5px;
+  /* 右侧添加内边距，避免滚动条遮挡内容 */
 }
 
 /* 美化滚动条样式 */
@@ -1960,6 +1969,7 @@ ninja-keys::part(ninja-input-wrapper) {
   overflow: hidden;
   border-radius: 32px;
   margin: 0 auto;
+
   img {
     position: absolute;
     top: 0;
@@ -1977,4 +1987,48 @@ ninja-keys::part(ninja-input-wrapper) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.navbar-brand img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+/* Tag Filter Styles */
+.tag-filter-card {
+  #tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 100%;
+    overflow-wrap: break-word;
+
+    .badge {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+
+      &:hover {
+        text-decoration: underline;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .badge {
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+  }
+}
+
+.tag-toggle {
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.tag-active {
+    color: white;
+  }
 }

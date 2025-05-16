@@ -3,7 +3,7 @@ layout: page
 title: ConMonitor
 description: Lightweight Container Protection with Virtualization and VM Functions
 img: assets/img/octocat/justicetocat.jpg
-importance: 1
+pub_year: 2024
 category: Publications
 related_publications: true
 redirect: javascript:void(0)

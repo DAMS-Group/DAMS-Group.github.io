@@ -52,6 +52,17 @@
     <div class="title">{{ entry.title }}</div>
     <!-- Author -->
     <div class="author">
+
+      <!-- Tags -->
+      {% if entry.tags %}
+        <div class="paper-tags mt-2">
+          {% assign splitted_tags = entry.tags | split: ',' %}
+          {% for tag in splitted_tags %}
+            <span class="badge badge-pill badge-secondary tag-filter" data-tag="{{ tag }}">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       {% assign author_array_size = entry.author_array | size %}
 
       {% assign author_array_limit = author_array_size %}
@@ -317,3 +328,39 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+  (function() {
+    const tagMap = new Map();
+    document.querySelectorAll('.tag-filter').forEach(el => {
+      const tag = el.dataset.tag.trim();
+      if (tag && !tagMap.has(tag)) {
+        tagMap.set(tag, document.createElement('span'));
+      }
+    });
+
+    const container = document.getElementById('tag-cloud');
+    const selectedTags = new Set();
+
+    tagMap.forEach((_, tag) => {
+      const element = document.createElement('span');
+      element.className = 'badge badge-pill tag-toggle';
+      element.textContent = tag;
+      element.onclick = () => {
+        element.classList.toggle('tag-active');
+        element.classList.contains('tag-active') ? 
+          selectedTags.add(tag) : selectedTags.delete(tag);
+
+        document.querySelectorAll('.publications > div').forEach(paper => {
+          const paperTags = [...paper.querySelectorAll('.tag-filter')]
+            .map(t => t.dataset.tag.trim());
+          const show = selectedTags.size === 0 || 
+            [...selectedTags].every(t => paperTags.includes(t));
+          paper.style.display = show ? '' : 'none';
+        });
+      };
+      container.appendChild(element);
+      container.appendChild(document.createTextNode(' '));
+    });
+  })();
+</script>
