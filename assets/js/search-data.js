@@ -59,11 +59,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/chenjiayun/";
-            },},{id: "members-guojiaming",
-          title: 'Guojiaming',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/guojiaming/";
             },},{id: "members-hezhiyu",
           title: 'Hezhiyu',
           description: "",
