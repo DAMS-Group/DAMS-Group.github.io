@@ -184,66 +184,96 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhouqihang/";
-            },},{id: "news-2023年10月15日秋日团建",
-          title: '2023年10月15日秋日团建',
+            },},{id: "news-团建活动-2023年10月15日秋日团建",
+          title: '【团建活动】2023年10月15日秋日团建',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/team-building@judianchuanba/";
-            },},{id: "news-陈家赟的报告-ccgrid-2024",
-          title: '陈家赟的报告 @ CCGRID 2024',
+            },},{id: "news-论文录用-acsac-2023",
+          title: '【论文录用】ACSAC 2023',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@acsac2023/";
+            },},{id: "news-论文录用-ccgrid-2024",
+          title: '【论文录用】CCGrid 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@ccgrid2024/";
+            },},{id: "news-学术报告-陈家赟的报告-ccgrid-2024",
+          title: '【学术报告】陈家赟的报告 @ CCGrid 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/chenjiayun@ccgrid/";
-            },},{id: "news-姜楠的报告-ifipsec-2024",
-          title: '姜楠的报告 @ IFIPSEC 2024',
+            },},{id: "news-学术报告-姜楠的报告-ifipsec-2024",
+          title: '【学术报告】姜楠的报告 @ IFIPSEC 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/jiangnan@sec2024/";
-            },},{id: "news-张艺馨的报告-iscc-2024",
-          title: '张艺馨的报告 @ ISCC 2024',
+            },},{id: "news-学术报告-张艺馨的报告-iscc-2024",
+          title: '【学术报告】张艺馨的报告 @ ISCC 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/zhangyixin@iscc2024/";
-            },},{id: "news-张志聪的报告-icpads-2024",
-          title: '张志聪的报告 @ ICPADS 2024',
+            },},{id: "news-论文录用-icpads-2024",
+          title: '【论文录用】ICPADS 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@icpads2024/";
+            },},{id: "news-论文录用-acsac-2024",
+          title: '【论文录用】ACSAC 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@acsac2024/";
+            },},{id: "news-学术报告-张志聪的报告-icpads-2024",
+          title: '【学术报告】张志聪的报告 @ ICPADS 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/zhangzhicong@icpads2024/";
-            },},{id: "news-2024年10月25日年度团建",
-          title: '2024年10月25日年度团建',
+            },},{id: "news-团建活动-2024年10月25日年度团建",
+          title: '【团建活动】2024年10月25日年度团建',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/team-building@diliuji/";
-            },},{id: "news-徐少文的报告-socc-2024",
-          title: '徐少文的报告 @ SoCC 2024',
+            },},{id: "news-论文录用-socc-2024",
+          title: '【论文录用】SoCC 2024',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/xushaowen@socc2024/";
-            },},{id: "news-陈家赟的报告-acsac-2024",
-          title: '陈家赟的报告 @ ACSAC 2024',
+              window.location.href = "/news/accept@socc2024/";
+            },},{id: "news-学术报告-陈家赟的报告-acsac-2024",
+          title: '【学术报告】陈家赟的报告 @ ACSAC 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/chenjiayun@acsac2024/";
-            },},{id: "news-姜楠的学术报告-trustcom-2024",
-          title: '姜楠的学术报告 @ TrustCom 2024',
+            },},{id: "news-学术报告-姜楠的学术报告-trustcom-2024",
+          title: '【学术报告】姜楠的学术报告 @ TrustCom 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/jiangnan@trustcom2024/";
-            },},{id: "news-张艺馨的学术报告-trustcom-2024",
-          title: '张艺馨的学术报告 @ TrustCom 2024',
+            },},{id: "news-学术报告-张艺馨的学术报告-trustcom-2024",
+          title: '【学术报告】张艺馨的学术报告 @ TrustCom 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/zhangyixin@trustcom2024/";
-            },},{id: "news-陈家赟的学术报告-ndss-2025",
-          title: '陈家赟的学术报告 @ NDSS 2025',
+            },},{id: "news-学术报告-徐少文的报告-socc-2024",
+          title: '【学术报告】徐少文的报告 @ SoCC 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/xushaowen@socc2024/";
+            },},{id: "news-学术报告-陈家赟的报告-ndss-2025",
+          title: '【学术报告】陈家赟的报告 @ NDSS 2025',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/chenjiayun@ndss2025/";
-            },},{id: "news-宋奇阳的学术报告-ndss-2025",
-          title: '宋奇阳的学术报告 @ NDSS 2025',
+            },},{id: "news-学术报告-宋奇阳的学术报告-ndss-2025",
+          title: '【学术报告】宋奇阳的学术报告 @ NDSS 2025',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/songqiyang@ndss2025/";
+            },},{id: "news-论文录用-sigmetrics-2025",
+          title: '【论文录用】SIGMETRICS 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@sigmetrics2025/";
             },},{id: "projects-high-speed-usb-attack",
           title: 'High-Speed USB Attack',
           description: "A Conducted Compromising Emanations Method on High-Speed USB Devices via USB Hubs",
