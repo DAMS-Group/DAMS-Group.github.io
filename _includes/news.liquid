@@ -34,7 +34,7 @@
             data-category="学术活动"
             >学术活动</a
           >
-          <div class="news-list">
+          <div class="news-list" style="display: none;">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
               {% for item in news %}
@@ -57,7 +57,7 @@
             data-category="团建活动"
             >团建活动</a
           >
-          <div class="news-list">
+          <div class="news-list" style="display: none;">
             {% if site.news != blank %}
               {% assign news = site.news | reverse %}
               {% for item in news %}
