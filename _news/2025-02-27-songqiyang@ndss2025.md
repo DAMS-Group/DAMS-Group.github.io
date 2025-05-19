@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 宋奇阳的学术报告 @ NDSS 2025
+title: 【学术报告】宋奇阳的学术报告 @ NDSS 2025
 date: 2025-02-27 14:00:00+0800
 inline: false
 related_posts: false
-giscus_comments: true
+giscus_comments: false
 category: 学术活动
 ---
 

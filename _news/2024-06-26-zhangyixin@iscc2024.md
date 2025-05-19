@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 张艺馨的报告 @ ISCC 2024
+title: 【学术报告】张艺馨的报告 @ ISCC 2024
 date: 2024-06-26 14:00:00+0800
 inline: false
 related_posts: false
-giscus_comments: true
+giscus_comments: false
 category: 学术活动
 ---
 

@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 2023年10月15日秋日团建
+title: 【团建活动】2023年10月15日秋日团建
 date: 2023-10-15 10:00:00+0800
 inline: false
 related_posts: false
-giscus_comments: true
+giscus_comments: false
 category: 团建活动
 ---
 

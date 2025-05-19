@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 姜楠的学术报告 @ TrustCom 2024
+title: 【学术报告】姜楠的学术报告 @ TrustCom 2024
 date: 2024-12-17 14:00:00+0800
 inline: false
 related_posts: false
-giscus_comments: true
+giscus_comments: false
 category: 学术活动
 ---
 

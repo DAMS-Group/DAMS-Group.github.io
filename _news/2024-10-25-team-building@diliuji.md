@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 2024年10月25日年度团建
+title: 【团建活动】2024年10月25日年度团建
 date: 2024-10-25 10:00:00+0800
 inline: false
 related_posts: false
-giscus_comments: true
+giscus_comments: false
 category: 团建活动
 ---
 
