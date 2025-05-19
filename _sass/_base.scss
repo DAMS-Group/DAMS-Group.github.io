@@ -1893,3 +1893,47 @@ ninja-keys::part(ninja-input-wrapper) {
     color: #0F3560;
   }
 }
+
+/* 分页控件样式 */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto 1rem;
+  
+  .pagination-btn {
+    min-width: 90px;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    background: #e3f2fd;
+    border: 1px solid #1A4D8F;
+    box-shadow: 0 2px 6px rgba(26, 77, 143, 0.1);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-weight: 600;
+    color: #1A4D8F;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover:not(:disabled) {
+      background: #bbdefb;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 77, 143, 0.15);
+      color: #0F3560;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+  
+  .page-indicator {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-weight: 600;
+    color: #1A4D8F;
+    padding: 0.5em 1em;
+  }
+}

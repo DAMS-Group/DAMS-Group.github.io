@@ -209,12 +209,14 @@ body.sticky-bottom-footer {
       color: #3498db;
       text-decoration: none;
       display: inline-block;
-      margin-top: 0.5rem;
       transition: all 0.3s ease;
+      color: var(--global-theme-color);
+      font-weight: 500;
 
       &:hover {
         color: #2980b9;
         transform: translateX(5px);
+        text-decoration: underline;
       }
     }
   }
@@ -283,18 +285,6 @@ body.sticky-bottom-footer {
 
 .news-card .news-content {
   padding: 0;
-}
-
-.read-more {
-  display: inline-block;
-  margin-top: 0.8rem;
-  color: var(--global-theme-color);
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.read-more:hover {
-  text-decoration: underline;
 }
 
 /* 响应式布局 */

@@ -19,7 +19,7 @@
               {% for item in news %}
                 <div class="news-item">
                   <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
-                  <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                  <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title | slice: 6, 100 }}</a>
                 </div>
               {% endfor %}
             {% else %}
@@ -41,7 +41,7 @@
                 {% if item.category == '学术活动' %}
                   <div class="news-item">
                     <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
-                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title | slice: 6, 100 }}</a>
                   </div>
                 {% endif %}
               {% endfor %}
@@ -64,7 +64,7 @@
                 {% if item.category == '团建活动' %}
                   <div class="news-item">
                     <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
-                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title }}</a>
+                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title | slice: 6, 100 }}</a>
                   </div>
                 {% endif %}
               {% endfor %}
@@ -82,6 +82,10 @@
     {% if site.news != blank %}
       {% assign news = site.news | reverse %}
       {% assign has_news = false %}
+      <!-- 添加分页变量 -->
+      {% assign total_news = news.size %}
+      {% assign news_per_page = 10 %}
+      {% assign total_pages = total_news | divided_by: news_per_page | plus: 1 %}
       {% for item in news %}
         {% assign category = item.category | default: '其他' %}
         <div
@@ -118,11 +122,72 @@
       <p>暂无新闻...</p>
     {% endif %}
   </div>
+
+  <!-- 分页控件 -->
+  <div class="pagination-container">
+    <button id="prev-page" class="pagination-btn">上一页</button>
+    <span class="page-indicator">第 <span id="current-page">1</span> / <span id="total-pages">1</span> 页</span>
+    <button id="next-page" class="pagination-btn">下一页</button>
+  </div>
 </div>
 
 <!-- JavaScript代码 -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // 分页相关变量
+    let currentPage = 1;
+    const newsPerPage = 10;
+    let filteredCards = [];
+    
+    // 分页控件元素
+    const prevPageBtn = document.getElementById('prev-page');
+    const nextPageBtn = document.getElementById('next-page');
+    const currentPageEl = document.getElementById('current-page');
+    const totalPagesEl = document.getElementById('total-pages');
+    
+    // 分页函数
+    function updatePagination() {
+      // 计算总页数
+      const totalPages = Math.ceil(filteredCards.length / newsPerPage);
+      totalPagesEl.textContent = totalPages;
+      currentPageEl.textContent = currentPage;
+      
+      // 更新按钮状态
+      prevPageBtn.disabled = currentPage <= 1;
+      nextPageBtn.disabled = currentPage >= totalPages;
+      
+      // 隐藏所有新闻卡片
+      filteredCards.forEach(card => {
+        card.style.display = 'none';
+      });
+      
+      // 显示当前页的新闻
+      const startIndex = (currentPage - 1) * newsPerPage;
+      const endIndex = Math.min(startIndex + newsPerPage, filteredCards.length);
+      
+      for (let i = startIndex; i < endIndex; i++) {
+        if (filteredCards[i]) {
+          filteredCards[i].style.display = 'block';
+        }
+      }
+    }
+    
+    // 分页按钮事件
+    prevPageBtn.addEventListener('click', function() {
+      if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+      }
+    });
+    
+    nextPageBtn.addEventListener('click', function() {
+      const totalPages = Math.ceil(filteredCards.length / newsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        updatePagination();
+      }
+    });
+    
     // 获取所有分类链接和分类内容区
     const categoryLinks = document.querySelectorAll('.category-link');
     const categorySections = document.querySelectorAll('.category-section');
@@ -131,11 +196,13 @@
     // 初始化 - 显示全部分类
     document.getElementById('category-全部').classList.add('active');
     let hasInitialNews = false;
-    // 确保右侧详细内容区显示所有新闻
-    newsCards.forEach((card) => {
-      card.style.display = 'block';
-      hasInitialNews = true;
-    });
+    
+    // 初始化筛选的新闻卡片
+    filteredCards = Array.from(newsCards);
+    hasInitialNews = filteredCards.length > 0;
+    
+    // 初始化分页
+    updatePagination();
 
     // 添加导航栏动画激活
     const categoryNav = document.querySelector('.category-nav');
@@ -208,14 +275,20 @@
 
         // 筛选新闻卡片
         let hasNews = false;
-        newsCards.forEach((card) => {
-          if (selectedCategory === '全部' || card.getAttribute('data-category') === selectedCategory) {
-            card.style.display = 'block';
-            hasNews = true;
-          } else {
-            card.style.display = 'none';
-          }
+        // 重置当前页为第一页
+        currentPage = 1;
+        
+        // 筛选符合条件的新闻卡片
+        filteredCards = Array.from(newsCards).filter(card => {
+          return selectedCategory === '全部' || card.getAttribute('data-category') === selectedCategory;
         });
+        
+        if (filteredCards.length > 0) {
+          hasNews = true;
+        }
+        
+        // 更新分页
+        updatePagination();
 
         // 检查是否有该分类的新闻
         const noNewsMessage = document.querySelector('.no-news-message');

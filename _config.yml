@@ -233,6 +233,9 @@ scholar:
   details_dir: bibliography
   details_link: Details
 
+  sort_by: ccf
+  order: ascending
+
   query: "@*"
   group_by: year
   group_order: descending
