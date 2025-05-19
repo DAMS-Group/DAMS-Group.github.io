@@ -1,6 +1,625 @@
-<!DOCTYPE html> <html lang="cn"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> 第六章实验 | DAMS </title> <meta name="author" content=" "> <meta name="description" content="这是第六章的实验。"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/icon.png?b4018dbfbd52d2e3cc004f2a590839cb"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://dams.net.cn/book/2025/lab6/"> <script src="/assets/js/theme.js?6ddb66544c57e17a63e7abf8cc6c43e3"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+<!DOCTYPE html> <html lang="cn"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> 第六章实验：虚拟化应用 | DAMS </title> <meta name="author" content=" "> <meta name="description" content="本章介绍了使用LibVMI库进行虚拟机自省的实验，包括安装配置LibVMI环境、获取Windows虚拟机内核信息、监控CR3寄存器事件以及获取虚拟机进程列表等虚拟化监控应用。"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/icon.png?b4018dbfbd52d2e3cc004f2a590839cb"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://dams.net.cn/book/2025/lab6/"> <script src="/assets/js/theme.js?6ddb66544c57e17a63e7abf8cc6c43e3"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <img src="/assets/img/icon.png?b4018dbfbd52d2e3cc004f2a590839cb"> DAMS | 分布式与移动系统安全实验室 </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">首页 </a> </li> <li class="nav-item active"> <a class="nav-link" href="/book/">著作 </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">论文 </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">项目 </a> </li> <li class="nav-item "> <a class="nav-link" href="/members/">团队 </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">新闻 </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link"> <i class="ti ti-search"></i> </span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">第六章实验</h1> <p class="post-meta"> Created in May 01, 2025 </p> <p class="post-tags"> <a href="/book/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/book/tag/qemu"> <i class="fa-solid fa-hashtag fa-sm"></i> QEMU</a>   <a href="/book/tag/kvm"> <i class="fa-solid fa-hashtag fa-sm"></i> KVM</a>   ·   <a href="/book/category/%E9%85%8D%E5%A5%97%E5%AE%9E%E9%AA%8C"> <i class="fa-solid fa-tag fa-sm"></i> 配套实验</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>这是第六章的实验。</p> </div> </article> <div id="giscus_thread" style="max-width: 930px; margin: 0 auto;"> <script>
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <img src="/assets/img/icon.png?b4018dbfbd52d2e3cc004f2a590839cb"> DAMS | 分布式与移动系统安全实验室 </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">首页 </a> </li> <li class="nav-item active"> <a class="nav-link" href="/book/">著作 </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">论文 </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">项目 </a> </li> <li class="nav-item "> <a class="nav-link" href="/members/">团队 </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">新闻 </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link"> <i class="ti ti-search"></i> </span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">第六章实验：虚拟化应用</h1> <p class="post-meta"> Created in May 01, 2025 </p> <p class="post-tags"> <a href="/book/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/book/tag/qemu"> <i class="fa-solid fa-hashtag fa-sm"></i> QEMU</a>   <a href="/book/tag/kvm"> <i class="fa-solid fa-hashtag fa-sm"></i> KVM</a>   ·   <a href="/book/category/%E9%85%8D%E5%A5%97%E5%AE%9E%E9%AA%8C"> <i class="fa-solid fa-tag fa-sm"></i> 配套实验</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h1 id="实验一使用libvmi获取虚拟机相关信息">实验一：使用LibVMI获取虚拟机相关信息</h1> <h2 id="安装libvmi">安装libvmi</h2> <h3 id="背景知识">背景知识</h3> <p>libvmi 库提供了对正在运行中的底层虚拟机的运行细节进行监视的功能。监视的功能是由观察内存细节，陷入硬件事件和读取 CPU 寄存器来完成的。这种方式被称作虚拟机自省 (virtual machine introspection)。</p> <h3 id="实验步骤">实验步骤</h3> <p>本实验使用 ubuntu20.04 进行安装。</p> <p>仓库地址： <a href="https://github.com/libvmi/libvmi" rel="external nofollow noopener" target="_blank">libvmi/libvmi: The official home of the LibVMI project is at https://github.com/libvmi/libvmi.</a></p> <p>安装文档： <a href="https://kvm-vmi.github.io/kvm-vmi/master/setup.html" rel="external nofollow noopener" target="_blank">Setup — KVM-VMI 0.1 documentation</a></p> <p><strong>注意事项：</strong></p> <p>（1）根据 Option 2: Bare-metal setup 一节的内容安装。 （2）注意 KVM-VMI/kvm-vmi 中有较多的 submodule，若不使用安装文档中提供的带 –recursive 参数的下载命令，则需要手动补全这些 submodule，以免后续编译出错。</p> <ul> <li>安装KVM-VMI</li> </ul> <p>根据文档安装。</p> <p>注意事项：</p> <p>（1）KVM-VMI需要用kvmi-v7分支。</p> <p>（2）在make之前需要额外执行以下指令（相关issue： <a href="https://github.com/KVM-VMI/kvm/issues/57" rel="external nofollow noopener" target="_blank">Compile Failure: kvm-vmi/kvm/tools/objtool/.fixdep.o.cmd:1: *** Missing separator. Stop. · Issue #57 · KVM-VMI/kvm (github.com)</a> ）：</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  make distclean
+  make olddefconfig
+  ./scripts/config <span class="nt">--enable</span> KVM
+  ./scripts/config <span class="nt">--enable</span> KVM_INTEL
+  ./scripts/config <span class="nt">--enable</span> KVM_AMD
+  ./scripts/config <span class="nt">--enable</span> KVM_INTROSPECTION
+  ./scripts/config <span class="nt">--disable</span> TRANSPARENT_HUGEPAGE
+  ./scripts/config <span class="nt">--enable</span> REMOTE_MAPPING
+  ./scripts/config <span class="nt">--disable</span> SYSTEM_TRUSTED_KEYS
+  ./scripts/config <span class="nt">--disable</span> SYSTEM_REVOCATION_KEYS
+</code></pre></div></div> <ul> <li>安装QEMU</li> </ul> <p>根据文档安装。</p> <p>注意事项：</p> <p>（1）需要关闭apparmor（或者修改其配置）：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sudo service apparmor stop
+</code></pre></div></div> <ul> <li>在虚拟机中添加qemu指令</li> </ul> <p>根据文档添加即可。</p> <p>其中 http://libvirt.org/schemas/domain/qemu/1.0 这个网址为空，访问不到内容，具体说明在 <a href="https://libvirt.org/drvqemu.html#pass-through-of-arbitrary-qemu-commands" rel="external nofollow noopener" target="_blank">libvirt: QEMU/KVM/HVF hypervisor driver</a> 中，按照文档添加即可，无需担心。</p> <ul> <li>安装libkvmi</li> </ul> <p>根据文档安装即可。</p> <ul> <li>安装LibVMI</li> </ul> <p>根据文档安装即可。</p> <h2 id="应用-libvmi-的示例程序获取虚拟机信息">应用 libvmi 的示例程序获取虚拟机信息</h2> <p><strong>1） 打印 Windows 内核的 GUID 和 PE_HEADER；2）拦截并显示 CR3 事件；3）打印虚拟机中运行的进程列表。</strong></p> <h3 id="实验步骤-1">实验步骤</h3> <p>先将 kvm-vmi/libvmi/etc/libvmi-example.conf 复制到 /etc/libvmi.conf，然后将虚拟机名字改为其中对应的名字。这里我们使用 Windows7 虚拟机（32位），所以就将虚拟机名字改为 win7，与配置文件对应（修改配置文件使其与虚拟机名字对应亦可）：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>win7 {
+    ostype      = "Windows";
+    win_pdbase  = 0x18;
+    win_pid     = 0xb4;
+    win_tasks   = 0xb8;
+    win_pname   = 0x16c;
+}
+</code></pre></div></div> <ul> <li>1）打印 Windows 内核的 GUID 和 PE_HEADER</li> </ul> <p>使用 example 中的示例程序：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/vmi-win-guid name win7 /tmp/introspector 
+Windows Kernel found @ 0x3c14000
+	Version: 32-bit Windows 7
+	PE GUID: 4ce78a09412000
+	PDB GUID: 684da42a30cc450f81c535b4d18944b12
+	Kernel filename: ntkrpamp.pdb
+	Multi-processor with PAE (version 5.0 and higher)
+	Signature: 17744.
+	Machine: 332.
+	# of sections: 22.
+	# of symbols: 0.
+	Timestamp: 1290242569.
+	Characteristics: 290.
+	Optional header size: 224.
+	Optional header type: 0x10b
+	Section 1: .text
+	Section 2: _PAGELK
+	Section 3: POOLMI
+	Section 4: POOLCODE
+	Section 5: .data
+	Section 6: ALMOSTRO
+	Section 7: SPINLOCK
+	Section 8: PAGE
+	Section 9: PAGELK
+	Section 10: PAGEKD
+	Section 11: PAGEVRFY
+	Section 12: PAGEHDLS
+	Section 13: PAGEBGFX
+	Section 14: PAGEVRFB
+	Section 15: .edata
+	Section 16: PAGEDATA
+	Section 17: PAGEKDD
+	Section 18: PAGEVRFC
+	Section 19: PAGEVRFD
+	Section 20: INIT
+	Section 21: .rsrc
+	Section 22: .reloc
+</code></pre></div></div> <ul> <li>2）拦截并显示 CR3 事件</li> </ul> <p>使用 example 中的示例程序：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/cr3-event-example win7 /tmp/introspector 
+Waiting for events...
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x185000
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x185000
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x185000
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x7ee0d480
+......
+</code></pre></div></div> <ul> <li>3）打印虚拟机中运行的进程列表</li> </ul> <p>使用 example 中的示例程序：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/vmi-process-list -n win7 -s /tmp/introspector
+LibVMI Suggestion: set win_ntoskrnl=0x3c14000 in libvmi.conf for faster startup.
+LibVMI Suggestion: set win_kdbg=0x12ac28 in libvmi.conf for faster startup.
+LibVMI Suggestion: set win_kdvb=0x83d3ec28 in libvmi.conf for faster startup.
+Process listing for VM win7 (id=4)
+[    4] System (struct addr:85c3bc78)
+[  224] smss.exe (struct addr:975deae0)
+[  304] csrss.exe (struct addr:86d40768)
+[  352] wininit.exe (struct addr:92c8dd40)
+[  360] csrss.exe (struct addr:86d46030)
+[  400] winlogon.exe (struct addr:85cad420)
+[  444] services.exe (struct addr:86dca5e8)
+[  452] lsass.exe (struct addr:86e124e0)
+[  460] lsm.exe (struct addr:86e14828)
+[  564] svchost.exe (struct addr:86e47180)
+[  632] svchost.exe (struct addr:86e5c780)
+[  684] svchost.exe (struct addr:86e68568)
+[  808] svchost.exe (struct addr:86e35a58)
+[  848] svchost.exe (struct addr:86eb0030)
+[  912] audiodg.exe (struct addr:86ebf500)
+[  964] svchost.exe (struct addr:86ece030)
+[ 1080] svchost.exe (struct addr:86ef2030)
+[ 1200] dwm.exe (struct addr:86f26030)
+[ 1212] explorer.exe (struct addr:86f289f0)
+[ 1256] spoolsv.exe (struct addr:86f34030)
+[ 1296] svchost.exe (struct addr:86f51d40)
+[ 1308] taskhost.exe (struct addr:86f59868)
+[ 1428] svchost.exe (struct addr:86fa8030)
+[ 1824] rundll32.exe (struct addr:8703cb18)
+[ 1844] rundll32.exe (struct addr:8703ed40)
+[ 1864] rundll32.exe (struct addr:870412e8)
+[  660] SearchIndexer. (struct addr:870c8958)
+[ 1232] SearchProtocol (struct addr:870efb88)
+[ 1412] SearchFilterHo (struct addr:87106c70)
+[ 1288] wmpnetwk.exe (struct addr:87116cb0)
+</code></pre></div></div> <h2 id="调用libvmi的接口实现进程信息获取">调用LibVMI的接口实现进程信息获取</h2> <p>**1）修改示例程序中的 cr3-event-example.c；2）修改 示例程序中的 process-list.c，根据需要获取进程、线程信息。 ** libvmi 的 api 文档：https://libvmi.com/api/</p> <h3 id="实验步骤-2">实验步骤</h3> <p>我们来看看有哪些事件支持被监控：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// libvmi/events.h</span>
+
+<span class="cp">#define VMI_EVENT_INVALID           0
+#define VMI_EVENT_MEMORY            1   </span><span class="cm">/**&lt; Read/write/execute on a region of memory */</span><span class="cp">
+#define VMI_EVENT_REGISTER          2   </span><span class="cm">/**&lt; Read/write of a specific register */</span><span class="cp">
+#define VMI_EVENT_SINGLESTEP        3   </span><span class="cm">/**&lt; Instructions being executed on a set of VCPUs */</span><span class="cp">
+#define VMI_EVENT_INTERRUPT         4   </span><span class="cm">/**&lt; Interrupts being delivered */</span><span class="cp">
+#define VMI_EVENT_GUEST_REQUEST     5   </span><span class="cm">/**&lt; Guest-requested event */</span><span class="cp">
+#define VMI_EVENT_CPUID             6   </span><span class="cm">/**&lt; CPUID event */</span><span class="cp">
+#define VMI_EVENT_DEBUG_EXCEPTION   7   </span><span class="cm">/**&lt; Debug exception event */</span><span class="cp">
+#define VMI_EVENT_PRIVILEGED_CALL   8   </span><span class="cm">/**&lt; Privileged call (ie. SMC on ARM) */</span><span class="cp">
+#define VMI_EVENT_DESCRIPTOR_ACCESS 9   </span><span class="cm">/**&lt; A descriptor table register was accessed */</span><span class="cp">
+#define VMI_EVENT_FAILED_EMULATION  10  </span><span class="cm">/**&lt; Emulation failed when requested by VMI_EVENT_RESPONSE_EMULATE */</span><span class="cp">
+#define VMI_EVENT_DOMAIN_WATCH      11  </span><span class="cm">/**&lt; Watch create/destroy events */</span><span class="cp">
+</span></code></pre></div></div> <ul> <li>1）修改示例程序中的 cr3-event-example.c</li> </ul> <p>来看看 vmi_event 中包含了什么，我们可以从中选择想要监控的信息打印出来：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// libvmi/events.h</span>
+
+<span class="k">struct</span> <span class="n">vmi_event</span> <span class="p">{</span>
+    <span class="cm">/* CONST IN */</span>
+    <span class="kt">uint32_t</span> <span class="n">version</span><span class="p">;</span> <span class="cm">/**&lt; User should set it to VMI_EVENTS_VERSION */</span>
+
+    <span class="cm">/* CONST IN */</span>
+    <span class="n">vmi_event_type_t</span> <span class="n">type</span><span class="p">;</span>  <span class="cm">/**&lt; The specific type of event */</span>
+
+    <span class="cm">/**
+     * IN/OUT/RESPONSE
+     *
+     * The VMM maintained SLAT ID. Can be specified when registering mem_event (IN).
+     * On an event report (OUT) specifies the active SLAT ID on the vCPU.
+     * Iff VMI_EVENT_RESPONSE_SLAT_ID is set (RESPONSE), switch the vCPU to this VMM pagetable ID.
+     *
+     * Note: on Xen this corresponds to the altp2m_idx.
+     */</span>
+    <span class="kt">uint16_t</span> <span class="n">slat_id</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * RESPONSE
+     *
+     * The VMM should switch to this SLAT ID on the occurance of the next event.
+     * Iff VMI_EVENT_RESPONSE_NEXT_SLAT_ID is set.
+     *
+     * Note: on Xen this corresponds to the altp2m_idx and it also enables MTF singlestepping.
+     *  The altp2m switch automatically happens in the singlestep handler in Xen after a single
+     *  instruction is executed.
+     */</span>
+    <span class="kt">uint16_t</span> <span class="n">next_slat_id</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * An open-ended mechanism allowing a library user to
+     *  associate external data to the event.
+     * Metadata assigned to this pointer at any time (prior to
+     *  or following registration) is delivered to the callback,
+     *  for each matching event. The callback is also free to
+     *  modify in any way. The library user assumes all memory
+     *  management for this referenced data.
+     */</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * The callback function that is invoked when the relevant is observed.
+     */</span>
+    <span class="n">event_callback_t</span> <span class="n">callback</span><span class="p">;</span>
+
+    <span class="cm">/* OUT */</span>
+    <span class="kt">uint32_t</span> <span class="n">vcpu_id</span><span class="p">;</span> <span class="cm">/**&lt; The VCPU relative to which the event occurred. */</span>
+
+    <span class="cm">/**
+     * Reserved for future use
+     */</span>
+    <span class="kt">uint32_t</span> <span class="n">_reserved</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+
+    <span class="k">union</span> <span class="p">{</span>
+        <span class="n">reg_event_t</span> <span class="n">reg_event</span><span class="p">;</span>
+        <span class="n">mem_access_event_t</span> <span class="n">mem_event</span><span class="p">;</span>
+        <span class="n">single_step_event_t</span> <span class="n">ss_event</span><span class="p">;</span>
+        <span class="n">interrupt_event_t</span> <span class="n">interrupt_event</span><span class="p">;</span>
+        <span class="n">privcall_event_t</span> <span class="n">privcall_event</span><span class="p">;</span>
+        <span class="n">cpuid_event_t</span> <span class="n">cpuid_event</span><span class="p">;</span>
+        <span class="n">debug_event_t</span> <span class="n">debug_event</span><span class="p">;</span>
+        <span class="n">descriptor_event_t</span> <span class="n">descriptor_event</span><span class="p">;</span>
+        <span class="n">watch_domain_event_t</span> <span class="n">watch_event</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="cm">/*
+     * Note that the following pointers assume compiler compatibility
+     * ie. if you compiled a 32-bit version of LibVMI it will be
+     * incompatable with 64-bit tools and vice verse.
+     */</span>
+    <span class="k">union</span> <span class="p">{</span>
+        <span class="cm">/**
+         * OUT
+         *
+         * Snapshot of some VCPU registers when the event occurred
+         */</span>
+        <span class="k">union</span> <span class="p">{</span>
+            <span class="n">x86_registers_t</span> <span class="o">*</span><span class="n">x86_regs</span><span class="p">;</span>
+            <span class="n">arm_registers_t</span> <span class="o">*</span><span class="n">arm_regs</span><span class="p">;</span>
+        <span class="p">};</span>
+
+        <span class="cm">/**
+         * RESPONSE
+         *
+         * Read data to be sent back with VMI_EVENT_RESPONSE_SET_EMUL_READ_DATA
+         */</span>
+        <span class="n">emul_read_t</span> <span class="o">*</span><span class="n">emul_read</span><span class="p">;</span>
+
+        <span class="cm">/**
+         * RESPONSE
+         *
+         * Instruction buffer to be sent back with VMI_EVENT_RESPONSE_SET_EMUL_INSN
+         */</span>
+        <span class="n">emul_insn_t</span> <span class="o">*</span><span class="n">emul_insn</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>因为我们这里选择了监控寄存器，所以再来看看 reg_event_t 中包含什么：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// libvmi/events.h</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="cm">/**
+     * CONST IN
+     *
+     * Register for which write event is configured.
+     * Hypervisors offering register events tend to
+     *  have a limited number available for monitoring.
+     * These registers tend to be those defined as
+     * 'sensitive register instructions' by Popek and
+     *  Goldberg, meaning that the registers trigger
+     *  a VMEXIT, trap, or equivalent.
+     *
+     * Note for MSR events on Xen: up to Xen 4.7 only MSR_ALL is supported.
+     *  Starting with Xen 4.8 the user has the option to subscribe to specific
+     *  MSR events, or to continue using MSR_ALL. However, in this case MSR_ALL
+     *  only corresponds to common MSRs that are defined by LibVMI in libvmi.h.
+     *  To subscribe to MSR events that are NOT defined by LibVMI, the user can specify
+     *  MSR_UNDEFINED here and then set the specific MSR index in the 'msr' field
+     *  below.
+     */</span>
+    <span class="n">reg_t</span> <span class="n">reg</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * Event filter: callback triggers IFF register==&lt;equal&gt;
+     */</span>
+    <span class="n">reg_t</span> <span class="n">equal</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * IFF set to 1, events are delivered asynchronously and
+     *  without pausing the originating VCPU
+     * Default : 0. (i.e., VCPU is paused at time of event delivery).
+     */</span>
+    <span class="kt">uint8_t</span> <span class="n">async</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * IFF set to 1, events are only delivered if the written
+     *  value differs from the previously held value.
+     * Default : 0. (i.e., All write events are delivered).
+     */</span>
+    <span class="kt">uint8_t</span> <span class="n">onchange</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * Type of register event being monitored.
+     * Hypervisors offering register events do so only for those that trigger a
+     *  VMEXIT or similar trap. This predominantly means that only write events
+     *  are supported by the corresponding LibVMI driver
+     */</span>
+    <span class="n">vmi_reg_access_t</span> <span class="n">in_access</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * OUT
+     *
+     * Type of register access that triggered the event
+     */</span>
+    <span class="n">vmi_reg_access_t</span> <span class="n">out_access</span><span class="p">;</span>
+
+    <span class="kt">uint32_t</span> <span class="n">_pad</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * OUT
+     *
+     * Register value read or written
+     */</span>
+    <span class="n">reg_t</span> <span class="n">value</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * OUT
+     *
+     * Previous value of register (only for CR0/CR3/CR4/MSR)
+     */</span>
+    <span class="n">reg_t</span> <span class="n">previous</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN/OUT
+     *
+     * MSR register operations only
+     *
+     * CONST IN: Starting from Xen 4.8 the user can use this field to specify an
+     *  MSR index to subscribe to when the MSR is not formally defined by LibVMI.
+     *
+     * OUT: holds the specific MSR for which the event occurred
+     *  when the user registered with MSR_ALL.
+     * Unused for other register event types.
+     */</span>
+    <span class="kt">uint32_t</span> <span class="n">msr</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">reg_event_t</span><span class="p">;</span>
+</code></pre></div></div> <p>选择其中一些感兴趣的数据，并修改 call back 函数：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// cr3-event-example.c</span>
+
+<span class="p">...</span>
+
+<span class="n">event_response_t</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">vmi_instance_t</span> <span class="n">vmi</span><span class="p">,</span> <span class="n">vmi_event_t</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">vmi</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"CR3 write happened: Value=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">reg_event</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">vcpu_id=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">vcpu_id</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">rbx=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">x86_regs</span><span class="o">-&gt;</span><span class="n">rbx</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">cr0=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">x86_regs</span><span class="o">-&gt;</span><span class="n">cr0</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">previous CR3 value=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">reg_event</span><span class="p">.</span><span class="n">previous</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">VMI_EVENT_RESPONSE_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="p">...</span>
+    <span class="n">vmi_event_t</span> <span class="n">my_event</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">VMI_EVENTS_VERSION</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">VMI_EVENT_REGISTER</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">my_callback</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">reg_event</span><span class="p">.</span><span class="n">reg</span> <span class="o">=</span> <span class="n">CR3</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">reg_event</span><span class="p">.</span><span class="n">in_access</span> <span class="o">=</span> <span class="n">VMI_REGACCESS_W</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>重新 make，然后运行：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/cr3-event-example win7 /tmp/introspector
+Waiting for events...
+CR3 write happened: Value=0x7f9740a0
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x185000
+CR3 write happened: Value=0x185000
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x7f9740a0
+CR3 write happened: Value=0x7f9740a0
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x185000
+CR3 write happened: Value=0x185000
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x7f9740a0
+CR3 write happened: Value=0x7f9740a0
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x185000
+......
+</code></pre></div></div> <ul> <li>2）修改 process-list.c</li> </ul> <p>在windows中，EPROCESS 结构属于内核的执行体层，包含了进程的资源相关信息诸如句柄表、虚拟内存、安全、调试、异常、创建信息、I/O转移统计以及进程计时等。32位 win7 系统 EPROCESS 结构如下：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kd&gt; dt _EPROCESS
+ntdll!_EPROCESS
+   +0x000 Pcb              : _KPROCESS
+   +0x098 ProcessLock      : _EX_PUSH_LOCK
+   +0x0a0 CreateTime       : _LARGE_INTEGER
+   +0x0a8 ExitTime         : _LARGE_INTEGER
+   +0x0b0 RundownProtect   : _EX_RUNDOWN_REF
+   +0x0b4 UniqueProcessId  : Ptr32 Void
+   +0x0b8 ActiveProcessLinks : _LIST_ENTRY
+   +0x0c0 ProcessQuotaUsage : [2] Uint4B
+   +0x0c8 ProcessQuotaPeak : [2] Uint4B
+   +0x0d0 CommitCharge     : Uint4B
+   +0x0d4 QuotaBlock       : Ptr32 _EPROCESS_QUOTA_BLOCK
+   +0x0d8 CpuQuotaBlock    : Ptr32 _PS_CPU_QUOTA_BLOCK
+   +0x0dc PeakVirtualSize  : Uint4B
+   +0x0e0 VirtualSize      : Uint4B
+   +0x0e4 SessionProcessLinks : _LIST_ENTRY
+   +0x0ec DebugPort        : Ptr32 Void
+   +0x0f0 ExceptionPortData : Ptr32 Void
+   +0x0f0 ExceptionPortValue : Uint4B
+   +0x0f0 ExceptionPortState : Pos 0, 3 Bits
+   +0x0f4 ObjectTable      : Ptr32 _HANDLE_TABLE
+   +0x0f8 Token            : _EX_FAST_REF
+   +0x0fc WorkingSetPage   : Uint4B
+   +0x100 AddressCreationLock : _EX_PUSH_LOCK
+   +0x104 RotateInProgress : Ptr32 _ETHREAD
+   +0x108 ForkInProgress   : Ptr32 _ETHREAD
+   +0x10c HardwareTrigger  : Uint4B
+   +0x110 PhysicalVadRoot  : Ptr32 _MM_AVL_TABLE
+   +0x114 CloneRoot        : Ptr32 Void
+   +0x118 NumberOfPrivatePages : Uint4B
+   +0x11c NumberOfLockedPages : Uint4B
+   +0x120 Win32Process     : Ptr32 Void
+   +0x124 Job              : Ptr32 _EJOB
+   +0x128 SectionObject    : Ptr32 Void
+   +0x12c SectionBaseAddress : Ptr32 Void
+   +0x130 Cookie           : Uint4B
+   +0x134 Spare8           : Uint4B
+   +0x138 WorkingSetWatch  : Ptr32 _PAGEFAULT_HISTORY
+   +0x13c Win32WindowStation : Ptr32 Void
+   +0x140 InheritedFromUniqueProcessId : Ptr32 Void
+   +0x144 LdtInformation   : Ptr32 Void
+   +0x148 VdmObjects       : Ptr32 Void
+   +0x14c ConsoleHostProcess : Uint4B
+   +0x150 DeviceMap        : Ptr32 Void
+   +0x154 EtwDataSource    : Ptr32 Void
+   +0x158 FreeTebHint      : Ptr32 Void
+   +0x160 PageDirectoryPte : _HARDWARE_PTE_X86
+   +0x160 Filler           : Uint8B
+   +0x168 Session          : Ptr32 Void
+   +0x16c ImageFileName    : [15] UChar
+   +0x17b PriorityClass    : UChar
+   +0x17c JobLinks         : _LIST_ENTRY
+   +0x184 LockedPagesList  : Ptr32 Void
+   +0x188 ThreadListHead   : _LIST_ENTRY
+   ......
+</code></pre></div></div> <p>与 EPROCESS 对应，ETHREAD 结构记录了线程中相关的信息。32位 win7 系统 ETHREAD 结构如下：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kd&gt; dt _ETHREAD
+ntdll!_ETHREAD
+   +0x000 Tcb              : _KTHREAD
+   +0x200 CreateTime       : _LARGE_INTEGER
+   +0x208 ExitTime         : _LARGE_INTEGER
+   +0x208 KeyedWaitChain   : _LIST_ENTRY
+   +0x210 ExitStatus       : Int4B
+   +0x214 PostBlockList    : _LIST_ENTRY
+   +0x214 ForwardLinkShadow : Ptr32 Void
+   +0x218 StartAddress     : Ptr32 Void
+   +0x21c TerminationPort  : Ptr32 _TERMINATION_PORT
+   +0x21c ReaperLink       : Ptr32 _ETHREAD
+   +0x21c KeyedWaitValue   : Ptr32 Void
+   +0x220 ActiveTimerListLock : Uint4B
+   +0x224 ActiveTimerListHead : _LIST_ENTRY
+   +0x22c Cid              : _CLIENT_ID
+   ......
+</code></pre></div></div> <p>我们根据这些信息，修改 process-list.c：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="c1">// 添加变量</span>
+    <span class="n">vmi_pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ppid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">tasks_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pid_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pdbase_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">...</span>
+
+    <span class="cm">/* init the offset values */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">VMI_OS_LINUX</span> <span class="o">==</span> <span class="n">vmi_get_ostype</span><span class="p">(</span><span class="n">vmi</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"linux_tasks"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tasks_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"linux_name"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">name_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"linux_pid"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">VMI_OS_WINDOWS</span> <span class="o">==</span> <span class="n">vmi_get_ostype</span><span class="p">(</span><span class="n">vmi</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_tasks"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tasks_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_pname"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">name_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_pid"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="c1">// 添加获取win_pdbase的步骤</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_pdbase"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pdbase_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span> 
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">VMI_OS_FREEBSD</span> <span class="o">==</span> <span class="n">vmi_get_ostype</span><span class="p">(</span><span class="n">vmi</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">tasks_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"freebsd_name"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">name_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"freebsd_pid"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="p">...</span>
+        
+    <span class="cm">/* walk the task list */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">current_process</span> <span class="o">=</span> <span class="n">cur_list_entry</span> <span class="o">-</span> <span class="n">tasks_offset</span><span class="p">;</span>
+
+        <span class="cm">/* Note: the task_struct that we are looking at has a lot of
+         * information.  However, the process name and id are burried
+         * nice and deep.  Instead of doing something sane like mapping
+         * this data to a task_struct, I'm just jumping to the location
+         * with the info that I want.  This helps to make the example
+         * code cleaner, if not more fragile.  In a real app, you'd
+         * want to do this a little more robust :-)  See
+         * include/linux/sched.h for mode details */</span>
+
+        <span class="cm">/* NOTE: _EPROCESS.UniqueProcessId is a really VOID*, but is never &gt; 32 bits,
+         * so this is safe enough for x64 Windows for example purposes */</span>
+        <span class="n">vmi_read_32_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="n">pid_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
+
+        <span class="n">procname</span> <span class="o">=</span> <span class="n">vmi_read_str_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="n">name_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        
+        <span class="c1">// 根据偏移获取各种进程、线程信息</span>
+        <span class="kt">uint32_t</span> <span class="n">pdbase</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vmi_read_32_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="n">pdbase_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">pdbase</span><span class="p">);</span>
+        
+        <span class="n">vmi_read_32_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="mh">0x140</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ppid</span><span class="p">);</span> 
+        
+        <span class="n">vmi_read_addr_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="mh">0x188</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">addr_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ThreadListHead</span><span class="p">);</span> 
+        <span class="n">ThreadListHead</span> <span class="o">=</span> <span class="n">ThreadListHead</span> <span class="o">-</span> <span class="mh">0x268</span><span class="p">;</span>
+        
+        <span class="kt">int64_t</span> <span class="n">CreateTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vmi_read_64_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">ThreadListHead</span> <span class="o">+</span> <span class="mh">0x200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CreateTime</span><span class="p">);</span> 
+        
+        <span class="kt">uint32_t</span> <span class="n">Cid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vmi_read_64_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">ThreadListHead</span> <span class="o">+</span> <span class="mh">0x22c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">Cid</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">procname</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to find procname</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/* print out the process name */</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">pid</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">procname</span><span class="p">,</span> <span class="s">"svchost.exe"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+        	<span class="n">printf</span><span class="p">(</span><span class="s">"[%5d] %s (struct addr:%"</span><span class="n">PRIx64</span><span class="s">"), pdbase:%"</span><span class="n">PRIx64</span><span class="s">", ppid:%5d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">procname</span><span class="p">,</span> <span class="n">current_process</span><span class="p">,</span> <span class="n">pdbase</span><span class="p">,</span> <span class="n">ppid</span><span class="p">);</span>
+            <span class="c1">// 添加我们需要的输出语句</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">"ThreadListHead:%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ThreadListHead</span><span class="p">);</span>
+        	<span class="n">printf</span><span class="p">(</span><span class="s">"thread createtime:%ld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">CreateTime</span><span class="p">);</span>
+        	<span class="n">printf</span><span class="p">(</span><span class="s">"Cid:%5d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">Cid</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>输出结果：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span>  <span class="n">build</span> <span class="n">git</span><span class="o">:</span><span class="p">(</span><span class="mi">5882</span><span class="n">bc2</span><span class="p">)</span> <span class="err">✗</span> <span class="n">examples</span><span class="o">/</span><span class="n">vmi</span><span class="o">-</span><span class="n">process</span><span class="o">-</span><span class="n">list</span> <span class="o">-</span><span class="n">n</span> <span class="n">win7</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">introspector</span>
+<span class="n">LibVMI</span> <span class="n">Suggestion</span><span class="o">:</span> <span class="n">set</span> <span class="n">win_ntoskrnl</span><span class="o">=</span><span class="mh">0x3c14000</span> <span class="n">in</span> <span class="n">libvmi</span><span class="p">.</span><span class="n">conf</span> <span class="k">for</span> <span class="n">faster</span> <span class="n">startup</span><span class="p">.</span>
+<span class="n">LibVMI</span> <span class="n">Suggestion</span><span class="o">:</span> <span class="n">set</span> <span class="n">win_kdbg</span><span class="o">=</span><span class="mh">0x12ac28</span> <span class="n">in</span> <span class="n">libvmi</span><span class="p">.</span><span class="n">conf</span> <span class="k">for</span> <span class="n">faster</span> <span class="n">startup</span><span class="p">.</span>
+<span class="n">LibVMI</span> <span class="n">Suggestion</span><span class="o">:</span> <span class="n">set</span> <span class="n">win_kdvb</span><span class="o">=</span><span class="mh">0x83d3ec28</span> <span class="n">in</span> <span class="n">libvmi</span><span class="p">.</span><span class="n">conf</span> <span class="k">for</span> <span class="n">faster</span> <span class="n">startup</span><span class="p">.</span>
+<span class="n">Process</span> <span class="n">listing</span> <span class="k">for</span> <span class="n">VM</span> <span class="n">win7</span> <span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">[</span>  <span class="mi">224</span><span class="p">]</span> <span class="n">smss</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">975</span><span class="n">deae0</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d020</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>    <span class="mi">4</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">975</span><span class="n">de808</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839485781250</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">224</span>
+<span class="p">[</span>  <span class="mi">304</span><span class="p">]</span> <span class="n">csrss</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">d40768</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d060</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">296</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">85</span><span class="n">cc87b0</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839501718750</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">304</span>
+<span class="p">[</span>  <span class="mi">352</span><span class="p">]</span> <span class="n">wininit</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">92</span><span class="n">c8dd40</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d0a0</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">296</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">85</span><span class="n">cb3770</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839501875000</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="p">[</span>  <span class="mi">360</span><span class="p">]</span> <span class="n">csrss</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">d46030</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d040</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">344</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">85</span><span class="n">cad828</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839502968750</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">360</span>
+<span class="p">[</span>  <span class="mi">400</span><span class="p">]</span> <span class="n">winlogon</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">85</span><span class="n">cad420</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d0c0</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">344</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">86</span><span class="n">c07d48</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839503125000</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">400</span>
+<span class="p">[</span>  <span class="mi">444</span><span class="p">]</span> <span class="n">services</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">dca5e8</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d080</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mf">86e0</span><span class="n">f030</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839506718750</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">444</span>
+<span class="p">[</span>  <span class="mi">452</span><span class="p">]</span> <span class="n">lsass</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mf">86e124</span><span class="n">e0</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d0e0</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mf">86e20030</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839507656250</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">452</span>
+<span class="p">[</span>  <span class="mi">460</span><span class="p">]</span> <span class="n">lsm</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mf">86e14828</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d100</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mf">86e144</span><span class="n">a0</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839507187500</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">460</span>
+<span class="p">[</span> <span class="mi">1200</span><span class="p">]</span> <span class="n">dwm</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">f26030</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d280</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">808</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">86</span><span class="n">f26658</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839526718750</span>
+<span class="n">Cid</span><span class="o">:</span> <span class="mi">1200</span>
+<span class="p">......</span>
+</code></pre></div></div> <p>读者可以根据示例自行添加需要获取的信息。上述两个结构的具体信息读者可以自行查阅或自行调试获取。</p> <h2 id="参考63小节获取并输出linux内核系统调用表sys_call_table的内容">参考6.3小节，获取并输出Linux内核系统调用表sys_call_table的内容</h2> <h3 id="背景知识-1">背景知识</h3> <p>符号（Symbols），就是kernel中的变量（Variable Name）或函数名称（Function Name）。在Linux中，System.map文件是内核符号名称及其对应内存地址的映射表。它在内核构建过程中创建，并位于内核源代码树的根目录中（通常是/linux/System.map）。System.map文件由内核的崩溃转储分析工具和一些性能分析工具使用，以将内核地址映射到它们对应的符号名称。</p> <h3 id="实验步骤-3">实验步骤</h3> <p>这一个实验我们以 ubuntu14.04 为例。</p> <p>安装 ubuntu14.04 系统以及修改虚拟机 XML 文件的过程不在此赘述。</p> <p>虚拟机安装完成后，我们将它的 System.map 文件复制到宿主机 boot 目录下（其他路径也可以），检查一下 sys_call_table 符号是否存在：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  libvmi git:(5882bc2) ✗ cat /boot/System.map-3.13.0-24-generic | grep sys_call_table
+ffffffff81801400 R sys_call_table
+ffffffff81809cc0 R ia32_sys_call_table
+</code></pre></div></div> <p>然后修改 /etc/libvmi.conf 文件：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu14.04 {
+    sysmap      = "/boot/System.map-3.13.0-24-generic";
+    ostype      = "Linux";
+}
+</code></pre></div></div> <p>接着用 map-symbol 程序查看这一块内存的内容：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  libvmi git:(5882bc2) ✗ build/examples/map-symbol ubuntu14.04 sys_call_table /tmp/introspector 
+00000000|  80 9e 1b 81 ff ff ff ff  20 9f 1b 81 ff ff ff ff   ........ .......
+00000010|  b0 89 1b 81 ff ff ff ff  20 6b 1b 81 ff ff ff ff   ........ k......
+00000020|  90 e9 1b 81 ff ff ff ff  c0 e9 1b 81 ff ff ff ff   ................
+00000030|  a0 e9 1b 81 ff ff ff ff  10 e9 1c 81 ff ff ff ff   ................
+00000040|  00 90 1b 81 ff ff ff ff  30 86 01 81 ff ff ff ff   ........0.......
+00000050|  d0 10 18 81 ff ff ff ff  20 fe 17 81 ff ff ff ff   ........ .......
+00000060|  e0 f2 17 81 ff ff ff ff  a0 bb 07 81 ff ff ff ff   ................
+00000070|  30 a9 07 81 ff ff ff ff  10 6a 72 81 ff ff ff ff   0........jr.....
+00000080|  c0 c8 1c 81 ff ff ff ff  c0 9f 1b 81 ff ff ff ff   ................
+00000090|  70 a0 1b 81 ff ff ff ff  10 a5 1b 81 ff ff ff ff   p...............
+000000a0|  d0 a5 1b 81 ff ff ff ff  60 7b 1b 81 ff ff ff ff   ........`{......
+000000b0|  f0 2d 1c 81 ff ff ff ff  30 e0 1c 81 ff ff ff ff   .-......0.......
+000000c0|  80 9a 09 81 ff ff ff ff  e0 1d 18 81 ff ff ff ff   ................
+000000d0|  f0 22 18 81 ff ff ff ff  60 ab 17 81 ff ff ff ff   ."......`.......
+000000e0|  a0 35 17 81 ff ff ff ff  80 fa 2b 81 ff ff ff ff   .5........+.....
+000000f0|  60 02 2c 81 ff ff ff ff  e0 fa 2b 81 ff ff ff ff   `.,.......+.....
+00000100|  c0 76 1d 81 ff ff ff ff  80 75 1d 81 ff ff ff ff   .v.......u......
+00000110|  40 be 07 81 ff ff ff ff  f0 f4 08 81 ff ff ff ff   @...............
+00000120|  40 ad 06 81 ff ff ff ff  60 62 07 81 ff ff ff ff   @.......`b......
+00000130|  30 b1 06 81 ff ff ff ff  b0 e3 07 81 ff ff ff ff   0...............
+00000140|  d0 ac 1b 81 ff ff ff ff  a0 2d 60 81 ff ff ff ff   .........-`.....
+00000150|  60 31 60 81 ff ff ff ff  40 31 60 81 ff ff ff ff   `1`.....@1`.....
+......
+</code></pre></div></div> <h1 id="实验二嵌套虚拟化环境实验">实验二：嵌套虚拟化环境实验</h1> <h2 id="配置并重新编译kvm虚拟化环境开启嵌套虚拟化模式运行启动嵌套虚拟机">配置并重新编译KVM虚拟化环境，开启嵌套虚拟化模式，运行启动嵌套虚拟机</h2> <h3 id="实验步骤-4">实验步骤</h3> <p>检查L0 KVM的嵌套虚拟化支持是否开启：</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /sys/module/kvm_intel/parameters/nested
+</code></pre></div></div> <p>如果显示<code class="language-plaintext highlighter-rouge">Y</code>说明已经开启。</p> <p>创建、启动L1、L2虚拟机的步骤详见：<a href="https://gitee.com/silver-zhou/virtualization_book/tree/v-1.0/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AE%9E%E9%AA%8C" rel="external nofollow noopener" target="_blank">第一章实验</a></p> <p><strong>注意：</strong>使用<code class="language-plaintext highlighter-rouge">qemu-system-x86_64</code>命令启动虚拟机时，应加入<code class="language-plaintext highlighter-rouge">-cpu host</code>参数，以便上层vCPU继承下层CPU（或vCPU）的VMX特性。</p> <h2 id="在l0层kvm中捕获l1层kvm对嵌套虚拟机vmcs的写操作">在L0层KVM中捕获L1层KVM对嵌套虚拟机VMCS的写操作</h2> <h3 id="实验思路">实验思路</h3> <p>在KVM嵌套虚拟化实现中，L1、L2虚拟机实际都由L0物理机启动。</p> <p>但在逻辑上（即从L1的视角），L2虚拟机由L1虚拟机中的KVM维护、创建、启动。</p> <p>因此，L0、L1分别维护了如下VMCS数据结构：</p> <table> <thead> <tr> <th>VMCS名称</th> <th>实际维护者</th> <th>逻辑上的host</th> <th>逻辑上的guest</th> </tr> </thead> <tbody> <tr> <td>vmcs01</td> <td>L0</td> <td>L0</td> <td>L1</td> </tr> <tr> <td>vmcs12</td> <td>L1</td> <td>L1</td> <td>L2</td> </tr> <tr> <td>vmcs02</td> <td>L0</td> <td>L0</td> <td>L2</td> </tr> <tr> <td>shadow_vmcs12</td> <td>L0</td> <td>L1</td> <td>L2</td> </tr> </tbody> </table> <p>当L2发生VM exit，需要进入L1 KVM处理，并返回L2，该过程步骤如下：</p> <ol> <li><strong>L2 VM exit，控制流进入L0 KVM</strong></li> <li>L0 KVM读取vmcs02数据，将guest部分内容更新至shadow_vmcs12</li> <li>L0 KVM将shadow_vmcs12推送至L1虚拟机中维护的vmcs12</li> <li><strong>L0 KVM切换VMCS到vmcs01，控制流进入L1 KVM</strong></li> <li><strong>L1 KVM识别到L2虚拟机的陷入并处理，继续执行L2虚拟机，该指令被L0捕获后，控制流回到L0KVM</strong></li> <li>L0 KVM从L1虚拟机中读取到已经被L1 KVM维护过的vmcs12，存入shadow_vmcs12</li> <li>L0 KVM将shadow_vmcs12中guest相关数据更新至vmcs02</li> <li><strong>L0 KVM切换VMCS到vmcs02，控制流回到L2虚拟机</strong></li> </ol> <p>因此，只需在L1处理L2 VM exit的前（步骤3、步骤4之间）后（步骤6、步骤7之间），对vmcs12分别进行读取、对比，即可捕获L1层KVM对嵌套虚拟机VMCS的写操作。</p> <p>其中，在L1处理L2 VM exit前（步骤3、步骤4之间）加入代码如下：</p> <pre><code class="language-C">record_vmcs12_data = vmcs12-&gt;guest_cr0;
+</code></pre> <p>在L1处理L2 VM exit后（步骤6、步骤7之间）加入代码如下：</p> <pre><code class="language-C">if (record_vmcs12_data != vmcs12-&gt;guest_cr0)
+{
+	printk("[cpt6-exp2] before L1 run, guest_cr0=%llx\n",record_vmcs12_data);
+	printk("[cpt6-exp2] after  L1 run, guest_cr0=%llx\n",vmcs12-&gt;guest_cr0);
+}
+</code></pre> <p>其中<code class="language-plaintext highlighter-rouge">record_vmcs12_data</code>为全局变量。</p> <h3 id="实验步骤-5">实验步骤</h3> <p>使用补丁文件<em>exp2/cpt6-exp2-kernel.patch</em>修改Linux内核源码，编译、安装：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make -j
+sudo rmmod kvm_intel
+sudo insmod kernel-source/arch/x86/kvm/kvm-intel.ko
+</code></pre></div></div> <p>依次启动L1、L2虚拟机</p> <p>打开dmesg可以看到L1 KVM对L2虚拟机CR0寄存器的修改，如图：</p> <p><img src="./assets/cpt6-exp2-result.png" alt="cpt6-exp2-result"></p> </div> </article> <div id="giscus_thread" style="max-width: 1600px; margin: 0 auto;"> <script>
       let giscusTheme = determineComputedTheme();
       let giscusAttributes = {
         src: 'https://giscus.app/client.js',
@@ -23,6 +642,6 @@
       let giscusScript = document.createElement('script');
       Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
       document.getElementById('giscus_thread').appendChild(giscusScript);
-    </script> <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025. 分布式与移动系统安全实验室. All rights reserved. Last updated: May 18, 2025. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+    </script> <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025. 分布式与移动系统安全实验室. All rights reserved. Last updated: May 19, 2025. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> </body> </html>

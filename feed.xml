@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="cn"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://dams.net.cn/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dams.net.cn/" rel="alternate" type="text/html" hreflang="cn"/><updated>2025-05-18T15:53:46+00:00</updated><id>https://dams.net.cn/feed.xml</id><title type="html">DAMS</title><entry><title type="html">第一章实验</title><link href="https://dams.net.cn/book/2025/lab1/" rel="alternate" type="text/html" title="第一章实验"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab1</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab1/"><![CDATA[<h1 id="实验一搭建-kvm-虚拟化平台">实验一：搭建 KVM 虚拟化平台</h1> <h2 id="安装-host-系统">安装 Host 系统</h2> <blockquote> <p>本小节为物理机安装 ubuntu 双系统说明，如采用 VMWare 等虚拟工作站方式作为运行环境可直接跳转下一小节。</p> </blockquote> <ul> <li> <p>Ubuntu 20.04 LTS 镜像</p> <ul> <li>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04/">清华源下载ubuntu-20.04.5-desktop-amd64.iso</a></li> <li>20.04自带内核版本为 Linux5.15，与本书研究对象一致。</li> </ul> </li> <li> <p>制作U盘启动盘</p> <p>MacOS 系统可采用 <code class="language-plaintext highlighter-rouge">dd</code> 命令将U盘制作成 ubuntu 系统启动盘（windows 系统可采用 Rufus 工具）。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diskutil list
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="cn"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://dams.net.cn/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dams.net.cn/" rel="alternate" type="text/html" hreflang="cn"/><updated>2025-05-19T05:19:35+00:00</updated><id>https://dams.net.cn/feed.xml</id><title type="html">DAMS</title><entry><title type="html">第一章实验：环境搭建</title><link href="https://dams.net.cn/book/2025/lab1/" rel="alternate" type="text/html" title="第一章实验：环境搭建"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab1</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab1/"><![CDATA[<h1 id="实验一搭建-kvm-虚拟化平台">实验一：搭建 KVM 虚拟化平台</h1> <h2 id="安装-host-系统">安装 Host 系统</h2> <blockquote> <p>本小节为物理机安装 ubuntu 双系统说明，如采用 VMWare 等虚拟工作站方式作为运行环境可直接跳转下一小节。</p> </blockquote> <ul> <li> <p>Ubuntu 20.04 LTS 镜像</p> <ul> <li>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04/">清华源下载ubuntu-20.04.5-desktop-amd64.iso</a></li> <li>20.04自带内核版本为 Linux5.15，与本书研究对象一致。</li> </ul> </li> <li> <p>制作U盘启动盘</p> <p>MacOS 系统可采用 <code class="language-plaintext highlighter-rouge">dd</code> 命令将U盘制作成 ubuntu 系统启动盘（windows 系统可采用 Rufus 工具）。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diskutil list
 /dev/disk0 <span class="o">(</span>internal, physical<span class="o">)</span>:
    <span class="c">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      GUID_partition_scheme                        <span class="k">*</span>251.0 GB   disk0
@@ -129,7 +129,7 @@ which qemu-img
 </code></pre></div> </div> <p><code class="language-plaintext highlighter-rouge">dd</code> 命令用于生成虚拟块设备文件。<code class="language-plaintext highlighter-rouge">if</code> 参数告诉 <code class="language-plaintext highlighter-rouge">dd</code> 从哪个文件读取数据， <code class="language-plaintext highlighter-rouge">of</code> 参数表示读出的数据写入哪个文件中。 <code class="language-plaintext highlighter-rouge">/dev/zero</code> 是 Linux 提供的一个特殊的字符设备，其每次读取的结果都是二进制0，可用于生成空镜像文件。<code class="language-plaintext highlighter-rouge">bs=1M</code> 表示每一次读写1M数据，<code class="language-plaintext highlighter-rouge">count=40960</code>表示读写 40960 次，这样就指定了生成文件的大小为40G。</p> </li> </ul> <h2 id="启动虚拟机">启动虚拟机</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qemu-system-x86_64 <span class="nt">-cpu</span> host <span class="nt">-smp</span> 1 <span class="nt">-m</span> 2048 <span class="nt">--enable-kvm</span> guest.img <span class="nt">-cdrom</span> ubuntu.iso
 </code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">-cpu</code> 参数用于指定cpu类型和型号， <code class="language-plaintext highlighter-rouge">-smp</code> 参数用于cpu核数， <code class="language-plaintext highlighter-rouge">-m</code> 参数用于指定内存大小，<code class="language-plaintext highlighter-rouge">-cdrom</code> 参数用于指定要载入的镜像。</p> <h2 id="安装-gvncviewer-并连接虚拟机">安装 gvncviewer 并连接虚拟机</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>gvncviewer
 gvncviewer 127.0.0.1::5900 <span class="c"># 默认情况 QEMU 开启5900端口</span>
-</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">Ctrl+Alt+2</code> 切换到 QEMU 监视器窗口，可以执行 <code class="language-plaintext highlighter-rouge">info kvm</code> 命令来查看当前 QEMU 是否使用 KVM。<code class="language-plaintext highlighter-rouge">Ctrl+Alt+1</code> 切换回原窗口。</p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这篇文章主要介绍了如何搭建KVM虚拟化平台，包括安装Ubuntu Host系统、编译安装Linux内核、配置KVM支持、编译安装QEMU，以及如何创建和启动虚拟机。]]></summary></entry><entry><title type="html">第二章实验</title><link href="https://dams.net.cn/book/2025/lab2/" rel="alternate" type="text/html" title="第二章实验"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab2</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab2/"><![CDATA[<h1 id="实验一简易kvm虚拟机实例">实验一：简易KVM虚拟机实例</h1> <h2 id="背景知识">背景知识</h2> <p><strong><code class="language-plaintext highlighter-rouge">/dev/kvm</code> 设备</strong></p> <p><code class="language-plaintext highlighter-rouge">/dev/kvm</code> 是一个字符设备，KVM 通过该设备导出了一系列 ioctl 系统调用接口，QEMU 等用户层程序通过这些接口来控制虚拟机。KVM 的 ioctl 接口可以分为三类：</p> <ol> <li>系统全局的 ioctl，这类 ioctl 的作用对象是 KVM 模块，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_dev_ioctl</code>，功能包括获取 KVM 版本，创建 VM 等。</li> <li>虚拟机相关的 ioctl，这类 ioctl 的作用对象是 VM，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_vm_ioctl</code> ，功能包括设置 VM 内存，创建 VCPU 等。</li> <li>虚拟机 VCPU 相关的 ioctl，这类 ioctl 的作用对象是 VCPU，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_vcpu_ioctl</code> ，功能包括设置寄存器，VCPU运行等。</li> </ol> <h2 id="解决思路">解决思路</h2> <p>创建一个简易 KVM 虚拟机实例分为两大部分：</p> <ol> <li>实现一个简易的用户层 QEMU。</li> <li>实现一个简易的 guest 内核。</li> </ol> <h3 id="实现简易的用户层-qemu">实现简易的用户层 QEMU</h3> <p>本书的1.4.1章节中介绍了 KVM 虚拟机与 QEMU 的关系： KVM 的生命周期由 QEMU 管理和维护，一个 KVM 虚拟机可以理解为一个 QEMU 进程，虚拟机的一个 VCPU 对应 QEMU 进程中的一个线程。</p> <p>KVM 导出了一系列 IOCTL 接口供用户层创建、配置、启动虚拟机，典型的用户层软件是 QEMU ，但是从本质上来说，QEMU 和 KVM 可以不必相互依赖，本实验展示简易的用户层程序（后称为简易 QEMU）。</p> <p>该简易 QEMU 主要实现如下几个功能：</p> <ul> <li>创建虚拟机对象</li> <li>为虚拟机分配物理内存、加载 guest 二进制</li> <li>创建虚拟机 VCPU 对象</li> <li>设置 VCPU 的相关寄存器、将 VCPU 调度到物理 CPU 上运行</li> <li>处理 VM Exit 事件</li> </ul> <p><strong>创建虚拟机对象</strong></p> <p>首先打开 <code class="language-plaintext highlighter-rouge">/dev/kvm</code> 设备获取 KVM 模块的文件描述符 <code class="language-plaintext highlighter-rouge">dev_fd</code> ，通过 ioctl(KVM_GET_API_VERSION) 获取 KVM 的版本号，从而使用户层知道相关接口在内核是否有支持。</p> <p>再通过 ioctl(KVM_CREATE_VM) 创建一个虚拟机对象，该 ioctl 返回一个代表虚拟机的文件描述符 <code class="language-plaintext highlighter-rouge">vm_fd</code> ，之后可以通过 <code class="language-plaintext highlighter-rouge">vm_fd</code> 控制虚拟机的内存、VCPU 等。</p> <p><strong>为虚拟机分配物理内存、加载 guest 二进制</strong></p> <p>虚拟机的物理内存对应 QEMU 的进程地址空间，使用 <code class="language-plaintext highlighter-rouge">mmap</code> 分配一定大小的内存作为虚拟机物理内存，然后调用 ioctl(KVM_SET_USER_MEMORY_REGION) 为虚拟机指定一个内存条。接着将简易的 guest 二进制加载到该内存区域。</p> <p><strong>创建虚拟机 VCPU 对象</strong></p> <p>调用 ioctl(KVM_CREATE_VCPU) 创建虚拟机 VCPU 对象，该 ioctl 返回一个代表 VCPU 的文件描述符 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> ，之后通过 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> 控制虚拟机的运行等。</p> <p>虚拟机运行过程中用户层（简易QEMU）和内核层（KVM模块）之间的数据共享是通过 VCPU 维护的 <code class="language-plaintext highlighter-rouge">kvm_run</code> 数据结构来实现的。首先通过调用 ioctl(KVM_GET_VCPU_MMAP_SIZE) 得到该结构的大小，接着调用 <code class="language-plaintext highlighter-rouge">mmap</code> 为 <code class="language-plaintext highlighter-rouge">kvm_run</code> 分配空间。</p> <p><strong>设置 VCPU 的相关寄存器、将 VCPU 调度到物理 CPU 上运行</strong></p> <p>为了让虚拟机 VCPU 运行起来，需要设置 VCPU 的相关寄存器，其中段寄存器和控制寄存器等特殊寄存器存放在 <code class="language-plaintext highlighter-rouge">kvm_sregs</code> 中，通过 ioctl(KVM_GET_SREGS)、ioctl(KVM_SET_SREGS) 读取和修改，通用寄存器存放在 <code class="language-plaintext highlighter-rouge">kvm_regs</code> 中，通过 ioctl(KVM_SET_REGS) 修改。</p> <p>准备工作完毕，可以让虚拟机运行起来了，通常在一个死循环中对 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> 调用 ioctl(KVM_RUN)。KVM 内核模块在处理这个 ioctl 时会把 VCPU 调度到物理 CPU 上运行，遇到 KVM 无法处理的退出事件则会返回到此处，处理完之后再次进入循环调用 ioctl(KVM_RUN) 进入虚拟机。</p> <p><strong>处理 VM Exit 事件</strong></p> <p>内核 KVM 无法处理时，会将信息保存到 <code class="language-plaintext highlighter-rouge">kvm_run</code> 并 return 0，用户层则可以通过读取该共享内存得知虚拟机退出原因，进行相应的处理。本例包括 guest 向 I/O 端口写数据产生的 <code class="language-plaintext highlighter-rouge">KVM_EXIT_IO</code> 退出的处理、执行 HALT 指令等。</p> <h3 id="实现简易的-guest-内核">实现简易的 guest 内核</h3> <p>简易内核主要实现一些能触发 VM Exit 的操作，包括向 I/O 端口写数据、执行 HALT 指令。汇编文件如下</p> <pre><code class="language-assembly">// guest_test.S
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">Ctrl+Alt+2</code> 切换到 QEMU 监视器窗口，可以执行 <code class="language-plaintext highlighter-rouge">info kvm</code> 命令来查看当前 QEMU 是否使用 KVM。<code class="language-plaintext highlighter-rouge">Ctrl+Alt+1</code> 切换回原窗口。</p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[本章介绍了如何搭建KVM虚拟化平台，包括安装Ubuntu Host系统、编译安装Linux内核、配置KVM支持、编译安装QEMU，以及如何创建和启动虚拟机。]]></summary></entry><entry><title type="html">第二章实验：CPU虚拟化</title><link href="https://dams.net.cn/book/2025/lab2/" rel="alternate" type="text/html" title="第二章实验：CPU虚拟化"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab2</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab2/"><![CDATA[<h1 id="实验一简易kvm虚拟机实例">实验一：简易KVM虚拟机实例</h1> <h2 id="背景知识">背景知识</h2> <p><strong><code class="language-plaintext highlighter-rouge">/dev/kvm</code> 设备</strong></p> <p><code class="language-plaintext highlighter-rouge">/dev/kvm</code> 是一个字符设备，KVM 通过该设备导出了一系列 ioctl 系统调用接口，QEMU 等用户层程序通过这些接口来控制虚拟机。KVM 的 ioctl 接口可以分为三类：</p> <ol> <li>系统全局的 ioctl，这类 ioctl 的作用对象是 KVM 模块，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_dev_ioctl</code>，功能包括获取 KVM 版本，创建 VM 等。</li> <li>虚拟机相关的 ioctl，这类 ioctl 的作用对象是 VM，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_vm_ioctl</code> ，功能包括设置 VM 内存，创建 VCPU 等。</li> <li>虚拟机 VCPU 相关的 ioctl，这类 ioctl 的作用对象是 VCPU，对应内核处理函数入口为 <code class="language-plaintext highlighter-rouge">kvm_vcpu_ioctl</code> ，功能包括设置寄存器，VCPU运行等。</li> </ol> <h2 id="解决思路">解决思路</h2> <p>创建一个简易 KVM 虚拟机实例分为两大部分：</p> <ol> <li>实现一个简易的用户层 QEMU。</li> <li>实现一个简易的 guest 内核。</li> </ol> <h3 id="实现简易的用户层-qemu">实现简易的用户层 QEMU</h3> <p>本书的1.4.1章节中介绍了 KVM 虚拟机与 QEMU 的关系： KVM 的生命周期由 QEMU 管理和维护，一个 KVM 虚拟机可以理解为一个 QEMU 进程，虚拟机的一个 VCPU 对应 QEMU 进程中的一个线程。</p> <p>KVM 导出了一系列 IOCTL 接口供用户层创建、配置、启动虚拟机，典型的用户层软件是 QEMU ，但是从本质上来说，QEMU 和 KVM 可以不必相互依赖，本实验展示简易的用户层程序（后称为简易 QEMU）。</p> <p>该简易 QEMU 主要实现如下几个功能：</p> <ul> <li>创建虚拟机对象</li> <li>为虚拟机分配物理内存、加载 guest 二进制</li> <li>创建虚拟机 VCPU 对象</li> <li>设置 VCPU 的相关寄存器、将 VCPU 调度到物理 CPU 上运行</li> <li>处理 VM Exit 事件</li> </ul> <p><strong>创建虚拟机对象</strong></p> <p>首先打开 <code class="language-plaintext highlighter-rouge">/dev/kvm</code> 设备获取 KVM 模块的文件描述符 <code class="language-plaintext highlighter-rouge">dev_fd</code> ，通过 ioctl(KVM_GET_API_VERSION) 获取 KVM 的版本号，从而使用户层知道相关接口在内核是否有支持。</p> <p>再通过 ioctl(KVM_CREATE_VM) 创建一个虚拟机对象，该 ioctl 返回一个代表虚拟机的文件描述符 <code class="language-plaintext highlighter-rouge">vm_fd</code> ，之后可以通过 <code class="language-plaintext highlighter-rouge">vm_fd</code> 控制虚拟机的内存、VCPU 等。</p> <p><strong>为虚拟机分配物理内存、加载 guest 二进制</strong></p> <p>虚拟机的物理内存对应 QEMU 的进程地址空间，使用 <code class="language-plaintext highlighter-rouge">mmap</code> 分配一定大小的内存作为虚拟机物理内存，然后调用 ioctl(KVM_SET_USER_MEMORY_REGION) 为虚拟机指定一个内存条。接着将简易的 guest 二进制加载到该内存区域。</p> <p><strong>创建虚拟机 VCPU 对象</strong></p> <p>调用 ioctl(KVM_CREATE_VCPU) 创建虚拟机 VCPU 对象，该 ioctl 返回一个代表 VCPU 的文件描述符 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> ，之后通过 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> 控制虚拟机的运行等。</p> <p>虚拟机运行过程中用户层（简易QEMU）和内核层（KVM模块）之间的数据共享是通过 VCPU 维护的 <code class="language-plaintext highlighter-rouge">kvm_run</code> 数据结构来实现的。首先通过调用 ioctl(KVM_GET_VCPU_MMAP_SIZE) 得到该结构的大小，接着调用 <code class="language-plaintext highlighter-rouge">mmap</code> 为 <code class="language-plaintext highlighter-rouge">kvm_run</code> 分配空间。</p> <p><strong>设置 VCPU 的相关寄存器、将 VCPU 调度到物理 CPU 上运行</strong></p> <p>为了让虚拟机 VCPU 运行起来，需要设置 VCPU 的相关寄存器，其中段寄存器和控制寄存器等特殊寄存器存放在 <code class="language-plaintext highlighter-rouge">kvm_sregs</code> 中，通过 ioctl(KVM_GET_SREGS)、ioctl(KVM_SET_SREGS) 读取和修改，通用寄存器存放在 <code class="language-plaintext highlighter-rouge">kvm_regs</code> 中，通过 ioctl(KVM_SET_REGS) 修改。</p> <p>准备工作完毕，可以让虚拟机运行起来了，通常在一个死循环中对 <code class="language-plaintext highlighter-rouge">vcpu_fd</code> 调用 ioctl(KVM_RUN)。KVM 内核模块在处理这个 ioctl 时会把 VCPU 调度到物理 CPU 上运行，遇到 KVM 无法处理的退出事件则会返回到此处，处理完之后再次进入循环调用 ioctl(KVM_RUN) 进入虚拟机。</p> <p><strong>处理 VM Exit 事件</strong></p> <p>内核 KVM 无法处理时，会将信息保存到 <code class="language-plaintext highlighter-rouge">kvm_run</code> 并 return 0，用户层则可以通过读取该共享内存得知虚拟机退出原因，进行相应的处理。本例包括 guest 向 I/O 端口写数据产生的 <code class="language-plaintext highlighter-rouge">KVM_EXIT_IO</code> 退出的处理、执行 HALT 指令等。</p> <h3 id="实现简易的-guest-内核">实现简易的 guest 内核</h3> <p>简易内核主要实现一些能触发 VM Exit 的操作，包括向 I/O 端口写数据、执行 HALT 指令。汇编文件如下</p> <pre><code class="language-assembly">// guest_test.S
 
 .globl _start
     .code16
@@ -372,7 +372,7 @@ KVM_EXIT_HLT
 		<span class="cm">/*****case model-id modify test*/</span>
 		<span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div></div> <p>编译运行结果如下:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter2/exp3/modify-cpuid-model-test-480.webp 480w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-800.webp 800w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/book/chapter2/exp3/modify-cpuid-model-test.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="modify-cpuid-model-test" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这篇文章主要介绍了三个KVM虚拟化实验：实现一个简易的KVM虚拟机实例、捕获虚拟机下一条指令地址信息、伪造虚拟机CPUID信息。]]></summary></entry><entry><title type="html">第三章实验</title><link href="https://dams.net.cn/book/2025/lab3/" rel="alternate" type="text/html" title="第三章实验"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab3</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab3/"><![CDATA[<h1 id="实验一ept页表副本的创建与替换">实验一：EPT页表副本的创建与替换</h1> <p><strong>创建EPT页表副本，在虚拟机从实模式跳转到保护模式时替换原有的EPT页表</strong></p> <h2 id="解决思路">解决思路</h2> <p>如3.3.3中提到的，<code class="language-plaintext highlighter-rouge">vmx_load_mmu_pgd</code>函数中完成了EPT页表的加载：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">enable_ept</span><span class="p">){</span>
+</code></pre></div></div> <p>编译运行结果如下:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter2/exp3/modify-cpuid-model-test-480.webp 480w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-800.webp 800w,/assets/img/book/chapter2/exp3/modify-cpuid-model-test-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/book/chapter2/exp3/modify-cpuid-model-test.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="modify-cpuid-model-test" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[本章介绍了三个KVM虚拟化实验：实现一个简易的KVM虚拟机实例、捕获虚拟机下一条指令地址信息、伪造虚拟机CPUID信息。]]></summary></entry><entry><title type="html">第三章实验：内存虚拟化</title><link href="https://dams.net.cn/book/2025/lab3/" rel="alternate" type="text/html" title="第三章实验：内存虚拟化"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab3</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab3/"><![CDATA[<h1 id="实验一ept页表副本的创建与替换">实验一：EPT页表副本的创建与替换</h1> <p><strong>创建EPT页表副本，在虚拟机从实模式跳转到保护模式时替换原有的EPT页表</strong></p> <h2 id="解决思路">解决思路</h2> <p>如3.3.3中提到的，<code class="language-plaintext highlighter-rouge">vmx_load_mmu_pgd</code>函数中完成了EPT页表的加载：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">enable_ept</span><span class="p">){</span>
     <span class="n">eptp</span> <span class="o">=</span> <span class="n">construct_eptp</span><span class="p">(</span><span class="n">vcpu</span><span class="p">,</span> <span class="n">root_hpa</span><span class="p">,</span> <span class="n">root_level</span><span class="p">);</span>
     <span class="n">vmcs_write64</span><span class="p">(</span><span class="n">EPT_POINTER</span><span class="p">,</span> <span class="n">eptp</span><span class="p">);</span>
     <span class="p">......</span>
@@ -606,4 +606,1490 @@ KVM_EXIT_HLT
     <span class="n">printk</span><span class="p">(</span><span class="s">"data = %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</code></pre></div></div> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter3/exp3/balloon_deflate_guest-480.webp 480w,/assets/img/book/chapter3/exp3/balloon_deflate_guest-800.webp 800w,/assets/img/book/chapter3/exp3/balloon_deflate_guest-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/book/chapter3/exp3/balloon_deflate_guest.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="balloon deflate guest" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这篇文章主要介绍了三个虚拟化实验：EPT页表副本的创建与替换、VMFUNC的创建与使用、气球模型的充气与放气实现，通过这些实验展示了虚拟化技术中内存管理和隔离的关键技术。]]></summary></entry><entry><title type="html">第四章实验</title><link href="https://dams.net.cn/book/2025/lab4/" rel="alternate" type="text/html" title="第四章实验"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab4</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab4/"><![CDATA[<p>这是第四章的实验。</p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这是第四章的实验。]]></summary></entry><entry><title type="html">第五章实验</title><link href="https://dams.net.cn/book/2025/lab5/" rel="alternate" type="text/html" title="第五章实验"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab5</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab5/"><![CDATA[<p>这是第五章的实验。</p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这是第五章的实验。]]></summary></entry><entry><title type="html">第六章实验</title><link href="https://dams.net.cn/book/2025/lab6/" rel="alternate" type="text/html" title="第六章实验"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab6</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab6/"><![CDATA[<p>这是第六章的实验。</p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[这是第六章的实验。]]></summary></entry></feed>
+</code></pre></div></div> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/book/chapter3/exp3/balloon_deflate_guest-480.webp 480w,/assets/img/book/chapter3/exp3/balloon_deflate_guest-800.webp 800w,/assets/img/book/chapter3/exp3/balloon_deflate_guest-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/book/chapter3/exp3/balloon_deflate_guest.png" class="img-fluid rounded z-depth-1" width="70%" height="auto" title="balloon deflate guest" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[本章介绍了三个虚拟化实验：EPT页表副本的创建与替换、VMFUNC的创建与使用、气球模型的充气与放气实现，通过这些实验展示了虚拟化技术中内存管理和隔离的关键技术。]]></summary></entry><entry><title type="html">第四章实验：I/O虚拟化</title><link href="https://dams.net.cn/book/2025/lab4/" rel="alternate" type="text/html" title="第四章实验：I/O虚拟化"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab4</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab4/"><![CDATA[<h2 id="实验一使用完全设备模拟方式创建一个虚拟pci设备并实现和虚拟机的数据传输">实验一：使用完全设备模拟方式创建一个虚拟PCI设备，并实现和虚拟机的数据传输</h2> <h3 id="设计思路">设计思路：</h3> <ol> <li>在宿主机上实现qemu虚拟PCI设备 <ul> <li>新建虚拟PCI设备“demo”</li> <li>在虚拟设备初始化中提供BAR0的MMIO绑定</li> <li>定义对BAR0读写的监听，提供数据的存取服务</li> </ul> </li> <li>在虚拟机中实现PCI设备驱动 <ul> <li>新建内核态驱动模块，打开“demo”设备</li> <li>监听用户态测试程序读写操作</li> <li>发起对BAR0的数据写入、读取操作，</li> </ul> </li> <li>在虚拟机中实现用户态测试程序 <ul> <li>打开上述设备</li> <li>读写设备来调用驱动，验证虚拟PCI设备可用性</li> </ul> </li> </ol> <h3 id="实验过程">实验过程：</h3> <ol> <li>在Qemu源码中创建hw/misc/demo.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">pci_demo_realize</span><span class="p">(</span><span class="n">PCIDevice</span> <span class="o">*</span><span class="n">pdev</span><span class="p">,</span> <span class="n">Error</span> <span class="o">**</span><span class="n">errp</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DemoState</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">DEMO</span><span class="p">(</span><span class="n">pdev</span><span class="p">);</span>
+
+    <span class="n">memory_region_init_io</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">mmio</span><span class="p">,</span> <span class="n">OBJECT</span><span class="p">(</span><span class="n">demo</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">demo_mmio_ops</span><span class="p">,</span> <span class="n">demo</span><span class="p">,</span>
+                    <span class="s">"demo-mmio"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">MiB</span><span class="p">);</span>
+    <span class="n">pci_register_bar</span><span class="p">(</span><span class="n">pdev</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">PCI_BASE_ADDRESS_SPACE_MEMORY</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">mmio</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>设备在初始化的过程中需以MMIO的方式注册BAR0及其共享内存区域。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">uint64_t</span> <span class="nf">demo_mmio_read</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">,</span> <span class="n">hwaddr</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DemoState</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">opaque</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">val</span> <span class="o">=</span> <span class="o">~</span><span class="mi">0ULL</span><span class="p">;</span>
+  
+    <span class="k">if</span> <span class="p">(</span><span class="n">addr</span> <span class="o">!=</span> <span class="mh">0x00</span> <span class="o">||</span>  <span class="n">size</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="mh">0x00</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">buff</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">demo_mmio_write</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">,</span> <span class="n">hwaddr</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">val</span><span class="p">,</span>
+                <span class="kt">unsigned</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DemoState</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">opaque</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">addr</span> <span class="o">!=</span> <span class="mh">0x00</span> <span class="o">||</span>  <span class="n">size</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="mh">0x00</span><span class="p">:</span>
+            <span class="n">demo</span><span class="o">-&gt;</span><span class="n">buff</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">const</span> <span class="n">MemoryRegionOps</span> <span class="n">demo_mmio_ops</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">demo_mmio_read</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">demo_mmio_write</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">endianness</span> <span class="o">=</span> <span class="n">DEVICE_NATIVE_ENDIAN</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>分别定义BAR0上的读写操作：针对BAR0上0x00地址的4字节读写，实现简单的数据存取功能。</p> <ol> <li>修改misc目录下的Makefile.objs</li> </ol> <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">common-obj-y</span> <span class="o">+=</span> demo.o
+</code></pre></div></div> <p>增加demo.o的编译目标，之后重新编译、安装Qemu。</p> <ol> <li>在虚拟机内核中创建驱动源码demo.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">demo_probe</span><span class="p">(</span><span class="k">struct</span> <span class="n">pci_dev</span> <span class="o">*</span><span class="n">pdev</span><span class="p">,</span>
+				   <span class="k">const</span> <span class="k">struct</span> <span class="n">pci_device_id</span> <span class="o">*</span><span class="n">ent</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">device</span> <span class="o">*</span><span class="n">dev</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pdev</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">err</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_probe() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="n">data</span> <span class="o">=</span> <span class="n">kzalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">),</span> <span class="n">GFP_KERNEL</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">data</span><span class="p">)</span>
+		<span class="k">return</span> <span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span>
+	<span class="n">data</span><span class="o">-&gt;</span><span class="n">pdev</span> <span class="o">=</span> <span class="n">pdev</span><span class="p">;</span>
+
+	<span class="n">err</span> <span class="o">=</span> <span class="n">pci_enable_device</span><span class="p">(</span><span class="n">pdev</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">dev_err</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="s">"Cannot enable PCI device</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">goto</span> <span class="n">err_kfree</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">err</span> <span class="o">=</span> <span class="n">pci_request_regions</span><span class="p">(</span><span class="n">pdev</span><span class="p">,</span> <span class="n">DRV_MODULE_NAME</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">dev_err</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="s">"Cannot obtain PCI resources</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">goto</span> <span class="n">err_disable_pdev</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">data</span><span class="o">-&gt;</span><span class="n">bar0</span> <span class="o">=</span> <span class="n">pci_iomap</span><span class="p">(</span><span class="n">pdev</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">bar0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">dev_err</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="s">"failed to read BAR0</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">goto</span> <span class="n">err_disable_bar</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">pci_set_drvdata</span><span class="p">(</span><span class="n">pdev</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+
+	
+	<span class="n">demo_major</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">DRV_MODULE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">demo_fops</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">demo_major</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="n">KERN_ERR</span> <span class="s">"register_chrdev fail</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">goto</span> <span class="n">err_iounmap</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_probe() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>在内核模块的probe函数中依次：初始化驱动数据结构体、注册设备、请求PCI资源、映射BAR0内存、绑定数据结构体、注册字符设备。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">demo_read</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">fp</span><span class="p">,</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="n">ubuf</span><span class="p">,</span>
+						<span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">off</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="c1">//...</span>
+	<span class="n">val</span> <span class="o">=</span> <span class="n">readl</span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">bar0</span><span class="p">);</span>
+	<span class="n">ret</span> <span class="o">=</span> <span class="n">copy_to_user</span><span class="p">(</span><span class="n">ubuf</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">demo_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">fp</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="n">ubuf</span><span class="p">,</span>
+						<span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">off</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="c1">//...</span>
+	<span class="n">ret</span> <span class="o">=</span> <span class="n">copy_from_user</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="n">ubuf</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="c1">//...</span>
+	<span class="n">writel</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">bar0</span><span class="p">);</span>
+<span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">demo_fops</span> <span class="o">=</span> 
+<span class="p">{</span>
+	<span class="p">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">demo_open</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">release</span> <span class="o">=</span> <span class="n">demo_release</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">demo_read</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">demo_write</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>其中，demo_fops指定了驱动作为字符设备，在被读写时的回调函数，用于从用户态进行功能调用。</p> <ol> <li>创建用户态测试程序test.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span> 
+<span class="cp">#define FILE	"/dev/demo"
+</span>  
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+	
+	<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="kt">FILE</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"open %s error.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="kt">FILE</span><span class="p">);</span>
+		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"open %s success..</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="kt">FILE</span><span class="p">);</span>
+	
+	<span class="n">val</span> <span class="o">=</span> <span class="mh">0x1333</span><span class="p">;</span>
+	<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"0. write 1333</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"1. read = %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+	<span class="n">val</span> <span class="o">=</span> <span class="mh">0x2333</span><span class="p">;</span>
+	<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"2. write 2333</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"3. read = %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+	<span class="n">val</span> <span class="o">=</span> <span class="mh">0x3333</span><span class="p">;</span>
+	<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"4. write 3333</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"5. read = %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+	<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+	
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>通过open、write、read对驱动模块功能进行调用。</p> <ol> <li>设计Makefile进行虚拟机中测试用驱动模块和应用程序编译</li> </ol> <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CONFIG_MODULE_SIG</span><span class="o">=</span>n
+
+<span class="nv">obj-m</span> <span class="o">+=</span> demo.o
+
+<span class="nl">all</span><span class="o">:</span>
+	make <span class="nt">-C</span> /lib/modules/<span class="p">$(</span>shell <span class="nb">uname</span> <span class="nt">-r</span><span class="p">)</span>/build <span class="nv">M</span><span class="o">=</span><span class="p">$(</span>shell <span class="nb">pwd</span><span class="p">)</span> modules
+	gcc test.c <span class="nt">-o</span> <span class="nb">test</span>
+
+<span class="nl">clean</span><span class="o">:</span>
+	<span class="nb">rm</span> <span class="nt">-f</span> <span class="k">*</span>.o <span class="k">*</span>.mod.c <span class="k">*</span>.ko <span class="nb">test</span>
+
+<span class="nl">all-clean</span><span class="o">:</span>
+	<span class="nb">rm</span> <span class="nt">-f</span> <span class="k">*</span>.o <span class="k">*</span>.mod.c <span class="k">*</span>.ko Module.symvers modules.order <span class="nb">test</span>
+</code></pre></div></div> <p>运行<code class="language-plaintext highlighter-rouge">make</code>命令即可编译驱动模块和用户态测试程序。</p> <ol> <li>功能测试运行</li> </ol> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 启动虚拟机</span>
+qemu-system-x86_64 <span class="nt">-smp</span> 4 <span class="nt">-m</span> 4096 <span class="nt">--enable-kvm</span> <span class="nt">--device</span> demo guest.img
+<span class="c"># --device demo参数将demo设备挂载到虚拟机上</span>
+
+<span class="c"># 连接vnc</span>
+vncviewer :0
+
+<span class="c"># 进入exp1目录，编译实验代码</span>
+<span class="nb">cd </span>exp1/guest-driver
+make
+
+<span class="c"># 安装驱动模块</span>
+<span class="nb">sudo </span>insmod demo.ko
+
+<span class="c"># 查看注册的设备编号</span>
+<span class="nb">cat</span> /proc/device | <span class="nb">grep </span>demo
+<span class="c"># 输出：</span>
+<span class="c"># 248 demo</span>
+
+<span class="c"># 给编号248的驱动创建设备文件 </span>
+<span class="nb">sudo mknod</span> /dev/demo c 248 0
+
+<span class="c"># 运行用户态测试程序</span>
+<span class="nb">sudo</span> ./test
+
+<span class="c"># 检查内核输出</span>
+dmesg
+</code></pre></div></div> <p>用户态测试程序运行结果、dmesg输出如下：</p> <p><img src="./assets/exp1.png" alt="exp1"/></p> <h2 id="实验二使用virtio方式创建一个虚拟外设并实现和虚拟机的数据传输">实验二：使用virtio方式创建一个虚拟外设，并实现和虚拟机的数据传输</h2> <h3 id="设计思路-1">设计思路：</h3> <ol> <li>在宿主机qemu中实现虚拟设备 <ul> <li>新建virtio虚拟设备“virtio-demo”</li> <li>定义virtio虚拟设备类型QOM，继承自TYPE_DEVICE-&gt;TYPE_VIRTIO_DEVICE-&gt;TYPE_VIRTIO_DEMO</li> <li>具像化过程中，virtio设备添加queue</li> </ul> </li> <li>在宿主机qemu中实现代理设备 <ul> <li>新建代理设备“virtio-demo-pci”</li> <li>定义代理设备类型QOM，继承自TYPE_DEVICE-&gt;TYPE_PCI_DEVICE-&gt;TYPE_VIRTIO_PCI-&gt;TYPE_VIRTIO_DEMO_PCI</li> <li>具像化过程中，代理设备设置virtio总线上的virtio设备</li> </ul> </li> <li>在虚拟机中实现virtio设备驱动 <ul> <li>新建virtio虚拟设备驱动“virtio-demo”</li> <li>设置对virtio的读写操作</li> <li>监听用户态测试程序的读写操作，执行相关功能</li> </ul> </li> <li>在虚拟机中实现用户态测试程序 <ul> <li>新建用户态测试程序“test”</li> <li>打开上述virtio设备</li> <li>读写设备来调用驱动，验证虚拟PCI设备可用性</li> </ul> </li> </ol> <h3 id="实验过程-1">实验过程：</h3> <ol> <li>在Qemu源码中增加hw/virtio/virtio-demo-pci.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">virtio_demo_pci_realize</span><span class="p">(</span><span class="n">VirtIOPCIProxy</span> <span class="o">*</span><span class="n">vpci_dev</span><span class="p">,</span> <span class="n">Error</span> <span class="o">**</span><span class="n">errp</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">VirtIODemoPCI</span> <span class="o">*</span><span class="n">dev</span> <span class="o">=</span> <span class="n">VIRTIO_DEMO_PCI</span><span class="p">(</span><span class="n">vpci_dev</span><span class="p">);</span>
+    <span class="n">DeviceState</span> <span class="o">*</span><span class="n">vdev</span> <span class="o">=</span> <span class="n">DEVICE</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">vdev</span><span class="p">);</span>
+    
+    <span class="n">qdev_set_parent_bus</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="n">BUS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vpci_dev</span><span class="o">-&gt;</span><span class="n">bus</span><span class="p">));</span>
+    <span class="n">object_property_set_bool</span><span class="p">(</span><span class="n">OBJECT</span><span class="p">(</span><span class="n">vdev</span><span class="p">),</span> <span class="nb">true</span><span class="p">,</span> <span class="s">"realized"</span><span class="p">,</span> <span class="n">errp</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>在realize函数中将virtio-demo-pci设备挂载到PCI总线。</p> <pre><code class="language-C">static void virtio_demo_pci_instance_init(Object *obj)
+{
+    VirtIODemoPCI *dev = VIRTIO_DEMO_PCI(obj);
+
+    virtio_instance_init_common(obj, &amp;dev-&gt;vdev, sizeof(dev-&gt;vdev),
+                                TYPE_VIRTIO_DEMO);
+}
+</code></pre> <p>在instance_init函数中调用virtio_instance_init_common初始化virtio-demo设备，并将其挂载到virtio总线。</p> <ol> <li>在Qemu源码中增加hw/virtio/virtio-demo.c，以及对相关头文件进行修改</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">virtio_demo_device_realize</span><span class="p">(</span><span class="n">DeviceState</span> <span class="o">*</span><span class="n">dev</span><span class="p">,</span> <span class="n">Error</span> <span class="o">**</span><span class="n">errp</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">VirtIODevice</span> <span class="o">*</span><span class="n">vdev</span> <span class="o">=</span> <span class="n">VIRTIO_DEVICE</span><span class="p">(</span><span class="n">dev</span><span class="p">);</span>
+    <span class="n">VirtIODemo</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">VIRTIO_DEMO</span><span class="p">(</span><span class="n">dev</span><span class="p">);</span>
+
+    <span class="n">virtio_init</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="s">"virtio-demo"</span><span class="p">,</span> <span class="n">VIRTIO_ID_DEMO</span><span class="p">,</span>
+                <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">virtio_demo_config</span><span class="p">));</span>
+
+    <span class="n">s</span><span class="o">-&gt;</span><span class="n">vq</span> <span class="o">=</span> <span class="n">virtio_add_queue</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">virtio_demo_handle</span><span class="p">);</span>
+
+    <span class="n">s</span><span class="o">-&gt;</span><span class="n">buff</span> <span class="o">=</span> <span class="mh">0x1333</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>在realize函数中调用virtio_init进行virtio设备初始化，调用virtio_add_queue添加一条vring消息通道，使用virtio_demo_handle函数处理队列上的回调。</p> <p>对s-&gt;buff的赋值用于后续通信测试。</p> <pre><code class="language-C">static void virtio_demo_handle(VirtIODevice *vdev, VirtQueue *vq)
+{
+    VirtIODemo *s = VIRTIO_DEMO(vdev);
+    VirtQueueElement *elem;
+
+    uint64_t data;
+    uint32_t *opt_p = (uint32_t *)&amp;data;
+    uint32_t *buff_p = (uint32_t *)((void *)&amp;data + 4);
+
+    int len = 0;
+    for (;;) {
+        elem = virtqueue_pop(vq, sizeof(VirtQueueElement));
+        if (!elem) {
+        		printf("exit virtio_demo_handle()\n");
+            return;
+        }
+
+        if (iov_to_buf(elem-&gt;out_sg, elem-&gt;out_num, 0, &amp;data, 8) == 8) {
+            printf("recv opt: %x\n", *opt_p);
+					  printf("recv buff: %x\n", *buff_p);
+            switch (*opt_p) {
+                case 0:
+                    printf("opt: read from guest\n");
+                    *buff_p = s-&gt;buff;
+                    break;
+                case 1:
+                    printf("opt: write from guest\n");
+                    s-&gt;buff = *buff_p;
+                    break;
+                default:
+                    printf("opt: error!\n");
+            }
+            len = iov_from_buf(elem-&gt;in_sg, elem-&gt;in_num, 0, &amp;data, 8);
+            printf("iov_from_buf ret = %d\n", len);
+            printf("buff: %x\n", s-&gt;buff);
+        }
+        
+        virtqueue_push(vq, elem, 8);
+        virtio_notify(vdev, vq);
+        g_free(elem);
+    }
+}
+</code></pre> <p>virtio_demo_handle函数用于处理队列上的回调。</p> <pre><code class="language-C">for (;;) {
+    elem = virtqueue_pop(vq, sizeof(VirtQueueElement));
+    if (!elem) {
+        return;
+    }
+    iov_to_buf(elem-&gt;out_sg, elem-&gt;out_num, 0, &amp;data, 8);
+    iov_from_buf(elem-&gt;in_sg, elem-&gt;in_num, 0, &amp;data, 8);
+    virtqueue_push(vq, elem, 8);
+    virtio_notify(vdev, vq);
+    g_free(elem);
+}
+</code></pre> <p>上述代码为virtqueue队列回调函数的常用代码框架：</p> <ul> <li>virtqueue_pop函数从队列中获取队列元素；</li> <li>iov_to_buf函数从队列元素中获取数据到缓冲区；</li> <li>iov_from_buf函数将数据从缓冲区中写入队列元素；</li> <li>virtqueue_push函数将队列元素推入队列中；</li> <li>virtio_notify函数发送中断通知对端有新的消息；</li> </ul> <p>对于本实验的业务逻辑：</p> <ul> <li>消息队列元素中存放4字节操作码和4字节的操作数；</li> <li>操作码为0代表客户机向外设发起的读操作，将s-&gt;buff内容写人操作数缓冲区；</li> <li>操作码为1代表客户机向外设发起的写操作，将操作数缓冲区内容写入s-&gt;buff中。</li> </ul> <ol> <li>修改virtio目录下的Makefile.objs</li> </ol> <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">obj-y</span> <span class="o">+=</span> virtio-demo.o
+<span class="nv">obj-y</span> <span class="o">+=</span> virtio-demo-pci.o
+</code></pre></div></div> <p>增加virtio-demo.o和virtio-demo-pci.o编译目标，之后重新编译、安装Qemu。</p> <ol> <li>在虚拟机内核中创建驱动源码virtio_demo.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">virtdemo_probe</span><span class="p">(</span><span class="k">struct</span> <span class="n">virtio_device</span> <span class="o">*</span><span class="n">vdev</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">virtio_demo</span> <span class="o">*</span><span class="n">vd</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">err</span> <span class="o">=</span> <span class="o">~</span><span class="mi">0</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"virtdemo_probe() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="n">sema_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo_io_sem</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">mutex_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo_io_mutex</span><span class="p">);</span>
+
+	<span class="n">demo_major</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">DRV_MODULE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">demo_fops</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">demo_major</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="n">KERN_ERR</span> <span class="s">"register_chrdev fail</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">goto</span> <span class="n">out</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">vdev</span><span class="o">-&gt;</span><span class="n">priv</span> <span class="o">=</span> <span class="n">vd</span> <span class="o">=</span> <span class="n">kmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">vd</span><span class="p">),</span> <span class="n">GFP_KERNEL</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">vd</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">err</span> <span class="o">=</span> <span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span>
+		<span class="k">goto</span> <span class="n">out_uunregister_chrdev</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">global_data</span> <span class="o">=</span> <span class="n">vd</span><span class="p">;</span>
+	<span class="n">vd</span><span class="o">-&gt;</span><span class="n">vdev</span> <span class="o">=</span> <span class="n">vdev</span><span class="p">;</span>
+
+	<span class="n">vd</span><span class="o">-&gt;</span><span class="n">vq</span> <span class="o">=</span> <span class="n">virtio_find_single_vq</span><span class="p">(</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">vdev</span><span class="p">,</span> <span class="n">demo_handle_request</span><span class="p">,</span> <span class="s">"demo-vq"</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">goto</span> <span class="n">out_free_vd</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">virtio_device_ready</span><span class="p">(</span><span class="n">vdev</span><span class="p">);</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"virtdemo_probe() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>在virtio-demo的驱动模块的probe函数中，分别执行以下操作：</p> <ul> <li>初始化读写互斥锁和信号量</li> <li>注册驱动模块的字符设备</li> <li>初始化驱动模块数据结构</li> <li>调用virtio_find_single_vq函数匹配virtqueue消息队列</li> <li>启用virtio设备</li> </ul> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">demo_handle_request</span><span class="p">(</span><span class="k">struct</span> <span class="n">virtqueue</span> <span class="o">*</span><span class="n">vq</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">uint32_t</span> <span class="o">*</span><span class="n">data_p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="kt">uint32_t</span> <span class="o">*</span><span class="n">opt_p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="kt">uint32_t</span> <span class="o">*</span><span class="n">buff_p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_handle_request() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="n">data_p</span> <span class="o">=</span> <span class="n">virtqueue_get_buf</span><span class="p">(</span><span class="n">vq</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">len</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">data_p</span><span class="p">)</span>
+		<span class="k">return</span><span class="p">;</span>
+
+	<span class="n">opt_p</span> <span class="o">=</span> <span class="n">data_p</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="n">buff_p</span> <span class="o">=</span> <span class="n">opt_p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"check ret opt = %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">opt_p</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"check ret buff = %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">buff_p</span><span class="p">);</span>
+
+	<span class="n">val</span> <span class="o">=</span> <span class="o">*</span><span class="n">buff_p</span><span class="p">;</span>
+
+	<span class="n">up</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo_io_sem</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_io_sem up</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_handle_request() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>消息队列在驱动模块侧的回调函数设置为demo_handle_request。其中，调用virtqueue_get_buf获取读写缓冲区，缓冲区的数据结构与iov_to_buf函数、iov_from_buf函数、virtqueue_add_sgs函数中所使用的缓冲区相对应。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">send_kick</span><span class="p">(</span><span class="k">struct</span> <span class="n">virtio_demo</span> <span class="o">*</span><span class="n">vd</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">v1</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">v2</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">scatterlist</span> <span class="n">sg0</span><span class="p">,</span> <span class="n">sg1</span><span class="p">,</span> <span class="o">*</span><span class="n">sgs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"send_kick() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">vd</span><span class="o">-&gt;</span><span class="n">opt</span> <span class="o">=</span> <span class="n">v1</span><span class="p">;</span>
+	<span class="n">vd</span><span class="o">-&gt;</span><span class="n">buff</span> <span class="o">=</span> <span class="n">v2</span><span class="p">;</span>
+	<span class="n">vd</span><span class="o">-&gt;</span><span class="n">opt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">vd</span><span class="o">-&gt;</span><span class="n">buff2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">sg_init_one</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sg0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">opt</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+	<span class="n">sg_init_one</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sg1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">opt2</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+	<span class="n">sgs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">sg0</span><span class="p">;</span>
+	<span class="n">sgs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">sg1</span><span class="p">;</span>
+	<span class="n">virtqueue_add_sgs</span><span class="p">(</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">,</span> <span class="n">sgs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">opt</span><span class="p">,</span> <span class="n">GFP_ATOMIC</span><span class="p">);</span>
+	<span class="n">virtqueue_kick</span><span class="p">(</span><span class="n">vd</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">);</span>
+
+	<span class="n">down_interruptible</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo_io_sem</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_io_sem down</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"send_kick() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>send_kick是对驱动上消息发送功能的封装：</p> <ul> <li>两次调用sg_init_one分别初始化作为输入、输出使用的scatterlist数据结构</li> <li>virtqueue_add_sgs函数可用于将多个scatterlist结构（可分别用于输入、输出）同时压入消息队列中</li> <li>调用virtqueue_kick函数发送中断通知对端</li> </ul> <p>send_kick与demo_handle_request设置有同步信号量：</p> <ul> <li> <p>信号量demo_io_sem在初始化时被置为0</p> </li> <li>在send_kick运行结束时，调用down_interruptible获取信号量demo_io_sem</li> <li>由于此时信号量为0，send_kick函数产生阻塞，进而demo_read/demo_write函数产生阻塞，无法返回</li> <li>在demo_handle_request被调用，并完成主体工作后，调用up释放信号量demo_io_sem</li> <li>send_kick函数获取到信号量，继续运行，随后demo_read/demo_write向用户态返回结果</li> </ul> <ol> <li>创建用户态测试程序test.c</li> </ol> <p>用户态测试程序的实现与实验一类似，此处不作赘述。</p> <ol> <li>设计Makefile进行虚拟机中测试用驱动模块和应用程序编译</li> </ol> <p>Makefile的设计与实验一类似，此处不作赘述。</p> <p>运行<code class="language-plaintext highlighter-rouge">make</code>命令即可编译驱动模块。</p> <ol> <li>功能测试运行</li> </ol> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 启动虚拟机</span>
+qemu-system-x86_64 <span class="nt">-smp</span> 4 <span class="nt">-m</span> 4096 <span class="nt">--enable-kvm</span> <span class="nt">--device</span> virtio-demo-pci guest.img
+<span class="c"># --device virtio-demo-pci参数将virtio-demo-pci设备挂载到虚拟机的PCI总线上，virtio-demo设备随之被挂载到virtio总线</span>
+
+<span class="c"># 连接vnc</span>
+vncviewer :0
+
+<span class="c"># 进入exp2目录，编译实验代码</span>
+<span class="nb">cd </span>exp2/guest-driver
+make
+
+<span class="c"># 安装驱动模块</span>
+<span class="nb">sudo </span>insmod virtio_demo.ko
+
+<span class="c"># 查看注册的设备编号</span>
+<span class="nb">cat</span> /proc/device | <span class="nb">grep </span>virtio_demo
+<span class="c"># 输出：</span>
+<span class="c"># 248 virtio_demo</span>
+
+<span class="c"># 给编号248的驱动创建设备文件 </span>
+<span class="nb">sudo mknod</span> /dev/virtio_demo c 248 0
+
+<span class="c"># 运行用户态测试程序</span>
+<span class="nb">sudo</span> ./test
+
+<span class="c"># 检查内核输出</span>
+dmesg
+</code></pre></div></div> <p>实验运行结果如下：</p> <p><img src="./assets/exp2-1.png" alt="exp2-1"/></p> <p>部分dmesg输出如下：</p> <p><img src="./assets/exp2-2.png" alt="exp2-2"/></p> <h2 id="实验三使用vhost方式创建一个虚拟外设并实现和虚拟机的数据传输">实验三：使用vhost方式创建一个虚拟外设，并实现和虚拟机的数据传输</h2> <h3 id="设计思路-2">设计思路：</h3> <ol> <li>在Qemu中实现 vhost_demo虚拟外设</li> <li>在宿主机内核中实现vhost_demo虚拟外设的后端内核态部分</li> <li>在虚拟机中沿用实验二中的内核态驱动模块virtio-demo和用户态测试程序test</li> </ol> <h3 id="实验过程-2">实验过程：</h3> <ol> <li>基于实验二中的qemu侧virtio后端virtio_demo.c进行修改</li> </ol> <p>修改virtio_demo_device_realize，即virtio_demo后端设备初始化函数</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">vhost_demo_handle</span><span class="p">(</span><span class="n">VirtIODevice</span> <span class="o">*</span><span class="n">vdev</span><span class="p">,</span> <span class="n">VirtQueue</span> <span class="o">*</span><span class="n">vq</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">virtio_demo_device_realize</span><span class="p">(</span><span class="n">DeviceState</span> <span class="o">*</span><span class="n">dev</span><span class="p">,</span> <span class="n">Error</span> <span class="o">**</span><span class="n">errp</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">VirtIODevice</span> <span class="o">*</span><span class="n">vdev</span> <span class="o">=</span> <span class="n">VIRTIO_DEVICE</span><span class="p">(</span><span class="n">dev</span><span class="p">);</span>
+    <span class="n">VirtIODemo</span> <span class="o">*</span><span class="n">d</span> <span class="o">=</span> <span class="n">VIRTIO_DEMO</span><span class="p">(</span><span class="n">dev</span><span class="p">);</span>
+    <span class="n">VhostDemoOptions</span> <span class="n">options</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">vhostfd</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_device_realize() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">virtio_init</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="s">"virtio-demo"</span><span class="p">,</span> <span class="n">VIRTIO_ID_DEMO</span><span class="p">,</span>
+                <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">virtio_demo_config</span><span class="p">));</span>
+
+    <span class="n">d</span><span class="o">-&gt;</span><span class="n">vq</span> <span class="o">=</span> <span class="n">virtio_add_queue</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">vhost_demo_handle</span><span class="p">);</span>
+
+    <span class="n">d</span><span class="o">-&gt;</span><span class="n">dc</span> <span class="o">=</span> <span class="n">g_malloc0</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">DemoClientState</span><span class="p">));</span>
+
+    <span class="n">options</span><span class="p">.</span><span class="n">backend_type</span> <span class="o">=</span> <span class="n">VHOST_BACKEND_TYPE_KERNEL</span><span class="p">;</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">dc</span> <span class="o">=</span> <span class="n">d</span><span class="o">-&gt;</span><span class="n">dc</span><span class="p">;</span>
+
+    <span class="n">vhostfd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/vhost-demo"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">vhostfd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">warn_report</span><span class="p">(</span><span class="s">"open vhost-demo char device failed: %s"</span><span class="p">,</span>
+                    <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">qemu_set_nonblock</span><span class="p">(</span><span class="n">vhostfd</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">opaque</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">vhostfd</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">vhost_demo_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">options</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">warn_report</span><span class="p">(</span><span class="n">VHOST_DEMO_INIT_FAILED</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_device_realize() end normal</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></div> <p>其中，DemoClientState为vhost设备后端在virtio设备中的状态结构体，因此需要在virtio设备初始化过程中进行结构体的初始化。随后调用open函数打开vhost-demo模块对应的后端设备文件。包括状态结构体、后端设备文件描述符在内的参数被放入参数结构体中，传入vhost_demo_init函数进行进一步的vhost相关初始化。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">virtio_demo_class_init</span><span class="p">(</span><span class="n">ObjectClass</span> <span class="o">*</span><span class="n">klass</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DeviceClass</span> <span class="o">*</span><span class="n">dc</span> <span class="o">=</span> <span class="n">DEVICE_CLASS</span><span class="p">(</span><span class="n">klass</span><span class="p">);</span>
+    <span class="n">VirtioDeviceClass</span> <span class="o">*</span><span class="n">vdc</span> <span class="o">=</span> <span class="n">VIRTIO_DEVICE_CLASS</span><span class="p">(</span><span class="n">klass</span><span class="p">);</span>
+
+    <span class="n">dc</span><span class="o">-&gt;</span><span class="n">vmsd</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">vmstate_virtio_demo</span><span class="p">;</span>
+    <span class="n">set_bit</span><span class="p">(</span><span class="n">DEVICE_CATEGORY_MISC</span><span class="p">,</span> <span class="n">dc</span><span class="o">-&gt;</span><span class="n">categories</span><span class="p">);</span>
+    <span class="n">vdc</span><span class="o">-&gt;</span><span class="n">realize</span> <span class="o">=</span> <span class="n">virtio_demo_device_realize</span><span class="p">;</span>
+    <span class="n">vdc</span><span class="o">-&gt;</span><span class="n">unrealize</span> <span class="o">=</span> <span class="n">virtio_demo_device_unrealize</span><span class="p">;</span>
+    <span class="n">vdc</span><span class="o">-&gt;</span><span class="n">get_features</span> <span class="o">=</span> <span class="n">virtio_demo_get_features</span><span class="p">;</span>
+    <span class="n">vdc</span><span class="o">-&gt;</span><span class="n">set_status</span> <span class="o">=</span> <span class="n">virtio_demo_set_status</span><span class="p">;</span>
+    <span class="n">vdc</span><span class="o">-&gt;</span><span class="n">guest_notifier_mask</span> <span class="o">=</span> <span class="n">virtio_demo_guest_notifier_mask</span><span class="p">;</span>
+    <span class="n">vdc</span><span class="o">-&gt;</span><span class="n">guest_notifier_pending</span> <span class="o">=</span> <span class="n">virtio_demo_guest_notifier_pending</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>virtio_demo_class_init函数中，增加了多项回调函数。与vhost最为相关的是set_status回调函数。在虚拟机启动过程中，一旦vhost前端驱动准备完毕，即产生一个set_status，此时将调用virtio_demo_set_status函数，对vhost后端做进一步的初始化和激活。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">virtio_demo_vhost_status</span><span class="p">(</span><span class="n">VirtIODemo</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">status</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">VirtIODevice</span> <span class="o">*</span><span class="n">vdev</span> <span class="o">=</span> <span class="n">VIRTIO_DEVICE</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+    <span class="n">DemoClientState</span> <span class="o">*</span><span class="n">dc</span> <span class="o">=</span> <span class="n">d</span><span class="o">-&gt;</span><span class="n">dc</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_vhost_status() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">get_vhost_demo</span><span class="p">(</span><span class="n">dc</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_vhost_status() return 1</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">virtio_demo_started</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">status</span><span class="p">))</span> <span class="o">==</span> <span class="o">!!</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">vhost_started</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_vhost_status() return 2</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">vhost_started</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">r</span><span class="p">;</span>
+        <span class="n">d</span><span class="o">-&gt;</span><span class="n">vhost_started</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">vhost_demo_start</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="n">dc</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_vhost_status() after vhost_demo_start</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">error_report</span><span class="p">(</span><span class="s">"unable to start vhost crypto: %d: "</span>
+                         <span class="s">"falling back on userspace virtio"</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span><span class="p">);</span>
+            <span class="n">d</span><span class="o">-&gt;</span><span class="n">vhost_started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">vhost_demo_stop</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="n">dc</span><span class="p">);</span>
+        <span class="n">d</span><span class="o">-&gt;</span><span class="n">vhost_started</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"virtio_demo_vhost_status() end normal</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">virtio_demo_set_status</span><span class="p">(</span><span class="n">VirtIODevice</span> <span class="o">*</span><span class="n">vdev</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">status</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">VirtIODemo</span> <span class="o">*</span><span class="n">dev</span> <span class="o">=</span> <span class="n">VIRTIO_DEMO</span><span class="p">(</span><span class="n">vdev</span><span class="p">);</span>
+    <span class="n">virtio_demo_vhost_status</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">status</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>其中，此处判断在vhost后端还未启动的情况下，调用vhost_demo_start函数进行vhost后端启动，vhost_demo_start函数依次调用set_guest_notifiers、vhost_dev_enable_notifiers、vhost_dev_start、vhost_set_vring_enable开启对vring监听。</p> <ol> <li>创建宿主机vhost后端驱动内核模块demo.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">vhost_demo_open</span><span class="p">(</span><span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">vhost_demo</span> <span class="o">*</span><span class="n">d</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: vhost_demo_open() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">d</span> <span class="o">=</span> <span class="n">kvmalloc</span><span class="p">(</span><span class="k">sizeof</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">GFP_KERNEL</span> <span class="o">|</span> <span class="n">__GFP_RETRY_MAYFAIL</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">d</span><span class="p">)</span>
+		<span class="k">return</span> <span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span>
+	
+	<span class="n">d</span><span class="o">-&gt;</span><span class="n">vqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">;</span>
+	<span class="n">d</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">.</span><span class="n">handle_kick</span> <span class="o">=</span> <span class="n">handle_demo_kick</span><span class="p">;</span>
+
+	<span class="n">vhost_dev_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">d</span><span class="o">-&gt;</span><span class="n">vqs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+		       <span class="n">UIO_MAXIOV</span><span class="p">,</span>
+		       <span class="n">VHOST_DEMO_PKT_WEIGHT</span><span class="p">,</span> <span class="n">VHOST_DEMO_WEIGHT</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span>
+		       <span class="nb">NULL</span><span class="p">);</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: vhost_demo_open() vhost_dev_init finish</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="n">f</span><span class="o">-&gt;</span><span class="n">private_data</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+	
+	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: vhost_demo_open() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>其中，vhost_demo为后端主要结构体，其中维护了一个virtqueue结构体的列表，这里的demo中我们只使用了一个virtqueue队列，同时对其handle_kick函数进行赋值，确定接受到队列上的消息时回调的函数。调用vhost_dev_init函数执行vhost设备初始化。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">handle_demo_kick</span><span class="p">(</span><span class="k">struct</span> <span class="n">vhost_work</span> <span class="o">*</span><span class="n">work</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">vhost_virtqueue</span> <span class="o">*</span><span class="n">vq</span> <span class="o">=</span> <span class="n">container_of</span><span class="p">(</span><span class="n">work</span><span class="p">,</span> <span class="k">struct</span> <span class="n">vhost_virtqueue</span><span class="p">,</span>
+						  <span class="n">poll</span><span class="p">.</span><span class="n">work</span><span class="p">);</span>
+	<span class="k">struct</span> <span class="n">vhost_demo</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">container_of</span><span class="p">(</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="k">struct</span> <span class="n">vhost_demo</span><span class="p">,</span> <span class="n">dev</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">head</span><span class="p">;</span>
+	<span class="kt">unsigned</span> <span class="n">in</span><span class="p">,</span> <span class="n">out</span><span class="p">;</span>
+	<span class="kt">size_t</span> <span class="n">out_len</span><span class="p">,</span> <span class="n">in_len</span><span class="p">,</span> <span class="n">total_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="n">iov_iter</span> <span class="n">iov_iter</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">mutex</span><span class="p">);</span>
+	<span class="n">vhost_disable_notify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">vq</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() mutex_lock and vhost_disable_notify</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+
+		<span class="n">head</span> <span class="o">=</span> <span class="n">vhost_get_vq_desc</span><span class="p">(</span><span class="n">vq</span><span class="p">,</span> <span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">,</span>
+				      <span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">),</span> 
+					  <span class="o">&amp;</span><span class="n">out</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span> 
+					  <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">head</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+			<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() for(;;) break1</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="cm">/* Nothing new?  Wait for eventfd to tell us they refilled. */</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="n">vq</span><span class="o">-&gt;</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">vhost_enable_notify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">vq</span><span class="p">)))</span> <span class="p">{</span>
+				<span class="n">vhost_disable_notify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">vq</span><span class="p">);</span>
+				<span class="k">continue</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() for(;;) break2</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), out=%u in=%u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="p">);</span>
+
+		<span class="n">out_len</span> <span class="o">=</span> <span class="n">iov_length</span><span class="p">(</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+		<span class="n">in_len</span> <span class="o">=</span> <span class="n">iov_length</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">[</span><span class="n">out</span><span class="p">],</span> <span class="n">in</span><span class="p">);</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), out_len=%lu in_len=%lu</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+			<span class="n">out_len</span><span class="p">,</span> <span class="n">in_len</span><span class="p">);</span>
+
+		<span class="n">iov_iter_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">,</span> <span class="n">WRITE</span><span class="p">,</span> <span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">out_len</span><span class="p">);</span>
+		<span class="n">copy_from_iter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">v1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">);</span>
+
+		<span class="n">demo</span><span class="o">-&gt;</span><span class="n">v3</span> <span class="o">=</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v1</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v1</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">demo</span><span class="o">-&gt;</span><span class="n">v4</span> <span class="o">=</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v2</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="n">iov_iter_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">,</span> <span class="n">READ</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">[</span><span class="n">out</span><span class="p">],</span> <span class="n">in</span><span class="p">,</span> <span class="n">in_len</span><span class="p">);</span>
+		<span class="n">copy_to_iter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">v3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">);</span>
+
+		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), handle finish, v1-v4 = %u %u %u %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+			<span class="n">demo</span><span class="o">-&gt;</span><span class="n">v1</span><span class="p">,</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v2</span><span class="p">,</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v3</span><span class="p">,</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v4</span><span class="p">);</span>
+
+		<span class="n">vhost_add_used_and_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">vq</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="n">total_len</span> <span class="o">+=</span> <span class="p">(</span><span class="n">out_len</span> <span class="o">+</span> <span class="n">in_len</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">vhost_exceeds_weight</span><span class="p">(</span><span class="n">vq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">total_len</span><span class="p">)))</span> <span class="p">{</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">mutex</span><span class="p">);</span>
+	<span class="n">vhost_poll_queue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">poll</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	
+<span class="p">}</span>
+</code></pre></div></div> <p>handle_demo_kick是vhost demo接收到队列中消息（即kick）时的回调函数。mutex_lock确保临界代码区间保持单例。vhost_disable_notify临时关闭virtqueue队列消息通知。随后进入无限循环，获取virtqueue队列内容。vhost_get_vq_desc获得队列中元素的描述符，iov_iter_init对队列中元素进行遍历，copy_from_iter、copy_to_iter进行队列中信息的获取和补充。最后通过vhost_add_used_and_signal函数标记队列中元素被使用，并向前端发送信号。循环会在vhost_get_vq_desc无法获取到新的描述符时退出，vhost_enable_notify重新打开队列的消息通知，并调用vhost_poll_queue开启监听。</p> <ol> <li>设计Makefile进行宿主机中vhost模块编译</li> </ol> <p>Makefile的设计与实验一类似，此处不作赘述。</p> <ol> <li>创建虚拟机中测试程序</li> </ol> <p>虚拟机测试程序完全复用实验二中的virtio前端模块和用户态程序，此处不作赘述。</p> <ol> <li>设计Makefile进行虚拟机中测试用驱动模块和应用程序编译</li> </ol> <p>Makefile的设计完全复用实验二中的对应Makefile，此处不作赘述。</p> <ol> <li>功能测试运行</li> </ol> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 进入exp3目录，编译vhost后端驱动，并安装</span>
+<span class="nb">cd </span>exp3/host-driver
+make
+<span class="nb">sudo </span>insmod demo.ko
+
+<span class="c"># 以下操作与实验二相同</span>
+<span class="c"># 启动虚拟机</span>
+qemu-system-x86_64 <span class="nt">-smp</span> 4 <span class="nt">-m</span> 4096 <span class="nt">--enable-kvm</span> <span class="nt">--device</span> virtio-demo-pci guest.img
+<span class="c"># --device virtio-demo-pci参数将virtio-demo-pci设备挂载到虚拟机的PCI总线上，virtio-demo设备随之被挂载到virtio总线</span>
+
+<span class="c"># 连接vnc</span>
+vncviewer :0
+
+<span class="c"># 进入exp3目录，编译实验代码</span>
+<span class="nb">cd </span>exp3/guest-driver
+make
+
+<span class="c"># 安装驱动模块</span>
+<span class="nb">sudo </span>insmod virtio_demo.ko
+
+<span class="c"># 查看注册的设备编号</span>
+<span class="nb">cat</span> /proc/device | <span class="nb">grep </span>virtio_demo
+<span class="c"># 输出：</span>
+<span class="c"># 248 virtio_demo</span>
+
+<span class="c"># 给编号248的驱动创建设备文件 </span>
+<span class="nb">sudo mknod</span> /dev/virtio_demo c 248 0
+
+<span class="c"># 运行用户态测试程序</span>
+<span class="nb">sudo</span> ./test
+
+<span class="c"># 检查内核输出</span>
+dmesg
+</code></pre></div></div> <p>实验运行结果如下：</p> <p><img src="assets/exp3.png" alt="输入图片说明"/></p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[本章介绍了三种I/O虚拟化实现方式的实验：完全设备模拟方式创建虚拟PCI设备、virtio方式创建虚拟外设以及vhost方式创建虚拟外设，并分别实现了与虚拟机的数据传输功能。]]></summary></entry><entry><title type="html">第五章实验：中断虚拟化</title><link href="https://dams.net.cn/book/2025/lab5/" rel="alternate" type="text/html" title="第五章实验：中断虚拟化"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab5</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab5/"><![CDATA[<h1 id="实验一自定义中断添加与注入">实验一：自定义中断添加与注入</h1> <p><strong>在虚拟机中增加自定义中断向量，KVM 向虚拟机注入虚拟中断，触发虚拟机对该中断的处理。</strong></p> <h2 id="背景知识">背景知识</h2> <h3 id="linux-中断的申请和释放"><strong>Linux 中断的申请和释放</strong></h3> <p>request_irq / free_irq</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># linux-4.14/include/linux/interrupt.h
+</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">int</span> <span class="n">__must_check</span>
+<span class="nf">request_irq</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">irq</span><span class="p">,</span> <span class="n">irq_handler_t</span> <span class="n">handler</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">flags</span><span class="p">,</span>
+	    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">dev</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">request_threaded_irq</span><span class="p">(</span><span class="n">irq</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">dev</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">extern</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="nf">free_irq</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
+</code></pre></div></div> <p>函数 request_irq 用来申请中断资源，irq 表示设备对应的中断号，handler 表示中断处理函数，flags 表示触发方式，name 表示中断名称，自定义，主要是给用户查看的，dev 一般设置为设备结构体，会传递给中断处理函数的第二个参数。</p> <p>函数 free_irq 用来释放中断资源，第一个参数是 irq中断号，第二个参数 dev，与 request_irq 的第一个和最后一个参数一致。</p> <h3 id="kvm-中断模拟"><strong>KVM 中断模拟</strong></h3> <ol> <li>KVM 对设备发来的中断进行模拟处理，向VCPU注入中断信号。设备调用 ioctl(KVM_IRQ_LINE) 通知 KVM 发送中断，KVM 中对应处理函数为<code class="language-plaintext highlighter-rouge">kvm_vm_ioctl_irq_line</code> ，调用 <code class="language-plaintext highlighter-rouge">kvm_set_irq(struct kvm *kvm, int irq_source_id, u32 irq, int level, bool line_status)</code> 。</li> <li>控制流从 KVM 返回虚拟机，vcpu_enter_guest，<code class="language-plaintext highlighter-rouge">vmx_inject_irq</code> 将中断向量写入VMCS。</li> <li>虚拟机根据VMCS字段内容，通过IDT表找到中断处理函数。</li> </ol> <p>(PIC for example)</p> <pre><code class="language-mermaid">graph LR
+
+case:KVM_IRQ_LINE --&gt; kvm_vm_ioctl_irq_line --&gt; kvm_set_irq --&gt; irq_set.set --&gt; kvm_set_pic_irq
+vcpu_enter_guest --&gt; inject_pending_event --&gt; kvm_x86_ops.set_irq --&gt; vmx_inject_irq
+
+</code></pre> <h3 id="中断线与中断向量"><strong>中断线与中断向量</strong></h3> <p><strong>概念区分</strong>：中断线是硬件概念，设备连接某一条中断线。中断向量是操作系统概念，通过中断向量号作为索引在IDT表中寻找中断处理例程。</p> <p><strong>二者的转换</strong>：</p> <p>在pin-base机制中，设备直接向中断线发送信号，中断控制器（PIC或者I/O APIC）把中断线号转换成中断向量号发送给CPU。I/O APIC中二者的转换通过I/O APIC的I/O重定向表完成；在MSI/MSIX中，设备直接向CPU的LAPIC写入中断向量号信息。</p> <p>上文request_irq中的irq号即中断线号，操作系统中的vector表示中断向量号。</p> <p>相关代码： vcpu_enter_guest中的kvm_cpu_get_interrupt 函数获取中断向量号（PIC为例）</p> <pre><code class="language-mermaid">graph LR
+
+kvm_cpu_get_interrupt --&gt; kvm_cpu_get_extint --&gt; kvm_pic_read_irq
+kvm_cpu_get_interrupt --&gt; kvm_get_apic_interrupt --&gt; kvm_apic_has_interrupt
+</code></pre> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># linux-5.15/arch/x86/kvm/irq.c
+</span>
+<span class="kt">int</span> <span class="nf">kvm_cpu_get_interrupt</span><span class="p">(</span><span class="k">struct</span> <span class="n">kvm_vcpu</span> <span class="o">*</span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">kvm_cpu_get_extint</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">vector</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">vector</span><span class="p">;</span>			<span class="cm">/* PIC */</span>
+
+	<span class="k">return</span> <span class="n">kvm_get_apic_interrupt</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>	<span class="cm">/* APIC */</span>
+<span class="p">}</span>
+</code></pre></div></div> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># linux-5.15/arch/x86/kvm/i8259.c
+</span>
+<span class="kt">int</span> <span class="nf">kvm_pic_read_irq</span><span class="p">(</span><span class="k">struct</span> <span class="n">kvm</span> <span class="o">*</span><span class="n">kvm</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 部分代码</span>
+	<span class="n">irq</span> <span class="o">=</span> <span class="n">pic_get_irq</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pics</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="c1">// PIC控制器的irq_base与irq相加得到中断向量号</span>
+	<span class="n">intno</span> <span class="o">=</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">pics</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">irq_base</span> <span class="o">+</span> <span class="n">irq</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">intno</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><strong>也就是说，kvm_set_irq 中参数irq表示硬件概念，与驱动中设置的irq一致。</strong></p> <h2 id="解决思路">解决思路</h2> <h3 id="虚拟机中驱动的实现">虚拟机中驱动的实现</h3> <ol> <li> <p>模块初始化时注册irq。——调用函数request_irq(IRQ_NUM, demo_handle_irq, IRQF_SHARED, DRV_MODULE_NAME, &amp;demo_dev)</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 驱动 demo.c</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">demodev_driver_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">devno</span><span class="p">;</span>
+	<span class="n">dev_t</span> <span class="n">num_dev</span><span class="p">;</span>
+   
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demodev_driver_init is called. </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+   
+	<span class="c1">// 注册中断处理函数</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">request_irq</span><span class="p">(</span><span class="n">IRQ_NUM</span><span class="p">,</span> <span class="n">demoirq_handler</span><span class="p">,</span> <span class="n">IRQF_SHARED</span><span class="p">,</span> <span class="n">DRV_MODULE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">demodev</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printk</span><span class="p">(</span><span class="s">"register irq[%d] handler failed. </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">IRQ_NUM</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"request irq success.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div> </div> </li> <li> <p>中断号的选取。——本实验选取未预先配置的中断号IRQ 10。</p> </li> <li> <p>irq的处理。——输出当前IRQ号以及中断处理函数的地址。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 驱动 demo.c</span>
+<span class="k">static</span> <span class="n">irqreturn_t</span> <span class="nf">demoirq_handler</span><span class="p">(</span><span class="kt">int</span> <span class="n">irq</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">dev</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">demoirq</span> <span class="n">demodev</span><span class="p">;</span>
+    <span class="n">demodev</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="k">struct</span> <span class="n">demoirq</span><span class="o">*</span><span class="p">)</span><span class="n">dev</span><span class="p">;</span>	
+   	
+	<span class="k">if</span> <span class="p">(</span><span class="n">IRQ_DRIVER_ID</span> <span class="o">==</span> <span class="n">demodev</span><span class="p">.</span><span class="n">devid</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">"[demoirq_handler] irq_num: %u, demoirq_handler address: %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">IRQ_NUM</span><span class="p">,</span> <span class="n">demoirq_handler</span><span class="p">);</span>
+	<span class="p">}</span>	
+   
+	<span class="k">return</span> <span class="n">IRQ_HANDLED</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div> </div> </li> <li> <p>模块关闭时注销irq。free_irq(IRQ_NUM, &amp;demo_dev)</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 驱动 demo.c</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">demodev_driver_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>	
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demodev_driver_exit is called. </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="p">...</span>
+	<span class="n">free_irq</span><span class="p">(</span><span class="n">IRQ_NUM</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">demodev</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div> </div> </li> </ol> <h3 id="kvm-向虚拟机注入中断">KVM 向虚拟机注入中断</h3> <p>添加 ioctl KVM_IRQ_DEMO 处理实例，调用kvm_set_irq函数实现对虚拟机的中断注入。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># linux-5.15/virt/kvm/kvm_main.c
+</span><span class="k">static</span> <span class="kt">long</span> <span class="nf">kvm_vm_ioctl</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">,</span>
+			   <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">ioctl</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">struct</span> <span class="n">kvm</span> <span class="o">*</span><span class="n">kvm</span> <span class="o">=</span> <span class="n">filp</span><span class="o">-&gt;</span><span class="n">private_data</span><span class="p">;</span>
+	<span class="kt">void</span> <span class="n">__user</span> <span class="o">*</span><span class="n">argp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="n">__user</span> <span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">r</span><span class="p">;</span>
+	<span class="p">...</span>
+	<span class="k">case</span> <span class="n">KVM_IRQ_DEMO</span><span class="p">:</span> <span class="p">{</span>
+		<span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+		<span class="c1">// raise my irq</span>
+		<span class="c1">// kvm_set_irq(kvm, KVM_USERSPACE_IRQ_SOURCE_ID, irq_num, irq_event-&gt;level, line_status);</span>
+		<span class="n">printk</span><span class="p">(</span><span class="s">"case KVM_IRQ_DEMO: kvm_set_irq</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		
+		<span class="n">ret</span> <span class="o">=</span> <span class="n">kvm_set_irq</span><span class="p">(</span><span class="n">kvm</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+        <span class="n">printk</span><span class="p">(</span><span class="s">"[JNDebug] kvm_set_irq(level 1) return = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+		<span class="c1">// 如果不加这个level 0 会导致虚拟机死循环demo_irq_handle程序</span>
+		<span class="n">ret</span> <span class="o">=</span> <span class="n">kvm_set_irq</span><span class="p">(</span><span class="n">kvm</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+        <span class="n">printk</span><span class="p">(</span><span class="s">"[JNDebug] kvm_set_irq(level 0) return = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+		
+		<span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="qemu-中添加自定义命令实现从monitor触发中断">QEMU 中添加自定义命令实现从monitor触发中断</h3> <p>通过hmp协议实现从qemu触发irq中断。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># qemu-4.4.0/hmp.c
+</span><span class="kt">void</span> <span class="nf">hmp_raise_irq_demo</span><span class="p">(</span><span class="n">Monitor</span> <span class="o">*</span><span class="n">mon</span><span class="p">,</span> <span class="k">const</span> <span class="n">QDict</span> <span class="o">*</span><span class="n">qdict</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ioctl</span>
+    <span class="n">kvm_vm_ioctl</span><span class="p">(</span><span class="n">kvm_state</span><span class="p">,</span> <span class="n">KVM_IRQ_DEMO</span><span class="p">);</span>
+    <span class="n">monitor_printf</span><span class="p">(</span><span class="n">mon</span><span class="p">,</span> <span class="s">"hmp raise irq demo</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="实现过程">实现过程</h2> <p>宿主机：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 打补丁，编译QEMU</span>
+make
+make <span class="nb">install</span>
+
+<span class="c"># 打补丁，编译KVM  </span>
+<span class="nb">sudo </span>sh build-kvm.sh 
+
+<span class="c"># qemu 启动  </span>
+qemu-system-x86_64 <span class="nt">-m</span> 2048 <span class="nt">-smp</span> 4 <span class="nt">--enable-kvm</span> <span class="nt">-drive</span> <span class="nv">file</span><span class="o">=</span>../guest.img,format<span class="o">=</span>raw <span class="nt">-cdrom</span> ../ubuntu-16.04.7-desktop-amd64.iso
+
+<span class="c"># 连接VNC    </span>
+gvncviewer 127.0.0.1::5900
+
+<span class="c"># 查看日志</span>
+dmesg <span class="nt">-w</span>
+</code></pre></div></div> <p>虚拟机：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 添加demo.c和Makefile文件，编译驱动模块</span>
+make
+
+<span class="c"># 安装驱动模块     </span>
+<span class="nb">sudo </span>insmod demo.ko
+
+<span class="c"># 查看中断       </span>
+<span class="nb">head</span> /proc/interrupts
+
+<span class="c"># Ctrl+Alt+2 进入qemu monitor模式      </span>
+raise_irq_demo
+
+<span class="c"># Ctrl+Alt+1 回到正常模式  查看日志    </span>
+dmesg
+</code></pre></div></div> <p>结果：</p> <p>中断的注册</p> <p><img src="exp1/image/add-irq-num10.png" alt="add-irq-num10" style="zoom:80%;"/></p> <p>中断的处理</p> <p><img src="exp1/image/qemu-monitor.png" alt="qemu-monitor" style="zoom:80%;"/></p> <p><img src="exp1/image/vm-dmesg.png" alt="vm-dmesg" style="zoom:80%;"/></p> <p>内核输出</p> <p><img src="exp1/image/kvm-dmesg.png" alt="kvm-dmesg" style="zoom:80%;"/></p> <h1 id="实验二设备添加异步中断机制">实验二：设备添加异步中断机制</h1> <p><strong>基于第四章实验的自定义虚拟设备，增加 APIC中断机制的支持。</strong></p> <h2 id="解决思路-1">解决思路</h2> <p>本实验以write操作为例模拟实际环境中I/O的处理。虚拟机中对QEMU设备发送write请求后，主动调度让出CPU，等待中断处理函数唤醒再继续处理。QEMU设备收到write请求后，核验有效性后启动一个线程来处理具体的write请求，线程处理完之后触发irq中断通知虚拟机的驱动。</p> <h3 id="虚拟机驱动中io的主动调度及唤醒">虚拟机驱动中I/O的主动调度及唤醒</h3> <p>执行完writel之后，陷入到宿主机QEMU处理，主动调度让出CPU等待QEMU处理完。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// demo.c</span>
+<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">demo_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">fp</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="n">ubuf</span><span class="p">,</span>
+						<span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">off</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+	<span class="kt">uint32_t</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_write() begin</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="n">KERN_ERR</span> <span class="s">"write error len</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">return</span> <span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">ret</span> <span class="o">=</span> <span class="n">copy_from_user</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="n">ubuf</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">printk</span><span class="p">(</span><span class="n">KERN_ERR</span> <span class="s">"copy_from_user fail</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="k">return</span> <span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">writel</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">bar0</span><span class="p">);</span>
+
+	<span class="c1">// add schedule()</span>
+	<span class="c1">// add signal to printk</span>
+	<span class="n">DECLARE_WAITQUEUE</span><span class="p">(</span><span class="n">wait</span><span class="p">,</span> <span class="n">current</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">signal</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">// prepare to wait</span>
+		<span class="n">add_wait_queue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">write_wait</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">wait</span><span class="p">);</span>
+		<span class="n">set_current_state</span><span class="p">(</span><span class="n">TASK_INTERRUPTIBLE</span><span class="p">);</span>
+
+		<span class="n">printk</span><span class="p">(</span><span class="s">"wait for write done signal</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+		<span class="n">schedule</span><span class="p">();</span>
+		<span class="n">remove_wait_queue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">write_wait</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">wait</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">signal</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_read() copy_from_user: %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"demo_read() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>中断处理函数中唤醒当前进程。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// demo.c</span>
+<span class="k">static</span> <span class="n">irqreturn_t</span> <span class="nf">demoirq_handler</span><span class="p">(</span><span class="kt">int</span> <span class="n">irq</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">dev</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"[demoirq_handler] irq_num: %u, demoirq_handler address: %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">IRQ_NUM</span><span class="p">,</span> <span class="n">demoirq_handler</span><span class="p">);</span>
+	<span class="n">signal</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">wake_up</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">write_wait</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="n">IRQ_HANDLED</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="qemu设备中io的处理及中断通知">QEMU设备中I/O的处理及中断通知</h3> <p>qemu_thread_create 开启新线程demo_write_thread处理write请求，处理完成之后调用ioctl向虚拟机注入中断。</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">static</span> <span class="kt">void</span> <span class="o">*</span><span class="nf">demo_write_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// handle write</span>
+    <span class="n">DemoState</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">opaque</span><span class="p">;</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="mh">0x00</span><span class="p">:</span>
+            <span class="n">demo</span><span class="o">-&gt;</span><span class="n">buff</span> <span class="o">=</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// demo_raise_irq</span>
+    <span class="n">kvm_vm_ioctl</span><span class="p">(</span><span class="n">kvm_state</span><span class="p">,</span> <span class="n">KVM_IRQ_DEMO</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">demo_mmio_write</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">,</span> <span class="n">hwaddr</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">val</span><span class="p">,</span>
+                <span class="kt">unsigned</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DemoState</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">opaque</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">addr</span> <span class="o">!=</span> <span class="mh">0x00</span> <span class="o">||</span>  <span class="n">size</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// create thread </span>
+    <span class="n">demo</span><span class="o">-&gt;</span><span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span><span class="p">;</span>
+    <span class="n">demo</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">demo</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">qemu_thread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="kr">thread</span><span class="p">,</span> <span class="s">"demo_write_thread"</span><span class="p">,</span> <span class="n">demo_write_thread</span><span class="p">,</span>
+                           <span class="n">demo</span><span class="p">,</span> <span class="n">QEMU_THREAD_JOINABLE</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="kvm中断注入">KVM中断注入</h3> <p>同实验一。</p> <h2 id="实现过程-1">实现过程</h2> <p>宿主机：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 打补丁，编译QEMU</span>
+make
+make <span class="nb">install</span>
+
+<span class="c"># 打补丁，编译KVM  </span>
+<span class="nb">sudo </span>sh build-kvm.sh 
+
+<span class="c"># qemu 启动  </span>
+qemu-system-x86_64 <span class="nt">-m</span> 2048 <span class="nt">-smp</span> 4 <span class="nt">--enable-kvm</span> <span class="nt">-drive</span> <span class="nv">file</span><span class="o">=</span>../guest.img,format<span class="o">=</span>raw <span class="nt">--device</span> demo
+
+<span class="c"># 连接VNC    </span>
+gvncviewer 127.0.0.1::5900
+
+<span class="c"># 查看日志</span>
+dmesg <span class="nt">-w</span>
+</code></pre></div></div> <p>虚拟机：</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 添加demo.c和Makefile文件，编译驱动模块</span>
+make
+
+<span class="c"># 安装驱动模块     </span>
+<span class="nb">sudo </span>insmod demo.ko
+
+<span class="c"># 查看注册的设备编号</span>
+<span class="nb">cat</span> /proc/device | <span class="nb">grep </span>demo
+<span class="c"># 输出：</span>
+<span class="c"># 245 demo</span>
+
+<span class="c"># 给编号245的驱动创建设备文件 </span>
+<span class="nb">sudo mknod</span> /dev/demo c 245 0
+
+<span class="c"># 运行用户态测试程序</span>
+<span class="nb">sudo</span> ./test
+
+<span class="c"># 检查内核输出</span>
+dmesg
+</code></pre></div></div> <p>结果：</p> <p><img src="exp2/image/test-result.png" alt="test-result" style="zoom:80%;"/></p> <p><img src="exp2/image/guest-dmesg.png" alt="guest-dmesg" style="zoom:80%;"/></p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[本章介绍了中断虚拟化的两个实验：一是在虚拟机中添加自定义中断向量并通过KVM注入虚拟中断触发处理；二是为自定义虚拟设备增加APIC中断机制支持，实现异步I/O处理。]]></summary></entry><entry><title type="html">第六章实验：虚拟化应用</title><link href="https://dams.net.cn/book/2025/lab6/" rel="alternate" type="text/html" title="第六章实验：虚拟化应用"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab6</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab6/"><![CDATA[<h1 id="实验一使用libvmi获取虚拟机相关信息">实验一：使用LibVMI获取虚拟机相关信息</h1> <h2 id="安装libvmi">安装libvmi</h2> <h3 id="背景知识">背景知识</h3> <p>libvmi 库提供了对正在运行中的底层虚拟机的运行细节进行监视的功能。监视的功能是由观察内存细节，陷入硬件事件和读取 CPU 寄存器来完成的。这种方式被称作虚拟机自省 (virtual machine introspection)。</p> <h3 id="实验步骤">实验步骤</h3> <p>本实验使用 ubuntu20.04 进行安装。</p> <p>仓库地址： <a href="https://github.com/libvmi/libvmi">libvmi/libvmi: The official home of the LibVMI project is at https://github.com/libvmi/libvmi.</a></p> <p>安装文档： <a href="https://kvm-vmi.github.io/kvm-vmi/master/setup.html">Setup — KVM-VMI 0.1 documentation</a></p> <p><strong>注意事项：</strong></p> <p>（1）根据 Option 2: Bare-metal setup 一节的内容安装。 （2）注意 KVM-VMI/kvm-vmi 中有较多的 submodule，若不使用安装文档中提供的带 –recursive 参数的下载命令，则需要手动补全这些 submodule，以免后续编译出错。</p> <ul> <li>安装KVM-VMI</li> </ul> <p>根据文档安装。</p> <p>注意事项：</p> <p>（1）KVM-VMI需要用kvmi-v7分支。</p> <p>（2）在make之前需要额外执行以下指令（相关issue： <a href="https://github.com/KVM-VMI/kvm/issues/57">Compile Failure: kvm-vmi/kvm/tools/objtool/.fixdep.o.cmd:1: *** Missing separator. Stop. · Issue #57 · KVM-VMI/kvm (github.com)</a> ）：</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  make distclean
+  make olddefconfig
+  ./scripts/config <span class="nt">--enable</span> KVM
+  ./scripts/config <span class="nt">--enable</span> KVM_INTEL
+  ./scripts/config <span class="nt">--enable</span> KVM_AMD
+  ./scripts/config <span class="nt">--enable</span> KVM_INTROSPECTION
+  ./scripts/config <span class="nt">--disable</span> TRANSPARENT_HUGEPAGE
+  ./scripts/config <span class="nt">--enable</span> REMOTE_MAPPING
+  ./scripts/config <span class="nt">--disable</span> SYSTEM_TRUSTED_KEYS
+  ./scripts/config <span class="nt">--disable</span> SYSTEM_REVOCATION_KEYS
+</code></pre></div></div> <ul> <li>安装QEMU</li> </ul> <p>根据文档安装。</p> <p>注意事项：</p> <p>（1）需要关闭apparmor（或者修改其配置）：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sudo service apparmor stop
+</code></pre></div></div> <ul> <li>在虚拟机中添加qemu指令</li> </ul> <p>根据文档添加即可。</p> <p>其中 http://libvirt.org/schemas/domain/qemu/1.0 这个网址为空，访问不到内容，具体说明在 <a href="https://libvirt.org/drvqemu.html#pass-through-of-arbitrary-qemu-commands">libvirt: QEMU/KVM/HVF hypervisor driver</a> 中，按照文档添加即可，无需担心。</p> <ul> <li>安装libkvmi</li> </ul> <p>根据文档安装即可。</p> <ul> <li>安装LibVMI</li> </ul> <p>根据文档安装即可。</p> <h2 id="应用-libvmi-的示例程序获取虚拟机信息">应用 libvmi 的示例程序获取虚拟机信息</h2> <p><strong>1） 打印 Windows 内核的 GUID 和 PE_HEADER；2）拦截并显示 CR3 事件；3）打印虚拟机中运行的进程列表。</strong></p> <h3 id="实验步骤-1">实验步骤</h3> <p>先将 kvm-vmi/libvmi/etc/libvmi-example.conf 复制到 /etc/libvmi.conf，然后将虚拟机名字改为其中对应的名字。这里我们使用 Windows7 虚拟机（32位），所以就将虚拟机名字改为 win7，与配置文件对应（修改配置文件使其与虚拟机名字对应亦可）：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>win7 {
+    ostype      = "Windows";
+    win_pdbase  = 0x18;
+    win_pid     = 0xb4;
+    win_tasks   = 0xb8;
+    win_pname   = 0x16c;
+}
+</code></pre></div></div> <ul> <li>1）打印 Windows 内核的 GUID 和 PE_HEADER</li> </ul> <p>使用 example 中的示例程序：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/vmi-win-guid name win7 /tmp/introspector 
+Windows Kernel found @ 0x3c14000
+	Version: 32-bit Windows 7
+	PE GUID: 4ce78a09412000
+	PDB GUID: 684da42a30cc450f81c535b4d18944b12
+	Kernel filename: ntkrpamp.pdb
+	Multi-processor with PAE (version 5.0 and higher)
+	Signature: 17744.
+	Machine: 332.
+	# of sections: 22.
+	# of symbols: 0.
+	Timestamp: 1290242569.
+	Characteristics: 290.
+	Optional header size: 224.
+	Optional header type: 0x10b
+	Section 1: .text
+	Section 2: _PAGELK
+	Section 3: POOLMI
+	Section 4: POOLCODE
+	Section 5: .data
+	Section 6: ALMOSTRO
+	Section 7: SPINLOCK
+	Section 8: PAGE
+	Section 9: PAGELK
+	Section 10: PAGEKD
+	Section 11: PAGEVRFY
+	Section 12: PAGEHDLS
+	Section 13: PAGEBGFX
+	Section 14: PAGEVRFB
+	Section 15: .edata
+	Section 16: PAGEDATA
+	Section 17: PAGEKDD
+	Section 18: PAGEVRFC
+	Section 19: PAGEVRFD
+	Section 20: INIT
+	Section 21: .rsrc
+	Section 22: .reloc
+</code></pre></div></div> <ul> <li>2）拦截并显示 CR3 事件</li> </ul> <p>使用 example 中的示例程序：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/cr3-event-example win7 /tmp/introspector 
+Waiting for events...
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x185000
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x185000
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x185000
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x7ee0d480
+CR3 write happened: Value=0x7ee0d220
+CR3 write happened: Value=0x7ee0d480
+......
+</code></pre></div></div> <ul> <li>3）打印虚拟机中运行的进程列表</li> </ul> <p>使用 example 中的示例程序：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/vmi-process-list -n win7 -s /tmp/introspector
+LibVMI Suggestion: set win_ntoskrnl=0x3c14000 in libvmi.conf for faster startup.
+LibVMI Suggestion: set win_kdbg=0x12ac28 in libvmi.conf for faster startup.
+LibVMI Suggestion: set win_kdvb=0x83d3ec28 in libvmi.conf for faster startup.
+Process listing for VM win7 (id=4)
+[    4] System (struct addr:85c3bc78)
+[  224] smss.exe (struct addr:975deae0)
+[  304] csrss.exe (struct addr:86d40768)
+[  352] wininit.exe (struct addr:92c8dd40)
+[  360] csrss.exe (struct addr:86d46030)
+[  400] winlogon.exe (struct addr:85cad420)
+[  444] services.exe (struct addr:86dca5e8)
+[  452] lsass.exe (struct addr:86e124e0)
+[  460] lsm.exe (struct addr:86e14828)
+[  564] svchost.exe (struct addr:86e47180)
+[  632] svchost.exe (struct addr:86e5c780)
+[  684] svchost.exe (struct addr:86e68568)
+[  808] svchost.exe (struct addr:86e35a58)
+[  848] svchost.exe (struct addr:86eb0030)
+[  912] audiodg.exe (struct addr:86ebf500)
+[  964] svchost.exe (struct addr:86ece030)
+[ 1080] svchost.exe (struct addr:86ef2030)
+[ 1200] dwm.exe (struct addr:86f26030)
+[ 1212] explorer.exe (struct addr:86f289f0)
+[ 1256] spoolsv.exe (struct addr:86f34030)
+[ 1296] svchost.exe (struct addr:86f51d40)
+[ 1308] taskhost.exe (struct addr:86f59868)
+[ 1428] svchost.exe (struct addr:86fa8030)
+[ 1824] rundll32.exe (struct addr:8703cb18)
+[ 1844] rundll32.exe (struct addr:8703ed40)
+[ 1864] rundll32.exe (struct addr:870412e8)
+[  660] SearchIndexer. (struct addr:870c8958)
+[ 1232] SearchProtocol (struct addr:870efb88)
+[ 1412] SearchFilterHo (struct addr:87106c70)
+[ 1288] wmpnetwk.exe (struct addr:87116cb0)
+</code></pre></div></div> <h2 id="调用libvmi的接口实现进程信息获取">调用LibVMI的接口实现进程信息获取</h2> <p>**1）修改示例程序中的 cr3-event-example.c；2）修改 示例程序中的 process-list.c，根据需要获取进程、线程信息。 ** libvmi 的 api 文档：https://libvmi.com/api/</p> <h3 id="实验步骤-2">实验步骤</h3> <p>我们来看看有哪些事件支持被监控：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// libvmi/events.h</span>
+
+<span class="cp">#define VMI_EVENT_INVALID           0
+#define VMI_EVENT_MEMORY            1   </span><span class="cm">/**&lt; Read/write/execute on a region of memory */</span><span class="cp">
+#define VMI_EVENT_REGISTER          2   </span><span class="cm">/**&lt; Read/write of a specific register */</span><span class="cp">
+#define VMI_EVENT_SINGLESTEP        3   </span><span class="cm">/**&lt; Instructions being executed on a set of VCPUs */</span><span class="cp">
+#define VMI_EVENT_INTERRUPT         4   </span><span class="cm">/**&lt; Interrupts being delivered */</span><span class="cp">
+#define VMI_EVENT_GUEST_REQUEST     5   </span><span class="cm">/**&lt; Guest-requested event */</span><span class="cp">
+#define VMI_EVENT_CPUID             6   </span><span class="cm">/**&lt; CPUID event */</span><span class="cp">
+#define VMI_EVENT_DEBUG_EXCEPTION   7   </span><span class="cm">/**&lt; Debug exception event */</span><span class="cp">
+#define VMI_EVENT_PRIVILEGED_CALL   8   </span><span class="cm">/**&lt; Privileged call (ie. SMC on ARM) */</span><span class="cp">
+#define VMI_EVENT_DESCRIPTOR_ACCESS 9   </span><span class="cm">/**&lt; A descriptor table register was accessed */</span><span class="cp">
+#define VMI_EVENT_FAILED_EMULATION  10  </span><span class="cm">/**&lt; Emulation failed when requested by VMI_EVENT_RESPONSE_EMULATE */</span><span class="cp">
+#define VMI_EVENT_DOMAIN_WATCH      11  </span><span class="cm">/**&lt; Watch create/destroy events */</span><span class="cp">
+</span></code></pre></div></div> <ul> <li>1）修改示例程序中的 cr3-event-example.c</li> </ul> <p>来看看 vmi_event 中包含了什么，我们可以从中选择想要监控的信息打印出来：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// libvmi/events.h</span>
+
+<span class="k">struct</span> <span class="n">vmi_event</span> <span class="p">{</span>
+    <span class="cm">/* CONST IN */</span>
+    <span class="kt">uint32_t</span> <span class="n">version</span><span class="p">;</span> <span class="cm">/**&lt; User should set it to VMI_EVENTS_VERSION */</span>
+
+    <span class="cm">/* CONST IN */</span>
+    <span class="n">vmi_event_type_t</span> <span class="n">type</span><span class="p">;</span>  <span class="cm">/**&lt; The specific type of event */</span>
+
+    <span class="cm">/**
+     * IN/OUT/RESPONSE
+     *
+     * The VMM maintained SLAT ID. Can be specified when registering mem_event (IN).
+     * On an event report (OUT) specifies the active SLAT ID on the vCPU.
+     * Iff VMI_EVENT_RESPONSE_SLAT_ID is set (RESPONSE), switch the vCPU to this VMM pagetable ID.
+     *
+     * Note: on Xen this corresponds to the altp2m_idx.
+     */</span>
+    <span class="kt">uint16_t</span> <span class="n">slat_id</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * RESPONSE
+     *
+     * The VMM should switch to this SLAT ID on the occurance of the next event.
+     * Iff VMI_EVENT_RESPONSE_NEXT_SLAT_ID is set.
+     *
+     * Note: on Xen this corresponds to the altp2m_idx and it also enables MTF singlestepping.
+     *  The altp2m switch automatically happens in the singlestep handler in Xen after a single
+     *  instruction is executed.
+     */</span>
+    <span class="kt">uint16_t</span> <span class="n">next_slat_id</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * An open-ended mechanism allowing a library user to
+     *  associate external data to the event.
+     * Metadata assigned to this pointer at any time (prior to
+     *  or following registration) is delivered to the callback,
+     *  for each matching event. The callback is also free to
+     *  modify in any way. The library user assumes all memory
+     *  management for this referenced data.
+     */</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * The callback function that is invoked when the relevant is observed.
+     */</span>
+    <span class="n">event_callback_t</span> <span class="n">callback</span><span class="p">;</span>
+
+    <span class="cm">/* OUT */</span>
+    <span class="kt">uint32_t</span> <span class="n">vcpu_id</span><span class="p">;</span> <span class="cm">/**&lt; The VCPU relative to which the event occurred. */</span>
+
+    <span class="cm">/**
+     * Reserved for future use
+     */</span>
+    <span class="kt">uint32_t</span> <span class="n">_reserved</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+
+    <span class="k">union</span> <span class="p">{</span>
+        <span class="n">reg_event_t</span> <span class="n">reg_event</span><span class="p">;</span>
+        <span class="n">mem_access_event_t</span> <span class="n">mem_event</span><span class="p">;</span>
+        <span class="n">single_step_event_t</span> <span class="n">ss_event</span><span class="p">;</span>
+        <span class="n">interrupt_event_t</span> <span class="n">interrupt_event</span><span class="p">;</span>
+        <span class="n">privcall_event_t</span> <span class="n">privcall_event</span><span class="p">;</span>
+        <span class="n">cpuid_event_t</span> <span class="n">cpuid_event</span><span class="p">;</span>
+        <span class="n">debug_event_t</span> <span class="n">debug_event</span><span class="p">;</span>
+        <span class="n">descriptor_event_t</span> <span class="n">descriptor_event</span><span class="p">;</span>
+        <span class="n">watch_domain_event_t</span> <span class="n">watch_event</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="cm">/*
+     * Note that the following pointers assume compiler compatibility
+     * ie. if you compiled a 32-bit version of LibVMI it will be
+     * incompatable with 64-bit tools and vice verse.
+     */</span>
+    <span class="k">union</span> <span class="p">{</span>
+        <span class="cm">/**
+         * OUT
+         *
+         * Snapshot of some VCPU registers when the event occurred
+         */</span>
+        <span class="k">union</span> <span class="p">{</span>
+            <span class="n">x86_registers_t</span> <span class="o">*</span><span class="n">x86_regs</span><span class="p">;</span>
+            <span class="n">arm_registers_t</span> <span class="o">*</span><span class="n">arm_regs</span><span class="p">;</span>
+        <span class="p">};</span>
+
+        <span class="cm">/**
+         * RESPONSE
+         *
+         * Read data to be sent back with VMI_EVENT_RESPONSE_SET_EMUL_READ_DATA
+         */</span>
+        <span class="n">emul_read_t</span> <span class="o">*</span><span class="n">emul_read</span><span class="p">;</span>
+
+        <span class="cm">/**
+         * RESPONSE
+         *
+         * Instruction buffer to be sent back with VMI_EVENT_RESPONSE_SET_EMUL_INSN
+         */</span>
+        <span class="n">emul_insn_t</span> <span class="o">*</span><span class="n">emul_insn</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>因为我们这里选择了监控寄存器，所以再来看看 reg_event_t 中包含什么：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// libvmi/events.h</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="cm">/**
+     * CONST IN
+     *
+     * Register for which write event is configured.
+     * Hypervisors offering register events tend to
+     *  have a limited number available for monitoring.
+     * These registers tend to be those defined as
+     * 'sensitive register instructions' by Popek and
+     *  Goldberg, meaning that the registers trigger
+     *  a VMEXIT, trap, or equivalent.
+     *
+     * Note for MSR events on Xen: up to Xen 4.7 only MSR_ALL is supported.
+     *  Starting with Xen 4.8 the user has the option to subscribe to specific
+     *  MSR events, or to continue using MSR_ALL. However, in this case MSR_ALL
+     *  only corresponds to common MSRs that are defined by LibVMI in libvmi.h.
+     *  To subscribe to MSR events that are NOT defined by LibVMI, the user can specify
+     *  MSR_UNDEFINED here and then set the specific MSR index in the 'msr' field
+     *  below.
+     */</span>
+    <span class="n">reg_t</span> <span class="n">reg</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * Event filter: callback triggers IFF register==&lt;equal&gt;
+     */</span>
+    <span class="n">reg_t</span> <span class="n">equal</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * IFF set to 1, events are delivered asynchronously and
+     *  without pausing the originating VCPU
+     * Default : 0. (i.e., VCPU is paused at time of event delivery).
+     */</span>
+    <span class="kt">uint8_t</span> <span class="n">async</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * IFF set to 1, events are only delivered if the written
+     *  value differs from the previously held value.
+     * Default : 0. (i.e., All write events are delivered).
+     */</span>
+    <span class="kt">uint8_t</span> <span class="n">onchange</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN
+     *
+     * Type of register event being monitored.
+     * Hypervisors offering register events do so only for those that trigger a
+     *  VMEXIT or similar trap. This predominantly means that only write events
+     *  are supported by the corresponding LibVMI driver
+     */</span>
+    <span class="n">vmi_reg_access_t</span> <span class="n">in_access</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * OUT
+     *
+     * Type of register access that triggered the event
+     */</span>
+    <span class="n">vmi_reg_access_t</span> <span class="n">out_access</span><span class="p">;</span>
+
+    <span class="kt">uint32_t</span> <span class="n">_pad</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * OUT
+     *
+     * Register value read or written
+     */</span>
+    <span class="n">reg_t</span> <span class="n">value</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * OUT
+     *
+     * Previous value of register (only for CR0/CR3/CR4/MSR)
+     */</span>
+    <span class="n">reg_t</span> <span class="n">previous</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * CONST IN/OUT
+     *
+     * MSR register operations only
+     *
+     * CONST IN: Starting from Xen 4.8 the user can use this field to specify an
+     *  MSR index to subscribe to when the MSR is not formally defined by LibVMI.
+     *
+     * OUT: holds the specific MSR for which the event occurred
+     *  when the user registered with MSR_ALL.
+     * Unused for other register event types.
+     */</span>
+    <span class="kt">uint32_t</span> <span class="n">msr</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">reg_event_t</span><span class="p">;</span>
+</code></pre></div></div> <p>选择其中一些感兴趣的数据，并修改 call back 函数：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// cr3-event-example.c</span>
+
+<span class="p">...</span>
+
+<span class="n">event_response_t</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">vmi_instance_t</span> <span class="n">vmi</span><span class="p">,</span> <span class="n">vmi_event_t</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">vmi</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"CR3 write happened: Value=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">reg_event</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">vcpu_id=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">vcpu_id</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">rbx=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">x86_regs</span><span class="o">-&gt;</span><span class="n">rbx</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">cr0=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">x86_regs</span><span class="o">-&gt;</span><span class="n">cr0</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">previous CR3 value=0x%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">reg_event</span><span class="p">.</span><span class="n">previous</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">VMI_EVENT_RESPONSE_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="p">...</span>
+    <span class="n">vmi_event_t</span> <span class="n">my_event</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">VMI_EVENTS_VERSION</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">VMI_EVENT_REGISTER</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">my_callback</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">reg_event</span><span class="p">.</span><span class="n">reg</span> <span class="o">=</span> <span class="n">CR3</span><span class="p">;</span>
+    <span class="n">my_event</span><span class="p">.</span><span class="n">reg_event</span><span class="p">.</span><span class="n">in_access</span> <span class="o">=</span> <span class="n">VMI_REGACCESS_W</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>重新 make，然后运行：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  build git:(5882bc2) ✗ examples/cr3-event-example win7 /tmp/introspector
+Waiting for events...
+CR3 write happened: Value=0x7f9740a0
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x185000
+CR3 write happened: Value=0x185000
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x7f9740a0
+CR3 write happened: Value=0x7f9740a0
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x185000
+CR3 write happened: Value=0x185000
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x7f9740a0
+CR3 write happened: Value=0x7f9740a0
+	vcpu_id=0x0
+	rbx=0x83d77c00
+	cr0=0x8001003b
+	previous CR3 value=0x185000
+......
+</code></pre></div></div> <ul> <li>2）修改 process-list.c</li> </ul> <p>在windows中，EPROCESS 结构属于内核的执行体层，包含了进程的资源相关信息诸如句柄表、虚拟内存、安全、调试、异常、创建信息、I/O转移统计以及进程计时等。32位 win7 系统 EPROCESS 结构如下：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kd&gt; dt _EPROCESS
+ntdll!_EPROCESS
+   +0x000 Pcb              : _KPROCESS
+   +0x098 ProcessLock      : _EX_PUSH_LOCK
+   +0x0a0 CreateTime       : _LARGE_INTEGER
+   +0x0a8 ExitTime         : _LARGE_INTEGER
+   +0x0b0 RundownProtect   : _EX_RUNDOWN_REF
+   +0x0b4 UniqueProcessId  : Ptr32 Void
+   +0x0b8 ActiveProcessLinks : _LIST_ENTRY
+   +0x0c0 ProcessQuotaUsage : [2] Uint4B
+   +0x0c8 ProcessQuotaPeak : [2] Uint4B
+   +0x0d0 CommitCharge     : Uint4B
+   +0x0d4 QuotaBlock       : Ptr32 _EPROCESS_QUOTA_BLOCK
+   +0x0d8 CpuQuotaBlock    : Ptr32 _PS_CPU_QUOTA_BLOCK
+   +0x0dc PeakVirtualSize  : Uint4B
+   +0x0e0 VirtualSize      : Uint4B
+   +0x0e4 SessionProcessLinks : _LIST_ENTRY
+   +0x0ec DebugPort        : Ptr32 Void
+   +0x0f0 ExceptionPortData : Ptr32 Void
+   +0x0f0 ExceptionPortValue : Uint4B
+   +0x0f0 ExceptionPortState : Pos 0, 3 Bits
+   +0x0f4 ObjectTable      : Ptr32 _HANDLE_TABLE
+   +0x0f8 Token            : _EX_FAST_REF
+   +0x0fc WorkingSetPage   : Uint4B
+   +0x100 AddressCreationLock : _EX_PUSH_LOCK
+   +0x104 RotateInProgress : Ptr32 _ETHREAD
+   +0x108 ForkInProgress   : Ptr32 _ETHREAD
+   +0x10c HardwareTrigger  : Uint4B
+   +0x110 PhysicalVadRoot  : Ptr32 _MM_AVL_TABLE
+   +0x114 CloneRoot        : Ptr32 Void
+   +0x118 NumberOfPrivatePages : Uint4B
+   +0x11c NumberOfLockedPages : Uint4B
+   +0x120 Win32Process     : Ptr32 Void
+   +0x124 Job              : Ptr32 _EJOB
+   +0x128 SectionObject    : Ptr32 Void
+   +0x12c SectionBaseAddress : Ptr32 Void
+   +0x130 Cookie           : Uint4B
+   +0x134 Spare8           : Uint4B
+   +0x138 WorkingSetWatch  : Ptr32 _PAGEFAULT_HISTORY
+   +0x13c Win32WindowStation : Ptr32 Void
+   +0x140 InheritedFromUniqueProcessId : Ptr32 Void
+   +0x144 LdtInformation   : Ptr32 Void
+   +0x148 VdmObjects       : Ptr32 Void
+   +0x14c ConsoleHostProcess : Uint4B
+   +0x150 DeviceMap        : Ptr32 Void
+   +0x154 EtwDataSource    : Ptr32 Void
+   +0x158 FreeTebHint      : Ptr32 Void
+   +0x160 PageDirectoryPte : _HARDWARE_PTE_X86
+   +0x160 Filler           : Uint8B
+   +0x168 Session          : Ptr32 Void
+   +0x16c ImageFileName    : [15] UChar
+   +0x17b PriorityClass    : UChar
+   +0x17c JobLinks         : _LIST_ENTRY
+   +0x184 LockedPagesList  : Ptr32 Void
+   +0x188 ThreadListHead   : _LIST_ENTRY
+   ......
+</code></pre></div></div> <p>与 EPROCESS 对应，ETHREAD 结构记录了线程中相关的信息。32位 win7 系统 ETHREAD 结构如下：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kd&gt; dt _ETHREAD
+ntdll!_ETHREAD
+   +0x000 Tcb              : _KTHREAD
+   +0x200 CreateTime       : _LARGE_INTEGER
+   +0x208 ExitTime         : _LARGE_INTEGER
+   +0x208 KeyedWaitChain   : _LIST_ENTRY
+   +0x210 ExitStatus       : Int4B
+   +0x214 PostBlockList    : _LIST_ENTRY
+   +0x214 ForwardLinkShadow : Ptr32 Void
+   +0x218 StartAddress     : Ptr32 Void
+   +0x21c TerminationPort  : Ptr32 _TERMINATION_PORT
+   +0x21c ReaperLink       : Ptr32 _ETHREAD
+   +0x21c KeyedWaitValue   : Ptr32 Void
+   +0x220 ActiveTimerListLock : Uint4B
+   +0x224 ActiveTimerListHead : _LIST_ENTRY
+   +0x22c Cid              : _CLIENT_ID
+   ......
+</code></pre></div></div> <p>我们根据这些信息，修改 process-list.c：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="c1">// 添加变量</span>
+    <span class="n">vmi_pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ppid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">tasks_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pid_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pdbase_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">...</span>
+
+    <span class="cm">/* init the offset values */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">VMI_OS_LINUX</span> <span class="o">==</span> <span class="n">vmi_get_ostype</span><span class="p">(</span><span class="n">vmi</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"linux_tasks"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tasks_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"linux_name"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">name_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"linux_pid"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">VMI_OS_WINDOWS</span> <span class="o">==</span> <span class="n">vmi_get_ostype</span><span class="p">(</span><span class="n">vmi</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_tasks"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tasks_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_pname"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">name_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_pid"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="c1">// 添加获取win_pdbase的步骤</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"win_pdbase"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pdbase_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span> 
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">VMI_OS_FREEBSD</span> <span class="o">==</span> <span class="n">vmi_get_ostype</span><span class="p">(</span><span class="n">vmi</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">tasks_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"freebsd_name"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">name_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">VMI_FAILURE</span> <span class="o">==</span> <span class="n">vmi_get_offset</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="s">"freebsd_pid"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pid_offset</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="p">...</span>
+        
+    <span class="cm">/* walk the task list */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">current_process</span> <span class="o">=</span> <span class="n">cur_list_entry</span> <span class="o">-</span> <span class="n">tasks_offset</span><span class="p">;</span>
+
+        <span class="cm">/* Note: the task_struct that we are looking at has a lot of
+         * information.  However, the process name and id are burried
+         * nice and deep.  Instead of doing something sane like mapping
+         * this data to a task_struct, I'm just jumping to the location
+         * with the info that I want.  This helps to make the example
+         * code cleaner, if not more fragile.  In a real app, you'd
+         * want to do this a little more robust :-)  See
+         * include/linux/sched.h for mode details */</span>
+
+        <span class="cm">/* NOTE: _EPROCESS.UniqueProcessId is a really VOID*, but is never &gt; 32 bits,
+         * so this is safe enough for x64 Windows for example purposes */</span>
+        <span class="n">vmi_read_32_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="n">pid_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">pid</span><span class="p">);</span>
+
+        <span class="n">procname</span> <span class="o">=</span> <span class="n">vmi_read_str_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="n">name_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        
+        <span class="c1">// 根据偏移获取各种进程、线程信息</span>
+        <span class="kt">uint32_t</span> <span class="n">pdbase</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vmi_read_32_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="n">pdbase_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">pdbase</span><span class="p">);</span>
+        
+        <span class="n">vmi_read_32_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="mh">0x140</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ppid</span><span class="p">);</span> 
+        
+        <span class="n">vmi_read_addr_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">current_process</span> <span class="o">+</span> <span class="mh">0x188</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">addr_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ThreadListHead</span><span class="p">);</span> 
+        <span class="n">ThreadListHead</span> <span class="o">=</span> <span class="n">ThreadListHead</span> <span class="o">-</span> <span class="mh">0x268</span><span class="p">;</span>
+        
+        <span class="kt">int64_t</span> <span class="n">CreateTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vmi_read_64_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">ThreadListHead</span> <span class="o">+</span> <span class="mh">0x200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CreateTime</span><span class="p">);</span> 
+        
+        <span class="kt">uint32_t</span> <span class="n">Cid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">vmi_read_64_va</span><span class="p">(</span><span class="n">vmi</span><span class="p">,</span> <span class="n">ThreadListHead</span> <span class="o">+</span> <span class="mh">0x22c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">Cid</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">procname</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"Failed to find procname</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="k">goto</span> <span class="n">error_exit</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/* print out the process name */</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">pid</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">procname</span><span class="p">,</span> <span class="s">"svchost.exe"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+        	<span class="n">printf</span><span class="p">(</span><span class="s">"[%5d] %s (struct addr:%"</span><span class="n">PRIx64</span><span class="s">"), pdbase:%"</span><span class="n">PRIx64</span><span class="s">", ppid:%5d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">procname</span><span class="p">,</span> <span class="n">current_process</span><span class="p">,</span> <span class="n">pdbase</span><span class="p">,</span> <span class="n">ppid</span><span class="p">);</span>
+            <span class="c1">// 添加我们需要的输出语句</span>
+			<span class="n">printf</span><span class="p">(</span><span class="s">"ThreadListHead:%"</span><span class="n">PRIx64</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">ThreadListHead</span><span class="p">);</span>
+        	<span class="n">printf</span><span class="p">(</span><span class="s">"thread createtime:%ld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">CreateTime</span><span class="p">);</span>
+        	<span class="n">printf</span><span class="p">(</span><span class="s">"Cid:%5d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">Cid</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>输出结果：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span>  <span class="n">build</span> <span class="n">git</span><span class="o">:</span><span class="p">(</span><span class="mi">5882</span><span class="n">bc2</span><span class="p">)</span> <span class="err">✗</span> <span class="n">examples</span><span class="o">/</span><span class="n">vmi</span><span class="o">-</span><span class="n">process</span><span class="o">-</span><span class="n">list</span> <span class="o">-</span><span class="n">n</span> <span class="n">win7</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">introspector</span>
+<span class="n">LibVMI</span> <span class="n">Suggestion</span><span class="o">:</span> <span class="n">set</span> <span class="n">win_ntoskrnl</span><span class="o">=</span><span class="mh">0x3c14000</span> <span class="n">in</span> <span class="n">libvmi</span><span class="p">.</span><span class="n">conf</span> <span class="k">for</span> <span class="n">faster</span> <span class="n">startup</span><span class="p">.</span>
+<span class="n">LibVMI</span> <span class="n">Suggestion</span><span class="o">:</span> <span class="n">set</span> <span class="n">win_kdbg</span><span class="o">=</span><span class="mh">0x12ac28</span> <span class="n">in</span> <span class="n">libvmi</span><span class="p">.</span><span class="n">conf</span> <span class="k">for</span> <span class="n">faster</span> <span class="n">startup</span><span class="p">.</span>
+<span class="n">LibVMI</span> <span class="n">Suggestion</span><span class="o">:</span> <span class="n">set</span> <span class="n">win_kdvb</span><span class="o">=</span><span class="mh">0x83d3ec28</span> <span class="n">in</span> <span class="n">libvmi</span><span class="p">.</span><span class="n">conf</span> <span class="k">for</span> <span class="n">faster</span> <span class="n">startup</span><span class="p">.</span>
+<span class="n">Process</span> <span class="n">listing</span> <span class="k">for</span> <span class="n">VM</span> <span class="n">win7</span> <span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">[</span>  <span class="mi">224</span><span class="p">]</span> <span class="n">smss</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">975</span><span class="n">deae0</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d020</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>    <span class="mi">4</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">975</span><span class="n">de808</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839485781250</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">224</span>
+<span class="p">[</span>  <span class="mi">304</span><span class="p">]</span> <span class="n">csrss</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">d40768</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d060</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">296</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">85</span><span class="n">cc87b0</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839501718750</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">304</span>
+<span class="p">[</span>  <span class="mi">352</span><span class="p">]</span> <span class="n">wininit</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">92</span><span class="n">c8dd40</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d0a0</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">296</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">85</span><span class="n">cb3770</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839501875000</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="p">[</span>  <span class="mi">360</span><span class="p">]</span> <span class="n">csrss</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">d46030</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d040</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">344</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">85</span><span class="n">cad828</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839502968750</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">360</span>
+<span class="p">[</span>  <span class="mi">400</span><span class="p">]</span> <span class="n">winlogon</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">85</span><span class="n">cad420</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d0c0</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">344</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">86</span><span class="n">c07d48</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839503125000</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">400</span>
+<span class="p">[</span>  <span class="mi">444</span><span class="p">]</span> <span class="n">services</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">dca5e8</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d080</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mf">86e0</span><span class="n">f030</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839506718750</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">444</span>
+<span class="p">[</span>  <span class="mi">452</span><span class="p">]</span> <span class="n">lsass</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mf">86e124</span><span class="n">e0</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d0e0</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mf">86e20030</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839507656250</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">452</span>
+<span class="p">[</span>  <span class="mi">460</span><span class="p">]</span> <span class="n">lsm</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mf">86e14828</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d100</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">352</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mf">86e144</span><span class="n">a0</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839507187500</span>
+<span class="n">Cid</span><span class="o">:</span>  <span class="mi">460</span>
+<span class="p">[</span> <span class="mi">1200</span><span class="p">]</span> <span class="n">dwm</span><span class="p">.</span><span class="n">exe</span> <span class="p">(</span><span class="k">struct</span> <span class="n">addr</span><span class="o">:</span><span class="mi">86</span><span class="n">f26030</span><span class="p">),</span> <span class="n">pdbase</span><span class="o">:</span><span class="mi">7</span><span class="n">ee0d280</span><span class="p">,</span> <span class="n">ppid</span><span class="o">:</span>  <span class="mi">808</span>
+<span class="n">ThreadListHead</span><span class="o">:</span><span class="mi">86</span><span class="n">f26658</span>
+<span class="kr">thread</span> <span class="n">createtime</span><span class="o">:</span><span class="mi">133255839526718750</span>
+<span class="n">Cid</span><span class="o">:</span> <span class="mi">1200</span>
+<span class="p">......</span>
+</code></pre></div></div> <p>读者可以根据示例自行添加需要获取的信息。上述两个结构的具体信息读者可以自行查阅或自行调试获取。</p> <h2 id="参考63小节获取并输出linux内核系统调用表sys_call_table的内容">参考6.3小节，获取并输出Linux内核系统调用表sys_call_table的内容</h2> <h3 id="背景知识-1">背景知识</h3> <p>符号（Symbols），就是kernel中的变量（Variable Name）或函数名称（Function Name）。在Linux中，System.map文件是内核符号名称及其对应内存地址的映射表。它在内核构建过程中创建，并位于内核源代码树的根目录中（通常是/linux/System.map）。System.map文件由内核的崩溃转储分析工具和一些性能分析工具使用，以将内核地址映射到它们对应的符号名称。</p> <h3 id="实验步骤-3">实验步骤</h3> <p>这一个实验我们以 ubuntu14.04 为例。</p> <p>安装 ubuntu14.04 系统以及修改虚拟机 XML 文件的过程不在此赘述。</p> <p>虚拟机安装完成后，我们将它的 System.map 文件复制到宿主机 boot 目录下（其他路径也可以），检查一下 sys_call_table 符号是否存在：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  libvmi git:(5882bc2) ✗ cat /boot/System.map-3.13.0-24-generic | grep sys_call_table
+ffffffff81801400 R sys_call_table
+ffffffff81809cc0 R ia32_sys_call_table
+</code></pre></div></div> <p>然后修改 /etc/libvmi.conf 文件：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ubuntu14.04 {
+    sysmap      = "/boot/System.map-3.13.0-24-generic";
+    ostype      = "Linux";
+}
+</code></pre></div></div> <p>接着用 map-symbol 程序查看这一块内存的内容：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  libvmi git:(5882bc2) ✗ build/examples/map-symbol ubuntu14.04 sys_call_table /tmp/introspector 
+00000000|  80 9e 1b 81 ff ff ff ff  20 9f 1b 81 ff ff ff ff   ........ .......
+00000010|  b0 89 1b 81 ff ff ff ff  20 6b 1b 81 ff ff ff ff   ........ k......
+00000020|  90 e9 1b 81 ff ff ff ff  c0 e9 1b 81 ff ff ff ff   ................
+00000030|  a0 e9 1b 81 ff ff ff ff  10 e9 1c 81 ff ff ff ff   ................
+00000040|  00 90 1b 81 ff ff ff ff  30 86 01 81 ff ff ff ff   ........0.......
+00000050|  d0 10 18 81 ff ff ff ff  20 fe 17 81 ff ff ff ff   ........ .......
+00000060|  e0 f2 17 81 ff ff ff ff  a0 bb 07 81 ff ff ff ff   ................
+00000070|  30 a9 07 81 ff ff ff ff  10 6a 72 81 ff ff ff ff   0........jr.....
+00000080|  c0 c8 1c 81 ff ff ff ff  c0 9f 1b 81 ff ff ff ff   ................
+00000090|  70 a0 1b 81 ff ff ff ff  10 a5 1b 81 ff ff ff ff   p...............
+000000a0|  d0 a5 1b 81 ff ff ff ff  60 7b 1b 81 ff ff ff ff   ........`{......
+000000b0|  f0 2d 1c 81 ff ff ff ff  30 e0 1c 81 ff ff ff ff   .-......0.......
+000000c0|  80 9a 09 81 ff ff ff ff  e0 1d 18 81 ff ff ff ff   ................
+000000d0|  f0 22 18 81 ff ff ff ff  60 ab 17 81 ff ff ff ff   ."......`.......
+000000e0|  a0 35 17 81 ff ff ff ff  80 fa 2b 81 ff ff ff ff   .5........+.....
+000000f0|  60 02 2c 81 ff ff ff ff  e0 fa 2b 81 ff ff ff ff   `.,.......+.....
+00000100|  c0 76 1d 81 ff ff ff ff  80 75 1d 81 ff ff ff ff   .v.......u......
+00000110|  40 be 07 81 ff ff ff ff  f0 f4 08 81 ff ff ff ff   @...............
+00000120|  40 ad 06 81 ff ff ff ff  60 62 07 81 ff ff ff ff   @.......`b......
+00000130|  30 b1 06 81 ff ff ff ff  b0 e3 07 81 ff ff ff ff   0...............
+00000140|  d0 ac 1b 81 ff ff ff ff  a0 2d 60 81 ff ff ff ff   .........-`.....
+00000150|  60 31 60 81 ff ff ff ff  40 31 60 81 ff ff ff ff   `1`.....@1`.....
+......
+</code></pre></div></div> <h1 id="实验二嵌套虚拟化环境实验">实验二：嵌套虚拟化环境实验</h1> <h2 id="配置并重新编译kvm虚拟化环境开启嵌套虚拟化模式运行启动嵌套虚拟机">配置并重新编译KVM虚拟化环境，开启嵌套虚拟化模式，运行启动嵌套虚拟机</h2> <h3 id="实验步骤-4">实验步骤</h3> <p>检查L0 KVM的嵌套虚拟化支持是否开启：</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /sys/module/kvm_intel/parameters/nested
+</code></pre></div></div> <p>如果显示<code class="language-plaintext highlighter-rouge">Y</code>说明已经开启。</p> <p>创建、启动L1、L2虚拟机的步骤详见：<a href="https://gitee.com/silver-zhou/virtualization_book/tree/v-1.0/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AE%9E%E9%AA%8C">第一章实验</a></p> <p><strong>注意：</strong>使用<code class="language-plaintext highlighter-rouge">qemu-system-x86_64</code>命令启动虚拟机时，应加入<code class="language-plaintext highlighter-rouge">-cpu host</code>参数，以便上层vCPU继承下层CPU（或vCPU）的VMX特性。</p> <h2 id="在l0层kvm中捕获l1层kvm对嵌套虚拟机vmcs的写操作">在L0层KVM中捕获L1层KVM对嵌套虚拟机VMCS的写操作</h2> <h3 id="实验思路">实验思路</h3> <p>在KVM嵌套虚拟化实现中，L1、L2虚拟机实际都由L0物理机启动。</p> <p>但在逻辑上（即从L1的视角），L2虚拟机由L1虚拟机中的KVM维护、创建、启动。</p> <p>因此，L0、L1分别维护了如下VMCS数据结构：</p> <table> <thead> <tr> <th>VMCS名称</th> <th>实际维护者</th> <th>逻辑上的host</th> <th>逻辑上的guest</th> </tr> </thead> <tbody> <tr> <td>vmcs01</td> <td>L0</td> <td>L0</td> <td>L1</td> </tr> <tr> <td>vmcs12</td> <td>L1</td> <td>L1</td> <td>L2</td> </tr> <tr> <td>vmcs02</td> <td>L0</td> <td>L0</td> <td>L2</td> </tr> <tr> <td>shadow_vmcs12</td> <td>L0</td> <td>L1</td> <td>L2</td> </tr> </tbody> </table> <p>当L2发生VM exit，需要进入L1 KVM处理，并返回L2，该过程步骤如下：</p> <ol> <li><strong>L2 VM exit，控制流进入L0 KVM</strong></li> <li>L0 KVM读取vmcs02数据，将guest部分内容更新至shadow_vmcs12</li> <li>L0 KVM将shadow_vmcs12推送至L1虚拟机中维护的vmcs12</li> <li><strong>L0 KVM切换VMCS到vmcs01，控制流进入L1 KVM</strong></li> <li><strong>L1 KVM识别到L2虚拟机的陷入并处理，继续执行L2虚拟机，该指令被L0捕获后，控制流回到L0KVM</strong></li> <li>L0 KVM从L1虚拟机中读取到已经被L1 KVM维护过的vmcs12，存入shadow_vmcs12</li> <li>L0 KVM将shadow_vmcs12中guest相关数据更新至vmcs02</li> <li><strong>L0 KVM切换VMCS到vmcs02，控制流回到L2虚拟机</strong></li> </ol> <p>因此，只需在L1处理L2 VM exit的前（步骤3、步骤4之间）后（步骤6、步骤7之间），对vmcs12分别进行读取、对比，即可捕获L1层KVM对嵌套虚拟机VMCS的写操作。</p> <p>其中，在L1处理L2 VM exit前（步骤3、步骤4之间）加入代码如下：</p> <pre><code class="language-C">record_vmcs12_data = vmcs12-&gt;guest_cr0;
+</code></pre> <p>在L1处理L2 VM exit后（步骤6、步骤7之间）加入代码如下：</p> <pre><code class="language-C">if (record_vmcs12_data != vmcs12-&gt;guest_cr0)
+{
+	printk("[cpt6-exp2] before L1 run, guest_cr0=%llx\n",record_vmcs12_data);
+	printk("[cpt6-exp2] after  L1 run, guest_cr0=%llx\n",vmcs12-&gt;guest_cr0);
+}
+</code></pre> <p>其中<code class="language-plaintext highlighter-rouge">record_vmcs12_data</code>为全局变量。</p> <h3 id="实验步骤-5">实验步骤</h3> <p>使用补丁文件<em>exp2/cpt6-exp2-kernel.patch</em>修改Linux内核源码，编译、安装：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make -j
+sudo rmmod kvm_intel
+sudo insmod kernel-source/arch/x86/kvm/kvm-intel.ko
+</code></pre></div></div> <p>依次启动L1、L2虚拟机</p> <p>打开dmesg可以看到L1 KVM对L2虚拟机CR0寄存器的修改，如图：</p> <p><img src="./assets/cpt6-exp2-result.png" alt="cpt6-exp2-result"/></p>]]></content><author><name></name></author><category term="配套实验"/><category term="QEMU"/><category term="KVM"/><summary type="html"><![CDATA[本章介绍了使用LibVMI库进行虚拟机自省的实验，包括安装配置LibVMI环境、获取Windows虚拟机内核信息、监控CR3寄存器事件以及获取虚拟机进程列表等虚拟化监控应用。]]></summary></entry></feed>
