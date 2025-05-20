@@ -59,6 +59,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/chenjiayun/";
+            },},{id: "members-guofeng",
+          title: 'Guofeng',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/guofeng/";
             },},{id: "members-hezhiyu",
           title: 'Hezhiyu',
           description: "",
@@ -79,6 +84,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/jiangnan/";
+            },},{id: "members-lihaiyang",
+          title: 'Lihaiyang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/lihaiyang/";
             },},{id: "members-liupuchun",
           title: 'Liupuchun',
           description: "",
@@ -89,6 +99,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/liuxin/";
+            },},{id: "members-liyakai",
+          title: 'Liyakai',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/liyakai/";
             },},{id: "members-liyan",
           title: 'Liyan',
           description: "",
@@ -204,6 +219,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/chenjiayun@ccgrid/";
+            },},{id: "news-学术报告-李亚凯的报告-geekcon-international-2024",
+          title: '【学术报告】李亚凯的报告 @ GeekCon International 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/liyankai@geekcon2024/";
             },},{id: "news-学术报告-姜楠的报告-ifipsec-2024",
           title: '【学术报告】姜楠的报告 @ IFIPSEC 2024',
           description: "",
