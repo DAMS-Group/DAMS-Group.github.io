@@ -4,6 +4,7 @@
     <h3>导航栏</h3>
 
     <!-- 分类导航 -->
+    {% assign newslist = site.news %}
     <div class="category-nav">
       <ul class="category-list">
         <li class="category-section" id="category-全部">
@@ -14,8 +15,8 @@
             >全部</a
           >
           <div class="news-list">
-            {% if site.news != blank %}
-              {% assign news = site.news | reverse %}
+            {% if newslist != blank %}
+              {% assign news = newslist | reverse %}
               {% for item in news %}
                 <div class="news-item">
                   <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
@@ -35,8 +36,8 @@
             >学术活动</a
           >
           <div class="news-list" style="display: none;">
-            {% if site.news != blank %}
-              {% assign news = site.news | reverse %}
+            {% if newslist != blank %}
+              {% assign news = newslist | reverse %}
               {% for item in news %}
                 {% if item.category == '学术活动' %}
                   <div class="news-item">
@@ -58,8 +59,8 @@
             >团建活动</a
           >
           <div class="news-list" style="display: none;">
-            {% if site.news != blank %}
-              {% assign news = site.news | reverse %}
+            {% if newslist != blank %}
+              {% assign news = newslist | reverse %}
               {% for item in news %}
                 {% if item.category == '团建活动' %}
                   <div class="news-item">
@@ -78,9 +79,9 @@
   </div>
 
   <!-- 右侧详细内容区 -->
-  <div class="news-content">
-    {% if site.news != blank %}
-      {% assign news = site.news | reverse %}
+  <div class="news-section">
+    {% if newslist != blank %}
+      {% assign news = newslist | reverse %}
       {% assign has_news = false %}
       <!-- 添加分页变量 -->
       {% assign total_news = news.size %}
@@ -92,6 +93,7 @@
           id="news-{{ forloop.index }}"
           class="news-card"
           data-category="{{ category }}"
+          {% if forloop.index > 10 %}style="display: none;"{% endif %}
         >
           <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
           <h4>
@@ -122,13 +124,23 @@
       <p>暂无新闻...</p>
     {% endif %}
   </div>
+</div>
 
-  <!-- 分页控件 -->
-  <div class="pagination-container">
-    <button id="prev-page" class="pagination-btn">上一页</button>
-    <span class="page-indicator">第 <span id="current-page">1</span> / <span id="total-pages">1</span> 页</span>
-    <button id="next-page" class="pagination-btn">下一页</button>
-  </div>
+<!-- 分页控件 -->
+<div class="pagination-wrapper">
+  <nav aria-label="Blog page navigation" class="pagination-container">
+    <ul class="pagination pagination-lg justify-content-center">
+      <li class="page-item">
+        <a id="prev-page" class="page-link"> &lt; </a>
+      </li>
+      <li class="page-item">
+        <span class="page-link">第 <span id="current-page">1</span> / <span id="total-pages">1</span> 页</span>
+      </li>
+      <li class="page-item">
+        <a id="next-page" class="page-link"> &gt; </a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 <!-- JavaScript代码 -->
