@@ -64,6 +64,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/guofeng/";
+            },},{id: "members-guojiaming",
+          title: 'Guojiaming',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/guojiaming/";
             },},{id: "members-hezhiyu",
           title: 'Hezhiyu',
           description: "",
@@ -199,16 +204,21 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhouqihang/";
-            },},{id: "news-团建活动-2023年10月15日秋日团建",
-          title: '【团建活动】2023年10月15日秋日团建',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/team-building@judianchuanba/";
             },},{id: "news-论文录用-acsac-2023",
           title: '【论文录用】ACSAC 2023',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@acsac2023/";
+            },},{id: "news-团建活动-2023年10月15日秋日团建",
+          title: '【团建活动】2023年10月15日秋日团建',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/team-building@judianchuanba/";
+            },},{id: "news-学术报告-徐少文的报告-acsac-2023",
+          title: '【学术报告】徐少文的报告 @ ACSAC 2023',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/xushaowen@acsac2023/";
             },},{id: "news-论文录用-ccgrid-2024",
           title: '【论文录用】CCGrid 2024',
           description: "",
@@ -228,7 +238,7 @@ ninja.data = [{
           title: '【学术报告】姜楠的报告 @ IFIPSEC 2024',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/jiangnan@sec2024/";
+              window.location.href = "/news/jiangnan@ifipsec2024/";
             },},{id: "news-学术报告-张艺馨的报告-iscc-2024",
           title: '【学术报告】张艺馨的报告 @ ISCC 2024',
           description: "",
