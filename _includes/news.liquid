@@ -252,30 +252,6 @@
       noNewsMessage.style.display = hasInitialNews ? 'none' : 'block';
     }
 
-    // 根据当前分类更新分页函数
-    function updatePaginationForCategory() {
-      // 获取当前选中的分类
-      const selectedCategory = document.querySelector('.category-link.active').getAttribute('data-category');
-      
-      // 重置当前页为第一页
-      currentPage = 1;
-      
-      // 筛选符合当前分类的新闻卡片
-      filteredCards = Array.from(newsCards).filter(card => {
-        return selectedCategory === '全部' || card.getAttribute('data-category') === selectedCategory;
-      });
-      
-      // 检查是否有该分类的新闻
-      const hasNews = filteredCards.length > 0;
-      const noNewsMessage = document.querySelector('.no-news-message');
-      if (noNewsMessage) {
-        noNewsMessage.style.display = hasNews ? 'none' : 'block';
-      }
-      
-      // 更新分页
-      updatePagination();
-    }
-
     // 为分类链接添加点击事件
     categoryLinks.forEach((link) => {
       link.addEventListener('click', function (e) {
@@ -316,6 +292,11 @@
         let hasNews = false;
         // 重置当前页为第一页
         currentPage = 1;
+
+        // 隐藏当前所有的 新闻卡片
+        filteredCards.forEach(card => {
+          card.style.display = 'none';
+        });
 
         // 筛选符合条件的新闻卡片
         filteredCards = Array.from(newsCards).filter(card => {
@@ -391,8 +372,8 @@
                 allNewsList.style.display = 'block';
               }
               
-              // 调用分类分页函数更新显示
-              updatePaginationForCategory();
+              // 调用分页函数更新显示
+              updatePagination();
             }
           }
 
@@ -401,21 +382,6 @@
           if (targetIndex !== -1) {
             // 计算目标新闻卡片所在的页码
             const targetPage = Math.floor(targetIndex / newsPerPage) + 1;
-            // 如果目标页码与当前页码不同，则更新当前页码并重新分页
-            if (targetPage !== currentPage) {
-              currentPage = targetPage;
-              updatePagination();
-            }
-          }
-
-          // 计算目标新闻卡片在filteredCards中的索引
-          const targetIndex = filteredCards.findIndex(card => card === targetElement);
-          
-          // 如果找到了目标新闻卡片
-          if (targetIndex !== -1) {
-            // 计算目标新闻卡片所在的页码
-            const targetPage = Math.floor(targetIndex / newsPerPage) + 1;
-            
             // 如果目标页码与当前页码不同，则更新当前页码并重新分页
             if (targetPage !== currentPage) {
               currentPage = targetPage;

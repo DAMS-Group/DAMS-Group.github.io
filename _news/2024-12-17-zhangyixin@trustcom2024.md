@@ -12,4 +12,6 @@ category: 学术活动
 
 该工作介绍了USB Catcher方法，该方法通过导电干扰辐射来检测USB设备中的受控辐射。
 
-{% include figure.liquid loading="eager" path="assets/img/news/conferences/zhangyixin@trustcom2024.jpg" title="张艺馨@TrustCom2024" class="img-fluid rounded z-depth-1" width="80%" center="true" %}
+<div style="text-align: center;">
+    <img alt="张艺馨@TrustCom2024" src="/assets/img/news/conferences/zhangyixin@trustcom2024.jpg" width="60%" style="margin: 0 auto" />
+</div>

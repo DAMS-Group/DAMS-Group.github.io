@@ -12,4 +12,6 @@ category: 学术活动
 
 该工作提出了一种新型可信虚拟化架构，建立从硬件可信基到虚拟机内部的完整可信链，设计了一系列保证主动动态度量连续性的方法，保护虚拟机在全生命周期的完整性。该工作还在内建ASP的测试平台上实现实验原型，评估结果表明，vASP架构有较好的安全性和性能。
 
-{% include figure.liquid loading="eager" path="assets/img/news/conferences/chenjiayun@ccgrid2024.jpg" title="陈家赟@CCGRID2024" class="img-fluid rounded z-depth-1" %}
+<div style="text-align: center;">
+    <img alt="陈家赟@CCGRID2024" src="/assets/img/news/conferences/chenjiayun@ccgrid2024.jpg" width="60%" style="margin: 0 auto" />
+</div>

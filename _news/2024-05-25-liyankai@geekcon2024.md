@@ -12,4 +12,6 @@ category: 学术活动
 
 该工作旨在帮助企业感知并验证越狱风险，解决大模型越狱攻防研究者面临的两大难题：一是越狱方法迭代速度快；二是追踪越狱方法的成本高昂。为此通过大模型持续性的从互联网学习越狱方法，并将越狱方法结合相关越狱风险，对大语言模型进行自动化RedTeam测试，来验证当前越狱风险的大小。
 
-{% include figure.liquid loading="eager" path="assets/img/news/conferences/liyakai@geekcon2024.jpg" title="李亚凯@GeekCon2024" class="img-fluid rounded z-depth-1" %}
+<div style="text-align: center;">
+    <img alt="李亚凯@GeekCon2024" src="/assets/img/news/conferences/liyakai@geekcon2024.jpg" width="100%" style="margin: 0 auto" />
+</div>
