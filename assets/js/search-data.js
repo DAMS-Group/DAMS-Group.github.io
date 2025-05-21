@@ -289,6 +289,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/songqiyang@ndss2025/";
+            },},{id: "news-论文录用-mobisys-2025",
+          title: '【论文录用】MobiSys 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@mobisys2025/";
             },},{id: "news-论文录用-sigmetrics-2025",
           title: '【论文录用】SIGMETRICS 2025',
           description: "",
