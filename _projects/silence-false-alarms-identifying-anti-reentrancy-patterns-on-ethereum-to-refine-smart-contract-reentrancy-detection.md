@@ -2,7 +2,7 @@
 layout: page
 title: AutoAR
 description: Silence False Alarms - Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection
-img: assets/img/octocat/securityknightocat.png
+img: https://octodex.github.com/images/securityknightocat.png
 pub_year: 2025
 category: Publications
 related_publications: true

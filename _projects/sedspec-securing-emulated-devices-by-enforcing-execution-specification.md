@@ -2,7 +2,7 @@
 layout: page
 title: SEDSpec
 description: Securing Emulated Devices by Enforcing Execution Specification
-img: assets/img/octocat/mcefeeline.jpg
+img: https://octodex.github.com/images/mcefeeline.jpg
 pub_year: 2024
 category: Publications
 related_publications: true

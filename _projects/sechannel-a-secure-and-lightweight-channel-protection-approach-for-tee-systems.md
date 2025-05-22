@@ -2,7 +2,7 @@
 layout: page
 title: SeChannel
 description: A Secure and Lightweight Channel Protection Approach for TEE Systems
-img: assets/img/octocat/manufacturetocat.png
+img: https://octodex.github.com/images/manufacturetocat.png
 pub_year: 2024
 category: Publications
 related_publications: true

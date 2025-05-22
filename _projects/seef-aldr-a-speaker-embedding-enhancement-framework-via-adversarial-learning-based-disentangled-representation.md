@@ -2,7 +2,7 @@
 layout: page
 title: SEEF-ALDR
 description: A Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation
-img: assets/img/octocat/steroidtocat.png
+img: https://octodex.github.com/images/steroidtocat.png
 pub_year: 2020
 category: Publications
 related_publications: true

@@ -12,4 +12,6 @@ category: 团建活动
 
 在美食的陪伴下，大家畅所欲言，分享着各自的研究心得和生活趣事。餐厅里洋溢着欢声笑语，不仅增进了团队成员之间的感情，也为紧张的科研生活增添了一抹轻松的色彩。🍽️
 
-{% include figure.liquid loading="eager" path="assets/img/news/activities/2024-team-building.jpg" title="2024年团建" class="img-fluid rounded z-depth-1" width="80%" center="true" %}
+<div style="text-align: center;">
+    <img alt="2024年团建" src="/assets/img/news/activities/2024-team-building.jpg" width="80%" style="margin: 0 auto" />
+</div>

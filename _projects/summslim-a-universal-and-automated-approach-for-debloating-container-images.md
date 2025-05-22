@@ -2,7 +2,7 @@
 layout: page
 title: SummSlim
 description: A Universal and Automated Approach for Debloating Container Images
-img: assets/img/octocat/skatetocat.png
+img: https://octodex.github.com/images/skatetocat.png
 pub_year: 2024
 category: Publications
 related_publications: true

@@ -2,7 +2,7 @@
 layout: page
 title: ET-GAN
 description: Cross-Language Emotion Transfer Based on Cycle-Consistent Generative Adversarial Networks
-img: assets/img/octocat/minertocat.png
+img: https://octodex.github.com/images/minertocat.png
 pub_year: 2020
 category: Publications
 related_publications: true

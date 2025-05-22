@@ -2,7 +2,7 @@
 layout: page
 title: HClave
 description: An Isolated Execution Environment Design for Hypervisor Runtime Security
-img: assets/img/octocat/vinyltocat.png
+img: https://octodex.github.com/images/vinyltocat.png
 pub_year: 2024
 category: Publications
 related_publications: true

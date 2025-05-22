@@ -2,7 +2,7 @@
 layout: page
 title: High-Speed USB Attack
 description: A Conducted Compromising Emanations Method on High-Speed USB Devices via USB Hubs
-img: assets/img/octocat/universetocat.png
+img: https://octodex.github.com/images/universetocat.png
 pub_year: 2024
 category: Publications
 related_publications: true

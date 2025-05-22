@@ -2,7 +2,7 @@
 layout: page
 title: RContainer
 description: A Secure Container Architecture through Extending ARM CCA Hardware Primitives
-img: assets/img/octocat/jetpacktocat.png
+img: https://octodex.github.com/images/jetpacktocat.png
 pub_year: 2025
 category: Publications
 related_publications: true

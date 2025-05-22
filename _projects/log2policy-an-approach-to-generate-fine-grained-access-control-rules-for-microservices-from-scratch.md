@@ -2,7 +2,7 @@
 layout: page
 title: Log2Policy
 description: An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch
-img: assets/img/octocat/snowtocat.jpg
+img: https://octodex.github.com/images/snowtocat_final.jpg
 pub_year: 2023
 category: Publications
 related_publications: true

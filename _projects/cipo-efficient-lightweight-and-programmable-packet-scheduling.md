@@ -2,7 +2,7 @@
 layout: page
 title: CIPO
 description: Efficient, Lightweight and Programmable Packet Scheduling
-img: assets/img/octocat/fintechtocat.png
+img: https://octodex.github.com/images/Fintechtocat.png
 pub_year: 2024
 category: Publications
 related_publications: true

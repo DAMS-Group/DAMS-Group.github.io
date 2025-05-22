@@ -2,7 +2,7 @@
 layout: page
 title: Chameleon
 description: Towards Building Least-privileged TEE via Functionality-based Resource Re-grouping
-img: assets/img/octocat/umbrellatocat.jpg
+img: https://octodex.github.com/images/puddle_jumper_octodex.jpg
 pub_year: 2025
 category: Publications
 related_publications: true
