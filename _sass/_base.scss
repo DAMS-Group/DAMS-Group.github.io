@@ -279,6 +279,14 @@ ul.task-list input[type="checkbox"] {
   margin-left: auto;
 }
 
+@media (max-width: 576px) {
+  .book_profile_box {
+    min-width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
 .book-profile-box {
   margin: 2rem 0;
   padding: 2rem;
