@@ -1,13 +1,12 @@
 ---
 layout: default
 ---
-<div class="post">
+<div class="about_post">
   <div class="hero-section">
     {% if page.lab_image %}
-      <div class="lab_image background-image">
+      <div class="lab_image">
         {% assign lab_image_path = page.lab_image | prepend: 'assets/img/' %}
-        {% assign lab_image_class = 'img-fluid' %}
-        {% include figure.liquid loading="eager" path=lab_image_path class=lab_image_class alt=page.lab_image cache_bust=true %}
+        <img src={{ lab_image_path }} width="100%" />
       </div>
     {% endif %}
 
@@ -27,7 +26,7 @@ layout: default
     <!-- News -->
     {% if site.announcements and site.announcements.enabled %}
       <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">新闻</a>
+        <a href="{{ '/news/' | relative_url }}">新闻</a>
       </h2>
       {% include latest_news.liquid limit=true %}
     {% endif %}
@@ -35,14 +34,14 @@ layout: default
     <!-- Latest posts -->
     {% if site.latest_posts and site.latest_posts.enabled %}
       <h2>
-        <a href="{{ '/book/' | relative_url }}" style="color: inherit">实验</a>
+        <a href="{{ '/book/' | relative_url }}">实验</a>
       </h2>
       {% include latest_posts.liquid %}
     {% endif %}
 
     <!-- Selected papers -->
     <h2>
-      <a href="{{ '/publications/' | relative_url }}" style="color: inherit">发表</a>
+      <a href="{{ '/publications/' | relative_url }}">发表</a>
     </h2>
     {% include selected_papers.liquid %}
   </div>

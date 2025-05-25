@@ -1,102 +1,100 @@
 ---
 layout: page
 ---
-<div class="post">
-  <article>
-    <!-- Teachers Section -->
-    <div class="member_type">
-      <h2>Teachers</h2>
-      <hr>
-      {% assign teachers = site.members | where: 'category', 'teachers' | sort: 'order' %}
-      {% if teachers.size > 0 %}
-        {% for member in teachers %}
-          <br>
-          {% assign loopindex = forloop.index0 | modulo: 5 %}
-          {% if loopindex == 0 %}
-            <div class="members_row">
-          {% endif %}
-          <div class="member">
-            {% if member.image %}
-              {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
-              {% if member.blog %}
-                <a href="{{ member.blog }}">
-              {% endif %}
-              <div class="avatar-img-container">
-                {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
-              </div>
-              {% if member.blog %}
-                </a>
-              {% endif %}
+<article>
+  <!-- Teachers Section -->
+  <div class="member_type">
+    <h2>Teachers</h2>
+    <hr>
+    {% assign teachers = site.members | where: 'category', 'teachers' | sort: 'order' %}
+    {% if teachers.size > 0 %}
+      {% for member in teachers %}
+        <br>
+        {% assign loopindex = forloop.index0 | modulo: 5 %}
+        {% if loopindex == 0 %}
+          <div class="members_row">
+        {% endif %}
+        <div class="member">
+          {% if member.image %}
+            {% assign member_image_path = member.image | prepend: 'assets/img/' %}
+            {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
+            {% if member.blog %}
+              <a href="{{ member.blog }}">
             {% endif %}
-            <div class="more-info">
-              {% if member.name %}
-                <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
-              {% endif %}
-              {% if member.title %}
-                <li class="member-title" style="list-style-type:none;">{{ member.title }}</li>
-              {% endif %}
-              {% if member.research %}
-                <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
-              {% endif %}
-              {% if member.email %}
-                <li style="list-style-type:none;">
-                  <a href="mailto: {{- member.email -}} ">{{- member.email -}}</a>
-                </li>
-              {% endif %}
+            <div class="avatar-img-container">
+              {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
             </div>
-          </div>
-          {% if loopindex == 4 or forloop.last %}
-            </div>
+            {% if member.blog %}
+              </a>
+            {% endif %}
           {% endif %}
-        {% endfor %}
-      {% else %}
-        <p>暂无教师信息。</p>
-      {% endif %}
-    </div>
+          <div class="more-info">
+            {% if member.name %}
+              <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
+            {% endif %}
+            {% if member.title %}
+              <li class="member-title" style="list-style-type:none;">{{ member.title }}</li>
+            {% endif %}
+            {% if member.research %}
+              <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
+            {% endif %}
+            {% if member.email %}
+              <li style="list-style-type:none;">
+                <a href="mailto: {{- member.email -}} ">{{- member.email -}}</a>
+              </li>
+            {% endif %}
+          </div>
+        </div>
+        {% if loopindex == 4 or forloop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p>暂无教师信息。</p>
+    {% endif %}
+  </div>
 
-    <!-- Students Section -->
-    <div class="member_type">
-      <h2>Students</h2>
-      <hr>
-      {% assign students = site.members | where: 'category', 'students' | sort: 'grade' %}
-      {% if students.size > 0 %}
-        {% for member in students %}
-          <br>
-          {% assign loopindex = forloop.index0 | modulo: 5 %}
-          {% if loopindex == 0 %}
-            <div class="members_row">
+  <!-- Students Section -->
+  <div class="member_type">
+    <h2>Students</h2>
+    <hr>
+    {% assign students = site.members | where: 'category', 'students' | sort: 'grade' %}
+    {% if students.size > 0 %}
+      {% for member in students %}
+        <br>
+        {% assign loopindex = forloop.index0 | modulo: 5 %}
+        {% if loopindex == 0 %}
+          <div class="members_row">
+        {% endif %}
+        <div class="member">
+          {% if member.image %}
+            {% assign member_image_path = member.image | prepend: 'assets/img/' %}
+            {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
+            <div class="avatar-img-container">
+              {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
+            </div>
           {% endif %}
-          <div class="member">
-            {% if member.image %}
-              {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
-              <div class="avatar-img-container">
-                {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
-              </div>
+          <div class="more-info">
+            {% if member.name %}
+              <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
             {% endif %}
-            <div class="more-info">
-              {% if member.name %}
-                <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
-              {% endif %}
-              {% if member.grade %}
-                <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级博士生</li>
-              {% endif %}
-              {% if member.job %}
-                <li class="member-job" style="list-style-type:none;">毕业去向：{{ member.job }}</li>
-              {% endif %}
-              {% if member.research %}
-                <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
-              {% endif %}
-            </div>
+            {% if member.grade %}
+              <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级博士生</li>
+            {% endif %}
+            {% if member.job %}
+              <li class="member-job" style="list-style-type:none;">毕业去向：{{ member.job }}</li>
+            {% endif %}
+            {% if member.research %}
+              <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
+            {% endif %}
           </div>
-          {% if loopindex == 4 or forloop.last %}
-            </div>
-          {% endif %}
-        {% endfor %}
-      {% else %}
-        <p>暂无学生信息。</p>
-      {% endif %}
-    </div>
-  </article>
-</div>
+        </div>
+        {% if loopindex == 4 or forloop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p>暂无学生信息。</p>
+    {% endif %}
+  </div>
+</article>

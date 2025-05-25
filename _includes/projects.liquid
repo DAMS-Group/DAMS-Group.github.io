@@ -7,25 +7,33 @@
         <h2 class="category">{{ category }}</h2>
       </a>
       {% assign sorted_projects = site.projects | where: 'category', category | sort: 'pub_year' | reverse %}
-      <!-- Generate cards for each project -->
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        {% for project in sorted_projects %}
+      {% for project in sorted_projects %}
+        {% assign loopindex = forloop.index0 | modulo: 4 %}
+        {% if loopindex == 0 %}
+          <div class="projects_row">
+        {% endif %}
+        <div class="project">
           {% include project_card.liquid %}
-        {% endfor %}
-      </div>
+        </div>
+        {% if loopindex == 3 or forloop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
     {% endfor %}
-
   {% else %}
     <!-- Display projects without categories -->
-
     {% assign sorted_projects = site.projects | sort: 'pub_year' | reverse %}
-
-    <!-- Generate cards for each project -->
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-      {% for project in sorted_projects %}
+    {% for project in sorted_projects %}
+      {% assign loopindex = forloop.index0 | modulo: 4 %}
+      {% if loopindex == 0 %}
+        <div class="projects_row">
+      {% endif %}
+      <div class="project">
         {% include project_card.liquid %}
-      {% endfor %}
-    </div>
+      </div>
+      {% if loopindex == 3 or forloop.last %}
+        </div>
+      {% endif %}
+    {% endfor %}
   {% endif %}
 </div>

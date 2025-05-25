@@ -1,4 +1,4 @@
-<div class="news" style="width: 30%">
+<div class="news">
   {% if site.news != blank %}
     {% assign news_size = site.news | size %}
     <div
@@ -16,8 +16,8 @@
         {% endif %}
         {% for item in news limit: news_limit %}
           <tr>
-            <th scope="row" style="width: 30%; white-space: nowrap;">{{ item.date | date: '%b %d, %Y' }}</th>
-            <td style="max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <th scope="row">{{ item.date | date: '%b %d, %Y' }}</th>
+            <td>
               {% if item.inline %}
                 {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
               {% else %}
