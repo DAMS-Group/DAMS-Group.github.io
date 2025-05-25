@@ -412,6 +412,7 @@ ul.task-list input[type="checkbox"] {
 
   .navbar-brand {
     color: var(--global-text-color);
+    margin-right: 0rem;
   }
 
   .navbar-nav .nav-item .nav-link {
@@ -496,6 +497,12 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
+@media (max-width: 576px) {
+  .navbar-toggler {
+    padding: 0;
+  }
+}
+
 .navbar-toggler.collapsed {
   .top-bar {
     transform: rotate(0);
@@ -507,6 +514,14 @@ ul.task-list input[type="checkbox"] {
 
   .bottom-bar {
     transform: rotate(0);
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-toggler.collapsed {
+    .icon-bar {
+      width: 16px;
+    }
   }
 }
 
@@ -1936,6 +1951,13 @@ ninja-keys::part(ninja-input-wrapper) {
   width: 2rem;
   height: 2rem;
   object-fit: contain;
+}
+
+@media (max-width: 576px) {
+ .navbar-brand img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 /* Tag Filter Styles */
