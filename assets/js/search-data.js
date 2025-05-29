@@ -224,6 +224,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@ccgrid2024/";
+            },},{id: "news-论文录用-iscc-2024",
+          title: '【论文录用】ISCC 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@iscc2024/";
             },},{id: "news-学术报告-陈家赟的报告-ccgrid-2024",
           title: '【学术报告】陈家赟的报告 @ CCGrid 2024',
           description: "",
@@ -264,6 +269,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/team-building@diliuji/";
+            },},{id: "news-论文录用-trustcom-2024",
+          title: '【论文录用】TrustCom 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@trustcom2024/";
             },},{id: "news-论文录用-socc-2024",
           title: '【论文录用】SoCC 2024',
           description: "",
@@ -279,16 +289,16 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/jiangnan@trustcom2024/";
-            },},{id: "news-学术报告-张艺馨的学术报告-trustcom-2024",
-          title: '【学术报告】张艺馨的学术报告 @ TrustCom 2024',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/zhangyixin@trustcom2024/";
             },},{id: "news-学术报告-徐少文的报告-socc-2024",
           title: '【学术报告】徐少文的报告 @ SoCC 2024',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/xushaowen@socc2024/";
+            },},{id: "news-学术报告-张艺馨的学术报告-trustcom-2024",
+          title: '【学术报告】张艺馨的学术报告 @ TrustCom 2024',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/zhangyixin@trustcom2024/";
             },},{id: "news-学术报告-陈家赟的报告-ndss-2025",
           title: '【学术报告】陈家赟的报告 @ NDSS 2025',
           description: "",
