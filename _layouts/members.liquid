@@ -39,7 +39,7 @@ layout: page
               <li class="member-research" style="list-style-type:none;">研究方向：{{ member.research }}</li>
             {% endif %}
             {% if member.email %}
-              <li style="list-style-type:none;">
+              <li style="list-style-type:none; word-break: break-word;">
                 <a href="mailto: {{- member.email -}} ">{{- member.email -}}</a>
               </li>
             {% endif %}

@@ -1544,6 +1544,7 @@ ninja-keys::part(ninja-input-wrapper) {
     justify-content: space-around;
     gap: 0.8rem;
     align-items: flex-start;
+    width: 100%;
 
     >div {
       flex: 1;
@@ -1569,7 +1570,6 @@ ninja-keys::part(ninja-input-wrapper) {
     .about_row {
       display: inline-flex;
       flex-direction: column;
-      max-width: 100%;
 
       >div {
         min-width: 100%;
@@ -1667,6 +1667,7 @@ ninja-keys::part(ninja-input-wrapper) {
       &:hover {
         background-color: rgba(var(--global-theme-color-rgb), 0.1);
       }
+
       cursor: default; // 禁用tr的pointer样式
     }
 
@@ -1955,7 +1956,7 @@ ninja-keys::part(ninja-input-wrapper) {
 }
 
 @media (max-width: 576px) {
- .navbar-brand img {
+  .navbar-brand img {
     width: 1.5rem;
     height: 1.5rem;
   }
