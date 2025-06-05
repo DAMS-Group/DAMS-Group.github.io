@@ -16,30 +16,23 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/book/";
           },
-        },{id: "nav-论文",
-          title: "论文",
-          description: "实验室相关论文工作。",
+        },{id: "nav-发表",
+          title: "发表",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-项目",
-          title: "项目",
-          description: "论文实现的相关项目。",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
-          },
         },{id: "nav-团队",
           title: "团队",
-          description: "实验室成员。",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/members/";
           },
         },{id: "nav-新闻",
           title: "新闻",
-          description: "实验室新闻。",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/news/";
@@ -319,106 +312,6 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@sigmetrics2025/";
-            },},{id: "projects-high-speed-usb-attack",
-          title: 'High-Speed USB Attack',
-          description: "A Conducted Compromising Emanations Method on High-Speed USB Devices via USB Hubs",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/a-conducted-compromising-emanations-method-on-high-speed-usb-devices-via-usb-hubs/";
-            },},{id: "projects-chameleon",
-          title: 'Chameleon',
-          description: "Towards Building Least-privileged TEE via Functionality-based Resource Re-grouping",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/chameleon-towards-building-least-privileged-tee-via-functionality-based-resource-re-grouping/";
-            },},{id: "projects-cipo",
-          title: 'CIPO',
-          description: "Efficient, Lightweight and Programmable Packet Scheduling",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/cipo-efficient-lightweight-and-programmable-packet-scheduling/";
-            },},{id: "projects-conmonitor",
-          title: 'ConMonitor',
-          description: "Lightweight Container Protection with Virtualization and VM Functions",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/conmonitor-lightweight-container-protection-with-virtualization-and-vm-functions/";
-            },},{id: "projects-cubevisor",
-          title: 'CubeVisor',
-          description: "A Multi-realm Architecture Design for Running VM with ARM CCA",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/cubevisor-a-multi-realm-architecture-design-for-running-vm-with-arm-cca/";
-            },},{id: "projects-enclavepdp",
-          title: 'EnclavePDP',
-          description: "A General Framework to Verify Data Integrity in Cloud Using Intel SGX",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/enclavepdp-a-general-framework-to-verify-data-integrity-in-cloud-using-intel-sgx/";
-            },},{id: "projects-et-gan",
-          title: 'ET-GAN',
-          description: "Cross-Language Emotion Transfer Based on Cycle-Consistent Generative Adversarial Networks",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/et-gan-cross-language-emotion-transfer-based-on-cycle-consistent-generative-adversarial-networks/";
-            },},{id: "projects-hclave",
-          title: 'HClave',
-          description: "An Isolated Execution Environment Design for Hypervisor Runtime Security",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/hclave-an-isolated-execution-environment-design-for-hypervisor-runtime-security/";
-            },},{id: "projects-lightarmor",
-          title: 'LightArmor',
-          description: "A Lightweight Trusted Operating System Isolation Approach for Mobile Systems",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/lightarmor-a-lightweight-trusted-operating-system-isolation-approach-for-mobile-systems/";
-            },},{id: "projects-log2policy",
-          title: 'Log2Policy',
-          description: "An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/log2policy-an-approach-to-generate-fine-grained-access-control-rules-for-microservices-from-scratch/";
-            },},{id: "projects-rcontainer",
-          title: 'RContainer',
-          description: "A Secure Container Architecture through Extending ARM CCA Hardware Primitives",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/rcontainer-a-secure-container-architecture-through-extending-arm-cca-hardware-primitives/";
-            },},{id: "projects-secfortress",
-          title: 'SecFortress',
-          description: "Securing Hypervisor using Cross-layer Isolation",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/secfortress-securing-hypervisor-using-cross-layer-isolation/";
-            },},{id: "projects-sechannel",
-          title: 'SeChannel',
-          description: "A Secure and Lightweight Channel Protection Approach for TEE Systems",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/sechannel-a-secure-and-lightweight-channel-protection-approach-for-tee-systems/";
-            },},{id: "projects-sedspec",
-          title: 'SEDSpec',
-          description: "Securing Emulated Devices by Enforcing Execution Specification",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/sedspec-securing-emulated-devices-by-enforcing-execution-specification/";
-            },},{id: "projects-seef-aldr",
-          title: 'SEEF-ALDR',
-          description: "A Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/seef-aldr-a-speaker-embedding-enhancement-framework-via-adversarial-learning-based-disentangled-representation/";
-            },},{id: "projects-autoar",
-          title: 'AutoAR',
-          description: "Silence False Alarms - Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/silence-false-alarms-identifying-anti-reentrancy-patterns-on-ethereum-to-refine-smart-contract-reentrancy-detection/";
-            },},{id: "projects-summslim",
-          title: 'SummSlim',
-          description: "A Universal and Automated Approach for Debloating Container Images",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/summslim-a-universal-and-automated-approach-for-debloating-container-images/";
-            },},{id: "projects-unicontainer",
-          title: 'Unicontainer',
-          description: "Unlocking the Potential of Unikernel for Secure and Efficient Containerization",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/unicontainer-unlocking-the-potential-of-unikernel-for-secure-and-efficient-containerization/";
-            },},{id: "projects-usb-catcher",
-          title: 'USB Catcher',
-          description: "Detection of Controlled Emissions via Conducted Compromising Emanations",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/usb-catcher-detection-of-controlled-emissions-via-conducted-compromising-emanations/";
-            },},{id: "projects-vasp",
-          title: 'vASP',
-          description: "Full VM Life-cycle Protection Based on Active Security Processor Architecture",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/vasp-full-vm-life-cycle-protection-based-on-active-security-processor-architecture/";
             },},{
         id: 'social-github',
         title: 'GitHub',
