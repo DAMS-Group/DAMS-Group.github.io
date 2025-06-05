@@ -17,13 +17,13 @@
   (function () {
     const tagMap = new Map();
     document.querySelectorAll('.tag-filter').forEach((el) => {
-      const tag = el.dataset.tag.toLowerCase().trim().replace(/\s+/g, ' ');
+      const tag = el.dataset.tag.trim().replace(/\s+/g, ' ');
       if (tag && !tagMap.has(tag)) {
         tagMap.set(tag, document.createElement('span'));
       }
     });
 
-    console.log(tagMap);
+    //console.log(tagMap);
 
     const container = document.getElementById('tag-cloud');
     const selectedTags = new Set();
