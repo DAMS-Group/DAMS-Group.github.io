@@ -11,7 +11,7 @@
             slides.forEach((slide) => {
               slide.style.opacity = 0;
             });
-            
+
             // 当所有图片完成淡出后，隐藏它们并显示当前图片
             setTimeout(() => {
               // 隐藏所有图片
@@ -20,10 +20,10 @@
                   slide.style.display = 'none';
                 }
               });
-              
+
               // 显示当前图片
               slides[index].style.display = 'block';
-              
+
               // 给浏览器一点时间来处理显示状态的变化
               setTimeout(() => {
                 // 将当前图片透明度设为1（淡入）
@@ -67,17 +67,17 @@
                 slide.style.display = 'none';
                 slide.style.opacity = 0;
               });
-              
+
               // 随机选择一张图片显示
               const randomIndex = Math.floor(Math.random() * slides.length);
               currentSlide = randomIndex; // 更新当前幻灯片索引
-              
+
               // 显示随机选择的图片
               slides[randomIndex].style.display = 'block';
               setTimeout(() => {
                 slides[randomIndex].style.opacity = 1;
               }, 50);
-              
+
               startSlideTimer();
             }
           });
