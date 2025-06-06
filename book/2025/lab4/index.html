@@ -12,7 +12,7 @@
 <span class="p">{</span>
     <span class="n">DemoState</span> <span class="o">*</span><span class="n">demo</span> <span class="o">=</span> <span class="n">opaque</span><span class="p">;</span>
     <span class="kt">uint64_t</span> <span class="n">val</span> <span class="o">=</span> <span class="o">~</span><span class="mi">0ULL</span><span class="p">;</span>
-  
+
     <span class="k">if</span> <span class="p">(</span><span class="n">addr</span> <span class="o">!=</span> <span class="mh">0x00</span> <span class="o">||</span>  <span class="n">size</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
     <span class="p">}</span>
@@ -78,7 +78,7 @@
 
 	<span class="n">pci_set_drvdata</span><span class="p">(</span><span class="n">pdev</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
 
-	
+
 	<span class="n">demo_major</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">DRV_MODULE_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">demo_fops</span><span class="p">);</span>
 	<span class="k">if</span> <span class="p">(</span><span class="n">demo_major</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
 	<span class="p">{</span>
@@ -110,7 +110,7 @@
 <span class="c1">//...</span>
 <span class="p">}</span>
 
-<span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">demo_fops</span> <span class="o">=</span> 
+<span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">demo_fops</span> <span class="o">=</span>
 <span class="p">{</span>
 	<span class="p">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
 	<span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">demo_open</span><span class="p">,</span>
@@ -121,14 +121,14 @@
 </code></pre></div></div> <p>其中，demo_fops指定了驱动作为字符设备，在被读写时的回调函数，用于从用户态进行功能调用。</p> <ol> <li>创建用户态测试程序test.c</li> </ol> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
 #include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span> 
+</span>
 <span class="cp">#define FILE	"/dev/demo"
-</span>  
+</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
-	
+
 	<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="kt">FILE</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
 	<span class="k">if</span> <span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
 	<span class="p">{</span>
@@ -136,7 +136,7 @@
 		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 	<span class="p">}</span>
 	<span class="n">printf</span><span class="p">(</span><span class="s">"open %s success..</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="kt">FILE</span><span class="p">);</span>
-	
+
 	<span class="n">val</span> <span class="o">=</span> <span class="mh">0x1333</span><span class="p">;</span>
 	<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 	<span class="n">printf</span><span class="p">(</span><span class="s">"0. write 1333</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
@@ -156,7 +156,7 @@
 	<span class="n">printf</span><span class="p">(</span><span class="s">"5. read = %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
 
 	<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
-	
+
 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div> <p>通过open、write、read对驱动模块功能进行调用。</p> <ol> <li>设计Makefile进行虚拟机中测试用驱动模块和应用程序编译</li> </ol> <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CONFIG_MODULE_SIG</span><span class="o">=</span>n
@@ -191,7 +191,7 @@ make
 <span class="c"># 输出：</span>
 <span class="c"># 248 demo</span>
 
-<span class="c"># 给编号248的驱动创建设备文件 </span>
+<span class="c"># 给编号248的驱动创建设备文件</span>
 <span class="nb">sudo mknod</span> /dev/demo c 248 0
 
 <span class="c"># 运行用户态测试程序</span>
@@ -203,7 +203,7 @@ dmesg
 <span class="p">{</span>
     <span class="n">VirtIODemoPCI</span> <span class="o">*</span><span class="n">dev</span> <span class="o">=</span> <span class="n">VIRTIO_DEMO_PCI</span><span class="p">(</span><span class="n">vpci_dev</span><span class="p">);</span>
     <span class="n">DeviceState</span> <span class="o">*</span><span class="n">vdev</span> <span class="o">=</span> <span class="n">DEVICE</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">vdev</span><span class="p">);</span>
-    
+
     <span class="n">qdev_set_parent_bus</span><span class="p">(</span><span class="n">vdev</span><span class="p">,</span> <span class="n">BUS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vpci_dev</span><span class="o">-&gt;</span><span class="n">bus</span><span class="p">));</span>
     <span class="n">object_property_set_bool</span><span class="p">(</span><span class="n">OBJECT</span><span class="p">(</span><span class="n">vdev</span><span class="p">),</span> <span class="nb">true</span><span class="p">,</span> <span class="s">"realized"</span><span class="p">,</span> <span class="n">errp</span><span class="p">);</span>
 <span class="p">}</span>
@@ -262,7 +262,7 @@ dmesg
             printf("iov_from_buf ret = %d\n", len);
             printf("buff: %x\n", s-&gt;buff);
         }
-        
+
         virtqueue_push(vq, elem, 8);
         virtio_notify(vdev, vq);
         g_free(elem);
@@ -383,7 +383,7 @@ make
 <span class="c"># 输出：</span>
 <span class="c"># 248 virtio_demo</span>
 
-<span class="c"># 给编号248的驱动创建设备文件 </span>
+<span class="c"># 给编号248的驱动创建设备文件</span>
 <span class="nb">sudo mknod</span> /dev/virtio_demo c 248 0
 
 <span class="c"># 运行用户态测试程序</span>
@@ -491,7 +491,7 @@ dmesg
 	<span class="n">d</span> <span class="o">=</span> <span class="n">kvmalloc</span><span class="p">(</span><span class="k">sizeof</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">GFP_KERNEL</span> <span class="o">|</span> <span class="n">__GFP_RETRY_MAYFAIL</span><span class="p">);</span>
 	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">d</span><span class="p">)</span>
 		<span class="k">return</span> <span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span>
-	
+
 	<span class="n">d</span><span class="o">-&gt;</span><span class="n">vqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">;</span>
 	<span class="n">d</span><span class="o">-&gt;</span><span class="n">vq</span><span class="p">.</span><span class="n">handle_kick</span> <span class="o">=</span> <span class="n">handle_demo_kick</span><span class="p">;</span>
 
@@ -503,7 +503,7 @@ dmesg
 	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: vhost_demo_open() vhost_dev_init finish</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
 	<span class="n">f</span><span class="o">-&gt;</span><span class="n">private_data</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
-	
+
 	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: vhost_demo_open() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -525,8 +525,8 @@ dmesg
 	<span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
 
 		<span class="n">head</span> <span class="o">=</span> <span class="n">vhost_get_vq_desc</span><span class="p">(</span><span class="n">vq</span><span class="p">,</span> <span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">,</span>
-				      <span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">),</span> 
-					  <span class="o">&amp;</span><span class="n">out</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span> 
+				      <span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">),</span>
+					  <span class="o">&amp;</span><span class="n">out</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span>
 					  <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 		<span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">head</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
 			<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() for(;;) break1</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
@@ -545,7 +545,7 @@ dmesg
 
 		<span class="n">out_len</span> <span class="o">=</span> <span class="n">iov_length</span><span class="p">(</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
 		<span class="n">in_len</span> <span class="o">=</span> <span class="n">iov_length</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">[</span><span class="n">out</span><span class="p">],</span> <span class="n">in</span><span class="p">);</span>
-		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), out_len=%lu in_len=%lu</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), out_len=%lu in_len=%lu</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
 			<span class="n">out_len</span><span class="p">,</span> <span class="n">in_len</span><span class="p">);</span>
 
 		<span class="n">iov_iter_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">,</span> <span class="n">WRITE</span><span class="p">,</span> <span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">out_len</span><span class="p">);</span>
@@ -559,7 +559,7 @@ dmesg
 		<span class="n">iov_iter_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">,</span> <span class="n">READ</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">iov</span><span class="p">[</span><span class="n">out</span><span class="p">],</span> <span class="n">in</span><span class="p">,</span> <span class="n">in_len</span><span class="p">);</span>
 		<span class="n">copy_to_iter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">v3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iov_iter</span><span class="p">);</span>
 
-		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), handle finish, v1-v4 = %u %u %u %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+		<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick(), handle finish, v1-v4 = %u %u %u %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
 			<span class="n">demo</span><span class="o">-&gt;</span><span class="n">v1</span><span class="p">,</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v2</span><span class="p">,</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v3</span><span class="p">,</span> <span class="n">demo</span><span class="o">-&gt;</span><span class="n">v4</span><span class="p">);</span>
 
 		<span class="n">vhost_add_used_and_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">vq</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -571,7 +571,7 @@ dmesg
 	<span class="n">mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">mutex</span><span class="p">);</span>
 	<span class="n">vhost_poll_queue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vq</span><span class="o">-&gt;</span><span class="n">poll</span><span class="p">);</span>
 	<span class="n">printk</span><span class="p">(</span><span class="s">"vhost_demo: handle_demo_kick() end</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-	
+
 <span class="p">}</span>
 </code></pre></div></div> <p>handle_demo_kick是vhost demo接收到队列中消息（即kick）时的回调函数。mutex_lock确保临界代码区间保持单例。vhost_disable_notify临时关闭virtqueue队列消息通知。随后进入无限循环，获取virtqueue队列内容。vhost_get_vq_desc获得队列中元素的描述符，iov_iter_init对队列中元素进行遍历，copy_from_iter、copy_to_iter进行队列中信息的获取和补充。最后通过vhost_add_used_and_signal函数标记队列中元素被使用，并向前端发送信号。循环会在vhost_get_vq_desc无法获取到新的描述符时退出，vhost_enable_notify重新打开队列的消息通知，并调用vhost_poll_queue开启监听。</p> <ol> <li>设计Makefile进行宿主机中vhost模块编译</li> </ol> <p>Makefile的设计与实验一类似，此处不作赘述。</p> <ol> <li>创建虚拟机中测试程序</li> </ol> <p>虚拟机测试程序完全复用实验二中的virtio前端模块和用户态程序，此处不作赘述。</p> <ol> <li>设计Makefile进行虚拟机中测试用驱动模块和应用程序编译</li> </ol> <p>Makefile的设计完全复用实验二中的对应Makefile，此处不作赘述。</p> <ol> <li>功能测试运行</li> </ol> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 进入exp3目录，编译vhost后端驱动，并安装</span>
 <span class="nb">cd </span>exp3/host-driver
@@ -598,7 +598,7 @@ make
 <span class="c"># 输出：</span>
 <span class="c"># 248 virtio_demo</span>
 
-<span class="c"># 给编号248的驱动创建设备文件 </span>
+<span class="c"># 给编号248的驱动创建设备文件</span>
 <span class="nb">sudo mknod</span> /dev/virtio_demo c 248 0
 
 <span class="c"># 运行用户态测试程序</span>
@@ -606,6 +606,6 @@ make
 
 <span class="c"># 检查内核输出</span>
 dmesg
-</code></pre></div></div> <p>实验运行结果如下：</p> <div style="text-align: center;"> <img src="/assets/img/book/chapter4/exp3.png" width="70%" style="margin: 0 auto"> </div> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025. 分布式与移动系统安全实验室. All rights reserved. Last updated: June 05, 2025. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+</code></pre></div></div> <p>实验运行结果如下：</p> <div style="text-align: center;"> <img src="/assets/img/book/chapter4/exp3.png" width="70%" style="margin: 0 auto"> </div> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025. 分布式与移动系统安全实验室. All rights reserved. Last updated: June 06, 2025. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> </body> </html>
