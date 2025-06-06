@@ -4,14 +4,13 @@ layout: default
 <div class="about_post">
   <div class="hero-section">
     {% if page.lab_images %}
-      <div class="lab_image" style="width: 100%; overflow: hidden; position: relative;">
-        <div class="image-slider" style="width: 100%; position: relative;">
+      <div class="lab_image">
+        <div class="image-slider">
           {% for img in page.lab_images %}
             {% assign img_path = img | prepend: 'assets/img/covers/' %}
             <img
               src="{{ img_path }}"
               class="slider-image"
-              style="width: 100%; display: none; opacity: 0; transition: opacity 0.5s ease-in-out; cursor: pointer;"
               onclick="nextSlideAndResetTimer()">
           {% endfor %}
           <!-- 左侧按钮 -->
@@ -29,31 +28,30 @@ layout: default
           let slideTimer;
 
           function showSlide(index) {
-            // 先显示新图片，再隐藏旧图片，避免图片直接消失
-            // 设置当前要显示的图片为可见状态但透明度为0
-            slides[index].style.display = 'block';
-
-            // 给浏览器一点时间来处理显示状态的变化
+            // 先让所有图片消失，再显示新图片
+            // 将所有图片透明度设为0（淡出）
+            slides.forEach((slide) => {
+              slide.style.opacity = 0;
+            });
+            
+            // 当所有图片完成淡出后，隐藏它们并显示当前图片
             setTimeout(() => {
-              // 将所有图片透明度设为0（淡出）
+              // 隐藏所有图片
               slides.forEach((slide, i) => {
                 if (i !== index) {
-                  slide.style.opacity = 0;
+                  slide.style.display = 'none';
                 }
               });
-
-              // 将当前图片透明度设为1（淡入）
-              slides[index].style.opacity = 1;
-
-              // 当其他图片完成淡出后，将它们隐藏
+              
+              // 显示当前图片
+              slides[index].style.display = 'block';
+              
+              // 给浏览器一点时间来处理显示状态的变化
               setTimeout(() => {
-                slides.forEach((slide, i) => {
-                  if (i !== index) {
-                    slide.style.display = 'none';
-                  }
-                });
-              }, 500);
-            }, 50);
+                // 将当前图片透明度设为1（淡入）
+                slides[index].style.opacity = 1;
+              }, 50);
+            }, 500);
           }
 
           function nextSlide() {
@@ -83,14 +81,25 @@ layout: default
             startSlideTimer();
           }
 
-          // 初始化显示第一张图片并启动定时器
+          // 初始化显示随机一张图片并启动定时器
           document.addEventListener('DOMContentLoaded', function () {
             if (slides.length > 0) {
-              // 确保第一张图片立即显示
-              slides[0].style.display = 'block';
+              // 初始化所有图片为不显示状态
+              slides.forEach((slide) => {
+                slide.style.display = 'none';
+                slide.style.opacity = 0;
+              });
+              
+              // 随机选择一张图片显示
+              const randomIndex = Math.floor(Math.random() * slides.length);
+              currentSlide = randomIndex; // 更新当前幻灯片索引
+              
+              // 显示随机选择的图片
+              slides[randomIndex].style.display = 'block';
               setTimeout(() => {
-                slides[0].style.opacity = 1;
+                slides[randomIndex].style.opacity = 1;
               }, 50);
+              
               startSlideTimer();
             }
           });
