@@ -11,14 +11,21 @@ layout: default
             <img
               src="{{ img_path }}"
               class="slider-image"
-              onclick="nextSlideAndResetTimer()">
+              onclick="nextSlideAndResetTimer()"
+            >
           {% endfor %}
           <!-- 左侧按钮 -->
-          <button onclick="prevSlideAndResetTimer()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;">
+          <button
+            onclick="prevSlideAndResetTimer()"
+            style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;"
+          >
             &lt;
           </button>
           <!-- 右侧按钮 -->
-          <button onclick="nextSlideAndResetTimer()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;">
+          <button
+            onclick="nextSlideAndResetTimer()"
+            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;"
+          >
             &gt;
           </button>
         </div>
@@ -33,7 +40,7 @@ layout: default
             slides.forEach((slide) => {
               slide.style.opacity = 0;
             });
-            
+
             // 当所有图片完成淡出后，隐藏它们并显示当前图片
             setTimeout(() => {
               // 隐藏所有图片
@@ -42,10 +49,10 @@ layout: default
                   slide.style.display = 'none';
                 }
               });
-              
+
               // 显示当前图片
               slides[index].style.display = 'block';
-              
+
               // 给浏览器一点时间来处理显示状态的变化
               setTimeout(() => {
                 // 将当前图片透明度设为1（淡入）
@@ -89,17 +96,17 @@ layout: default
                 slide.style.display = 'none';
                 slide.style.opacity = 0;
               });
-              
+
               // 随机选择一张图片显示
               const randomIndex = Math.floor(Math.random() * slides.length);
               currentSlide = randomIndex; // 更新当前幻灯片索引
-              
+
               // 显示随机选择的图片
               slides[randomIndex].style.display = 'block';
               setTimeout(() => {
                 slides[randomIndex].style.opacity = 1;
               }, 50);
-              
+
               startSlideTimer();
             }
           });
@@ -156,7 +163,8 @@ layout: default
         <script
           type="text/javascript"
           id="clstr_globe"
-          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"></script>
+          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"
+        ></script>
       </div>
       <script type="text/javascript" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       <div class="busuanzi-statistics">
