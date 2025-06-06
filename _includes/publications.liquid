@@ -46,7 +46,7 @@
           const sibling = pub_year.nextElementSibling;
           if (sibling) {
             const paperTags = sibling.querySelectorAll('li');
-            const allHidden = Array.from(paperTags).every(tag => tag.style.display === 'none');
+            const allHidden = Array.from(paperTags).every((tag) => tag.style.display === 'none');
             pub_year.style.display = allHidden ? 'none' : '';
           }
         });

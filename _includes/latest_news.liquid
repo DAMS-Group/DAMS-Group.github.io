@@ -22,7 +22,9 @@
                 {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
               {% else %}
                 {% comment %} <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title | slice: 6, 100 }}</a> {% endcomment %}
-                <a class="news-title" href="{{ item.url | relative_url }}">{{ item.content | slice: 0, 20 | remove: '<p>' | remove: '</p>' | emojify }}</a>
+                <a class="news-title" href="{{ item.url | relative_url }}">
+                  {{- item.content | slice: 0, 20 | remove: '<p>' | remove: '</p>' | emojify -}}
+                </a>
               {% endif %}
             </td>
           </tr>

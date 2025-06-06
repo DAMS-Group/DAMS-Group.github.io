@@ -93,7 +93,9 @@
           id="news-{{ forloop.index }}"
           class="news-card"
           data-category="{{ category }}"
-          {% if forloop.index > 10 %}style="display: none;"{% endif %}
+          {% if forloop.index > 10 %}
+            style="display: none;"
+          {% endif %}
         >
           <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
           <h4>
@@ -109,7 +111,7 @@
             {% else %}
               {% assign first_paragraph = item.content | split: '</p>' | first | remove: '<p>' %}
               {{ first_paragraph }}
-              {% unless item.title contains "【论文录用】" %}
+              {% unless item.title contains '【论文录用】' %}
                 <a href="{{ item.url | relative_url }}" class="read-more">阅读更多</a>
               {% endunless %}
             {% endif %}
@@ -153,12 +155,12 @@
     const newsPerPage = 10;
     let filteredCards = [];
     let hasInitialNews = false;
-    
+
     // 获取所有分类链接和分类内容区
     const categoryLinks = document.querySelectorAll('.category-link');
     const categorySections = document.querySelectorAll('.category-section');
     const newsCards = document.querySelectorAll('.news-card');
-    
+
     // 初始化筛选的新闻卡片
     filteredCards = Array.from(newsCards);
 
@@ -180,7 +182,7 @@
       nextPageBtn.disabled = currentPage >= totalPages;
 
       // 隐藏所有新闻卡片
-      filteredCards.forEach(card => {
+      filteredCards.forEach((card) => {
         card.style.display = 'none';
       });
 
@@ -196,14 +198,14 @@
     }
 
     // 分页按钮事件
-    prevPageBtn.addEventListener('click', function() {
+    prevPageBtn.addEventListener('click', function () {
       if (currentPage > 1) {
         currentPage--;
         updatePagination();
       }
     });
 
-    nextPageBtn.addEventListener('click', function() {
+    nextPageBtn.addEventListener('click', function () {
       const totalPages = Math.ceil(filteredCards.length / newsPerPage);
       if (currentPage < totalPages) {
         currentPage++;
@@ -294,12 +296,12 @@
         currentPage = 1;
 
         // 隐藏当前所有的 新闻卡片
-        filteredCards.forEach(card => {
+        filteredCards.forEach((card) => {
           card.style.display = 'none';
         });
 
         // 筛选符合条件的新闻卡片
-        filteredCards = Array.from(newsCards).filter(card => {
+        filteredCards = Array.from(newsCards).filter((card) => {
           return selectedCategory === '全部' || card.getAttribute('data-category') === selectedCategory;
         });
 
@@ -355,7 +357,7 @@
                   l.classList.remove('active');
                 }
               });
-              
+
               // 更新分类内容区显示
               categorySections.forEach((section) => {
                 section.classList.remove('active');
@@ -364,14 +366,14 @@
                   newsList.style.display = 'none';
                 }
               });
-              
+
               const allSection = document.getElementById('category-全部');
               allSection.classList.add('active');
               const allNewsList = allSection.querySelector('.news-list');
               if (allNewsList) {
                 allNewsList.style.display = 'block';
               }
-              
+
               // 调用分页函数更新显示
               updatePagination();
             }
@@ -388,7 +390,7 @@
               updatePagination();
             }
           }
-          
+
           // 滚动到目标元素
           targetElement.scrollIntoView({ behavior: 'smooth' });
         }

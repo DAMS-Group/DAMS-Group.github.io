@@ -2,31 +2,31 @@
 layout: about
 title: 首页
 permalink: /
-lab_image: cover.jpg
 lab_images:
-    - 1b0ca61e754813baea5c3de7af60c85.jpg
-    - 3c950452d372ba6d0496af6d0ecb23e.jpg
-    - 5783436b9702c85df0266489fe170b5.jpg
-    - 6974e79f781b038c48fb91c43acb3b5.jpg
-    - 6c8dc81dd0399eab3591a8bc6a53855.jpg
-    - 79633d37a77a90ca80bab570f2848b4.jpg
-    - 7be97c4daad290e70db5e0c4bc245e8.jpg
-    - 88596ceb285315c39a67eab4e454ef7.jpg
-    - 8e5772c5c7f5ec94f54d393b643b695.jpg
-    - 9c1b1ab77fb34385f6fea8dc0a34ef3.jpg
-    - a758bdcc94766eaea1e674251fdab55.jpg
-    - b6558840c7868800d91d40064304a27.jpg
-    - b8ebd4ef1d44213fc0337a657fdf9ea.jpg
-    - c51a41427815a7694ab255f120d7202.jpg
-    - cea6cc94fb808567de6e482ea9f004e.jpg
-    - cebe27eeb509bba0291c208b1ff73bc.jpg
-    - cff4d57075ce72c68e1408fc0db5d03.jpg
-    - d23eec3a33090aa7a08e9601cc0b212.jpg
-    - d64343a2715445ed88c8198f9876328.jpg
-    - d7812ee7447b5db51674ba71d010049.jpg
-    - e26585ac862523e2c8887f1f09f9bd5.jpg
-    - e911b81f4b945f56a879113364fea98.jpg
-    - f30e0e4df97fe99e4ec12458c6a734a.jpg
+  - 59ca94c5996959d44b0b3a41efc3c13b.jpg
+  - 1f97011edcc21b9a81f457fe3c0d0fc2.jpg
+  - df9575e22115647c7f077c754973f64e.jpg
+  - bcc3c3790e89422b772c8b426aabb0da.jpg
+  - b9ee57dc798af8deea9b4318545e5803.jpg
+  - 700e2bea7ec14d6d2fe15ee9bed1c9fb.jpg
+  - 5df3f7268d96ad85fe52802a7283b7a5.jpg
+  - 0d9103ad72fb8fe8eedcb2f6f556cde5.jpg
+  - 61af2f3d8eadbcf1abacb718e39e0b10.jpg
+  - d27b477d1fb0b017fd6a0ad8dc6e2064.jpg
+  - 0fbc5651f3bbbb6735db45ae3c3d7b79.jpg
+  - 6a039c63f4d4a0891d4694e7ade2d1b4.jpg
+  - 5b5f1df5a069eef2ff9e3b5744f3f63e.jpg
+  - 30385c5ed953aefce69c4f693679fb94.jpg
+  - 2cb07007fc44ae9f44b099f220a9f034.jpg
+  - 9a9e3aca356981ade3360a9ca484a79f.jpg
+  - c1daf90e02c059673c69c60feacaab66.jpg
+  - a15124433054cec5457cb6c088e9c10b.jpg
+  - 620442e53f3e877cd175014dd6a1f525.jpg
+  - a82cef12ccdaaed5ea9842f3f65274a0.jpg
+  - 5d37f2580d031b20d01a6cd1a954b879.jpg
+  - 05e89c1fe9c1fa7834b71b7c6746c987.jpg
+  - 580b6a2197a756b14b8ee85edc1111d5.jpg
+  - f85728fe02fbc9bd0185f7009deb5d0c.jpg
 
 enable_statistics: false
 ---

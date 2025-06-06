@@ -3,97 +3,98 @@ layout: default
 ---
 <div class="about_post">
   <div class="hero-section">
-    {% if page.lab_image %}
+    {% if page.lab_images %}
       <div class="lab_image" style="width: 100%; overflow: hidden; position: relative;">
-        {% if page.lab_images %}
-          <div class="image-slider" style="width: 100%; position: relative;">
-            {% for img in page.lab_images %}
-              {% assign img_path = img | prepend: 'assets/img/covers/' %}
-              <img src="{{ img_path }}" class="slider-image" style="width: 100%; display: none; opacity: 0; transition: opacity 0.5s ease-in-out; cursor: pointer;" onclick="nextSlideAndResetTimer()" />
-            {% endfor %}
-            <!-- 左侧按钮 -->
-            <button onclick="prevSlideAndResetTimer()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;">&lt;</button>
-            <!-- 右侧按钮 -->
-            <button onclick="nextSlideAndResetTimer()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;">&gt;</button>
-          </div>
-          <script>
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slider-image');
-            let slideTimer;
-            
-            function showSlide(index) {
-              // 先显示新图片，再隐藏旧图片，避免图片直接消失
-              // 设置当前要显示的图片为可见状态但透明度为0
-              slides[index].style.display = 'block';
-              
-              // 给浏览器一点时间来处理显示状态的变化
+        <div class="image-slider" style="width: 100%; position: relative;">
+          {% for img in page.lab_images %}
+            {% assign img_path = img | prepend: 'assets/img/covers/' %}
+            <img
+              src="{{ img_path }}"
+              class="slider-image"
+              style="width: 100%; display: none; opacity: 0; transition: opacity 0.5s ease-in-out; cursor: pointer;"
+              onclick="nextSlideAndResetTimer()">
+          {% endfor %}
+          <!-- 左侧按钮 -->
+          <button onclick="prevSlideAndResetTimer()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;">
+            &lt;
+          </button>
+          <!-- 右侧按钮 -->
+          <button onclick="nextSlideAndResetTimer()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; z-index: 10;">
+            &gt;
+          </button>
+        </div>
+        <script>
+          let currentSlide = 0;
+          const slides = document.querySelectorAll('.slider-image');
+          let slideTimer;
+
+          function showSlide(index) {
+            // 先显示新图片，再隐藏旧图片，避免图片直接消失
+            // 设置当前要显示的图片为可见状态但透明度为0
+            slides[index].style.display = 'block';
+
+            // 给浏览器一点时间来处理显示状态的变化
+            setTimeout(() => {
+              // 将所有图片透明度设为0（淡出）
+              slides.forEach((slide, i) => {
+                if (i !== index) {
+                  slide.style.opacity = 0;
+                }
+              });
+
+              // 将当前图片透明度设为1（淡入）
+              slides[index].style.opacity = 1;
+
+              // 当其他图片完成淡出后，将它们隐藏
               setTimeout(() => {
-                // 将所有图片透明度设为0（淡出）
                 slides.forEach((slide, i) => {
                   if (i !== index) {
-                    slide.style.opacity = 0;
+                    slide.style.display = 'none';
                   }
                 });
-                
-                // 将当前图片透明度设为1（淡入）
-                slides[index].style.opacity = 1;
-                
-                // 当其他图片完成淡出后，将它们隐藏
-                setTimeout(() => {
-                  slides.forEach((slide, i) => {
-                    if (i !== index) {
-                      slide.style.display = 'none';
-                    }
-                  });
-                }, 500);
+              }, 500);
+            }, 50);
+          }
+
+          function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+          }
+
+          function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+          }
+
+          function startSlideTimer() {
+            // 清除现有定时器
+            clearInterval(slideTimer);
+            // 设置新的定时器，每5秒切换一次
+            slideTimer = setInterval(nextSlide, 5000);
+          }
+
+          function nextSlideAndResetTimer() {
+            nextSlide();
+            startSlideTimer();
+          }
+
+          function prevSlideAndResetTimer() {
+            prevSlide();
+            startSlideTimer();
+          }
+
+          // 初始化显示第一张图片并启动定时器
+          document.addEventListener('DOMContentLoaded', function () {
+            if (slides.length > 0) {
+              // 确保第一张图片立即显示
+              slides[0].style.display = 'block';
+              setTimeout(() => {
+                slides[0].style.opacity = 1;
               }, 50);
-            }
-            
-            function nextSlide() {
-              currentSlide = (currentSlide + 1) % slides.length;
-              showSlide(currentSlide);
-            }
-            
-            function prevSlide() {
-              currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-              showSlide(currentSlide);
-            }
-            
-            function startSlideTimer() {
-              // 清除现有定时器
-              clearInterval(slideTimer);
-              // 设置新的定时器，每5秒切换一次
-              slideTimer = setInterval(nextSlide, 5000);
-            }
-            
-            function nextSlideAndResetTimer() {
-              nextSlide();
               startSlideTimer();
             }
-            
-            function prevSlideAndResetTimer() {
-              prevSlide();
-              startSlideTimer();
-            }
-            
-            // 初始化显示第一张图片并启动定时器
-            document.addEventListener('DOMContentLoaded', function() {
-              if(slides.length > 0) {
-                // 确保第一张图片立即显示
-                slides[0].style.display = 'block';
-                setTimeout(() => {
-                  slides[0].style.opacity = 1;
-                }, 50);
-                startSlideTimer();
-              }
-            });
-          </script>
-        {% else %}
-          {% if page.lab_image %}
-            {% assign lab_image_path = page.lab_image | prepend: 'assets/img/' %}
-            <img src={{ lab_image_path }} width="100%" />
-          {% endif %}
-        {% endif %}
+          });
+        </script>
       </div>
     {% endif %}
 
@@ -146,8 +147,7 @@ layout: default
         <script
           type="text/javascript"
           id="clstr_globe"
-          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"
-        ></script>
+          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"></script>
       </div>
       <script type="text/javascript" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       <div class="busuanzi-statistics">
