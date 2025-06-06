@@ -37,6 +37,6 @@ for root, dirs, files in os.walk('../assets/img/covers'):
 for root, dirs, files in os.walk('../assets/img/covers'):
     for filename in files:
         if filename.lower().endswith('.jpg'):
-            print(f"  - {filename}")
+            print(f"    - {filename}")
 
 print("\n操作完成！")
