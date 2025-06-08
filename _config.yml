@@ -246,7 +246,6 @@ enable_publication_badges:
 filtered_bibtex_keywords:
   [
     abbr,
-    abstract,
     additional_info,
     altmetric,
     annotation,
@@ -270,6 +269,8 @@ filtered_bibtex_keywords:
     github,
     tags,
     ccf,
+    type,
+    note,
   ]
 
 # Maximum number of authors to be shown for each publication (more authors are visible on click)
