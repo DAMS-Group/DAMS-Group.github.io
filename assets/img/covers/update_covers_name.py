@@ -11,7 +11,7 @@ def calculate_md5(file_path):
     return hash_md5.hexdigest()
 
 # 遍历当前目录及其所有子目录
-for root, dirs, files in os.walk('../assets/img/covers'):
+for root, dirs, files in os.walk('.'):
     for filename in files:
         file_path = os.path.join(root, filename)
         
@@ -34,7 +34,7 @@ for root, dirs, files in os.walk('../assets/img/covers'):
             os.rename(file_path, new_path)
             print(f"✅ 已重命名：{filename} → {new_name}")
 
-for root, dirs, files in os.walk('../assets/img/covers'):
+for root, dirs, files in os.walk('.'):
     for filename in files:
         if filename.lower().endswith('.jpg'):
             print(f"  - {filename}")
