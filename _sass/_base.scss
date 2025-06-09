@@ -1966,17 +1966,17 @@ ninja-keys::part(ninja-input-wrapper) {
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  
+
   &:hover {
     background: rgba(0, 0, 0, 0.8);
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
-  
+
   &.prev-button {
     left: 10px;
   }
-  
+
   &.next-button {
     right: 10px;
   }
