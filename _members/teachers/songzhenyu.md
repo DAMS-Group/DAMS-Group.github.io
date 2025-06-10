@@ -1,6 +1,6 @@
 ---
 category: teachers
-order: 3
+order: 2
 image: members/teachers/songzhenyu.jpg
 name: 宋振宇
 title: 正高级工程师 硕导
