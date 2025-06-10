@@ -1,45 +1,34 @@
 <!DOCTYPE html> <html lang="cn"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> DAMS </title> <meta name="author" content=" "> <meta name="description" content=""> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/icon.svg?d287cd2074727f834759e3ba9313e058"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://dams.net.cn/"> <script src="/assets/js/theme.js?6ddb66544c57e17a63e7abf8cc6c43e3"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <img src="/assets/img/icon.svg?d287cd2074727f834759e3ba9313e058"> DAMS | 分布式与移动系统安全实验室 </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item active"> <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/book/">著作 </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">发表 </a> </li> <li class="nav-item "> <a class="nav-link" href="/members/">团队 </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">新闻 </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link"> <i class="ti ti-search"></i> </span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="about_post"> <div class="hero-section"> <div class="lab_image"> <div class="image-slider"> <img src="assets/img/covers/dc59fc41edf9c1e82ea0958e2323aafa.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/e6872b194d406681ee5c49afc4b62e8c.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5c28acae685f0d101926ecdbc84c06e5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/d9a52617f540fa3a57b8d129c5c220ad.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/afc45b9932b37a6436c8385a775cf81b.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/59ca94c5996959d44b0b3a41efc3c13b.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/1f97011edcc21b9a81f457fe3c0d0fc2.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/df9575e22115647c7f077c754973f64e.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/8c70808761f16a5532bbb1f0435c386b.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/bcc3c3790e89422b772c8b426aabb0da.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/8f4b058f09464798f76167185a413d1b.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/32dcd15fb5341f06d19cc4cae178f1f4.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/c45b4d73077403068362e7df57fc80d9.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/6a247fb9ae24f13004eb7119afe739b1.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/b9ee57dc798af8deea9b4318545e5803.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/100108e2959a07793fc18f743ba6ce70.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/700e2bea7ec14d6d2fe15ee9bed1c9fb.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/184817f062a419f2593e6818d6455607.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5df3f7268d96ad85fe52802a7283b7a5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/61af2f3d8eadbcf1abacb718e39e0b10.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/49ee3213f2163ce9d970f0c1ffac2899.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/d27b477d1fb0b017fd6a0ad8dc6e2064.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/6a039c63f4d4a0891d4694e7ade2d1b4.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/4764a7032dd292d71fdeec38b40ee064.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5b5f1df5a069eef2ff9e3b5744f3f63e.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/30385c5ed953aefce69c4f693679fb94.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/daca27103571ca5f33da792dad05c894.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/26df3f61f2ebe48f9d4d37c1d2799eac.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/2cb07007fc44ae9f44b099f220a9f034.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/a15124433054cec5457cb6c088e9c10b.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5f05d3d4093a37a3bfa95c0b942f4ef0.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/620442e53f3e877cd175014dd6a1f525.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/a82cef12ccdaaed5ea9842f3f65274a0.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/74e511b7c8b90754fbe79407169a4bf5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/b21aa7dc629a3100726de733cf45dbcd.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/580b6a2197a756b14b8ee85edc1111d5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/f85728fe02fbc9bd0185f7009deb5d0c.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5241314b143503ae5cd1d21f0188b36d.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/c08494ae3c209391bfdc363152c9e628.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <button onclick="prevSlideAndResetTimer()" class="slider-nav-button prev-button"> &lt; </button> <button onclick="nextSlideAndResetTimer()" class="slider-nav-button next-button"> &gt; </button> </div> <script>
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <img src="/assets/img/icon.svg?d287cd2074727f834759e3ba9313e058"> DAMS | 分布式与移动系统安全实验室 </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item active"> <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/book/">著作 </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">发表 </a> </li> <li class="nav-item "> <a class="nav-link" href="/members/">团队 </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">新闻 </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link"> <i class="ti ti-search"></i> </span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="about_post"> <div class="hero-section"> <div class="lab_image"> <div class="image-slider"> <img src="assets/img/covers/184817f062a419f2593e6818d6455607.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/1f97011edcc21b9a81f457fe3c0d0fc2.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/4764a7032dd292d71fdeec38b40ee064.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/49ee3213f2163ce9d970f0c1ffac2899.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5241314b143503ae5cd1d21f0188b36d.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/580b6a2197a756b14b8ee85edc1111d5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/59ca94c5996959d44b0b3a41efc3c13b.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5df3f7268d96ad85fe52802a7283b7a5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/5f05d3d4093a37a3bfa95c0b942f4ef0.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/6a039c63f4d4a0891d4694e7ade2d1b4.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/6a247fb9ae24f13004eb7119afe739b1.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/74e511b7c8b90754fbe79407169a4bf5.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/bcc3c3790e89422b772c8b426aabb0da.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <img src="assets/img/covers/f85728fe02fbc9bd0185f7009deb5d0c.jpg" class="slider-image" onclick="nextSlideAndResetTimer()"> <button onclick="prevSlideAndResetTimer()" class="slider-nav-button prev-button"> &lt; </button> <button onclick="nextSlideAndResetTimer()" class="slider-nav-button next-button"> &gt; </button> </div> <script>
           let currentSlide = 0;
+          let previousSlide = 0;
           const slides = document.querySelectorAll('.slider-image');
           let slideTimer;
 
-          function showSlide(index) {
-            // 先让所有图片消失，再显示新图片
-            // 将所有图片透明度设为0（淡出）
-            slides.forEach((slide) => {
-              slide.style.opacity = 0;
-            });
+          function showSlide(currentIndex, nextIndex) {
+            // 设置层级关系
+            slides[currentIndex].style.zIndex = 1;
+            slides[nextIndex].style.zIndex = 2;
 
-            // 当所有图片完成淡出后，隐藏它们并显示当前图片
-            setTimeout(() => {
-              // 隐藏所有图片
-              slides.forEach((slide, i) => {
-                if (i !== index) {
-                  slide.style.display = 'none';
-                }
-              });
+            // 同步执行淡入淡出
+            slides[currentIndex].style.opacity = 0;
+            slides[nextIndex].style.opacity = 1;
 
-              // 显示当前图片
-              slides[index].style.display = 'block';
-
-              // 给浏览器一点时间来处理显示状态的变化
-              setTimeout(() => {
-                // 将当前图片透明度设为1（淡入）
-                slides[index].style.opacity = 1;
-              }, 50);
-            }, 500);
+            // 更新当前索引
+            currentSlide = nextIndex;
           }
 
           function nextSlide() {
+            previousSlide = currentSlide;
             currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+            showSlide(previousSlide, currentSlide);
           }
 
           function prevSlide() {
+            previousSlide = currentSlide;
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
+            showSlide(previousSlide, currentSlide);
           }
 
           function startSlideTimer() {
@@ -62,19 +51,13 @@
           // 初始化显示随机一张图片并启动定时器
           document.addEventListener('DOMContentLoaded', function () {
             if (slides.length > 0) {
-              // 初始化所有图片为不显示状态
-              slides.forEach((slide) => {
-                slide.style.display = 'none';
-                slide.style.opacity = 0;
-              });
-
               // 随机选择一张图片显示
               const randomIndex = Math.floor(Math.random() * slides.length);
               currentSlide = randomIndex; // 更新当前幻灯片索引
 
-              // 显示随机选择的图片
-              slides[randomIndex].style.display = 'block';
+              // 显示随机选择的图片 
               setTimeout(() => {
+                slides[randomIndex].style.zIndex = 2;
                 slides[randomIndex].style.opacity = 1;
               }, 50);
 
