@@ -187,13 +187,18 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/lvzhiqiang/";
+            },},{id: "members-高级工程师-硕导",
+          title: '高级工程师 硕导',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/songchen/";
             },},{id: "members-正高级工程师-硕导",
           title: '正高级工程师 硕导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songzhenyu/";
-            },},{id: "members-副研究员",
-          title: '副研究员',
+            },},{id: "members-副研究员-硕导",
+          title: '副研究员 硕导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhouqihang/";
