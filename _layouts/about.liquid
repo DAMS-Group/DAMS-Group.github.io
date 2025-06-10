@@ -31,44 +31,33 @@ layout: default
         </div>
         <script>
           let currentSlide = 0;
+          let previousSlide = 0;
           const slides = document.querySelectorAll('.slider-image');
           let slideTimer;
 
-          function showSlide(index) {
-            // 先让所有图片消失，再显示新图片
-            // 将所有图片透明度设为0（淡出）
-            slides.forEach((slide) => {
-              slide.style.opacity = 0;
-            });
+          function showSlide(currentIndex, nextIndex) {
+            // 设置层级关系
+            slides[currentIndex].style.zIndex = 1;
+            slides[nextIndex].style.zIndex = 2;
 
-            // 当所有图片完成淡出后，隐藏它们并显示当前图片
-            setTimeout(() => {
-              // 隐藏所有图片
-              slides.forEach((slide, i) => {
-                if (i !== index) {
-                  slide.style.display = 'none';
-                }
-              });
+            // 同步执行淡入淡出
+            slides[currentIndex].style.opacity = 0;
+            slides[nextIndex].style.opacity = 1;
 
-              // 显示当前图片
-              slides[index].style.display = 'block';
-
-              // 给浏览器一点时间来处理显示状态的变化
-              setTimeout(() => {
-                // 将当前图片透明度设为1（淡入）
-                slides[index].style.opacity = 1;
-              }, 50);
-            }, 500);
+            // 更新当前索引
+            currentSlide = nextIndex;
           }
 
           function nextSlide() {
+            previousSlide = currentSlide;
             currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+            showSlide(previousSlide, currentSlide);
           }
 
           function prevSlide() {
+            previousSlide = currentSlide;
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
+            showSlide(previousSlide, currentSlide);
           }
 
           function startSlideTimer() {
@@ -91,19 +80,13 @@ layout: default
           // 初始化显示随机一张图片并启动定时器
           document.addEventListener('DOMContentLoaded', function () {
             if (slides.length > 0) {
-              // 初始化所有图片为不显示状态
-              slides.forEach((slide) => {
-                slide.style.display = 'none';
-                slide.style.opacity = 0;
-              });
-
               // 随机选择一张图片显示
               const randomIndex = Math.floor(Math.random() * slides.length);
               currentSlide = randomIndex; // 更新当前幻灯片索引
 
-              // 显示随机选择的图片
-              slides[randomIndex].style.display = 'block';
+              // 显示随机选择的图片 
               setTimeout(() => {
+                slides[randomIndex].style.zIndex = 2;
                 slides[randomIndex].style.opacity = 1;
               }, 50);
 
