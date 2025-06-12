@@ -142,15 +142,22 @@
             <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
           {% endif %}
         </h3>
-        <p>{{ post.description }}</p>
-        <p class="post-meta">
-          {{ read_time }} min read &nbsp; &middot; &nbsp;
-          {{ post.date | date: '%B %d, %Y' }}
-          {% if post.external_source %}
-            &nbsp; &middot; &nbsp; {{ post.external_source }}
-          {% endif %}
-        </p>
+        {% if post.title contains '附录' %}
+          <p class="appendix-description">{{ post.content | remove: '<p>' | remove: '</p>' | emojify }}</p>
+        {% else %}
+          <p>{{ post.description }}</p>
+        {% endif %}
+        {% comment %}
+          <p class="post-meta">
+            {{ read_time }} min read &nbsp; &middot; &nbsp;
+            {{ post.date | date: '%B %d, %Y' }}
+            {% if post.external_source %}
+              &nbsp; &middot; &nbsp; {{ post.external_source }}
+            {% endif %}
+          </p>
+        {% endcomment %}
         <p class="post-tags">
+          <i class="fa-solid fa-clock fa-sm"></i> {{ read_time }} min read &nbsp; &middot; &nbsp;
           <a href="{{ year | prepend: '/book/' | prepend: site.baseurl}}"> <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
           {% if tags != '' %}
             &nbsp; &middot; &nbsp;

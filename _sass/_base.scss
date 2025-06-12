@@ -1337,8 +1337,8 @@ ninja-keys::part(ninja-input-wrapper) {
 
   .hero-section {
     position: relative;
-    height: 50vh;
-    min-height: 300px;
+    height: auto;
+    min-height: 600px;
     width: auto;
     min-width: auto;
     margin-bottom: 1.5rem;
@@ -1989,4 +1989,11 @@ ninja-keys::part(ninja-input-wrapper) {
   }
 }
 
-// ... existing code ...
+// Custom styles
+.appendix-description {
+  font-family: "SimSun", "宋体", serif;
+  font-style: italic;
+  color: black;
+  font-size: 1.1em;
+  line-height: 1.6;
+}

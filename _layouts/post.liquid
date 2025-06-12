@@ -18,7 +18,7 @@ layout: default
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-meta">
-      Created in {{ page.date | date: '%B %d, %Y' }}
+      {% comment %} Created in {{ page.date | date: '%B %d, %Y' }} {% endcomment %}
       {% if page.author %}by {{ page.author }}{% endif %}
       {% if page.last_updated %}, last updated in {{ page.last_updated | date: '%B %d, %Y' }}{% endif %}
       {% if page.meta %}• {{ page.meta }}{% endif %}
@@ -78,9 +78,15 @@ layout: default
       </div>
       <hr>
     {% endif %}
-    <div id="markdown-content">
-      {{ content }}
-    </div>
+    {% if page.title contains '附录' %}
+      <div id="markdown-content" class="appendix-description">
+        {{ content }}
+      </div>
+    {% else %}
+      <div id="markdown-content">
+        {{ content }}
+      </div>
+    {% endif %}
   </article>
 
   {% if page.related_publications %}
