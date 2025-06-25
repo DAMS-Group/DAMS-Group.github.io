@@ -52,6 +52,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/chenjiayun/";
+            },},{id: "members-gaozibo",
+          title: 'Gaozibo',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/gaozibo/";
             },},{id: "members-guofeng",
           title: 'Guofeng',
           description: "",
@@ -317,6 +322,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@sigmetrics2025/";
+            },},{id: "news-论文录用-usenix-security-2025",
+          title: '【论文录用】USENIX Security 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@USENIX-Security-20252025/";
             },},{
         id: 'social-github',
         title: 'GitHub',
