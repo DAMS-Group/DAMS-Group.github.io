@@ -51,29 +51,6 @@
             {% endif %}
           </div>
         </li>
-        <li class="category-section" id="category-团建活动">
-          <a
-            href="#"
-            class="category-link"
-            data-category="团建活动"
-            >团建活动</a
-          >
-          <div class="news-list" style="display: none;">
-            {% if newslist != blank %}
-              {% assign news = newslist | reverse %}
-              {% for item in news %}
-                {% if item.category == '团建活动' %}
-                  <div class="news-item">
-                    <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
-                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title | slice: 6, 100 }}</a>
-                  </div>
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              <p>暂无新闻...</p>
-            {% endif %}
-          </div>
-        </li>
         <li class="category-section" id="category-文体活动">
           <a
             href="#"
@@ -86,6 +63,29 @@
               {% assign news = newslist | reverse %}
               {% for item in news %}
                 {% if item.category == '文体活动' %}
+                  <div class="news-item">
+                    <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
+                    <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title | slice: 6, 100 }}</a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <p>暂无新闻...</p>
+            {% endif %}
+          </div>
+        </li>
+        <li class="category-section" id="category-团建活动">
+          <a
+            href="#"
+            class="category-link"
+            data-category="团建活动"
+            >团建活动</a
+          >
+          <div class="news-list" style="display: none;">
+            {% if newslist != blank %}
+              {% assign news = newslist | reverse %}
+              {% for item in news %}
+                {% if item.category == '团建活动' %}
                   <div class="news-item">
                     <div class="news-date">{{ item.date | date: '%Y-%m-%d' }}</div>
                     <a href="#news-{{ forloop.index }}" class="news-link">{{ item.title | slice: 6, 100 }}</a>
