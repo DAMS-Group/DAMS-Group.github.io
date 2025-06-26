@@ -8,4 +8,4 @@ giscus_comments: false
 category: 学术活动
 ---
 
-恭喜张志聪的论文 UniContainer: Unlocking the Potential of Unikernel for Secure and Efficient Containerization 被 ACM SIGMETRICS 2025 录用。该工作首次提出Unikernel技术和容器技术结合的安全运行架构。
+恭喜张志聪的论文《UniContainer: Unlocking the Potential of Unikernel for Secure and Efficient Containerization》被 ACM SIGMETRICS 2025 录用。该工作首次提出Unikernel技术和容器技术结合的安全运行架构。

@@ -13,5 +13,5 @@ category: 学术活动
 该工作针对智能合约重入漏洞误报多的问题，用无监督深度学习的方式自动地学习以太坊上的智能合约代码中的假阳性特征（反重入特征），有效地降低误报率达80%以上。
 
 <div style="text-align: center;">
-    <img alt="宋奇阳@NDSS2025" src="/assets/img/news/conferences/songqiyang@ndss2025.jpg" width="80%" style="margin: 0 auto" />
+    <img alt="宋奇阳@NDSS2025" src="/assets/img/news/conferences/songqiyang@ndss2025.jpg" width="80%" style="margin-top: 10px; margin-bottom: 10px" />
 </div>

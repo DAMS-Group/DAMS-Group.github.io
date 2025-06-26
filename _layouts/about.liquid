@@ -11,23 +11,12 @@ layout: default
             <img
               src="{{ img_path }}"
               class="slider-image"
-              onclick="nextSlideAndResetTimer()"
-            >
+              onclick="nextSlideAndResetTimer()">
           {% endfor %}
           <!-- 左侧按钮 -->
-          <button
-            onclick="prevSlideAndResetTimer()"
-            class="slider-nav-button prev-button"
-          >
-            &lt;
-          </button>
+          <button onclick="prevSlideAndResetTimer()" class="slider-nav-button prev-button">&lt;</button>
           <!-- 右侧按钮 -->
-          <button
-            onclick="nextSlideAndResetTimer()"
-            class="slider-nav-button next-button"
-          >
-            &gt;
-          </button>
+          <button onclick="nextSlideAndResetTimer()" class="slider-nav-button next-button">&gt;</button>
         </div>
         <script>
           let currentSlide = 0;
@@ -109,29 +98,47 @@ layout: default
     </div>
   </div>
 
-  <div class="about_row">
-    <!-- News -->
-    {% if site.announcements and site.announcements.enabled %}
-      <h2>
-        <a href="{{ '/news/' | relative_url }}">新闻</a>
-      </h2>
-      {% include latest_news.liquid limit=true %}
-    {% endif %}
+  {% if page.release %}
+    <div class="about_row">
+      <!-- News -->
+      {% if site.announcements and site.announcements.enabled %}
+        <h2>
+          <a href="{{ '/news/' | relative_url }}">新闻</a>
+        </h2>
+        {% include latest_news.liquid limit=true %}
+      {% endif %}
 
-    <!-- Latest posts -->
-    {% if site.latest_posts and site.latest_posts.enabled %}
-      <h2>
-        <a href="{{ '/book/' | relative_url }}">实验</a>
-      </h2>
-      {% include latest_posts.liquid %}
-    {% endif %}
+      <!-- Latest posts -->
+      {% if site.latest_posts and site.latest_posts.enabled %}
+        <h2>
+          <a href="{{ '/book/' | relative_url }}">实验</a>
+        </h2>
+        {% include latest_posts.liquid %}
+      {% endif %}
 
-    <!-- Selected papers -->
-    <h2>
-      <a href="{{ '/publications/' | relative_url }}">发表</a>
-    </h2>
-    {% include selected_papers.liquid %}
-  </div>
+      <!-- Selected papers -->
+      <h2>
+        <a href="{{ '/publications/' | relative_url }}">发表</a>
+      </h2>
+      {% include selected_papers.liquid %}
+    </div>
+  {% else %}
+    <div class="about_row" style="gap: 2.1rem">
+      <!-- News -->
+      {% if site.announcements and site.announcements.enabled %}
+        <h2>
+          <a href="{{ '/news/' | relative_url }}">新闻</a>
+        </h2>
+        {% include latest_news.liquid limit=true %}
+      {% endif %}
+
+      <!-- Selected papers -->
+      <h2>
+        <a href="{{ '/publications/' | relative_url }}">发表</a>
+      </h2>
+      {% include selected_papers.liquid %}
+    </div>
+  {% endif %}
 
   <!-- Social -->
   <div class="social">
@@ -146,8 +153,7 @@ layout: default
         <script
           type="text/javascript"
           id="clstr_globe"
-          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"
-        ></script>
+          src="//clustrmaps.com/globe.js?d=CuL-I4uyFN3tF2XZcj-VZgkHu1uA8SsHDV1oRI3AE1I"></script>
       </div>
       <script type="text/javascript" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       <div class="busuanzi-statistics">

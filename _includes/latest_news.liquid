@@ -4,9 +4,8 @@
     <div
       class="table-responsive"
       {% if include.limit and site.announcements.scrollable and news_size > 3 %}
-        style="max-height: 60vw"
-      {% endif %}
-    >
+      style="max-height: 60vw"
+      {% endif %}>
       <table class="table table-sm table-borderless">
         {% assign news = site.news | reverse %}
         {% if include.limit and site.announcements.limit %}
@@ -20,10 +19,10 @@
             <td>
               {% if item.inline %}
                 {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
-              {% else %}
+                {% else %}
                 {% comment %} <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title | slice: 6, 100 }}</a> {% endcomment %}
                 <a class="news-title" href="{{ item.url | relative_url }}">
-                  {{- item.content | slice: 0, 20 | remove: '<p>' | remove: '</p>' | emojify -}}
+                  {{- item.content | slice: 0, 50 | remove: '<p>' | remove: '</p>' | emojify -}}
                 </a>
               {% endif %}
             </td>

@@ -12,4 +12,5 @@ lab_images:
   - bcc3c3790e89422b772c8b426aabb0da.jpg
   - f85728fe02fbc9bd0185f7009deb5d0c.jpg
 enable_statistics: false
+release: true
 ---
