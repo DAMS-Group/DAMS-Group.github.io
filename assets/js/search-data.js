@@ -319,9 +319,9 @@ ninja.data = [{
           title: '【论文录用】USENIX Security 2025',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/accept@USENIX-Security-20252025/";
-            },},{id: "news-文体活动-2025-信工杯-羽毛球比赛创佳绩",
-          title: '【文体活动】2025“信工杯”羽毛球比赛创佳绩',
+              window.location.href = "/news/accept@usenixsecurity2025/";
+            },},{id: "news-文体活动-2025-quot-信工杯-quot-羽毛球比赛创佳绩",
+          title: '【文体活动】2025&amp;quot;信工杯&amp;quot;羽毛球比赛创佳绩',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/badminton-competition/";
