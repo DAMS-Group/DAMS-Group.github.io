@@ -23,13 +23,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-团队",
-          title: "团队",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/members/";
-          },
         },{id: "nav-新闻",
           title: "新闻",
           description: "",
@@ -327,6 +320,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@USENIX-Security-20252025/";
+            },},{id: "news-文体活动-2025-信工杯-羽毛球比赛创佳绩",
+          title: '【文体活动】2025“信工杯”羽毛球比赛创佳绩',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/badminton-competition/";
             },},{
         id: 'social-github',
         title: 'GitHub',
