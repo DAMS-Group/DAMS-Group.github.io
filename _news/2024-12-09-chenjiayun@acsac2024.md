@@ -12,4 +12,6 @@ category: 学术活动
 
 该工作提出了一种基于ARM CCA的新型安全虚拟化架构CubeVisor，通过“Cube”概念保护每个Cube免受其他组件的攻击，并优化内存分配和世界切换过程以提高性能。该工作在软件和硬件平台上构建了原型，评估结果表明，CubeVisor架构有较好的安全性和性能。
 
-{% include figure.liquid loading="eager" path="assets/img/news/conferences/chenjiayun@acsac2024.jpg" title="陈家赟@ACSAC2024" class="img-fluid rounded z-depth-1" %}
+<div style="text-align: center;">
+    <img alt="陈家赟@ACSAC2024" src="/assets/img/news/conferences/chenjiayun@acsac2024.jpg" width="80%" style="margin-top: 10px; margin-bottom: 10px" />
+</div>
