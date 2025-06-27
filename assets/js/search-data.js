@@ -333,13 +333,6 @@ ninja.data = [{
           window.open("https://github.com/dams-group", "_blank");
         },
       },{
-        id: 'social-rss',
-        title: 'RSS Feed',
-        section: 'Socials',
-        handler: () => {
-          window.open("/feed.xml", "_blank");
-        },
-      },{
         id: 'social-wechat_qr',
         title: 'Wechat_qr',
         section: 'Socials',
