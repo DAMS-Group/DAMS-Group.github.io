@@ -207,7 +207,7 @@ jekyll-archives:
       categories: "/book/:type/:name/"
 
 display_tags: ["QEMU", "KVM"] # these tags will be displayed on the front page of your blog
-display_categories: ["配套实验"] # these categories will be displayed on the front page of your blog
+display_categories: ["配套实验", "附录"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

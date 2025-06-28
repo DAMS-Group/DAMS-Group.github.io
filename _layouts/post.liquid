@@ -24,17 +24,12 @@ layout: default
       {% if page.meta %}• {{ page.meta }}{% endif %}
     </p>
     <p class="post-tags">
-      {% if url_beginning == '/book/' %}
-        <a href="{{ year | prepend: '/book/' | prepend: site.baseurl}}">
-          <i class="fa-solid fa-calendar fa-sm"></i>
-          {{ year }}
-        </a>
-      {% else %}
+      {% if url_beginning == '/news/' %}
         <i class="fa-solid fa-calendar fa-sm"></i>
-        {{ year }}
+        {{ page.date | date: '%Y-%m-%d' }}
+        &nbsp; &middot; &nbsp;
       {% endif %}
       {% if tags != '' %}
-        &nbsp; &middot; &nbsp;
         {% for tag in page.tags %}
           {% if url_beginning == '/book/' %}
             <a href="{{ tag | slugify | prepend: '/book/tag/' | prepend: site.baseurl}}">
