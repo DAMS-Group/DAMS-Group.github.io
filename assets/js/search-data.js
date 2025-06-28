@@ -209,7 +209,7 @@ ninja.data = [{
           title: '【团建活动】2023年10月15日秋日团建',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/team-building@judianchuanba/";
+              window.location.href = "/news/team-building-2023/";
             },},{id: "news-学术报告-徐少文的报告-acsac-2023",
           title: '【学术报告】徐少文的报告 @ ACSAC 2023',
           description: "",
@@ -264,7 +264,7 @@ ninja.data = [{
           title: '【团建活动】2024年10月25日年度团建',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/team-building@diliuji/";
+              window.location.href = "/news/team-building-2024/";
             },},{id: "news-论文录用-trustcom-2024",
           title: '【论文录用】TrustCom 2024',
           description: "",
@@ -324,7 +324,7 @@ ninja.data = [{
           title: '【文体活动】2025&amp;quot;信工杯&amp;quot;羽毛球比赛创佳绩',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/badminton-competition/";
+              window.location.href = "/news/badminton-competition-2025/";
             },},{
         id: 'social-github',
         title: 'GitHub',
