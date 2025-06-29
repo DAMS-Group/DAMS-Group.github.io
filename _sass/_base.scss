@@ -1675,7 +1675,7 @@ ninja-keys::part(ninja-input-wrapper) {
 
 .info-title {
   font-size: 1.2rem;
-  color: #2c3e50;
+  color: var(--global-theme-color);
   margin-bottom: 0.8rem;
   border-bottom: 2px solid #3498db;
   padding-bottom: 0.3rem;
@@ -1752,7 +1752,7 @@ ninja-keys::part(ninja-input-wrapper) {
   display: block;
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
-  color: #555;
+  color: var(--global-theme-color);
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -1968,7 +1968,7 @@ ninja-keys::part(ninja-input-wrapper) {
 // Custom styles
 .appendix-description {
   font-family: "LXGWWenKaiMono";
-  color: black;
+  color: var(--global-text-color);
   font-size: 1.1em;
   line-height: 1.6;
 }
