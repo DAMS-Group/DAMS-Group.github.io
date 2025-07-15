@@ -45,7 +45,15 @@ layout: page
             {% endif %}
           </div>
         </div>
-        {% if loopindex == 4 or forloop.last %}
+        {% if loopindex == 4 %}
+          </div>
+        {% elsif forloop.last %}
+          {% assign empty_members = 4 | minus: loopindex %}
+          {% for i in (1..empty_members) %}
+            <br>
+            <div class="member">
+            </div>
+          {% endfor %}
           </div>
         {% endif %}
       {% endfor %}
@@ -93,7 +101,15 @@ layout: page
             {% endif %}
           </div>
         </div>
-        {% if loopindex == 4 or forloop.last %}
+        {% if loopindex == 4 %}
+          </div>
+        {% elsif forloop.last %}
+          {% assign empty_members = 4 | minus: loopindex %}
+          {% for i in (1..empty_members) %}
+            <br>
+            <div class="member">
+            </div>
+          {% endfor %}
           </div>
         {% endif %}
       {% endfor %}
@@ -126,6 +142,13 @@ layout: page
             {% if member.name %}
               <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
             {% endif %}
+            {% if member.grade %}
+              {% if member.is_phd_student %}
+                <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级博士生</li>
+              {% else %}
+                <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级硕士生</li>
+              {% endif %}
+            {% endif %}
             {% if member.graduation_year %}
               <li class="member-graduation" style="list-style-type:none;">{{ member.graduation_year }}届毕业生</li>
             {% endif %}
@@ -137,7 +160,15 @@ layout: page
             {% endif %}
           </div>
         </div>
-        {% if loopindex == 4 or forloop.last %}
+        {% if loopindex == 4 %}
+          </div>
+        {% elsif forloop.last %}
+          {% assign empty_members = 4 | minus: loopindex %}
+          {% for i in (1..empty_members) %}
+            <br>
+            <div class="member">
+            </div>
+          {% endfor %}
           </div>
         {% endif %}
       {% endfor %}

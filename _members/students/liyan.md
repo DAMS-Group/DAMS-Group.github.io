@@ -4,4 +4,5 @@ image: members/students/liyan.jpg
 name: 李彦
 grade: 2019
 research: 软件供应链攻击检测
+is_phd_student: true
 ---

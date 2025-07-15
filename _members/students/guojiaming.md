@@ -4,4 +4,5 @@ image: members/students/guojiaming.jpg
 name: 郭佳明
 grade: 2022
 research: 物联网安全
+is_phd_student: true
 ---

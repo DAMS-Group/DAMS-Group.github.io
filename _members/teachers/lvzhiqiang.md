@@ -1,6 +1,6 @@
 ---
 category: teachers
-order: 3
+order: 2
 image: members/teachers/lvzhiqiang.jpg
 name: 吕志强
 title: 正高级工程师 博导
