@@ -1,5 +1,5 @@
 ---
-category: alumni
+category: students
 order: 6
 image: members/students/jiangnan.jpg
 name: 姜楠

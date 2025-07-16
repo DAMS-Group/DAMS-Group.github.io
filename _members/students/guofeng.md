@@ -1,5 +1,5 @@
 ---
-category: alumni
+category: students
 image: members/students/guofeng.jpg
 name: 郭峰
 grade: 2020

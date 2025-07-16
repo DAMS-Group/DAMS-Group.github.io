@@ -1,5 +1,5 @@
 ---
-category: alumni
+category: students
 image: members/students/zhangyixin.jpg
 name: 张艺馨
 grade: 2021

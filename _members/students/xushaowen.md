@@ -1,5 +1,5 @@
 ---
-category: alumni
+category: students
 order: 5
 image: members/students/xushaowen.jpg
 name: 徐少文
