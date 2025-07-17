@@ -182,6 +182,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhaoyuanbo/";
+            },},{id: "members-高级工程师",
+          title: '高级工程师',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/duhaichao/";
             },},{id: "members-研究员-博导",
           title: '研究员 博导',
           description: "",
