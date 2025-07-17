@@ -1,6 +1,5 @@
 ---
 category: students
-order: 5
 image: members/students/xushaowen.jpg
 name: 徐少文
 grade: 2019
