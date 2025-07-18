@@ -1,6 +1,6 @@
 ---
 category: teachers
-order: 6
+order: 7
 image: members/teachers/duhaichao.jpg
 name: 杜海超
 title: 高级工程师
