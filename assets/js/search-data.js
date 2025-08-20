@@ -352,6 +352,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/jiangnan@mobisys2025/";
+            },},{id: "news-论文录用-acm-ccs-2025",
+          title: '【论文录用】ACM CCS 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@ccs2025/";
             },},{
         id: 'social-github',
         title: 'GitHub',
