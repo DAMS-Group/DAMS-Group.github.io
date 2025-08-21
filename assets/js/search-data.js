@@ -292,6 +292,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@socc2024/";
+            },},{id: "news-论文录用-ndss-2025",
+          title: '【论文录用】NDSS 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@ndss2025/";
             },},{id: "news-学术报告-陈家赟的报告-acsac-2024",
           title: '【学术报告】陈家赟的报告 @ ACSAC 2024',
           description: "",
