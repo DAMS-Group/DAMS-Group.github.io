@@ -2,14 +2,12 @@
  * Content
  ******************************************************************************/
 
-/* 注意：基本的body样式在_base.scss中已定义，这里只添加特定于布局的样式 */
 body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
   line-height: 1.6;
 
-  /* 添加滚动边距以确保标题在固定导航栏下方正确显示 */
   h1,
   h2,
   h3,
@@ -312,9 +310,6 @@ body.sticky-bottom-footer {
  * Publications
  ******************************************************************************/
 
-/* 注意：主要的publications样式已移至_base.scss文件中的.publications类 */
-
-/* 这个类是特定于选定论文的样式，与_base.scss中的.publications不同 */
 .selected_paper {
   width: 100%;
   margin: 0 auto;
