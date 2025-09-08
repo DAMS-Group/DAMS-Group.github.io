@@ -132,6 +132,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songyanni/";
+            },},{id: "members-wangjuchen",
+          title: 'Wangjuchen',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/wangjuchen/";
             },},{id: "members-wanyisen",
           title: 'Wanyisen',
           description: "",
@@ -182,6 +187,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhaoyuanbo/";
+            },},{id: "members-zhengqiutong",
+          title: 'Zhengqiutong',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhengqiutong/";
             },},{id: "members-高级工程师",
           title: '高级工程师',
           description: "",
