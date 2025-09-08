@@ -23,7 +23,9 @@
             <h3 class="info-title">作者信息</h3>
             <ul class="info-list">
               {% for author in page.authors %}
-                <li><a class="author-link" data-author="{{ author }}">{{ author }}</a></li>
+                <li>
+                  <a class="author-link" data-author="{{ author }}">{{ author }}</a>
+                </li>
               {% endfor %}
             </ul>
           </div>
