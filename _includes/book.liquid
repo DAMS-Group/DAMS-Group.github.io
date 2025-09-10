@@ -23,13 +23,13 @@
             <h3 class="info-title">作者信息</h3>
             <ul class="info-list">
               <li>
-              {% for author in page.authors %}
-                {% if author == "TAB" %}
-                  &emsp;
-                {% else %}
-                  <a class="author-link" data-author="{{ author }}">{{ author }}</a>
-                {% endif %}
-              {% endfor %}
+                {% for author in page.authors %}
+                  {% if author == 'TAB' %}
+                    &emsp;
+                  {% else %}
+                    <a class="author-link" data-author="{{ author }}">{{ author }}</a>
+                  {% endif %}
+                {% endfor %}
               </li>
             </ul>
           </div>
