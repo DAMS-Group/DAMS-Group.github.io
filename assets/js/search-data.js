@@ -82,11 +82,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/hujunjie/";
-            },},{id: "members-jiangnan",
-          title: 'Jiangnan',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/jiangnan/";
             },},{id: "members-lihaiyang",
           title: 'Lihaiyang',
           description: "",
@@ -147,11 +142,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/xieqiang/";
-            },},{id: "members-xushaowen",
-          title: 'Xushaowen',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/xushaowen/";
             },},{id: "members-yanghaoran",
           title: 'Yanghaoran',
           description: "",
@@ -172,11 +162,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/yaowentao/";
-            },},{id: "members-zhangyixin",
-          title: 'Zhangyixin',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/zhangyixin/";
             },},{id: "members-zhangzhicong",
           title: 'Zhangzhicong',
           description: "",
@@ -197,6 +182,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/duhaichao/";
+            },},{id: "members-助理研究员",
+          title: '助理研究员',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/jiangnan/";
             },},{id: "members-研究员-博导",
           title: '研究员 博导',
           description: "",
@@ -222,6 +212,16 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/xieyamin/";
+            },},{id: "members-助理研究员",
+          title: '助理研究员',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/xushaowen/";
+            },},{id: "members-助理研究员",
+          title: '助理研究员',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhangyixin/";
             },},{id: "members-副研究员-硕导",
           title: '副研究员 硕导',
           description: "",
