@@ -361,7 +361,7 @@ ninja.data = [{
           title: '【论文录用】ECAI 2025',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/accept@ECAI2025/";
+              window.location.href = "/news/accept@ecai2025/";
             },},{id: "news-学术报告-姜楠的学术报告-mobisys-2025",
           title: '【学术报告】姜楠的学术报告 @ Mobisys 2025',
           description: "",
@@ -372,6 +372,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@ccs2025/";
+            },},{id: "news-论文录用-aaai-2026",
+          title: '【论文录用】AAAI 2026',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@aaai2026/";
             },},{
         id: 'social-github',
         title: 'GitHub',
