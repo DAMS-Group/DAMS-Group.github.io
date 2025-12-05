@@ -27,7 +27,6 @@ layout: default
       {% if url_beginning == '/news/' %}
         <i class="fa-solid fa-calendar fa-sm"></i>
         {{ page.date | date: '%Y-%m-%d' }}
-        &nbsp; &middot; &nbsp;
       {% endif %}
       {% if tags != '' %}
         {% for tag in page.tags %}
