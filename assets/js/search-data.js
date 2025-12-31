@@ -387,6 +387,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@security2026/";
+            },},{id: "news-学术报告-刘昕的学术报告-ecai-2025",
+          title: '【学术报告】刘昕的学术报告 @ ECAI 2025',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/liuxin@ecai2025/";
             },},{
         id: 'social-github',
         title: 'GitHub',
