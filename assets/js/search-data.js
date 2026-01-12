@@ -392,6 +392,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/liuxin@ecai2025/";
+            },},{id: "news-论文录用-ieee-tc",
+          title: '【论文录用】IEEE TC',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@tc2026/";
             },},{
         id: 'social-github',
         title: 'GitHub',
