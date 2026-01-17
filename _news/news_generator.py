@@ -24,7 +24,7 @@ def generate_news_file(filename, title, content):
     current_date = datetime.date.today()
     
     # Format the filename with the date prefix and .md extension
-    full_filename = f"{current_date.strftime('%Y-%m-%d')}-{filename}.md"
+    full_filename = f"{current_date.strftime('%Y-%m-%d')}-accept@{filename}.md"
     
     # Format the date for the YAML front matter (with time 08:00:00+0800)
     date_time_str = current_date.strftime("%Y-%m-%d 08:00:00+0800")
@@ -32,7 +32,7 @@ def generate_news_file(filename, title, content):
     # Create the content for the markdown file
     markdown_content = f"""---
 layout: post
-title: {title}
+title: 【论文录用】{title}
 date: {date_time_str}
 inline: false
 related_posts: false
