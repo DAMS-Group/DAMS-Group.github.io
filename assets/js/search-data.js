@@ -407,6 +407,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@asplos2026/";
+            },},{id: "news-团建活动-2026年1月19日年度团建",
+          title: '【团建活动】2026年1月19日年度团建',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/team-building-2026/";
             },},{
         id: 'social-github',
         title: 'GitHub',
