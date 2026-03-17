@@ -9,24 +9,6 @@
     "doi": ""
   },
   {
-    "key": "xin2025lks",
-    "year": "2025",
-    "title": "Latent Knowledge Scalpel: Precise and Massive Knowledge Editing for Large Language Models",
-    "preview": "lks-architecture.png",
-    "html": "https://arxiv.org/abs/2508.03741",
-    "pdf": "https://arxiv.org/pdf/2508.03741",
-    "doi": ""
-  },
-  {
-    "key": "zibo2025eavesdropping",
-    "year": "2025",
-    "title": "I Know What You Said: Unveiling Hardware Cache Side-Channels in Local Large Language Model Inference",
-    "preview": "eavesdropping-architecture.png",
-    "html": "https://www.usenix.org/conference/usenixsecurity25/presentation/gao-zibo",
-    "pdf": "https://www.usenix.org/system/files/usenixsecurity25-gao-zibo.pdf",
-    "doi": ""
-  },
-  {
     "key": "zhicong2025unicontainer",
     "year": "2025",
     "title": "Unicontainer: Unlocking the Potential of Unikernel for Secure and Efficient Containerization",
@@ -42,24 +24,6 @@
     "preview": "chameleon-architecture.png",
     "html": "",
     "pdf": "",
-    "doi": ""
-  },
-  {
-    "key": "qihang2025rcontainer",
-    "year": "2025",
-    "title": "RContainer: A Secure Container Architecture through Extending ARM CCA Hardware Primitives",
-    "preview": "rcontainer-architecture.png",
-    "html": "https://www.ndss-symposium.org/ndss-paper/rcontainer-a-secure-container-architecture-through-extending-arm-cca-hardware-primitives/",
-    "pdf": "https://www.ndss-symposium.org/wp-content/uploads/2025-328-paper.pdf",
-    "doi": ""
-  },
-  {
-    "key": "qiyang2025autoar",
-    "year": "2025",
-    "title": "Silence False Alarms: Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection",
-    "preview": "autoar-architecture.png",
-    "html": "https://www.ndss-symposium.org/ndss-paper/silence-false-alarms-identifying-anti-reentrancy-patterns-on-ethereum-to-refine-smart-contract-reentrancy-detection/",
-    "pdf": "https://www.ndss-symposium.org/wp-content/uploads/2025-167-paper.pdf",
     "doi": ""
   },
   {
