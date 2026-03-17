@@ -42,36 +42,12 @@
             alt=entry.preview
           %}
         {% endif %}
-        {% if entry.preview_type or entry.preview_note %}
-          <div class="preview-meta">
-            {% if entry.preview_type %}
-              {% assign preview_label = entry.preview_type %}
-              {% if entry.preview_type == 'architecture' %}
-                {% assign preview_label = 'Architecture verified' %}
-              {% elsif entry.preview_type == 'paper-opening' %}
-                {% assign preview_label = 'Paper-opening preview' %}
-              {% elsif entry.preview_type == 'fallback' %}
-                {% assign preview_label = 'Fallback preview' %}
-              {% elsif entry.preview_type == 'site-preview' %}
-                {% assign preview_label = 'Site preview (unreverified)' %}
-              {% endif %}
-              <span class="preview-status preview-status-{{ entry.preview_type }}">{{ preview_label }}</span>
-            {% endif %}
-            {% if entry.preview_note %}
-              <div class="preview-note">{{ entry.preview_note }}</div>
-            {% endif %}
-          </div>
-        {% endif %}
       {% endif %}
     </div>
   {% endif %}
 
   <!-- Entry bib key -->
-  <div
-    id="{{ entry.key }}"
-    class="{% if site.enable_publication_thumbnails %}col-sm-6{% else %}col-sm-10{% endif %}"
-    data-preview-type="{{ entry.preview_type | default: 'unknown' }}"
-  >
+  <div id="{{ entry.key }}" class="{% if site.enable_publication_thumbnails %}col-sm-6{% else %}col-sm-10{% endif %}">
     <!-- Title -->
     <div class="title">{{ entry.title }}</div>
 
