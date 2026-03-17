@@ -1,0 +1,209 @@
+[
+  {
+    "key": "junjie2025sistar",
+    "year": "2025",
+    "title": "SISTAR: An Efficient DDoS Detection and Mitigation Framework Utilizing Programmable Data Planes",
+    "preview": "sistar-architecture.png",
+    "html": "https://dl.acm.org/doi/10.1145/3719027.3765046",
+    "pdf": "",
+    "doi": ""
+  },
+  {
+    "key": "xin2025lks",
+    "year": "2025",
+    "title": "Latent Knowledge Scalpel: Precise and Massive Knowledge Editing for Large Language Models",
+    "preview": "lks-architecture.png",
+    "html": "https://arxiv.org/abs/2508.03741",
+    "pdf": "https://arxiv.org/pdf/2508.03741",
+    "doi": ""
+  },
+  {
+    "key": "zibo2025eavesdropping",
+    "year": "2025",
+    "title": "I Know What You Said: Unveiling Hardware Cache Side-Channels in Local Large Language Model Inference",
+    "preview": "eavesdropping-architecture.png",
+    "html": "https://www.usenix.org/conference/usenixsecurity25/presentation/gao-zibo",
+    "pdf": "https://www.usenix.org/system/files/usenixsecurity25-gao-zibo.pdf",
+    "doi": ""
+  },
+  {
+    "key": "zhicong2025unicontainer",
+    "year": "2025",
+    "title": "Unicontainer: Unlocking the Potential of Unikernel for Secure and Efficient Containerization",
+    "preview": "unicontainer-architecture.png",
+    "html": "https://dl.acm.org/doi/10.1145/3727134",
+    "pdf": "",
+    "doi": ""
+  },
+  {
+    "key": "nan2025chameleon",
+    "year": "2025",
+    "title": "Chameleon: Towards Building Least-privileged TEE via Functionality-based Resource Re-grouping",
+    "preview": "chameleon-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": ""
+  },
+  {
+    "key": "qihang2025rcontainer",
+    "year": "2025",
+    "title": "RContainer: A Secure Container Architecture through Extending ARM CCA Hardware Primitives",
+    "preview": "rcontainer-architecture.png",
+    "html": "https://www.ndss-symposium.org/ndss-paper/rcontainer-a-secure-container-architecture-through-extending-arm-cca-hardware-primitives/",
+    "pdf": "https://www.ndss-symposium.org/wp-content/uploads/2025-328-paper.pdf",
+    "doi": ""
+  },
+  {
+    "key": "qiyang2025autoar",
+    "year": "2025",
+    "title": "Silence False Alarms: Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection",
+    "preview": "autoar-architecture.png",
+    "html": "https://www.ndss-symposium.org/ndss-paper/silence-false-alarms-identifying-anti-reentrancy-patterns-on-ethereum-to-refine-smart-contract-reentrancy-detection/",
+    "pdf": "https://www.ndss-symposium.org/wp-content/uploads/2025-167-paper.pdf",
+    "doi": ""
+  },
+  {
+    "key": "jiayun2024cubevisor",
+    "year": "2024",
+    "title": "CubeVisor: A Multi-realm Architecture Design for Running VM with ARM CCA",
+    "preview": "cubevisor-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/ACSAC63791.2024.00023"
+  },
+  {
+    "key": "feng2024computernetworks",
+    "year": "2024",
+    "title": "CIPO: Efficient, lightweight and programmable packet scheduling",
+    "preview": "cipo-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1016/j.comnet.2024.110355"
+  },
+  {
+    "key": "shaowen2024conmonitor",
+    "year": "2024",
+    "title": "ConMonitor: Lightweight Container Protection with Virtualization and VM Functions",
+    "preview": "conmonitor-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1145/3698038.3698520"
+  },
+  {
+    "key": "qihang2024hclave",
+    "year": "2024",
+    "title": "HClave: An isolated execution environment design for hypervisor runtime security",
+    "preview": "hclave-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1016/j.cose.2024.103923"
+  },
+  {
+    "key": "yang2024sedspec",
+    "year": "2024",
+    "title": "SEDSpec: Securing Emulated Devices by Enforcing Execution Specification",
+    "preview": "sedspec-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/DSN58291.2024.00056"
+  },
+  {
+    "key": "nan2024sechannel",
+    "year": "2024",
+    "title": "SeChannel: A Secure and Lightweight Channel Protection Approach for TEE Systems",
+    "preview": "sechannel-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/TrustCom63139.2024.00038"
+  },
+  {
+    "key": "yixin2024usbcatcher",
+    "year": "2024",
+    "title": "USB Catcher: Detection of Controlled Emissions via Conducted Compromising Emanations",
+    "preview": "usb-catcher-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/TrustCom63139.2024.00182"
+  },
+  {
+    "key": "zhicong2024summslim",
+    "year": "2024",
+    "title": "SummSlim: A Universal and Automated Approach for Debloating Container Images",
+    "preview": "summslim-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/ICPADS63350.2024.00027"
+  },
+  {
+    "key": "yixin2024highspeedusbattack",
+    "year": "2024",
+    "title": "A Conducted Compromising Emanations Method on High-Speed USB Devices via USB Hubs",
+    "preview": "attack-high-speed-usb-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/ISCC61673.2024.10733582"
+  },
+  {
+    "key": "jiayun2024vasp",
+    "year": "2024",
+    "title": "vASP: Full VM Life-cycle Protection Based on Active Security Processor Architecture",
+    "preview": "vasp-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/CCGrid59990.2024.00028"
+  },
+  {
+    "key": "nan2024lightarmor",
+    "year": "2024",
+    "title": "LightArmor: A Lightweight Trusted Operating System Isolation Approach for Mobile Systems",
+    "preview": "lightarmor-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1007/978-3-031-65175-5_15"
+  },
+  {
+    "key": "shaowen2023log2policy",
+    "year": "2023",
+    "title": "Log2Policy: An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch",
+    "preview": "log2policy-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1145/3627106.3627137"
+  },
+  {
+    "key": "qihang2022secfortress",
+    "year": "2022",
+    "title": "SecFortress: Securing Hypervisor using Cross-layer Isolation",
+    "preview": "secfortress-architecture.png",
+    "html": "",
+    "pdf": "",
+    "doi": "10.1109/IPDPS53621.2022.00029"
+  },
+  {
+    "key": "jianwei2020seef-aldr",
+    "year": "2020",
+    "title": "SEEF-ALDR: A Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation",
+    "preview": "seef-aldr-architecture.png",
+    "html": "https://dl.acm.org/doi/10.1145/3427228.3427274",
+    "pdf": "",
+    "doi": "10.1145/3427228.3427274"
+  },
+  {
+    "key": "jianwei2020et-gan",
+    "year": "2020",
+    "title": "ET-GAN: Cross-Language Emotion Transfer Based on Cycle-Consistent Generative Adversarial Networks",
+    "preview": "et-gan-architecture.png",
+    "html": "",
+    "pdf": "https://ecai2020.eu/papers/239_paper.pdf",
+    "doi": ""
+  },
+  {
+    "key": "yun2020enclavepdp",
+    "year": "2020",
+    "title": "EnclavePDP: A General Framework to Verify Data Integrity in Cloud Using Intel SGX",
+    "preview": "enclavepdp-architecture.png",
+    "html": "https://www.usenix.org/conference/raid2020/presentation/he",
+    "pdf": "https://www.usenix.org/system/files/raid20-he.pdf",
+    "doi": ""
+  }
+]

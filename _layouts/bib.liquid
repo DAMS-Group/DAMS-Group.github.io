@@ -67,7 +67,11 @@
   {% endif %}
 
   <!-- Entry bib key -->
-  <div id="{{ entry.key }}" class="{% if site.enable_publication_thumbnails %}col-sm-6{% else %}col-sm-10{% endif %}">
+  <div
+    id="{{ entry.key }}"
+    class="{% if site.enable_publication_thumbnails %}col-sm-6{% else %}col-sm-10{% endif %}"
+    data-preview-type="{{ entry.preview_type | default: 'unknown' }}"
+  >
     <!-- Title -->
     <div class="title">{{ entry.title }}</div>
 
