@@ -42,6 +42,24 @@
             alt=entry.preview
           %}
         {% endif %}
+        {% if entry.preview_type or entry.preview_note %}
+          <div class="preview-meta">
+            {% if entry.preview_type %}
+              {% assign preview_label = entry.preview_type %}
+              {% if entry.preview_type == 'architecture' %}
+                {% assign preview_label = 'Architecture verified' %}
+              {% elsif entry.preview_type == 'paper-opening' %}
+                {% assign preview_label = 'Paper-opening preview' %}
+              {% elsif entry.preview_type == 'fallback' %}
+                {% assign preview_label = 'Fallback preview' %}
+              {% endif %}
+              <span class="preview-status preview-status-{{ entry.preview_type }}">{{ preview_label }}</span>
+            {% endif %}
+            {% if entry.preview_note %}
+              <div class="preview-note">{{ entry.preview_note }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
       {% endif %}
     </div>
   {% endif %}
