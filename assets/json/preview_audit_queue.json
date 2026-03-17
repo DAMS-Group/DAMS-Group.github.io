@@ -27,15 +27,6 @@
     "doi": ""
   },
   {
-    "key": "jiayun2024cubevisor",
-    "year": "2024",
-    "title": "CubeVisor: A Multi-realm Architecture Design for Running VM with ARM CCA",
-    "preview": "cubevisor-architecture.png",
-    "html": "",
-    "pdf": "",
-    "doi": "10.1109/ACSAC63791.2024.00023"
-  },
-  {
     "key": "feng2024computernetworks",
     "year": "2024",
     "title": "CIPO: Efficient, lightweight and programmable packet scheduling",
@@ -43,33 +34,6 @@
     "html": "",
     "pdf": "",
     "doi": "10.1016/j.comnet.2024.110355"
-  },
-  {
-    "key": "shaowen2024conmonitor",
-    "year": "2024",
-    "title": "ConMonitor: Lightweight Container Protection with Virtualization and VM Functions",
-    "preview": "conmonitor-architecture.png",
-    "html": "",
-    "pdf": "",
-    "doi": "10.1145/3698038.3698520"
-  },
-  {
-    "key": "qihang2024hclave",
-    "year": "2024",
-    "title": "HClave: An isolated execution environment design for hypervisor runtime security",
-    "preview": "hclave-architecture.png",
-    "html": "",
-    "pdf": "",
-    "doi": "10.1016/j.cose.2024.103923"
-  },
-  {
-    "key": "yang2024sedspec",
-    "year": "2024",
-    "title": "SEDSpec: Securing Emulated Devices by Enforcing Execution Specification",
-    "preview": "sedspec-architecture.png",
-    "html": "",
-    "pdf": "",
-    "doi": "10.1109/DSN58291.2024.00056"
   },
   {
     "key": "nan2024sechannel",
