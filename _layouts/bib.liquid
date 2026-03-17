@@ -52,6 +52,8 @@
                 {% assign preview_label = 'Paper-opening preview' %}
               {% elsif entry.preview_type == 'fallback' %}
                 {% assign preview_label = 'Fallback preview' %}
+              {% elsif entry.preview_type == 'site-preview' %}
+                {% assign preview_label = 'Site preview (unreverified)' %}
               {% endif %}
               <span class="preview-status preview-status-{{ entry.preview_type }}">{{ preview_label }}</span>
             {% endif %}
