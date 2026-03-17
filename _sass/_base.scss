@@ -1913,51 +1913,6 @@ ninja-keys::part(ninja-input-wrapper) {
   margin-top: 0.7rem;
 }
 
-.preview-filter-card {
-  margin: 1rem 0 1.25rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  background: #f8fafc;
-}
-
-.preview-filter-title {
-  margin-bottom: 0.7rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.preview-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 0.55rem;
-  margin-bottom: 0.9rem;
-}
-
-.preview-filter-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-}
-
-.preview-filter-btn {
-  border: 1px solid #cbd5e1;
-  background: #fff;
-  color: #334155;
-  padding: 0.38rem 0.78rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.18s ease;
-}
-
-.preview-filter-btn:hover,
-.preview-filter-btn.active {
-  background: #0f172a;
-  border-color: #0f172a;
-  color: #fff;
-}
-
 .preview-status {
   display: inline-block;
   margin-bottom: 0.45rem;

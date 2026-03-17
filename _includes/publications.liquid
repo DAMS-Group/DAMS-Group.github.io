@@ -9,23 +9,6 @@
   </div>
 </div>
 
-<div class="preview-filter-card">
-  <div class="preview-filter-title">Preview legend & filter</div>
-  <div class="preview-legend">
-    <span class="preview-status preview-status-architecture">Architecture verified</span>
-    <span class="preview-status preview-status-paper-opening">Paper-opening preview</span>
-    <span class="preview-status preview-status-fallback">Fallback preview</span>
-    <span class="preview-status preview-status-site-preview">Site preview (unreverified)</span>
-  </div>
-  <div class="preview-filter-actions" id="preview-filter-actions">
-    <button type="button" class="preview-filter-btn active" data-preview-filter="all">All</button>
-    <button type="button" class="preview-filter-btn" data-preview-filter="architecture">Architecture verified</button>
-    <button type="button" class="preview-filter-btn" data-preview-filter="paper-opening">Paper-opening</button>
-    <button type="button" class="preview-filter-btn" data-preview-filter="fallback">Fallback</button>
-    <button type="button" class="preview-filter-btn" data-preview-filter="site-preview">Unreverified</button>
-  </div>
-</div>
-
 <div class="publications">
   {% bibliography %}
 </div>
@@ -33,9 +16,6 @@
 <script>
   (function () {
     const tagMap = new Map();
-    const selectedTags = new Set();
-    let activePreviewFilter = 'all';
-
     document.querySelectorAll('.tag-filter').forEach((el) => {
       const tag = el.dataset.tag.trim().replace(/\s+/g, ' ');
       if (tag && !tagMap.has(tag)) {
@@ -43,8 +23,8 @@
       }
     });
 
-    const tagContainer = document.getElementById('tag-cloud');
-    const previewButtons = document.querySelectorAll('.preview-filter-btn');
+    const container = document.getElementById('tag-cloud');
+    const selectedTags = new Set();
 
     const updateYearVisibility = () => {
       document.querySelectorAll('h2.bibliography').forEach((pubYear) => {
@@ -58,20 +38,6 @@
       });
     };
 
-    const applyFilters = () => {
-      document.querySelectorAll('.publications li').forEach((item) => {
-        const tagContainer = item.querySelector('.paper-tags');
-        const paperTags = tagContainer ? [...tagContainer.querySelectorAll('.tag-filter')].map((t) => t.dataset.tag.trim()) : [];
-        const previewHolder = item.querySelector('[data-preview-type]');
-        const previewType = previewHolder ? previewHolder.dataset.previewType : 'unknown';
-
-        const tagMatch = selectedTags.size === 0 || [...selectedTags].every((tag) => paperTags.includes(tag));
-        const previewMatch = activePreviewFilter === 'all' || previewType === activePreviewFilter;
-        item.style.display = tagMatch && previewMatch ? '' : 'none';
-      });
-      updateYearVisibility();
-    };
-
     tagMap.forEach((_, tag) => {
       const element = document.createElement('span');
       element.className = 'tag-toggle tag-decoration';
@@ -79,21 +45,18 @@
       element.onclick = () => {
         element.classList.toggle('tag-active');
         element.classList.contains('tag-active') ? selectedTags.add(tag) : selectedTags.delete(tag);
-        applyFilters();
+
+        document.querySelectorAll('.publications li').forEach((item) => {
+          const paperTagContainer = item.querySelector('.paper-tags');
+          const paperTags = paperTagContainer ? [...paperTagContainer.querySelectorAll('.tag-filter')].map((t) => t.dataset.tag.trim()) : [];
+          const show = selectedTags.size === 0 || [...selectedTags].every((t) => paperTags.includes(t));
+          item.style.display = show ? '' : 'none';
+        });
+
+        updateYearVisibility();
       };
-      tagContainer.appendChild(element);
-      tagContainer.appendChild(document.createTextNode(' '));
+      container.appendChild(element);
+      container.appendChild(document.createTextNode(' '));
     });
-
-    previewButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        previewButtons.forEach((btn) => btn.classList.remove('active'));
-        button.classList.add('active');
-        activePreviewFilter = button.dataset.previewFilter;
-        applyFilters();
-      });
-    });
-
-    applyFilters();
   })();
 </script>
