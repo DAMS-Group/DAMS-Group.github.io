@@ -1,38 +1,3 @@
-@inproceedings{qiyang2026vcause,
-  title={vCause: Efficient and Verifiable Causality Analysis for Cloud-based Endpoint Auditing},
-  author={Song, Qiyang and Zhou, Qihang and Jia, Xiaoqi and Song, Zhenyu and Jiang, Wenbo and Huang, Heqing and Liu, Yong and Meng, Dan},
-  abstract={In cloud-based endpoint auditing, security administrators often rely on the cloud to perform causality analysis over log-derived versioned provenance graphs to investigate suspicious attack behaviors. However, the cloud may be distrusted or compromised by attackers, potentially manipulating the final causality analysis results. Consequently, administrators may not accurately understand attack behaviors and fail to implement effective countermeasures. This risk underscores the need for a defense scheme to ensure the integrity of causality analysis. While existing tamper-evident logging schemes and trusted execution environments show promise for this task, they are not specifically designed to support causality analysis and thus face inherent security and efficiency limitations. This paper presents vCause, an efficient and verifiable causality analysis system for cloud-based endpoint auditing. vCause integrates two authenticated data structures: a graph accumulator and a verifiable provenance graph. The data structures enable validation of two critical steps in causality analysis: (i) querying a point-of-interest node on a versioned provenance graph, and (ii) identifying its causally related components. Formal security analysis and experimental evaluation show that vCause can achieve secure and verifiable causality analysis with only <1% computational overhead on endpoints and 3.36% on the cloud.},
-  booktitle={Proceedings of the 35th USENIX Security Symposium},
-  year={2026},
-  note={Proceedings of the 35th USENIX Security Symposium (USENIX Security 2026)},
-  html={https://arxiv.org/abs/2603.15216},
-  pdf={https://arxiv.org/pdf/2603.15216},
-  preview={vcause-architecture.png},
-  preview_type={architecture},
-  preview_note={Verified paper architecture figure (Figure 2 in the publicly accessible paper PDF).},
-  type={inproceedings},
-  tags={Cloud,Security},
-  ccf={A},
-  bibtex_show={true},
-}
-
-@inproceedings{jiaming2026falconscope,
-  title={FalconScope: Effective and Efficient Detection of Hidden Web Interfaces in IoT Devices},
-  author={Guo, Jiaming and Yang, Haoran and Yan, Kuihao and Hu, Jiekang and Jia, Xiaoqi and Du, Haichao and Zhou, Qihang},
-  abstract={This work targets unauthorized-access risks caused by hidden web interfaces in IoT devices and presents FalconScope, an effective and efficient hidden-interface detection system that combines static analysis with LLM-driven semantic analysis.},
-  booktitle={Proceedings of The Web Conference 2026},
-  year={2026},
-  note={The International World Wide Web Conference (WWW 2026)},
-  html={https://www2026.thewebconf.org/accepted/research-tracks.html},
-  preview={falconscope-architecture.png},
-  preview_type={fallback},
-  preview_note={No publicly accessible paper PDF was available in the current environment, so the architecture figure could not be verified from the paper.},
-  type={inproceedings},
-  tags={IoT,Web,LLM},
-  ccf={A},
-  bibtex_show={true},
-}
-
 @inproceedings{xiaolong2026worksetenclave,
   title={WorksetEnclave: Towards Optimizing Cold Starts in Confidential Serverless with Workset-Based Enclave Restore},
   author={Yan, Xiaolong and Zhou, Qihang and Wan, Zisen and Qian, Feifan and Yao, Wentao and Zhang, Weijuan and Jia, Xiaoqi},
@@ -51,43 +16,22 @@
   ccf={A},
   bibtex_show={true},
 }
-
-@inproceedings{haoran2026iotbec,
-  title={IoTBec: An Accurate and Efficient Recurring Vulnerability Detection Framework for Black Box IoT devices},
-  author={Yang, Haoran and Guo, Jiaming and Yang, Shuangning and Zhao, Guoli and Liu, Qingqi and Zhang, Chi and Tan, Zhenlu and Shan, Lixiao and Zhou, Qihang and Zhou, Mengting and Tai, Jianwei and Jia, Xiaoqi},
-  abstract={The proliferation of IoT devices has driven a rise in vulnerability exploits. Existing vulnerability detection approaches heavily rely on firmware or source code for analysis, which critically compromises their efficiency in real-world black-box scenarios. To address this limitation, this paper proposes IoTBec, a novel firmware- and source-code-independent framework for recurring vulnerability detection. IoTBec constructs a Vulnerability Interface Signature (VIS) based on black-box interfaces and known vulnerability information, then integrates signature-based detection with LLM-driven fuzzing for automatic verification. Extensive experiments on devices from five major IoT vendors show IoTBec discovers substantially more vulnerabilities than existing black-box fuzzing methods while maintaining high precision and recall.},
-  booktitle={Network and Distributed System Security Symposium (NDSS)},
+@inproceedings{jiaming2026falconscope,
+  title={FalconScope: Effective and Efficient Detection of Hidden Web Interfaces in IoT Devices},
+  author={Guo, Jiaming and Yang, Haoran and Yan, Kuihao and Hu, Jiekang and Jia, Xiaoqi and Du, Haichao and Zhou, Qihang},
+  abstract={This work targets unauthorized-access risks caused by hidden web interfaces in IoT devices and presents FalconScope, an effective and efficient hidden-interface detection system that combines static analysis with LLM-driven semantic analysis.},
+  booktitle={Proceedings of The Web Conference 2026},
   year={2026},
-  note={Network and Distributed System Security (NDSS) Symposium 2026},
-  html={https://www.ndss-symposium.org/ndss-paper/iotbec-an-accurate-and-efficient-recurring-vulnerability-detection-framework-for-black-box-iot-devices/},
-  pdf={https://www.ndss-symposium.org/wp-content/uploads/2026-f634-paper.pdf},
-  preview={iotbec-architecture.png},
-  preview_type={architecture},
-  preview_note={Verified paper architecture figure (Figure 1 / workflow diagram in the publicly accessible NDSS paper PDF).},
+  note={The International World Wide Web Conference (WWW 2026)},
+  html={https://www2026.thewebconf.org/accepted/research-tracks.html},
+  preview={falconscope-architecture.png},
+  preview_type={fallback},
+  preview_note={No publicly accessible paper PDF was available in the current environment, so the architecture figure could not be verified from the paper.},
   type={inproceedings},
-  tags={IoT,Security},
+  tags={IoT,Web,LLM},
   ccf={A},
   bibtex_show={true},
 }
-
-@inproceedings{xin2026languageheads,
-  title={Focusing on Language: Revealing and Exploiting Language Attention Heads in Multilingual Large Language Models},
-  author={Liu, Xin and Song, Qiyang and Zhou, Qihang and Du, Haichao and Xu, Shaowen and Jiang, Wenbo and Zhang, Weijuan and Jia, Xiaoqi},
-  abstract={Large language models (LLMs) increasingly support multilingual understanding and generation. Meanwhile, efforts to interpret their internal mechanisms have emerged, offering insights to enhance multilingual performance. While multi-head self-attention (MHA) has proven critical in many areas, its role in multilingual capabilities remains underexplored. In this work, we study the contribution of MHA in supporting multilingual processing in LLMs. We propose Language Attention Head Importance Scores (LAHIS), an effective and efficient method that identifies attention head importance for multilingual capabilities via a single forward and backward pass through the LLM. Applying LAHIS to Aya-23-8B, Llama-3.2-3B, and Mistral-7B-v0.1, we reveal the existence of both language-specific and language-general heads. Language-specific heads enable cross-lingual attention transfer to guide the model toward target language contexts and mitigate off-target language generation issue, contributing to addressing challenges in multilingual LLMs. We also introduce a lightweight adaptation that learns a soft head mask to modulate attention outputs over language heads, requiring only 20 tunable parameters to improve XQuAD accuracy. Overall, our work enhances both the interpretability and multilingual capabilities of LLMs from the perspective of MHA.},
-  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-  year={2026},
-  note={The 40th Annual AAAI Conference on Artificial Intelligence (AAAI 2026)},
-  html={https://arxiv.org/abs/2511.07498},
-  pdf={https://arxiv.org/pdf/2511.07498},
-  preview={languageheads-architecture.png},
-  preview_type={paper-opening},
-  preview_note={No clear system architecture figure was found in the publicly accessible paper, so the preview falls back to a crop from the opening of page 1.},
-  type={inproceedings},
-  tags={AI,LLM},
-  ccf={A},
-  bibtex_show={true},
-}
-
 @article{qihang2026flexclave,
   title={FlexClave: An Extensible and Secure Trusted Execution Environment Framework},
   author={Zhou, Qihang and Cao, Wenzhuo and Jia, Xiaoqi and Xu, Shaowen and Chen, Jiayun and Jiang, Nan and Zhang, Zhicong and Song, Zhenyu and Du, Haichao and Xie, Yamin and Song, Chen and Tang, Jing and Yin, Peijie and Zhang, Shengzhi and Liu, Peng},
@@ -106,7 +50,57 @@
   ccf={A},
   bibtex_show={true},
 }
-
+@inproceedings{qiyang2026vcause,
+  title={vCause: Efficient and Verifiable Causality Analysis for Cloud-based Endpoint Auditing},
+  author={Song, Qiyang and Zhou, Qihang and Jia, Xiaoqi and Song, Zhenyu and Jiang, Wenbo and Huang, Heqing and Liu, Yong and Meng, Dan},
+  abstract={In cloud-based endpoint auditing, security administrators often rely on the cloud to perform causality analysis over log-derived versioned provenance graphs to investigate suspicious attack behaviors. However, the cloud may be distrusted or compromised by attackers, potentially manipulating the final causality analysis results. Consequently, administrators may not accurately understand attack behaviors and fail to implement effective countermeasures. This risk underscores the need for a defense scheme to ensure the integrity of causality analysis. While existing tamper-evident logging schemes and trusted execution environments show promise for this task, they are not specifically designed to support causality analysis and thus face inherent security and efficiency limitations. This paper presents vCause, an efficient and verifiable causality analysis system for cloud-based endpoint auditing. vCause integrates two authenticated data structures: a graph accumulator and a verifiable provenance graph. The data structures enable validation of two critical steps in causality analysis: (i) querying a point-of-interest node on a versioned provenance graph, and (ii) identifying its causally related components. Formal security analysis and experimental evaluation show that vCause can achieve secure and verifiable causality analysis with only <1% computational overhead on endpoints and 3.36% on the cloud.},
+  booktitle={Proceedings of the 35th USENIX Security Symposium},
+  year={2026},
+  note={Proceedings of the 35th USENIX Security Symposium (USENIX Security 2026)},
+  html={https://arxiv.org/abs/2603.15216},
+  pdf={https://arxiv.org/pdf/2603.15216},
+  preview={vcause-architecture.png},
+  preview_type={architecture},
+  preview_note={Verified paper architecture figure (Figure 2 in the publicly accessible paper PDF).},
+  type={inproceedings},
+  tags={Cloud,Security},
+  ccf={A},
+  bibtex_show={true},
+}
+@inproceedings{haoran2026iotbec,
+  title={IoTBec: An Accurate and Efficient Recurring Vulnerability Detection Framework for Black Box IoT devices},
+  author={Yang, Haoran and Guo, Jiaming and Yang, Shuangning and Zhao, Guoli and Liu, Qingqi and Zhang, Chi and Tan, Zhenlu and Shan, Lixiao and Zhou, Qihang and Zhou, Mengting and Tai, Jianwei and Jia, Xiaoqi},
+  abstract={The proliferation of IoT devices has driven a rise in vulnerability exploits. Existing vulnerability detection approaches heavily rely on firmware or source code for analysis, which critically compromises their efficiency in real-world black-box scenarios. To address this limitation, this paper proposes IoTBec, a novel firmware- and source-code-independent framework for recurring vulnerability detection. IoTBec constructs a Vulnerability Interface Signature (VIS) based on black-box interfaces and known vulnerability information, then integrates signature-based detection with LLM-driven fuzzing for automatic verification. Extensive experiments on devices from five major IoT vendors show IoTBec discovers substantially more vulnerabilities than existing black-box fuzzing methods while maintaining high precision and recall.},
+  booktitle={Network and Distributed System Security Symposium (NDSS)},
+  year={2026},
+  note={Network and Distributed System Security (NDSS) Symposium 2026},
+  html={https://www.ndss-symposium.org/ndss-paper/iotbec-an-accurate-and-efficient-recurring-vulnerability-detection-framework-for-black-box-iot-devices/},
+  pdf={https://www.ndss-symposium.org/wp-content/uploads/2026-f634-paper.pdf},
+  preview={iotbec-architecture.png},
+  preview_type={architecture},
+  preview_note={Verified paper architecture figure (Figure 1 / workflow diagram in the publicly accessible NDSS paper PDF).},
+  type={inproceedings},
+  tags={IoT,Security},
+  ccf={A},
+  bibtex_show={true},
+}
+@inproceedings{xin2026languageheads,
+  title={Focusing on Language: Revealing and Exploiting Language Attention Heads in Multilingual Large Language Models},
+  author={Liu, Xin and Song, Qiyang and Zhou, Qihang and Du, Haichao and Xu, Shaowen and Jiang, Wenbo and Zhang, Weijuan and Jia, Xiaoqi},
+  abstract={Large language models (LLMs) increasingly support multilingual understanding and generation. Meanwhile, efforts to interpret their internal mechanisms have emerged, offering insights to enhance multilingual performance. While multi-head self-attention (MHA) has proven critical in many areas, its role in multilingual capabilities remains underexplored. In this work, we study the contribution of MHA in supporting multilingual processing in LLMs. We propose Language Attention Head Importance Scores (LAHIS), an effective and efficient method that identifies attention head importance for multilingual capabilities via a single forward and backward pass through the LLM. Applying LAHIS to Aya-23-8B, Llama-3.2-3B, and Mistral-7B-v0.1, we reveal the existence of both language-specific and language-general heads. Language-specific heads enable cross-lingual attention transfer to guide the model toward target language contexts and mitigate off-target language generation issue, contributing to addressing challenges in multilingual LLMs. We also introduce a lightweight adaptation that learns a soft head mask to modulate attention outputs over language heads, requiring only 20 tunable parameters to improve XQuAD accuracy. Overall, our work enhances both the interpretability and multilingual capabilities of LLMs from the perspective of MHA.},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  year={2026},
+  note={The 40th Annual AAAI Conference on Artificial Intelligence (AAAI 2026)},
+  html={https://arxiv.org/abs/2511.07498},
+  pdf={https://arxiv.org/pdf/2511.07498},
+  preview={languageheads-architecture.png},
+  preview_type={paper-opening},
+  preview_note={No clear system architecture figure was found in the publicly accessible paper, so the preview falls back to a crop from the opening of page 1.},
+  type={inproceedings},
+  tags={AI,LLM},
+  ccf={A},
+  bibtex_show={true},
+}
 @inproceedings{junjie2025sistar,
   title={SISTAR: An Efficient DDoS Detection and Mitigation Framework Utilizing Programmable Data Planes},
   author={Hu, Junjie and Guo, Feng and Zhou, Qihang and Zhang, Yixin and Gao, Zibo and Han, Yinglong and Lv, Zhiqiang},
@@ -121,7 +115,6 @@
   ccf={A},
   bibtex_show={true},
 }
-
 @inproceedings{xin2025lks,
   title={Latent Knowledge Scalpel: Precise and Massive Knowledge Editing for Large Language Models},
   author={Liu, Xin and Song, Qiyang and Xu, Shaowen and Zhou, Kerou and Jiang, Wenbo and Jia, Xiaoqi and Zhang, Weijuan and Huang, Heqing and Li, Yakai},
@@ -138,7 +131,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{zibo2025eavesdropping,
   title={I Know What You Said: Unveiling Hardware Cache Side-Channels in Local Large Language Model Inference},
   author={Gao, Zibo and Hu, Junjie and Guo, Feng and Zhang, Yixin and Han, Yinlong and Liu, Siyuan and Li, Haiyang and Lv, Zhiqiang},
@@ -156,7 +148,6 @@
   ccf={A},
   bibtex_show={true},
 }
-
 @inproceedings{zhicong2025unicontainer,
   title={Unicontainer: Unlocking the Potential of Unikernel for Secure and Efficient Containerization},
   author={Zhang, Zhicong and Zhou, Qihang and Xu, Shaowen and Jiang, Nan and Zhang, Weijuan and Jia, Xiaoqi},
@@ -171,7 +162,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{nan2025chameleon,
   title={Chameleon: Towards Building Least-privileged TEE via Functionality-based Resource Re-grouping},
   author={Jiang, Nan and Zhou, Qihang and Qian, Feifan and Chen, Jiayun and Huang, Heqing and Jia, Xiaoqi and Du, Haichao},
@@ -186,7 +176,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{qihang2025rcontainer,
   title={RContainer: A Secure Container Architecture through Extending ARM CCA Hardware Primitives},
   author={Zhou, Qihang and Cao, Wenzhuo and Jia, Xiaoqi and Liu, Peng and Zhang, Shengzhi and Chen, Jiayun and Xu, Shaowen and Song, Zhenyu},
@@ -205,7 +194,6 @@
   ccf={A},
   bibtex_show={true},
 }
-
 @inproceedings{qiyang2025autoar,
   title={Silence False Alarms: Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection},
   author={Song, Qiyang and Huang, Heqing and Jia, Xiaoqi and Xie, Yuanbo and Cao, Jiahao},
@@ -224,7 +212,6 @@
   ccf={A},
   bibtex_show={true},
 }
-
 @inproceedings{jiayun2024cubevisor,
   title={CubeVisor: A Multi-realm Architecture Design for Running VM with ARM CCA},
   author={Chen, Jiayun and Zhou, Qihang and Yan, Xiaolong and Jiang, Nan and Jia, Xiaoqi and Zhang, Weijuan},
@@ -241,7 +228,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @article{feng2024computernetworks,
   title={CIPO: Efficient, lightweight and programmable packet scheduling},
   author={Guo, Feng and Sun, Shidong and Hu, Junjie and Zhang, Ning and Lv, Zhiqiang},
@@ -259,7 +245,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{shaowen2024conmonitor,
   title={ConMonitor: Lightweight Container Protection with Virtualization and VM Functions},
   author={Xu, Shaowen and Zhou, Qihang and Zhang, Zhicong and Jia, Xiaoqi and Liu, Donglin and Huang, Heqing and Du, Haichao and Song, Zhenyu},
@@ -277,7 +262,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @article{qihang2024hclave,
   title={HClave: An isolated execution environment design for hypervisor runtime security},
   author={Zhou, Qihang and Cao, Wenzhuo and Jia, Xiaoqi and Zhang, Shengzhi and Chen, Jiayun and Jiang, Nan and Zhang, Weijuan and Du, Haichao and Song, Zhenyu and Huang, Qingjia},
@@ -296,7 +280,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{yang2024sedspec,
   title={SEDSpec: Securing Emulated Devices by Enforcing Execution Specification},
   author={Chen, Yang and Zhang, Shengzhi and Jia Xiaoqi and Zhou, Qihang and Huang, Heqing and Xu, Shaowen and Du, Haichao},
@@ -312,7 +295,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{nan2024sechannel,
   title={SeChannel: A Secure and Lightweight Channel Protection Approach for TEE Systems},
   author={Jiang, Nan and Zhao, Yuanbo and Zhou, Qihang and Jia, Xiaoqi and Tang, Jing},
@@ -328,7 +310,6 @@
   tags={TEE},
   ccf={C},
 }
-
 @inproceedings{yixin2024usbcatcher,
   title={USB Catcher: Detection of Controlled Emissions via Conducted Compromising Emanations},
   author={Zhang, Yixin and Du, Fuqiang and Chi, Xinge and Lv, Zhiqiang},
@@ -344,7 +325,6 @@
   ccf={C},
   bibtex_show={true},
 }
-
 @inproceedings{zhicong2024summslim,
   title={SummSlim: A Universal and Automated Approach for Debloating Container Images},
   author={Zhang, Zhicong and Huang, Heqing and Xu, Shaowen and Zhou, Qihang and Zhang, Tianshu and Jia, Xiaoqi and Zhang, Weijuan},
@@ -362,7 +342,6 @@
   github={https://github.com/prcuzz/SummSlim},
   ccf={C},
 }
-
 @inproceedings{yixin2024highspeedusbattack,
   title={A Conducted Compromising Emanations Method on High-Speed USB Devices via USB Hubs},
   author={Zhang, Yixin and Li, Haiyang and Ye, Qingqing and Hu, Junjie and Han, Yinglong and Lv, Zhiqiang},
@@ -378,7 +357,6 @@
   ccf={C},
   bibtex_show={true},
 }
-
 @inproceedings{jiayun2024vasp,
   title={vASP: Full VM Life-cycle Protection Based on Active Security Processor Architecture},
   author={Chen, Jiayun and Zhou, Qihang and Zhang, Weijuan and Jiang, Nan and Xie, Yamin and Jia, Xiaoqi},
@@ -394,7 +372,6 @@
   ccf={C},
   bibtex_show={true},
 }
-
 @inproceedings{nan2024lightarmor,
   title={LightArmor: A Lightweight Trusted Operating System Isolation Approach for Mobile Systems},
   author={Jiang, Nan and Zhou, Qihang and Jia, Xiaoqi and Chen, Jiayun and Huang, Qingjia and Du, Haichao},
@@ -412,7 +389,6 @@
   ccf={C},
   bibtex_show={true},
 }
-
 @inproceedings{shaowen2023log2policy,
   title={Log2Policy: An Approach to Generate Fine-Grained Access Control Rules for Microservices from Scratch},
   author={Xu, Shaowen and Zhou, Qihang and Huang, Heqing and Jia, Xiaoqi and Du, Haichao and Chen, Yang and Xie, Yamin},
@@ -430,7 +406,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{qihang2022secfortress,
   title={SecFortress: Securing Hypervisor using Cross-layer Isolation},
   author={Zhou, Qihang and Jia, Xiaoqi and Zhang, Shengzhi and Jiang, Nan and Chen, Jiayun and Zhang, Weijuan},
@@ -446,7 +421,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{jianwei2020seef-aldr,
   title={SEEF-ALDR: A Speaker Embedding Enhancement Framework via Adversarial Learning based Disentangled Representation},
   author={Tai, Jianwei and Jia, Xiaoqi and Huang, Qingjia and Zhang, Weijuan and Du, Haichao and Zhang, Shengzhi},
@@ -466,7 +440,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{jianwei2020et-gan,
   title={ET-GAN: Cross-Language Emotion Transfer Based on Cycle-Consistent Generative Adversarial Networks},
   author={Jia, Xiaoqi and Tai, Jianwei and Hang, Zhou and Li, Yakai and Zhang, Weijuan and Du, Haichao and Huang, Qingjia},
@@ -481,7 +454,6 @@
   ccf={B},
   bibtex_show={true},
 }
-
 @inproceedings{yun2020enclavepdp,
   title={EnclavePDP: A General Framework to Verify Data Integrity in Cloud Using Intel SGX},
   author={He, Yun and Xu, Yihua and Jia, Xiaoqi and Zhang, Shengzhi and Liu, Peng and Chang, Shuai},
