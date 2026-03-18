@@ -412,6 +412,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/team-building-2026/";
+            },},{id: "news-论文录用-ieee-secon-2026",
+          title: '【论文录用】IEEE SECON 2026',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@ieeesecon2026/";
             },},{
         id: 'social-github',
         title: 'GitHub',
