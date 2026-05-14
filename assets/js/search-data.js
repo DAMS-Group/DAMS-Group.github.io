@@ -363,7 +363,7 @@ ninja.data = [{
           section: "News",handler: () => {
               window.location.href = "/news/accept@ecai2025/";
             },},{id: "news-学术报告-姜楠的学术报告-mobisys-2025",
-          title: '【学术报告】姜楠的学术报告 @ Mobisys 2025',
+          title: '【学术报告】姜楠的学术报告 @ MobiSys 2025',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/jiangnan@mobisys2025/";

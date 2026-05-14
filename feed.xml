@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="cn"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://dams.net.cn/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dams.net.cn/" rel="alternate" type="text/html" hreflang="cn"/><updated>2026-03-29T02:31:50+00:00</updated><id>https://dams.net.cn/feed.xml</id><title type="html">DAMS</title><entry><title type="html">第一章实验：环境搭建</title><link href="https://dams.net.cn/book/2025/lab1/" rel="alternate" type="text/html" title="第一章实验：环境搭建"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab1</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab1/"><![CDATA[<h1 id="实验一搭建-kvm-虚拟化平台">实验一：搭建 KVM 虚拟化平台</h1> <h2 id="安装-host-系统">安装 Host 系统</h2> <blockquote> <p>本小节为物理机安装 ubuntu 双系统说明，如采用 VMWare 等虚拟工作站方式作为运行环境可直接跳转下一小节。</p> </blockquote> <ul> <li> <p>Ubuntu 20.04 LTS 镜像</p> <ul> <li>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04/">清华源下载ubuntu-20.04.5-desktop-amd64.iso</a></li> <li>20.04自带内核版本为 Linux5.15，与本书研究对象一致。</li> </ul> </li> <li> <p>制作U盘启动盘</p> <p>MacOS 系统可采用 <code class="language-plaintext highlighter-rouge">dd</code> 命令将U盘制作成 ubuntu 系统启动盘（windows 系统可采用 Rufus 工具）。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diskutil list
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="cn"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://dams.net.cn/feed.xml" rel="self" type="application/atom+xml"/><link href="https://dams.net.cn/" rel="alternate" type="text/html" hreflang="cn"/><updated>2026-05-14T12:06:03+00:00</updated><id>https://dams.net.cn/feed.xml</id><title type="html">DAMS</title><entry><title type="html">第一章实验：环境搭建</title><link href="https://dams.net.cn/book/2025/lab1/" rel="alternate" type="text/html" title="第一章实验：环境搭建"/><published>2025-05-01T08:00:00+00:00</published><updated>2025-05-01T08:00:00+00:00</updated><id>https://dams.net.cn/book/2025/lab1</id><content type="html" xml:base="https://dams.net.cn/book/2025/lab1/"><![CDATA[<h1 id="实验一搭建-kvm-虚拟化平台">实验一：搭建 KVM 虚拟化平台</h1> <h2 id="安装-host-系统">安装 Host 系统</h2> <blockquote> <p>本小节为物理机安装 ubuntu 双系统说明，如采用 VMWare 等虚拟工作站方式作为运行环境可直接跳转下一小节。</p> </blockquote> <ul> <li> <p>Ubuntu 20.04 LTS 镜像</p> <ul> <li>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/20.04/">清华源下载ubuntu-20.04.5-desktop-amd64.iso</a></li> <li>20.04自带内核版本为 Linux5.15，与本书研究对象一致。</li> </ul> </li> <li> <p>制作U盘启动盘</p> <p>MacOS 系统可采用 <code class="language-plaintext highlighter-rouge">dd</code> 命令将U盘制作成 ubuntu 系统启动盘（windows 系统可采用 Rufus 工具）。</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diskutil list
 /dev/disk0 <span class="o">(</span>internal, physical<span class="o">)</span>:
    <span class="c">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
    0:      GUID_partition_scheme                        <span class="k">*</span>251.0 GB   disk0
@@ -544,7 +544,7 @@ KVM_EXIT_HLT
 		<span class="k">if</span><span class="p">((</span><span class="n">eptp</span> <span class="o">&gt;&gt;</span> <span class="n">PAGE_SHIFT</span><span class="p">)</span> <span class="o">==</span> <span class="p">((</span><span class="n">mmu</span><span class="o">-&gt;</span><span class="n">new_root_hpa</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;&gt;</span> <span class="n">PAGE_SHIFT</span><span class="p">)){</span>
 			<span class="n">printk</span><span class="p">(</span><span class="s">"[ept_violation]: new_root_hpa[%d] = 0x%llx</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">mmu</span><span class="o">-&gt;</span><span class="n">new_root_hpa</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 			<span class="n">printk</span><span class="p">(</span><span class="s">"[ept_violation]: root_hpa = 0x%llx</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">mmu</span><span class="o">-&gt;</span><span class="n">root_hpa</span><span class="p">);</span>
-			<span class="n">printk</span><span class="p">(</span><span class="s">"[ept_violation]: Currenty eptp = 0x%llx</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">eptp</span><span class="p">);</span>
+			<span class="n">printk</span><span class="p">(</span><span class="s">"[ept_violation]: Current eptp = 0x%llx</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">eptp</span><span class="p">);</span>
 			<span class="c1">// exchange root_hpa and new_root_hpa[i]</span>
 			<span class="n">temp</span> <span class="o">=</span> <span class="n">mmu</span><span class="o">-&gt;</span><span class="n">root_hpa</span><span class="p">;</span>
 			<span class="n">mmu</span><span class="o">-&gt;</span><span class="n">root_hpa</span> <span class="o">=</span> <span class="n">mmu</span><span class="o">-&gt;</span><span class="n">new_root_hpa</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
@@ -1617,7 +1617,7 @@ Process listing for VM win7 (id=4)
     <span class="cm">/**
      * RESPONSE
      *
-     * The VMM should switch to this SLAT ID on the occurance of the next event.
+     * The VMM should switch to this SLAT ID on the occurrence of the next event.
      * Iff VMI_EVENT_RESPONSE_NEXT_SLAT_ID is set.
      *
      * Note: on Xen this corresponds to the altp2m_idx and it also enables MTF singlestepping.
@@ -1634,7 +1634,7 @@ Process listing for VM win7 (id=4)
      * Metadata assigned to this pointer at any time (prior to
      *  or following registration) is delivered to the callback,
      *  for each matching event. The callback is also free to
-     *  modify in any way. The library user assumes all memory
+     *  modify it in any way. The library user assumes all memory
      *  management for this referenced data.
      */</span>
     <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
@@ -1642,7 +1642,7 @@ Process listing for VM win7 (id=4)
     <span class="cm">/**
      * CONST IN
      *
-     * The callback function that is invoked when the relevant is observed.
+     * The callback function that is invoked when the relevant event is observed.
      */</span>
     <span class="n">event_callback_t</span> <span class="n">callback</span><span class="p">;</span>
 
@@ -1669,7 +1669,7 @@ Process listing for VM win7 (id=4)
     <span class="cm">/*
      * Note that the following pointers assume compiler compatibility
      * ie. if you compiled a 32-bit version of LibVMI it will be
-     * incompatable with 64-bit tools and vice verse.
+     * incompatible with 64-bit tools and vice versa.
      */</span>
     <span class="k">union</span> <span class="p">{</span>
         <span class="cm">/**
@@ -1964,13 +1964,13 @@ ntdll!_ETHREAD
         <span class="n">current_process</span> <span class="o">=</span> <span class="n">cur_list_entry</span> <span class="o">-</span> <span class="n">tasks_offset</span><span class="p">;</span>
 
         <span class="cm">/* Note: the task_struct that we are looking at has a lot of
-         * information.  However, the process name and id are burried
+         * information.  However, the process name and id are buried
          * nice and deep.  Instead of doing something sane like mapping
          * this data to a task_struct, I'm just jumping to the location
          * with the info that I want.  This helps to make the example
          * code cleaner, if not more fragile.  In a real app, you'd
          * want to do this a little more robust :-)  See
-         * include/linux/sched.h for mode details */</span>
+         * include/linux/sched.h for more details */</span>
 
         <span class="cm">/* NOTE: _EPROCESS.UniqueProcessId is a really VOID*, but is never &gt; 32 bits,
          * so this is safe enough for x64 Windows for example purposes */</span>
@@ -2083,7 +2083,7 @@ ffffffff81809cc0 R ia32_sys_call_table
 00000150|  60 31 60 81 ff ff ff ff  40 31 60 81 ff ff ff ff   `1`.....@1`.....
 ......
 </code></pre></div></div> <h1 id="实验二嵌套虚拟化环境实验">实验二：嵌套虚拟化环境实验</h1> <h2 id="配置并重新编译kvm虚拟化环境开启嵌套虚拟化模式运行启动嵌套虚拟机">配置并重新编译KVM虚拟化环境，开启嵌套虚拟化模式，运行启动嵌套虚拟机</h2> <h3 id="实验步骤-4">实验步骤</h3> <p>检查L0 KVM的嵌套虚拟化支持是否开启：</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /sys/module/kvm_intel/parameters/nested
-</code></pre></div></div> <p>如果显示<code class="language-plaintext highlighter-rouge">Y</code>说明已经开启。</p> <p>创建、启动L1、L2虚拟机的步骤详见：<a href="https://gitee.com/silver-zhou/virtualization_book/tree/v-1.0/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AE%9E%E9%AA%8C">第一章实验</a></p> <p><strong>注意：</strong>使用<code class="language-plaintext highlighter-rouge">qemu-system-x86_64</code>命令启动虚拟机时，应加入<code class="language-plaintext highlighter-rouge">-cpu host</code>参数，以便上层vCPU继承下层CPU（或vCPU）的VMX特性。</p> <h2 id="在l0层kvm中捕获l1层kvm对嵌套虚拟机vmcs的写操作">在L0层KVM中捕获L1层KVM对嵌套虚拟机VMCS的写操作</h2> <h3 id="实验思路">实验思路</h3> <p>在KVM嵌套虚拟化实现中，L1、L2虚拟机实际都由L0物理机启动。</p> <p>但在逻辑上（即从L1的视角），L2虚拟机由L1虚拟机中的KVM维护、创建、启动。</p> <p>因此，L0、L1分别维护了如下VMCS数据结构：</p> <table> <thead> <tr> <th>VMCS名称</th> <th>实际维护者</th> <th>逻辑上的host</th> <th>逻辑上的guest</th> </tr> </thead> <tbody> <tr> <td>vmcs01</td> <td>L0</td> <td>L0</td> <td>L1</td> </tr> <tr> <td>vmcs12</td> <td>L1</td> <td>L1</td> <td>L2</td> </tr> <tr> <td>vmcs02</td> <td>L0</td> <td>L0</td> <td>L2</td> </tr> <tr> <td>shadow_vmcs12</td> <td>L0</td> <td>L1</td> <td>L2</td> </tr> </tbody> </table> <p>当L2发生VM exit，需要进入L1 KVM处理，并返回L2，该过程步骤如下：</p> <ol> <li><strong>L2 VM exit，控制流进入L0 KVM</strong></li> <li>L0 KVM读取vmcs02数据，将guest部分内容更新至shadow_vmcs12</li> <li>L0 KVM将shadow_vmcs12推送至L1虚拟机中维护的vmcs12</li> <li><strong>L0 KVM切换VMCS到vmcs01，控制流进入L1 KVM</strong></li> <li><strong>L1 KVM识别到L2虚拟机的陷入并处理，继续执行L2虚拟机，该指令被L0捕获后，控制流回到L0KVM</strong></li> <li>L0 KVM从L1虚拟机中读取到已经被L1 KVM维护过的vmcs12，存入shadow_vmcs12</li> <li>L0 KVM将shadow_vmcs12中guest相关数据更新至vmcs02</li> <li><strong>L0 KVM切换VMCS到vmcs02，控制流回到L2虚拟机</strong></li> </ol> <p>因此，只需在L1处理L2 VM exit的前（步骤3、步骤4之间）后（步骤6、步骤7之间），对vmcs12分别进行读取、对比，即可捕获L1层KVM对嵌套虚拟机VMCS的写操作。</p> <p>其中，在L1处理L2 VM exit前（步骤3、步骤4之间）加入代码如下：</p> <pre><code class="language-C">record_vmcs12_data = vmcs12-&gt;guest_cr0;
+</code></pre></div></div> <p>如果显示<code class="language-plaintext highlighter-rouge">Y</code>说明已经开启。</p> <p>创建、启动L1、L2虚拟机的步骤详见：<a href="https://gitee.com/silver-zhou/virtualization_book/tree/v-1.0/%E7%AC%AC%E4%B8%80%E7%AB%A0%E5%AE%9E%E9%AA%8C">第一章实验</a></p> <p><strong>注意：</strong>使用<code class="language-plaintext highlighter-rouge">qemu-system-x86_64</code>命令启动虚拟机时，应加入<code class="language-plaintext highlighter-rouge">-cpu host</code>参数，以便上层vCPU继承下层CPU（或vCPU）的VMX特性。</p> <h2 id="在l0层kvm中捕获l1层kvm对嵌套虚拟机vmcs的写操作">在L0层KVM中捕获L1层KVM对嵌套虚拟机VMCS的写操作</h2> <h3 id="实验思路">实验思路</h3> <p>在KVM嵌套虚拟化实现中，L1、L2虚拟机实际都由L0物理机启动。</p> <p>但在逻辑上（即从L1的视角），L2虚拟机由L1虚拟机中的KVM维护、创建、启动。</p> <p>因此，L0、L1分别维护了如下VMCS数据结构：</p> <table> <thead> <tr> <th>VMCS名称</th> <th>实际维护者</th> <th>逻辑上的host</th> <th>逻辑上的guest</th> </tr> </thead> <tbody> <tr> <td>vmcs01</td> <td>L0</td> <td>L0</td> <td>L1</td> </tr> <tr> <td>vmcs12</td> <td>L1</td> <td>L1</td> <td>L2</td> </tr> <tr> <td>vmcs02</td> <td>L0</td> <td>L0</td> <td>L2</td> </tr> <tr> <td>shadow_vmcs12</td> <td>L0</td> <td>L1</td> <td>L2</td> </tr> </tbody> </table> <p>当 L2 发生 VM exit，需要进入 L1 KVM 处理，并返回 L2，该过程步骤如下：</p> <ol> <li><strong>L2 VM exit，控制流进入 L0 KVM</strong></li> <li>L0 KVM 读取 vmcs02 数据，将 guest 部分内容更新至 shadow_vmcs12</li> <li>L0 KVM 将 shadow_vmcs12 推送至 L1 虚拟机中维护的 vmcs12</li> <li><strong>L0 KVM 切换 VMCS 到 vmcs01，控制流进入 L1 KVM</strong></li> <li><strong>L1 KVM 识别到 L2 虚拟机的陷入并处理，继续执行 L2 虚拟机，该指令被 L0 捕获后，控制流回到 L0 KVM</strong></li> <li>L0 KVM 从 L1 虚拟机中读取到已经被 L1 KVM 维护过的 vmcs12，存入 shadow_vmcs12</li> <li>L0 KVM 将 shadow_vmcs12 中 guest 相关数据更新至 vmcs02</li> <li><strong>L0 KVM 切换 VMCS 到 vmcs02，控制流回到 L2 虚拟机</strong></li> </ol> <p>因此，只需在 L1 处理 L2 VM exit 的前（步骤3、步骤4之间）后（步骤6、步骤7之间），对 vmcs12 分别进行读取、对比，即可捕获 L1 层 KVM 对嵌套虚拟机 VMCS 的写操作。</p> <p>其中，在L1处理L2 VM exit前（步骤3、步骤4之间）加入代码如下：</p> <pre><code class="language-C">record_vmcs12_data = vmcs12-&gt;guest_cr0;
 </code></pre> <p>在L1处理L2 VM exit后（步骤6、步骤7之间）加入代码如下：</p> <pre><code class="language-C">if (record_vmcs12_data != vmcs12-&gt;guest_cr0)
 {
 	printk("[cpt6-exp2] before L1 run, guest_cr0=%llx\n",record_vmcs12_data);
