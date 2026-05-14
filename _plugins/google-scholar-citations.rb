@@ -12,9 +12,9 @@ module Jekyll
 
     def initialize(tag_name, params, tokens)
       super
-      splitted = params.split(" ").map(&:strip)
-      @scholar_id = splitted[0]
-      @article_id = splitted[1]
+      split_params = params.split(" ").map(&:strip)
+      @scholar_id = split_params[0]
+      @article_id = split_params[1]
 
       if @scholar_id.nil? || @scholar_id.empty?
         puts "Invalid scholar_id provided"

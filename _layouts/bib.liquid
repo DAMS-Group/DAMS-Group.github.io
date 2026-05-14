@@ -54,8 +54,8 @@
     <!-- Tags -->
     {% if entry.tags %}
       <div class="paper-tags">
-        {% assign splitted_tags = entry.tags | split: ',' %}
-        {% for tag in splitted_tags %}
+        {% assign split_tags = entry.tags | split: ',' %}
+        {% for tag in split_tags %}
           <span class="badge badge-pill badge-secondary tag-filter" data-tag="{{ tag }}">{{ tag }}</span>
         {% endfor %}
       </div>
