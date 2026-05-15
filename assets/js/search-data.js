@@ -422,6 +422,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@dsn2026/";
+            },},{id: "news-论文录用-usenix-security-2026",
+          title: '【论文录用】USENIX Security 2026',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@usenixsecurity2026-gaozibo/";
             },},{
         id: 'social-github',
         title: 'GitHub',
