@@ -37,7 +37,42 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/news/";
           },
-        },{id: "members-baiyirui",
+        },{id: "members-chenjiayun",
+          title: 'Chenjiayun',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/chenjiayun/";
+            },},{id: "members-chenyang",
+          title: 'Chenyang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/chenyang/";
+            },},{id: "members-guofeng",
+          title: 'Guofeng',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/guofeng/";
+            },},{id: "members-heyun",
+          title: 'Heyun',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/heyun/";
+            },},{id: "members-hujunjie",
+          title: 'Hujunjie',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/hujunjie/";
+            },},{id: "members-lihaiyang",
+          title: 'Lihaiyang',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/lihaiyang/";
+            },},{id: "members-zhangzhicong",
+          title: 'Zhangzhicong',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhangzhicong/";
+            },},{id: "members-baiyirui",
           title: 'Baiyirui',
           description: "",
           section: "Members",handler: () => {
@@ -47,11 +82,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/caowenzhuo/";
-            },},{id: "members-chenjiayun",
-          title: 'Chenjiayun',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/chenjiayun/";
             },},{id: "members-fanjuncheng",
           title: 'Fanjuncheng',
           description: "",
@@ -62,11 +92,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/gaozibo/";
-            },},{id: "members-guofeng",
-          title: 'Guofeng',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/guofeng/";
             },},{id: "members-guojiaming",
           title: 'Guojiaming',
           description: "",
@@ -82,16 +107,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/huangsicong/";
-            },},{id: "members-hujunjie",
-          title: 'Hujunjie',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/hujunjie/";
-            },},{id: "members-lihaiyang",
-          title: 'Lihaiyang',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/lihaiyang/";
             },},{id: "members-liupuchun",
           title: 'Liupuchun',
           description: "",
@@ -127,11 +142,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/shanlixiao/";
-            },},{id: "members-songqiyang",
-          title: 'Songqiyang',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/songqiyang/";
             },},{id: "members-songyanni",
           title: 'Songyanni',
           description: "",
@@ -182,11 +192,6 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/yaowentao/";
-            },},{id: "members-zhangzhicong",
-          title: 'Zhangzhicong',
-          description: "",
-          section: "Members",handler: () => {
-              window.location.href = "/members/zhangzhicong/";
             },},{id: "members-zhaoyuanbo",
           title: 'Zhaoyuanbo',
           description: "",
@@ -222,13 +227,18 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songchen/";
-            },},{id: "members-正高级工程师-硕导",
-          title: '正高级工程师 硕导',
+            },},{id: "members-助理研究员",
+          title: '助理研究员',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/songqiyang/";
+            },},{id: "members-正高级工程师-博导",
+          title: '正高级工程师 博导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/songzhenyu/";
-            },},{id: "members-高级工程师",
-          title: '高级工程师',
+            },},{id: "members-高级工程师-硕导",
+          title: '高级工程师 硕导',
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/xieyamin/";
@@ -242,6 +252,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhangyixin/";
+            },},{id: "members-高级工程师-硕导",
+          title: '高级工程师 硕导',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhoumengting/";
             },},{id: "members-副研究员-硕导",
           title: '副研究员 硕导',
           description: "",
