@@ -87,13 +87,13 @@ layout: page
             {% endif %}
             {% if member.grade %}
               {% if member.is_phd_student %}
-                <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级博士生</li>
+                <li class="member-grade" style="list-style-type:none;">博士研究生</li>
               {% else %}
-                <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级硕士生</li>
+                <li class="member-grade" style="list-style-type:none;">硕士研究生</li>
               {% endif %}
             {% endif %}
             {% if member.job %}
-              <li class="member-job" style="list-style-type:none;">毕业去向: {{ member.job }}</li>
+              <li class="member-job" style="list-style-type:none;">{{ member.job }}</li>
             {% endif %}
             {% if member.research %}
               <li class="member-research" style="list-style-type:none;">研究方向: {{ member.research }}</li>
@@ -117,63 +117,40 @@ layout: page
   </div>
 
   <!-- Alumni Section -->
-  {% comment %}
-    <div class="member_type">
-      <h2>校友</h2>
-      <hr>
-      {% assign alumni = site.members | where: 'category', 'alumni' | sort: 'graduation_year' %}
-      {% if alumni.size > 0 %}
-        {% for member in alumni %}
-          <br>
-          {% assign loopindex = forloop.index0 | modulo: 5 %}
-          {% if loopindex == 0 %}
-            <div class="members_row">
-          {% endif %}
-          <div class="member">
-            {% if member.image %}
-              {% assign member_image_path = member.image | prepend: 'assets/img/' %}
-              {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
-              <div class="avatar-img-container">
-                {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
-              </div>
+  <div class="member_type">
+    <h2>校友</h2>
+    <hr>
+    {% assign alumni = site.members | where: 'category', 'alumni' | sort: 'grade' %}
+    {% if alumni.size > 0 %}
+      {% for member in alumni %}
+        <br>
+        {% assign loopindex = forloop.index0 | modulo: 5 %}
+        {% if loopindex == 0 %}
+          <div class="members_row">
+        {% endif %}
+        <div class="member">
+          <div class="more-info">
+            {% if member.name %}
+              <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
             {% endif %}
-            <div class="more-info">
-              {% if member.name %}
-                <li class="member-name" style="list-style-type:none;">{{ member.name }}</li>
-              {% endif %}
-              {% if member.grade %}
-                {% if member.is_phd_student %}
-                  <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级博士生</li>
-                {% else %}
-                  <li class="member-grade" style="list-style-type:none;">{{ member.grade }}级硕士生</li>
-                {% endif %}
-              {% endif %}
-              {% if member.graduation_year %}
-                <li class="member-graduation" style="list-style-type:none;">{{ member.graduation_year }}届毕业生</li>
-              {% endif %}
-              {% if member.job %}
-                <li class="member-job" style="list-style-type:none;">工作单位: {{ member.job }}</li>
-              {% endif %}
-              {% if member.research %}
-                <li class="member-research" style="list-style-type:none;">研究方向: {{ member.research }}</li>
-              {% endif %}
-            </div>
+            {% if member.job %}
+              <li class="member-job" style="list-style-type:none;">{{ member.job }}</li>
+            {% endif %}
           </div>
-          {% if loopindex == 4 %}
-            </div>
-          {% elsif forloop.last %}
-            {% assign empty_members = 4 | minus: loopindex %}
-            {% for i in (1..empty_members) %}
-              <br>
-              <div class="member">
-              </div>
-            {% endfor %}
-            </div>
-          {% endif %}
-        {% endfor %}
-      {% else %}
-        <p>暂无校友信息。</p>
-      {% endif %}
-    </div>
-  {% endcomment %}
+        </div>
+        {% if loopindex == 4 %}
+          </div>
+        {% elsif forloop.last %}
+          {% assign empty_members = 4 | minus: loopindex %}
+          {% for i in (1..empty_members) %}
+            <br>
+            <div class="member"></div>
+          {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p>暂无校友信息。</p>
+    {% endif %}
+  </div>
 </article>

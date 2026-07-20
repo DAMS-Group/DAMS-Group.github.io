@@ -1,6 +1,6 @@
 ---
 category: teachers
-order: 8
+order: 9
 image: members/teachers/jiangnan.jpg
 title: 工程师
 name: 姜楠

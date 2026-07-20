@@ -1,6 +1,6 @@
 ---
 category: teachers
-order: 9
+order: 10
 image: members/teachers/xushaowen.jpg
 title: 工程师
 name: 徐少文

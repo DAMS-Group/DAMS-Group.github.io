@@ -1,5 +1,5 @@
 ---
-category: students
+category: alumni
 order: 102
 image: members/students/chenjiayun.png
 name: 陈家赟

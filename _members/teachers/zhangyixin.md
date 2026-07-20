@@ -1,6 +1,6 @@
 ---
 category: teachers
-order: 10
+order: 11
 image: members/teachers/zhangyixin.jpg
 title: 工程师
 name: 张艺馨
