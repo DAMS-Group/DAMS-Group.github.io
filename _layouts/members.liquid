@@ -65,7 +65,10 @@ layout: page
   <div class="member_type">
     <h2>研究生</h2>
     <hr>
-    {% assign students = site.members | where: 'category', 'students' | sort: 'grade' | sort: 'is_phd_student' %}
+    {% assign students = site.members | where: 'category', 'students' %}
+    {% assign phd_students = students | where: 'is_phd_student', true | sort: 'grade' %}
+    {% assign master_students = students | where: 'is_phd_student', false | sort: 'grade' %}
+    {% assign students = phd_students | concat: master_students %}
     {% if students.size > 0 %}
       {% for member in students %}
         <br>
@@ -120,7 +123,10 @@ layout: page
   <div class="member_type">
     <h2>校友</h2>
     <hr>
-    {% assign alumni = site.members | where: 'category', 'alumni' | sort: 'grade' %}
+    {% assign alumni = site.members | where: 'category', 'alumni' %}
+    {% assign phd_alumni = alumni | where: 'is_phd_student', true | sort: 'grade' %}
+    {% assign master_alumni = alumni | where: 'is_phd_student', false | sort: 'grade' %}
+    {% assign alumni = phd_alumni | concat: master_alumni %}
     {% if alumni.size > 0 %}
       {% for member in alumni %}
         <br>
