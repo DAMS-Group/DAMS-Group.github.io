@@ -67,6 +67,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/lihaiyang/";
+            },},{id: "members-taijianwei",
+          title: 'Taijianwei',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/taijianwei/";
             },},{id: "members-zhangzhicong",
           title: 'Zhangzhicong',
           description: "",
