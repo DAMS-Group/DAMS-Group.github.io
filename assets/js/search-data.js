@@ -87,6 +87,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/caowenzhuo/";
+            },},{id: "members-dengqinyu",
+          title: 'Dengqinyu',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/dengqinyu/";
             },},{id: "members-fanjuncheng",
           title: 'Fanjuncheng',
           description: "",
@@ -142,6 +147,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/qianfeifan/";
+            },},{id: "members-qianyueqi",
+          title: 'Qianyueqi',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/qianyueqi/";
             },},{id: "members-shanlixiao",
           title: 'Shanlixiao',
           description: "",
@@ -207,6 +217,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/zhengqiutong/";
+            },},{id: "members-zhengyumeng",
+          title: 'Zhengyumeng',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/zhengyumeng/";
             },},{id: "members-高级工程师",
           title: '高级工程师',
           description: "",
