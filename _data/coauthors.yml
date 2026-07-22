@@ -1,6 +1,12 @@
 "zhou":
   - firstname: ["Q.", "Qihang"]
     url: https://qihang1994.github.io/
+  - firstname: ["M.", "Mengting"]
+    url: https://people.ucas.ac.cn/~0070721
+
+"xie":
+  - firstname: ["Y.", "Yamin"]
+    url: https://people.ucas.ac.cn/~xieyamin
 
 "jia":
   - firstname: ["X.", "Xiaoqi"]
@@ -9,6 +15,8 @@
 "song":
   - firstname: ["Z.", "Zhenyu"]
     url: https://people.ucas.ac.cn/~songzhenyu
+  - firstname: ["Q.", "Qiyang"]
+    url: https://ashessqy126.github.io/
 
 "liu":
   - firstname: ["P.", "Peng"]

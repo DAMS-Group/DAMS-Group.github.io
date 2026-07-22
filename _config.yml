@@ -233,6 +233,9 @@ scholar:
   query: "@*"
   group_by: year
   group_order: descending
+  # Use the formal publisher/proceedings date, falling back to the official conference start date.
+  sort_by: year, ccf, sort_date, title
+  order: descending, ascending, descending, ascending
 
 # Display different badges with stats for your publications
 # Customize badge behavior in _layouts/bib.liquid
@@ -271,6 +274,7 @@ filtered_bibtex_keywords:
     ccf,
     type,
     note,
+    sort_date,
     preview_type,
     preview_note,
   ]
