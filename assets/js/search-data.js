@@ -127,6 +127,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/liuxin/";
+            },},{id: "members-lixuepeng",
+          title: 'Lixuepeng',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/lixuepeng/";
             },},{id: "members-liyakai",
           title: 'Liyakai',
           description: "",
@@ -172,6 +177,11 @@ ninja.data = [{
           description: "",
           section: "Members",handler: () => {
               window.location.href = "/members/wangjuchen/";
+            },},{id: "members-wangyiran",
+          title: 'Wangyiran',
+          description: "",
+          section: "Members",handler: () => {
+              window.location.href = "/members/wangyiran/";
             },},{id: "members-wanyisen",
           title: 'Wanyisen',
           description: "",
