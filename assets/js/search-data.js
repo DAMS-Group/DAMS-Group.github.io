@@ -497,6 +497,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@usenixsecurity2026-gaozibo/";
+            },},{id: "news-论文录用-ndss-2027",
+          title: '【论文录用】NDSS 2027',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@ndss2027/";
             },},{
         id: 'social-github',
         title: 'GitHub',
