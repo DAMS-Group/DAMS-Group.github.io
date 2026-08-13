@@ -129,7 +129,6 @@ layout: page
     {% assign alumni = phd_alumni | concat: master_alumni %}
     {% if alumni.size > 0 %}
       {% for member in alumni %}
-        <br>
         {% assign loopindex = forloop.index0 | modulo: 5 %}
         {% if loopindex == 0 %}
           <div class="members_row">
@@ -149,7 +148,6 @@ layout: page
         {% elsif forloop.last %}
           {% assign empty_members = 4 | minus: loopindex %}
           {% for i in (1..empty_members) %}
-            <br>
             <div class="member"></div>
           {% endfor %}
           </div>
