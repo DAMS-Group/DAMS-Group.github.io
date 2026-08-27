@@ -502,6 +502,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@ndss2027/";
+            },},{id: "news-论文录用-acm-ccs-2026",
+          title: '【论文录用】ACM CCS 2026',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@ccs2026/";
             },},{
         id: 'social-github',
         title: 'GitHub',
