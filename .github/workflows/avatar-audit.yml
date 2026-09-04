@@ -1,0 +1,52 @@
+name: Avatar audit
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - "assets/img/members/**"
+      - "_members/**"
+      - "_layouts/members.liquid"
+      - "_config.yml"
+      - "bin/audit-avatars"
+      - ".github/workflows/avatar-audit.yml"
+  pull_request:
+    branches:
+      - master
+      - main
+    paths:
+      - "assets/img/members/**"
+      - "_members/**"
+      - "_layouts/members.liquid"
+      - "_config.yml"
+      - "bin/audit-avatars"
+      - ".github/workflows/avatar-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Audit team avatars
+        run: ./bin/audit-avatars "${{ runner.temp }}/avatar-audit"
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: avatar-audit
+          path: ${{ runner.temp }}/avatar-audit
+          retention-days: 14

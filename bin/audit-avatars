@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+project_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+avatar_root="$project_root/assets/img/members"
+member_root="$project_root/_members"
+output_root=${1:-"${TMPDIR:-/tmp}/dams-avatar-audit"}
+
+for command_name in identify convert montage rg awk stat; do
+  if ! command -v "$command_name" >/dev/null 2>&1; then
+    echo "Missing required command: $command_name" >&2
+    exit 2
+  fi
+done
+
+mkdir -p "$output_root"
+run_dir=$(mktemp -d "$output_root/run.XXXXXX")
+thumb_dir="$run_dir/thumbs"
+report_path="$run_dir/report.md"
+mkdir -p "$thumb_dir"
+
+mapfile -d '' avatar_files < <(find "$avatar_root" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) -print0 | sort -z)
+
+warning_count=0
+error_count=0
+
+{
+  echo "# Team avatar audit"
+  echo
+  echo "Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+  echo
+  echo "Preferred profile: 3:4 aspect ratio, at least 480×640, no larger than 500 KiB, rendered high-frequency score no greater than 0.050."
+  echo
+  echo "| Member | Asset | Dimensions | Size | HF score | Findings |"
+  echo "| --- | --- | ---: | ---: | ---: | --- |"
+} >"$report_path"
+
+for avatar_path in "${avatar_files[@]}"; do
+  relative_path=${avatar_path#"$project_root/assets/img/"}
+  member_doc=$(rg -l --fixed-strings "image: $relative_path" "$member_root" | head -n 1 || true)
+  member_name=$(sed -n 's/^name:[[:space:]]*//p' "$member_doc" 2>/dev/null | head -n 1)
+  if [[ -z "$member_name" ]]; then
+    member_name="(unreferenced)"
+    ((error_count += 1))
+  fi
+
+  dimensions=$(identify -ping -format '%w %h' "$avatar_path" 2>/dev/null || true)
+  if [[ ! "$dimensions" =~ ^[0-9]+\ [0-9]+$ ]]; then
+    echo "| $member_name | \`$relative_path\` | unreadable | — | — | ERROR: unreadable image |" >>"$report_path"
+    ((error_count += 1))
+    continue
+  fi
+
+  read -r width height <<<"$dimensions"
+  byte_size=$(stat -c '%s' "$avatar_path")
+  kib_size=$(( (byte_size + 1023) / 1024 ))
+  aspect_ratio=$(awk -v width="$width" -v height="$height" 'BEGIN { printf "%.3f", width / height }')
+  high_frequency_score=$(
+    convert "$avatar_path" -auto-orient -thumbnail '180x240^' -gravity center -extent 180x240 -colorspace Gray \
+      \( +clone -blur 0x1 \) -compose Difference -composite -format '%[fx:standard_deviation]' info:
+  )
+
+  findings=()
+  if ((width < 200 || height < 267)); then
+    findings+=("ERROR: below hard minimum 200×267")
+    ((error_count += 1))
+  elif ((width < 480 || height < 640)); then
+    findings+=("low resolution")
+    ((warning_count += 1))
+  fi
+
+  if ! awk -v ratio="$aspect_ratio" 'BEGIN { exit !(ratio >= 0.70 && ratio <= 0.80) }'; then
+    findings+=("non-3:4 crop")
+    ((warning_count += 1))
+  fi
+
+  if ((byte_size > 512000)); then
+    findings+=("over 500 KiB")
+    ((warning_count += 1))
+  fi
+
+  if awk -v score="$high_frequency_score" 'BEGIN { exit !(score > 0.050) }'; then
+    findings+=("high-frequency review")
+    ((warning_count += 1))
+  fi
+
+  if ((${#findings[@]} == 0)); then
+    finding_text="OK"
+  else
+    finding_text=${findings[0]}
+    for ((finding_index = 1; finding_index < ${#findings[@]}; finding_index += 1)); do
+      finding_text+=", ${findings[finding_index]}"
+    done
+  fi
+
+  echo "| $member_name | \`$relative_path\` | ${width}×${height} (${aspect_ratio}) | ${kib_size} KiB | $(printf '%.4f' "$high_frequency_score") | $finding_text |" >>"$report_path"
+
+  thumb_name=${relative_path//\//-}
+  thumb_name=${thumb_name%.*}.jpg
+  convert "$avatar_path" -auto-orient -thumbnail '180x240^' -gravity center -extent 180x240 -strip -quality 82 "$thumb_dir/$thumb_name"
+done
+
+while IFS= read -r referenced_image; do
+  if [[ ! -f "$project_root/assets/img/$referenced_image" ]]; then
+    echo "Missing referenced avatar: $referenced_image" >&2
+    echo >>"$report_path"
+    echo "- ERROR: missing referenced avatar \`$referenced_image\`." >>"$report_path"
+    ((error_count += 1))
+  fi
+done < <(rg --no-filename '^image:[[:space:]]+' "$member_root" | sed 's/^image:[[:space:]]*//' | sort -u)
+
+mapfile -d '' thumbnails < <(find "$thumb_dir" -type f -name '*.jpg' -print0 | sort -z)
+if ((${#thumbnails[@]} > 0)); then
+  montage "${thumbnails[@]}" -set label '%t' -tile 5x -geometry '+16+30' -background white -fill black -pointsize 12 "$run_dir/contact-sheet.jpg"
+fi
+
+{
+  echo
+  echo "## Summary"
+  echo
+  echo "- Avatars checked: ${#avatar_files[@]}"
+  echo "- Warnings: $warning_count"
+  echo "- Errors: $error_count"
+  echo "- Contact sheet: [contact-sheet.jpg](contact-sheet.jpg)"
+} >>"$report_path"
+
+echo "Avatar audit complete"
+echo "Report: $report_path"
+echo "Contact sheet: $run_dir/contact-sheet.jpg"
+echo "Warnings: $warning_count; errors: $error_count"
+
+if ((error_count > 0)); then
+  exit 1
+fi
