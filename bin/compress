@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+project_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+image_root="$project_root/assets/img"
+
+if ! command -v convert >/dev/null 2>&1; then
+  echo "Missing required command: convert" >&2
+  exit 2
+fi
+
+find "$image_root" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) -size +300k -print0 |
+  while IFS= read -r -d '' image_path; do
+    echo "Compressing ${image_path#"$project_root/"}"
+    convert "$image_path" -resize '50%x50%' -quality 70 "$image_path"
+  done
