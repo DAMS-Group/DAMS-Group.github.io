@@ -18,11 +18,16 @@ layout: page
           {% if member.image %}
             {% assign member_image_path = member.image | prepend: 'assets/img/' %}
             {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
+            {% if forloop.index <= 5 %}
+              {% assign member_image_loading = 'eager' %}
+            {% else %}
+              {% assign member_image_loading = 'lazy' %}
+            {% endif %}
             {% if member.blog %}
               <a href="{{ member.blog }}">
             {% endif %}
             <div class="avatar-img-container">
-              {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
+              {% include figure.liquid loading=member_image_loading path=member_image_path min-width="60%" sizes="(min-width: 1200px) 100px, (min-width: 576px) 9vw, 60vw" class=member_image_class alt=member.image center="true" %}
             </div>
             {% if member.blog %}
               </a>
@@ -81,7 +86,7 @@ layout: page
             {% assign member_image_path = member.image | prepend: 'assets/img/' %}
             {% assign member_image_class = 'preview img-fluid z-depth-1 rounded member-hover-effect avatar-img' %}
             <div class="avatar-img-container">
-              {% include figure.liquid loading="eager" path=member_image_path min-width="60%" sizes="1500px" class=member_image_class alt=member.image center="true" %}
+              {% include figure.liquid loading="lazy" path=member_image_path min-width="60%" sizes="(min-width: 1200px) 100px, (min-width: 576px) 9vw, 60vw" class=member_image_class alt=member.image center="true" %}
             </div>
           {% endif %}
           <div class="more-info">
