@@ -507,6 +507,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/accept@ccs2026/";
+            },},{id: "news-论文录用-acsac-2026",
+          title: '【论文录用】ACSAC 2026',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/accept@acsac2026-baiyirui/";
             },},{
         id: 'social-github',
         title: 'GitHub',
